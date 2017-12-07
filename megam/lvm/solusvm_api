@@ -1,0 +1,50 @@
+
+https://documentation.solusvm.com/display/DOCS/Examples
+
+https://documentation.solusvm.com/display/DOCS/List+Virtual+Servers
+
+reference (http request like solusvm )
+  http://docs.whmcs.com/API:XML_Sample_Code
+reference
+https://github.com/megamsys/whmcs_go
+
+
+Create API access for your HOST which is going to make API request
+   http://www.awbswiki.com/index.php?title=SolusVM_Specific_Configuration 
+
+but solusvm use https request
+
+Error x509: cannot validate certificate for 103.56.92.58  because it doesn't contain any IP SANs (cleared using below link)
+     http://stackoverflow.com/questions/12122159/golang-how-to-do-a-https-request-with-bad-certificate
+
+
+HTTPS request need ID and KEY  
+   http://103.56.92.58:5353/admincp/api.php
+   Solusvm Master : Configuration->API access->Add API user(IP of Which HOST is going to make API request )
+
+//for megam ip 192.168.1.248
+
+https://103.56.92.58:5656/api/admin/command.php?&rdtype=json&nodeid=4&action=node-virtualservers&id=iy9rRvifGKajunciPcu5V13ANyAmVnvklN2HV8cv&key=8mQloZ1rjkl6bevOCW2o0mykZpSLnV8l8OwmCnEN
+
+//for oja ip 183.83.50.26
+
+id  =4p5hqR6mXzR5oOAgmzof7RZ7hyLZRYGLeASvhOI5
+key =eoYs3oyfPNlMuaJByjrg8YRbozwvd6qijfAcu1i0
+
+//for oja ip  49.207.190.22
+
+id  =LSYbwzuPTvnGq5O3t9VwHV3F6S9m1NXAvMCSbXxV
+key =jMqzG6rZ4dmAYf6UX57NIUe4wHMyuakFMA5iwm9p
+
+
+
+{"status":"success","statusmsg":"","virtualservers":[{"vserverid":"11","ctid-xid":"kvm110","clientid":"1","ipaddress":"192.168.0.15","hostname":"v4.megam.io","template":"ubuntu-14.04.4-server-amd64","hdd":"10737418240","memory":"1073741824","swap-burst":"0","type":"kvm","mac":"00:16:3c:ac:54:b8"},{"vserverid":"9","ctid-xid":"kvm108","clientid":"1","ipaddress":"192.168.0.13","hostname":"v3.megam.io","template":"ubuntu-14.04.4-server-amd64","hdd":"10737418240","memory":"1073741824","swap-burst":"0","type":"kvm","mac":"00:16:3c:ad:49:70"},{"vserverid":"8","ctid-xid":"kvm107","clientid":"1","ipaddress":"192.168.122.4","hostname":"v2.megam.io","template":"ubuntu-14.04.4-server-amd64","hdd":"10737418240","memory":"1073741824","swap-burst":"0","type":"kvm","mac":"00:16:3c:2e:68:d6"},{"vserverid":"10","ctid-xid":"kvm109","clientid":"1","ipaddress":"192.168.0.14","hostname":"v1.megam.io","template":"ubuntu-14.04.4-server-amd64","hdd":"10737418240","memory":"1073741824","swap-burst":"0","type":"kvm","mac":"00:16:3c:ec:4f:e7"}]}
+
+
+https://103.56.92.58:5656/api/admin/command.php?&rdtype=json&action=client-list&id=iy9rRvifGKajunciPcu5V13ANyAmVnvklN2HV8cv&key=8mQloZ1rjkl6bevOCW2o0mykZpSLnV8l8OwmCnEN
+
+
+{"status":"success","statusmsg":"","clients":[{"id":"1","username":"vijaymp","email":"vijaykanthm28@gmail.com","firstname":"Vijaykanth","lastname":"MP","company":"Megam Systems","level":"Client","status":"Active","created":"2016-03-30","lastlogin":"2016-04-13"}]}
+
+
+

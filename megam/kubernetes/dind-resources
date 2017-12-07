@@ -1,0 +1,138 @@
+
+cat >/etc/kubernetes/kubelet.conf <<EOF
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUM2akNDQWRLZ0F3SUJBZ0lCQVRBTkJna3Foa2lHOXcwQkFRc0ZBREFtTVNRd0lnWURWUVFEREJ0dmNHVnUKYzJocFpuUXRjMmxuYm1WeVFERTBPVFk1TURJd01UY3dIaGNOTVRjd05qQTRNRFl3TmpVM1doY05Nakl3TmpBMwpNRFl3TmpVNFdqQW1NU1F3SWdZRFZRUUREQnR2Y0dWdWMyaHBablF0YzJsbmJtVnlRREUwT1RZNU1ESXdNVGN3CmdnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUJBUUR1QVQ0TGYrOGIxK1BWSHlWSU00V0oKRGlhNG1HUU5FckYwUk5ScFZTYnZQamQ1YUdreEtwRkdnbUZ4RnlwVE5MUnVncmNnVWNMSDl5aE9UZmg2SE93YQpKeTFLN0hkWUMzSko2UnhzeUdaZ3dqQkNnUWJKUXhOWmJ0U1JjZEtNcW5FcVJwS2M0SXNjVkNERHdoVEtjNWtSCmZSRm8rYkhJdlNsZ1lKa1FLbGdSWForWEI3SnJrMWphMFJYb1FmMXM2V0pVVC9haTRrWWJ4K01uZ1M5akRMb2cKSUM4K1VnT2pNV1RUQVhueE1sb3RvTnNwMllLamNrRFlLbC9YYkU5ZDNTeUhNN1JSem9qeWo1c0p6d1hTWVNBMQovNFVkbi8xTHVNdkZMV0d3WTJmM3FzSTFuTm5ocEphVGROZnJyYmVDZFNsUGxVMnNMYzVQbk1XMlJTVnYxcDFuCkFnTUJBQUdqSXpBaE1BNEdBMVVkRHdFQi93UUVBd0lDcERBUEJnTlZIUk1CQWY4RUJUQURBUUgvTUEwR0NTcUcKU0liM0RRRUJDd1VBQTRJQkFRQUVIWmowQkIrY2VZdkNkYW16YWtVZmIzMTFpN3B0ZFVPOXdUb1YxelJkazVmMQpGSldKRUtETzNKNjAxWVdHZFJ4YlU1Zk45aFRIa2tpY0JMOW1iclNRODd3RDc4eUdDc1BKOTNoZHc3UFhoa21XClZjUzdSYUM2aHdVMThybUIyTGdBS1BXSTFBOXozU1B1UWVPUWx5aFNWWWJlYTk5aHlnVlVQNzZTNVkvRGZMMVMKSzF2SHB0ekxETldrbUE0MGVuVU1GNXd2ZjBmZ3E4UTdxQmlzVlhkdlk3aFRzQlFuZkN1d296UkdHUjd4NGdPRgpCSnBFQ2VkK1hzRTBxanUxMk96RHBBemFGV0ZiUUw2WDI3RUxldlpNYnZpMnFXcksyTmxwK3IzTVJtRkZqTDFHCk1ITHBIYkpBYWZjU29XV2Y1N3htZU5JTzFhUG93V2w5NjI1WDNlL0wKLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+    server: https://192.168.1.25:8443
+  name: kubernetes
+contexts:
+- context:
+    cluster: kubernetes
+    user: kubelet-csr
+  name: kubelet-csr
+- context:
+    cluster: kubernetes
+    user: tls-bootstrap-token-user
+  name: tls-bootstrap-token-user@kubernetes
+current-context: kubelet-csr
+kind: Config
+preferences: {}
+users:
+- name: kubelet-csr
+  user:
+    client-certificate-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURDakNDQWZLZ0F3SUJBZ0lCQ1RBTkJna3Foa2lHOXcwQkFRc0ZBREFtTVNRd0lnWURWUVFEREJ0dmNHVnUKYzJocFpuUXRjMmxuYm1WeVFERTBPVFk1TURJd01UY3dIaGNOTVRjd05qQTRNRFl3TnpFMFdoY05NVGt3TmpBNApNRFl3TnpFMVdqQTBNUlV3RXdZRFZRUUtFd3h6ZVhOMFpXMDZibTlrWlhNeEd6QVpCZ05WQkFNVEVuTjVjM1JsCmJUcHViMlJsT25KaGFtVnphRENDQVNJd0RRWUpLb1pJaHZjTkFRRUJCUUFEZ2dFUEFEQ0NBUW9DZ2dFQkFMeG4KTzZBalNYaC9nMXNvTUc0UmdveTBFMERzL2x0RlhnR0VzTnIzSXd5VjZhcTlHZVBOVkxOaXpCTWpuL29lZU5WNwpTcFp4SHJYZFBrYXo1RElJRTJLd0RBRkRvdWQ3RDFSWm82ejdXRmxIL09PWkM1TWg3UERjbkovbllVR1JUclhZClNGUENZcnNOSmUvQ0FFZERISHhLQU9GTU5zcXJ4TEJOcXJYNll1NGdiY1RXdXRPaGFJYmdhTUJYalRJZFNpNFEKeHRKaW40NlpJR1Y2cWFmT2VuU1RQV0JHYlJPV2FYY2JHR1Z0blo0K01JNkVyTVd5TG9JWit5U1l2aHpHNTZxMgpCMDJnblo4U3NTYXVYQnQyY3N3OTlQaW1JU0xBaWw5dVVOQTZab1I5UjYveWJWbURoTVpoOXpOck9oVnRpbm9yClMxZzY2d1hLYk1NLzZmbTI0TzhDQXdFQUFhTTFNRE13RGdZRFZSMFBBUUgvQkFRREFnV2dNQk1HQTFVZEpRUU0KTUFvR0NDc0dBUVVGQndNQ01Bd0dBMVVkRXdFQi93UUNNQUF3RFFZSktvWklodmNOQVFFTEJRQURnZ0VCQUxleQpIZ3QxeUZIU1YyZFVJamVkZHdoM05Jd2d0L0I2V1hIam1wbG4xY0QzVXFUZkhTSjk3Unc5K21uYlZ0bFJRaHlUClVjNWZsbHZqUWhVeGswdWdpQVhqdXhqSU5nQ1dEV09uRFV3SVR1bHcxMW84NEZhVDZGQkNsbEkxa0w3MytscEIKTnNqalZPOFo1RVdSeWRoWmZTTzFaUTlxTktBY1dCYWZwMXNoR3dWR0NQR3RqS2RSdGZ2aFNtZkhVOG1US1VHYwp3M0lJZHF2QXhpTGl3MDJ1eWYwVTNHc2h6NUlCZ3A2emJKMWJNUUgxWjZFRGlpSW0xWW52M1RTM3RGUnB6Z2tjCjZlaS9SYlpQdTRKdWVuQ2N2UFoyelU5YTk5aFFvU01seXJUYXdZTjFZU1h5OGpzL3JTdGlEMm5jUktxR05hZ1AKTGF6dXU4OGNFcGloV0s0d0plTT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+    client-key-data: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb3dJQkFBS0NBUUVBdkdjN29DTkplSCtEV3lnd2JoR0NqTFFUUU96K1cwVmVBWVN3MnZjakRKWHBxcjBaCjQ4MVVzMkxNRXlPZitoNTQxWHRLbG5FZXRkMCtSclBrTWdnVFlyQU1BVU9pNTNzUFZGbWpyUHRZV1VmODQ1a0wKa3lIczhOeWNuK2RoUVpGT3RkaElVOEppdXcwbDc4SUFSME1jZkVvQTRVdzJ5cXZFc0UycXRmcGk3aUJ0eE5hNgowNkZvaHVCb3dGZU5NaDFLTGhERzBtS2ZqcGtnWlhxcHA4NTZkSk05WUVadEU1WnBkeHNZWlcyZG5qNHdqb1NzCnhiSXVnaG43SkppK0hNYm5xcllIVGFDZG54S3hKcTVjRzNaeXpEMzArS1loSXNDS1gyNVEwRHBtaEgxSHIvSnQKV1lPRXhtSDNNMnM2RlcyS2VpdExXRHJyQmNwc3d6L3ArYmJnN3dJREFRQUJBb0lCQVFDN20yQzRlZXJ6WHFhQwo0MlkyZEtFM1V5bkpBVFhYMVI5akM2ckFvRS82ZkYyT2MzZVFiQ3JuNW4yb29WVHdUOStyVlhaVWtKZ3dLUHVXCmxCT3I3bmEvVXViaGEyU1FkTzR5NUlBa0JMVlpVbUgwa2JZQThVdHNIWUtwaUZKRVpGbW9vcEtETlpIekNZaTUKVXNuTUxIdjFHQXdBVFZCU1NQRTNUbCtyam9WczhKQlVveEtiRlNJOFBiKzNSdm1GZ3k0R0hqVkt0eUlVem0xbwo2ekZpblhXZHpOa0tUVzBDRjhiRW5xaldoZ1hQOTA0OGJPTkgyaE9sT2ZBY2p3TjB2REdkcmpxTk9abmJFaDFPCkNtaXFieDZsWUEwR29nYmJ0Mzhqa1lOZ0YrM3RwdkJpR3R4ZFJJcXduTFNiQlc5Sks4WERoRlNsdDRTN1V0Tk4KVGVWZjQvUmhBb0dCQU5YZCtsZnB5eE94OTNHVTluRGlJV0pkZzVVY1FJVURVbHBsMjdzUGpNOE1VWXp3cEtUTQpDeFQxMWVYUXA4QmhGSnZHRnFtL2ZWUVM5ZzhKUGVFWisyWVNpUCszc3p1Y05ZNnRLQXlCU2N3STJPNHRuWVN1CnB4WkREU1VTemdQWlAwVnJIUUszVG4wMS9SZFdvNDRzdFpuRElTWnFhUjE4Wk84WmVqSGxMYzFsQW9HQkFPR0YKQjRJcFh4YjAwMlB6b2xIUkxuN1NEcFhOSG5YUnZqeVVIbTIvaVN4RDdBMUVrT0xBa1FYSUFBYU1IYXVSbjRXOAplZ0ErZUNkKzYxbkhHT1hnbXY3eGNXMFg2VjZhaEtxNFFqdC9xRWIzbnFLQU9PY0d3VFllZXNob3VjUVNyS2VGCjlHR01TSHlWWnVET0VjVjlzWDdVK0ZHTDRBcHdOc2l1aGFSUmNXbkRBb0dBZWxNdDlvek56K1VTQUJCUTZQNGUKVkRIaXFpM3ZwV1RoL0x5WDhxV1JSM2ZuU1RMM0tSOWdFMHdOWFJaOGJLZmFic0xkZ1pmNmFsVXlFaVdhRkIrVgpVS3UzV25SSyt3UjlDYTkyNGJndGFwdUE0TEtNanpDS2QweEF2M3pEQXlhR2J3RTJKYkNOSDBiN0RSZE1FMnoxCkxnNlM3bk1jem5XeEVhVkQ1RGdPZTVVQ2dZQjhNeVJnZGVKdHBTWHFiUm9mRHlJWkxCeG1PZElsdHY2YkpFUGgKMDFON2NtakZJZGJkV29wRDhkSzV5RjdxeDBkZ2d0MTUxdTJiYXRXNDJ1S0diMzFOSExHSUVGd3hBczQvcXp5bQp3Zlp1Sng5UmhXWlJMYklvMlA1cjh1a2o1OWo0WmRpaUJIMURSNUNpRER0VFZaYjBMOXdXSlArZElCRzcwZ205CjVqQ2N1d0tCZ0JsWDJoMk9xUVRkS0N3NEtmRGhFdVNNc3JmK1Fpa1RoeUpEZkRZMmVtZFRWcFRWbGU5eTVuK0oKZmN0WUhzNFBmanMwTFZCUXYxdjgrQmZZNndsNUNMVTRLcjJTV0xGT1hnN3VFUlpyUTVpb0Y1cFkvWHFNTDRBOAplaklMNk96aXpuNVQwc2QwelpYZkRvZ1VWVGppQTZya2g5RmZWU0RWSkdZYUJSUzk5eFpmCi0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==
+EOF
+
+
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: 2017-06-20T05:00:28Z
+  name: kube-proxy
+  namespace: kube-system
+  resourceVersion: "122"
+  selfLink: /api/v1/namespaces/kube-system/serviceaccounts/kube-proxy
+  uid: 6113308c-5575-11e7-96dc-02420ac00002
+secrets:
+- name: kube-proxy-token-psl6s
+
+
+rajesh@rajesh:~/kube-1.6$ kubectl get secrets kube-proxy-token-psl6s -n kube-system -o yaml
+apiVersion: v1
+data:
+  ca.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUN5RENDQWJDZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRFM01EWXlNREEwTlRrek4xb1hEVEkzTURZeE9EQTBOVGt6TjFvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTERUCjMyamJmZVZPamZUeUkzWjFXeklQa29JSUdHVElZTU9CTUFqbXE3enJ1d0RaZHJnRFZUR2k1bWVlTnFmcVN1TkkKa0lhdllZWHJ3cWhQVFhoUitjUWdKMUpVemtSekNyKy8zKzdjNi9ud1c2OFpyME41T3RZanRyMXl0cUtGcUNVRgpkRXg5c2dsQy9SRnJ4aGwvcFFxeFdSYVpTendBa2JhMHcvcEhrUC9wK1hQeWVNSDZ3eUp5MHJOWVphQ0NwRzdSCmticUxwWlY3eGhvelpyTWp6cUVkeE5tT1RpZDBWTXUvM3MwTURRTXpBYW1Ccnl3bXVReWRxYm1BQlVtQWZhT3MKbkRheXNiTm03dDFaSlRFS01jTTh6OU9JVzFyUmppalJ0WlNwc0FGZ3ZxdXhoYlc1MnhpUmVMbGJ0em56cGxVaApnR2RSN2kxYUdjUE9BeHo3KzlzQ0F3RUFBYU1qTUNFd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0RRWUpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFIbE5zbStrQ3F1ZU13aUR1MTRCVTVXcDhHU00KNXJoNjBiT3BsZzVaSlVMa0toYTdSWHNSQkdZWDRKdFkxUGV3TjdtUW1SMEVJMHdnVC9qTnFGaGc5N3Ezcy9ZYQpsRTBheUtUKzh5N2xwcXVNbXNjSzhkbk41QkVyc01TY1FnUk12Zy92YmhzQVNCeVJNWENwMEx1WUFOMVJJSUFDCk9veklZd2c2M0srcTFaUjlnN2U3WTVYQkJ3bW9ENFRPVDZ1NUg3OGVjVDlibjQ2Q0NCMTBKa1k3OHFsVXp5TU8KTCtjdUM5ZkdqUjdMVHpGUVJDTmw1d05pakgxQUU1THVPNjVMTG43ZHpSYmZyMzNCd0NmNHhhMU5XMmQ0emFmMQp5UWQ5R3hxYVVqNmc1OU1Gb3Y3d1VpeHcremt2NUlSamtnZ2FPeWZBQVIxQzJUNmVNWEs3MG1XWW1tZz0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+  namespace: a3ViZS1zeXN0ZW0=
+  token: ZXlKaGJHY2lPaUpTVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnBjM01pT2lKcmRXSmxjbTVsZEdWekwzTmxjblpwWTJWaFkyTnZkVzUwSWl3aWEzVmlaWEp1WlhSbGN5NXBieTl6WlhKMmFXTmxZV05qYjNWdWRDOXVZVzFsYzNCaFkyVWlPaUpyZFdKbExYTjVjM1JsYlNJc0ltdDFZbVZ5Ym1WMFpYTXVhVzh2YzJWeWRtbGpaV0ZqWTI5MWJuUXZjMlZqY21WMExtNWhiV1VpT2lKcmRXSmxMWEJ5YjNoNUxYUnZhMlZ1TFhCemJEWnpJaXdpYTNWaVpYSnVaWFJsY3k1cGJ5OXpaWEoyYVdObFlXTmpiM1Z1ZEM5elpYSjJhV05sTFdGalkyOTFiblF1Ym1GdFpTSTZJbXQxWW1VdGNISnZlSGtpTENKcmRXSmxjbTVsZEdWekxtbHZMM05sY25acFkyVmhZMk52ZFc1MEwzTmxjblpwWTJVdFlXTmpiM1Z1ZEM1MWFXUWlPaUkyTVRFek16QTRZeTAxTlRjMUxURXhaVGN0T1Raa1l5MHdNalF5TUdGak1EQXdNRElpTENKemRXSWlPaUp6ZVhOMFpXMDZjMlZ5ZG1salpXRmpZMjkxYm5RNmEzVmlaUzF6ZVhOMFpXMDZhM1ZpWlMxd2NtOTRlU0o5LmF0bl93ejZmNjUtT3g1V1c4RlR1M053aGpmdHBWZUdGM2VEV2pTOWZjb3NVbm95QlRpSFY3ekdyMW5PUmxOd256akFQMjNrS0lNLW9OSmtFZUwzV2JUeVFFS3hiSGExcVZWaUFCaWJmRkVSVkFlNUJsMGVXNmJ0ckxqeU5MNGtzdUd2Z3UxeVhKcm04Mlo0WlJncTdTZ2k2TTBzWDN6aTZORFpTTHpfR2RTMU1zcV9xQWVaa3NmZkxoT1huR281dzhkdW93Mnc5Z3VLLXZOUzBNQXQ2cmpxSmdSTm5VZzV3VDF6RWVFM3A5OEhfMWpnSG5vSnZHZjI1cGNGZFZ4LUllQXkyUDk0NGg1SXdYcllhR2Fjd1VwbkRZZlZpZG81b0hreGR4eFlGYTlzVmNELWxhOGpsUFZNM0xVZFdXaEc0bHdpZUlVN2l4S09HbWVjU2ZQUTNXZw==
+kind: Secret
+metadata:
+  annotations:
+    kubernetes.io/service-account.name: kube-proxy
+    kubernetes.io/service-account.uid: 6113308c-5575-11e7-96dc-02420ac00002
+  name: kube-proxy-token-psl6s
+  namespace: kube-system
+type: kubernetes.io/service-account-token
+
+rajesh@rajesh:~$ kubectl get serviceaccount virtlet -n kube-system -o yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: 2017-06-20T05:08:46Z
+  name: virtlet
+  namespace: kube-system
+secrets:
+- name: virtlet-token-vwjr4
+
+
+rajesh@rajesh:~/kube-1.6$ kubectl get secrets virtlet-token-vwjr4 -n kube-system -o yaml
+apiVersion: v1
+data:
+  ca.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUN5RENDQWJDZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRFM01EWXlNREEwTlRrek4xb1hEVEkzTURZeE9EQTBOVGt6TjFvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTERUCjMyamJmZVZPamZUeUkzWjFXeklQa29JSUdHVElZTU9CTUFqbXE3enJ1d0RaZHJnRFZUR2k1bWVlTnFmcVN1TkkKa0lhdllZWHJ3cWhQVFhoUitjUWdKMUpVemtSekNyKy8zKzdjNi9ud1c2OFpyME41T3RZanRyMXl0cUtGcUNVRgpkRXg5c2dsQy9SRnJ4aGwvcFFxeFdSYVpTendBa2JhMHcvcEhrUC9wK1hQeWVNSDZ3eUp5MHJOWVphQ0NwRzdSCmticUxwWlY3eGhvelpyTWp6cUVkeE5tT1RpZDBWTXUvM3MwTURRTXpBYW1Ccnl3bXVReWRxYm1BQlVtQWZhT3MKbkRheXNiTm03dDFaSlRFS01jTTh6OU9JVzFyUmppalJ0WlNwc0FGZ3ZxdXhoYlc1MnhpUmVMbGJ0em56cGxVaApnR2RSN2kxYUdjUE9BeHo3KzlzQ0F3RUFBYU1qTUNFd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0RRWUpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFIbE5zbStrQ3F1ZU13aUR1MTRCVTVXcDhHU00KNXJoNjBiT3BsZzVaSlVMa0toYTdSWHNSQkdZWDRKdFkxUGV3TjdtUW1SMEVJMHdnVC9qTnFGaGc5N3Ezcy9ZYQpsRTBheUtUKzh5N2xwcXVNbXNjSzhkbk41QkVyc01TY1FnUk12Zy92YmhzQVNCeVJNWENwMEx1WUFOMVJJSUFDCk9veklZd2c2M0srcTFaUjlnN2U3WTVYQkJ3bW9ENFRPVDZ1NUg3OGVjVDlibjQ2Q0NCMTBKa1k3OHFsVXp5TU8KTCtjdUM5ZkdqUjdMVHpGUVJDTmw1d05pakgxQUU1THVPNjVMTG43ZHpSYmZyMzNCd0NmNHhhMU5XMmQ0emFmMQp5UWQ5R3hxYVVqNmc1OU1Gb3Y3d1VpeHcremt2NUlSamtnZ2FPeWZBQVIxQzJUNmVNWEs3MG1XWW1tZz0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+  namespace: a3ViZS1zeXN0ZW0=
+  token: ZXlKaGJHY2lPaUpTVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnBjM01pT2lKcmRXSmxjbTVsZEdWekwzTmxjblpwWTJWaFkyTnZkVzUwSWl3aWEzVmlaWEp1WlhSbGN5NXBieTl6WlhKMmFXTmxZV05qYjNWdWRDOXVZVzFsYzNCaFkyVWlPaUpyZFdKbExYTjVjM1JsYlNJc0ltdDFZbVZ5Ym1WMFpYTXVhVzh2YzJWeWRtbGpaV0ZqWTI5MWJuUXZjMlZqY21WMExtNWhiV1VpT2lKMmFYSjBiR1YwTFhSdmEyVnVMWFozYW5JMElpd2lhM1ZpWlhKdVpYUmxjeTVwYnk5elpYSjJhV05sWVdOamIzVnVkQzl6WlhKMmFXTmxMV0ZqWTI5MWJuUXVibUZ0WlNJNkluWnBjblJzWlhRaUxDSnJkV0psY201bGRHVnpMbWx2TDNObGNuWnBZMlZoWTJOdmRXNTBMM05sY25acFkyVXRZV05qYjNWdWRDNTFhV1FpT2lJNE9XWm1aV1V4WXkwMU5UYzJMVEV4WlRjdE9ERXdNaTB3TWpReU1HRmpNREF3TURJaUxDSnpkV0lpT2lKemVYTjBaVzA2YzJWeWRtbGpaV0ZqWTI5MWJuUTZhM1ZpWlMxemVYTjBaVzA2ZG1seWRHeGxkQ0o5Lm5vZjE4dlJiaEVfTTdmU3JVZ3RqbUR3S2pPZVlsQkF0ZV9DanltWHpFZkdkZVYzeExNaUUwVFVFMWdHcG4yRFRuZXQxNFhFNVZRSTZrNGk1SWM0T3dLQzFCRzdfRjdLTnIyXzhDb0VuVEYxNzZtZWdIRzNMdzhoSWEzZDhyXzdmR095LVIwZF9RMVJYNlNHXzNJOE9OZXVUc0l6S09Bbl9EcTFXeEVuUlJRc21rclQtLTNrNy1IX0NlWUZZWlZ0Tml2MnBwQXBvelR6LXd6d3NYOUNtSl9WbHltMkNsRG1ZbmRGdjhJcHVhME42TGRySTZEUEtLNm1EZjhlblhCa2tUU0VmQWJ4SnZHX1FLSVVTOFl0RDZQLTlEUGUyNFVielBPdC1ocFlDUURXTVc0bmxjSlJqY1pKY2xuSlo5dGl6bVJSQXk1aVJYVC03X1NJM0w2bGZ1UQ==
+kind: Secret
+metadata:
+  annotations:
+    kubernetes.io/service-account.name: virtlet
+    kubernetes.io/service-account.uid: 89ffee1c-5576-11e7-8102-02420ac00002
+  name: virtlet-token-vwjr4
+  namespace: kube-system
+type: kubernetes.io/service-account-token
+
+kubectl create -f virtlet-service-acc.yaml -f virtlet-secret.yaml 
+serviceaccount "virtlet" created
+secret "virtlet-token-vwjr4" created
+
+
+
+rajesh@rajesh:~$ kubectl get configmap kube-proxy -n kube-system -o yaml
+apiVersion: v1
+data:
+  kubeconfig.conf: |
+    apiVersion: v1
+    kind: Config
+    clusters:
+    - cluster:
+        certificate-authority: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        server: https://192.168.1.25:8443
+      name: default
+    contexts:
+    - context:
+        cluster: default
+        namespace: default
+        user: default
+      name: default
+    current-context: default
+    users:
+    - name: default
+      user:
+        tokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+kind: ConfigMap
+metadata:
+  labels:
+    app: kube-proxy
+  name: kube-proxy
+  namespace: kube-system
+
+
+
+rajesh@rajesh:~$ kubectl get configmap kubelet-kube-node-1 -n kube-system -o yaml
+apiVersion: v1
+data:
+  kubelet.config: '{"address":"0.0.0.0","allowPrivileged":true,"authentication":{"anonymous":{"enabled":true},"webhook":{"cacheTTL":"2m0s","enabled":false},"x509":{"clientCAFile":""}},"authorization":{"mode":"AlwaysAllow","webhook":{"cacheAuthorizedTTL":"5m0s","cacheUnauthorizedTTL":"30s"}},"babysitDaemons":false,"cAdvisorPort":4194,"certDirectory":"/var/run/kubernetes","cgroupDriver":"cgroupfs","cgroupRoot":"","cgroupsPerQOS":false,"cloudConfigFile":"","cloudProvider":"auto-detect","clusterDNS":["10.96.0.10"],"clusterDomain":"cluster.local","cniBinDir":"/opt/cni/bin","cniConfDir":"/etc/cni/net.d","containerRuntime":"remote","containerized":false,"contentType":"application/vnd.kubernetes.protobuf","cpuCFSQuota":true,"dockerEndpoint":"unix:///var/run/docker.sock","dockerExecHandlerName":"native","enableCRI":true,"enableContentionProfiling":false,"enableControllerAttachDetach":false,"enableCustomMetrics":false,"enableDebuggingHandlers":true,"enableServer":true,"enforceNodeAllocatable":[],"eventBurst":10,"eventRecordQPS":5,"evictionHard":"memory.available\u003c100Mi","evictionMaxPodGracePeriod":0,"evictionMinimumReclaim":"","evictionPressureTransitionPeriod":"5m0s","evictionSoft":"","evictionSoftGracePeriod":"","exitOnLockContention":false,"experimentalKernelMemcgNotification":false,"experimentalQOSReserved":{},"featureGates":"DynamicKubeletConfig=true","fileCheckFrequency":"20s","hairpinMode":"promiscuous-bridge","healthzBindAddress":"127.0.0.1","healthzPort":10248,"hostIPCSources":["*"],"hostNetworkSources":["*"],"hostPIDSources":["*"],"hostnameOverride":"","httpCheckFrequency":"20s","imageGCHighThresholdPercent":90,"imageGCLowThresholdPercent":80,"imageMinimumGCAge":"2m0s","imagePullProgressDeadline":"1m0s","iptablesDropBit":15,"iptablesMasqueradeBit":14,"kubeAPIBurst":10,"kubeAPIQPS":5,"kubeReserved":{},"kubeletCgroups":"","lockFilePath":"","lowDiskSpaceThresholdMB":256,"makeIPTablesUtilChains":true,"manifestURL":"","manifestURLHeader":"","masterServiceNamespace":"default","maxContainerCount":-1,"maxOpenFiles":1000000,"maxPerPodContainerCount":1,"maxPods":110,"minimumGCAge":"0s","networkPluginDir":"","networkPluginMTU":0,"networkPluginName":"cni","nodeIP":"","nodeLabels":{},"nodeStatusUpdateFrequency":"10s","nonMasqueradeCIDR":"10.0.0.0/8","oomScoreAdj":-999,"outOfDiskTransitionFrequency":"5m0s","podCIDR":"","podInfraContainerImage":"gcr.io/google_containers/pause-amd64:3.0","podManifestPath":"/etc/kubernetes/manifests","podsPerCore":0,"port":10250,"protectKernelDefaults":false,"readOnlyPort":10255,"registerNode":true,"registerSchedulable":true,"registerWithTaints":[],"registryBurst":10,"registryPullQPS":5,"remoteImageEndpoint":"/run/criproxy.sock","remoteRuntimeEndpoint":"/run/criproxy.sock","resolvConf":"/etc/resolv.conf","rktAPIEndpoint":"localhost:15441","rktPath":"","rktStage1Image":"","rootDirectory":"/var/lib/kubelet","runtimeCgroups":"","runtimeRequestTimeout":"2m0s","seccompProfileRoot":"/var/lib/kubelet/seccomp","serializeImagePulls":true,"streamingConnectionIdleTimeout":"4h0m0s","syncFrequency":"1m0s","systemCgroups":"","systemReserved":{},"tlsCertFile":"","tlsPrivateKeyFile":"","volumePluginDir":"/usr/libexec/kubernetes/kubelet-plugins/volume/exec/","volumeStatsAggPeriod":"1m0s"}'
+kind: ConfigMap
+metadata:
+  name: kubelet-kube-node-1
+  namespace: kube-system
+
+
+
+
+  25m	25m	1	kubelet, kube-node-1	spec.containers{cirros-vm}	Warning	Failed		Failed to pull image "virtlet/download.cirros-cloud.net/0.3.5/cirros-0.3.5-x86_64-disk.img": rpc error: code = 2 desc = "/run/virtlet.sock": rpc error: code = 2 desc = Get http://download.cirros-cloud.net/0.3.5/cirros-0.3.5-x86_64-disk.img: dial tcp: lookup download.cirros-cloud.net on 10.96.0.10:53: write udp 10.192.0.3:46643->10.96.0.10:53: write: operation not permitted
+
+
+
+
+

@@ -1,0 +1,94 @@
+https://www.howtoforge.com/tutorial/how-to-create-docker-images-with-dockerfile/
+
+
+
+https://hub.docker.com/r/dexter2cz/one/
+
+docker pull dexter2cz/one
+
+docker run -it --name one --net=host -e FRONTEND=1 dexter2cz/one
+
+docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+857aa8a3ef5b        dexter2cz/one       "/start.sh"         29 minutes ago      Up 6 minutes                            one
+
+docker exec -i -t 857aa8a3ef5b /bin/bash
+
+https://github.com/vijaykanthm28/one-docker.git
+
+sudo docker build --tag oned:5.2 ./ 
+sudo docker save oned:latest > oned.tar.gz
+
+sudo docker load -i oned.tar.gz
+
+sudo docker run -it --name one --net=host -e FRONTEND=1 oned:latest
+
+sudo mkdir -p /var/lib/one/datastores
+sudo chown 9869:9869 /var/lib/one/datastores
+sudo docker run -d --name one_node --privileged=true --net=host -e NODE=1 -e SSH_AUTH_KEY="ssh-ed25519 AAAA... oneadmin@oneadmin.cz" -v /var/lib/libvirt/:/var/lib/libvirt/ -v /var/run/libvirt/:/var/run/libvirt/ -v /var/run/dbus/:/var/run/dbus/ -v /var/lib/one/datastores:/var/lib/one/datastores oned:latest
+
+
+sudo usermod -aG docker <your-user> : eg:-  sudo usermod -aG docker vijay 
+
+oneadmin:Arcyiamnorb5
+
+cat >/var/lib/one/.ssh/config  <<EOF
+Host ceph_node
+port 52022
+user oneadmin
+StrictHostKeyChecking no
+EOF
+
+sudo docker run -d --name one_node1 --privileged=true --net=host -e NODE=1 -e SSH_AUTH_KEY="ssh-ed25519 AAAA... oneadmin@oneadmin.cz" -v /var/lib/libvirt/:/var/lib/libvirt/ -v /var/run/libvirt/:/var/run/libvirt/ -v /var/run/dbus/:/var/run/dbus/ -v /etc/ceph:/etc/ceph -v /var/lib/ceph/:/var/lib/ceph/ -v /var/lib/one/datastores:/var/lib/one/datastores -p 52022:2222 oned:latest
+
+
+
+ 
+echo 'deb https://download.ceph.com/debian-jewel/ xenial main' >/etc/apt/sources.list.d/ceph.list
+wget -q -O- 'https://download.ceph.com/keys/release.asc' | sudo apt-key add -
+apt-get update 
+apt-get install sudo ceph-common 
+
+cat > secret.xml << EOF
+<secret ephemeral='no' private='no'>
+  <uuid>f6cfa6f9-b9b2-4094-90a1-6b907c63d578</uuid>
+  <usage type='ceph'>
+          <name>client.libvirt secret</name>
+  </usage>
+</secret>
+EOF
+
+sudo virsh secret-define secret.xml
+sudo virsh secret-set-value --secret f6cfa6f9-b9b2-4094-90a1-6b907c63d578 --base64 $(cat client.libvirt.key)
+
+
+
+virsh --connect $LIBVIRT_URI create $domain
+
+  libvirt_uri -  qemu:///system   domain -  /var/lib/one//datastores/0/204/deployment.0
+
+virsh --connect qemu:///system create /var/lib/one//datastores/0/204/deployment.0
+
+
+http://stackoverflow.com/questions/28134239/how-to-ssh-into-docker
+
+
+Firstly you need to install a SSH server in the images you wish to ssh-into. You can use a base image for all your container with the ssh
+server installed. Then you only have to run each container mapping the ssh port (default 22) to one to the host's ports 
+(Remote Server in your image), using -p <hostPort>:<containerPort>. i.e:
+
+docker run -p 52022:22 container1 
+docker run -p 53022:22 container2
+
+Then, if ports 52022 and 53022 of host's are accessible from outside, you can directly ssh to the containers using the ip of the host 
+(Remote Server) specifying the port in ssh with -p <port>. I.e.:
+
+ssh -p 52022 myuser@RemoteServer --> SSH to container1
+
+ssh -p 53022 myuser@RemoteServer --> SSH to container2
+
+virt-install --name fedora_test --ram 4096 --vcpus 2 \
+--disk path=/var/lib/libvirt/images/fedora.qcow2,format=qcow2,bus=virtio,size=15 \
+--network bridge=one --import
+docker exec -i -t 8380f53fdb65 /bin/bash
+

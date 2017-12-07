@@ -1,0 +1,128 @@
+#!/bin/bash
+
+#Requirement : Negative credits on an existing VMs needs to follow these.
+
+
+'
+$-5.00 for Suspension
+$-15.00 for Termination
+7 Day Grace Period
+14 Day Auto-Termination
+
+Now, when the suspension is reached
+we have to suspend the network and ability to connect to the VM
+I believe the "suspend" operation in OpenNebula does this
+we also disable VNC. We continue to remove credits for the VM being attached, so user still pays.
+If the grace period passes & the termination credit is reached
+then we terminate the VMs (delete for ever)
+If the termination credit is not reached, but the auto-termination is passed
+then we terminate the VMs
+'
+
+events_for_skews (skew means - something that is not parallel).
+ 
+CREATE TABLE IF NOT EXISTS events_for_skews(account_id text, cat_id text, inputs list<text>,outputs list<text>,actions list<text>,event_type text, json_claz text, created_at timestamp, updated_at timestamp, PRIMARY KEY ((account_id),cat_id,event_type));
+
+VM(includes disk)/containers/snapshots/backups/storage collector creates record if balance < 0 
+when VM launch or when 
+
+{
+"account_id": "",
+"cat_id": "",
+"type":"vms",
+"created_at": "",
+"updated_at": "",
+"inputs": [{"generated_at","next_due_at"},{"next_action":"suspend"}] key value list
+"outputs": [{"last_due_sent_at":"12-1-2017T001:30:56.000","last_action_done":"warning"}] key value list
+"actions": [[{"current_action":"warning","next_action":"","action":"done"}]] 
+"status":"",
+}
+
+
+# "daily_notify": "today-date",
+
+get notification levels from vertice conf when user onboad
+create delay_payment_actions with below records
+
+{
+"account_id": "",
+"cat_id": "",
+"type":"vms",
+"created_at": "",
+"updated_at": "",
+"inputs": [{"generated_at","next_due_at"},{"next_action":"suspend"}] key value list
+"outputs": [{"last_due_sent_at":"12-1-2017T001:30:56.000","last_action_done":"warning"}] key value list
+"actions": [[{"current_action":"warning","state":"done"}]] 
+"status":"",
+}
+
+Vertice Conf
+[skews]
+
+[[skews.actions]]
+ action = "suspend"
+ limit_cost = "-1"
+ deloy_grace_period = "7d"
+[[skews.actions]]
+ action = "terminate"
+ limit_cost = "-7"
+ deloy_grace_period = "15d"
+
+
+payment_delay_type ="dates" 
+payment_delay_actions = ["suspend","terminate"]
+deloy_grace_periods   = ["7","14"]
+deloy_cost = ["0","-5"]
+daily_notify = "09:30"
+
+
+if type cost goes < 0 
+check current balance lies between last_notified and next_notify if yes skip notifycation
+Notify user Email with what will be the next action and its next_grace_period
+Process next action
+
+Collect all current active ondemand VMs(disks and snapshots)/Containers/Backups/Storages
+Notify user What are the resources will affect in the next process 
+
+
+
+update 
+first_notify: 0 
+last_notified: next_notify
+next_notify: first_notify cost + next_grace_periods 
+next_action: next_delay_actions
+
+if type date 
+check current date lies between last_notified and next_notify if yes skip notifycation
+if no 
+Notify user Email with what will be the next action and its period
+process next_action
+
+update 
+last_notified: current date
+next_notify: first_notify date + next_grace_periods 
+next_action: next_delay_actions
+
+
+when make payment update 
+
+notify_dates: null
+next_actions: "warning"
+
+
+{
+"account_id": "",
+"cat_id": "",
+"type":"vms",
+"created_at": "",
+"updated_at": "",
+"inputs": [{"generated_at","next_due_at"},{"next_action":"suspend"}] key value list
+"outputs": [{"last_due_sent_at":"12-1-2017T001:30:56.000","last_action_done":"warning"}] key value list
+"actions": [[{"last_due_sent_at":"12-1-2017T001:30:56.000","action":"done"}]] 
+"status":"",
+}
+
+POST  /v2/eventskews/content       controllers.EventsBilling.post
+GET  /v2/eventskews/:cat_id         controllers.EventsBilling.list(limit: String)
+GET  /v2/eventskews                controllers.EventsBilling.index
+

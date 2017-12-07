@@ -1,0 +1,6 @@
+insert into quotas(account_id, created_at, id, allocated_to, allowed ,  inputs,json_claz ,  name,  updated_at, quota_type, status) values('mvijaykanth@megam.io', '2017-02-03T17:34:59.0000', 'QUO8671194369186000000', '  ', ['{"key":"RAM","value":"12 GB"}', '{"key":"CPU","value":"6 Core"}', '{"key":"DISK","value":"240 GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"8 TB"}' ,'{"key":"snapshots","value":"2"}'], null, 'Megam::Quotas', 'cloud-m-01', '2017-02-03T12:04:06.000', 'snapshots', 'active');
+
+insert into quotas(account_id, created_at,  id, allocated_to, allowed ,  inputs,  json_claz ,  name,  updated_at, quota_type, status) values('fddg@ss.co' , '2017-02-03T12:04:06.0000' , 'QUO5830545150944309312' , '  ' , ['{"key":"RAM","value":"12 GB"}', '{"key":"CPU","value":"6 Core"}', '{"key":"DISK","value":"240 GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"8 TB"}'] , null , 'Megam::Quotas' , 'cloud-m-01' , '2017-02-03T12:04:06.000','vm','active');
+
+
+delete from quotas where account_id='fddg@ss.co' and created_at='2017-02-03T17:34:59.0000' and id='QUO8671194369186000000';

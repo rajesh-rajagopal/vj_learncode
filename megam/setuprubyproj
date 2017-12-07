@@ -1,0 +1,32 @@
+
+To Setup Rails Project 
+
+setup ruby first 
+
+http://devcenter.megam.io/2015/03/03/megam_install_ruby/
+
+sudo apt-get install git curl
+
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+
+\curl -sSL -ip4 https://get.rvm.io | bash -s stable
+
+source ~/.rvm/scripts/rvm
+
+
+rvm install ruby-2.2.2 ( new version)
+
+rvm use ruby-2.2.2 --default
+
+rvm list
+
+
+
+$ git clone https://github.com/megamsys/nilavu.git 
+
+	$ cd nilavu 
+	$ bundle update         #install bundler 
+	$ bundle install 
+
+           bundle exec passenger start -p 3000 --max-pool-size 8
+

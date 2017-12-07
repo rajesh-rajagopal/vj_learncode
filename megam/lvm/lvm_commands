@@ -1,0 +1,10 @@
+#!/bin/sh
+
+
+apt-get install clvm lvm2 kvm libvirt-bin ruby nfs-common
+
+pvcreate /dev/sdb1 
+vgcreate vgpool /dev/sdb1
+lvcreate -L 3G -n lvstuff vgpool
+
+lvdisplay | awk '/vm001/{found=1}; /LV Size/ && found{print $3; exit}'  -- to get 

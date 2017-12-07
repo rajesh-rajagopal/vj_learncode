@@ -1,0 +1,89 @@
+[debug] application - **********models.base.repassword**************************** -->
+[debug] application - Input                -->[{"json_claz":"Megam::Account","id":null,"email":"mvijaykanth@megam.io","api_key":null,"first_name":null,"last_name":null,
+"phone":null,"password":"cXdlcnR5","password_reset_key":"V8ibI55mrh6RGSR6","password_reset_sent_at":null,"authority":null,"created_at":null,
+"some_msg":{}}]
+[debug] application - Repassword Account   -->[models.base.AccountSacks$email$@7362fe63]
+[debug] application - |^/^|-->checkMem:    -->[mvijaykanth@megam.io]
+[debug] application - InMemoryCache:       -->[getAs ?mvijaykanth@megam.io]
+
+
+
+
+
+Started PUT "/reset" for 192.168.1.246 at 2016-05-13 14:55:15 +0530
+Processing by UsersController#password_reset as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"RcEjDVLuezjUAe7CA8DjsapxsJrTvTMAcMo0F7DyFrzQM2DesEdRQ0C1nVBubgn7jRqLeJAFHF5VSXqRMLzh/Q==", "email"=>"mvijaykanth@megam.io", "token"=>"V8ibI55mrh6RGSR6", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "commit"=>"Update Password"}
+Can't verify CSRF token authenticity
+FASCADE Megam::Accountrepassword 
+START Megam::Account.repassword
+> email: mvijaykanth@megam.io
+> api_key: 
+> password: cXdlcnR5
+> first_name: 
+> last_name: 
+> password_reset_key: V8ibI55mrh6RGSR6
+> host: 192.168.1.246
+RUN_NOW Megam::Account.repassword 
+App 29489 stdout: --> (/accounts/repassword)
+App 29489 stdout: [2016-05-13T14:55:15+05:30] DEBUG: START
+App 29489 stdout: [2016-05-13T14:55:15+05:30] DEBUG: > expects: 201
+App 29489 stdout: [2016-05-13T14:55:15+05:30] DEBUG: > method: post
+App 29489 stdout: [2016-05-13T14:55:15+05:30] DEBUG: > body: {"json_claz":"Megam::Account","id":null,"email":"mvijaykanth@megam.io","api_key":null,
+"first_name":null,"last_name":null,"phone":null,"password":"cXdlcnR5","password_reset_key":"V8ibI55mrh6RGSR6",
+"password_reset_sent_at":null,"authority":null,"created_at":null,"some_msg":{}}
+
+App 29489 stdout: [2016-05-13T14:55:15+05:30] DEBUG: HTTP Request Data:
+App 29489 stdout: [2016-05-13T14:55:15+05:30] DEBUG: > HTTP http://192.168.1.246
+App 29489 stdout: [2016-05-13T14:55:15+05:30] DEBUG: > path: /v2/accounts/repassword
+App 29489 stdout: [2016-05-13T14:55:15+05:30] DEBUG: > body: {"json_claz":"Megam::Account","id":null,"email":"mvijaykanth@megam.io","api_key":null,"first_name":null,"last_name":null,
+"phone":null,"password":"cXdlcnR5","password_reset_key":"V8ibI55mrh6RGSR6","password_reset_sent_at":null,"authority":null,
+"created_at":null,"some_msg":{}}
+App 29489 stdout: [2016-05-13T14:55:15+05:30] DEBUG: > headers: {"Accept"=>"application/json", "Accept-Encoding"=>"gzip", "User-Agent"=>"megam-api/0.100", "X-Ruby-Version"=>"2.2.4", "X-Ruby-Platform"=>"x86_64-linux", "X-Megam-HMAC"=>"mvijaykanth@megam.io:25f8ca016e2106de4d510e0484c41ec1ed61e447", "X-Megam-DATE"=>"2016-05-13 14:55", "X-Megam-ORG"=>"", "X-Megam-PUTTUSAVI"=>"true"}
+App 29489 stdout: [2016-05-13T14:55:15+05:30] DEBUG: > host: 192.168.1.246
+App 29489 stdout: [2016-05-13T14:55:15+05:30] DEBUG: > nonblock: false
+App 29489 stdout: [2016-05-13T14:55:15+05:30] DEBUG: > scheme: http
+App 29489 stdout: [2016-05-13T14:55:15+05:30] DEBUG: End HTTP Request Data.
+App 29489 stdout: [2016-05-13T14:55:16+05:30] DEBUG: RESPONSE: HTTP Status and Header Data
+App 29489 stdout: [2016-05-13T14:55:16+05:30] DEBUG: > HTTP 192.168.1.246 201
+App 29489 stdout: [2016-05-13T14:55:16+05:30] DEBUG: > Content-Type: text/plain; charset=utf-8
+App 29489 stdout: [2016-05-13T14:55:16+05:30] DEBUG: > Date: Fri, 13 May 2016 09:25:16 GMT
+App 29489 stdout: [2016-05-13T14:55:16+05:30] DEBUG: > Content-Length: 495
+App 29489 stdout: [2016-05-13T14:55:16+05:30] DEBUG: End HTTP Status/Header Data.
+App 29489 stdout: [2016-05-13T14:55:16+05:30] DEBUG: RESPONSE: HTTP Body(JSON)
+App 29489 stdout: [2016-05-13T14:55:16+05:30] DEBUG: {
+App 29489 stdout:   "code":201,
+App 29489 stdout:   "msg_type":"info",
+App 29489 stdout:   "msg":"Account reseted successfully.\n            |\n            |You can use the the 'Accounts':{AccountResult(ACT6057895600899606262,Mvijaykanth,,,mvijaykanth@megam.io,354a604bccc3161b00a444137fae260b7a54d229,MTIzNDU=,,V8ibI55mrh6RGSR6,2016-05-13 08:18:04 +0000,2016-05-13 06:19:50 +0000)}.",
+App 29489 stdout:   "more":"",
+App 29489 stdout:   "json_claz":"Megam::Account",
+App 29489 stdout:   "links":"Forum   :http://docs.megam.io/discuss\nDocs    :http://docs.megam.io\nSupport :http://support.megam.io"
+App 29489 stdout: }
+App 29489 stdout: [2016-05-13T14:55:16+05:30] DEBUG: RESPONSE: Ruby Object
+App 29489 stdout: [2016-05-13T14:55:16+05:30] DEBUG: json_claz      =Megam::Account
+App 29489 stdout: id             =
+App 29489 stdout: email          =
+App 29489 stdout: api_key        =
+App 29489 stdout: first_name     =
+App 29489 stdout: last_name      =
+App 29489 stdout: phone          =
+App 29489 stdout: password       =
+App 29489 stdout: password_reset_key=
+App 29489 stdout: password_reset_sent_at=
+App 29489 stdout: authority      =
+App 29489 stdout: created_at     =
+App 29489 stdout: some_msg       ={:code=>201, :msg_type=>"info", :msg=>"Account reseted successfully.\n            |\n            |You can use the the 'Accounts':{AccountResult(ACT6057895600899606262,Mvijaykanth,,,mvijaykanth@megam.io,354a604bccc3161b00a444137fae260b7a54d229,MTIzNDU=,,V8ibI55mrh6RGSR6,2016-05-13 08:18:04 +0000,2016-05-13 06:19:50 +0000)}.", :links=>"Forum   :http://docs.megam.io/discuss\nDocs    :http://docs.megam.io\nSupport :http://support.megam.io"}
+App 29489 stdout: [2016-05-13T14:55:16+05:30] DEBUG: END(0.203324737s)
+Redirected to http://192.168.1.243:3000/signin
+Completed 302 Found in 205ms
+
+
+Started GET "/signin" for 192.168.1.246 at 2016-05-13 14:55:16 +0530
+Processing by SessionsController#new as HTML
+  Rendered sessions/_authenticators.html.erb (0.1ms)
+  Rendered sessions/_reset_modal.html.erb (0.4ms)
+  Rendered sessions/new.html.erb within layouts/application (2.2ms)
+  Rendered layouts/_head.html.erb (0.1ms)
+  Rendered /home/ranjitha/.rvm/gems/ruby-2.2.4/gems/toastr_rails-2.1.1/app/views/toastr_rails/_flash.html.erb (0.2ms)
+Completed 200 OK in 31ms (Views: 30.8ms)
+
+

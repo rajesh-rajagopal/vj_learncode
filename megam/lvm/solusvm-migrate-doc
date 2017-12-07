@@ -1,0 +1,114 @@
+https://documentation.solusvm.com/display/DOCS/KVM+Bridge+Setup
+https://documentation.solusvm.com/display/DOCS/KVM+Private+Internal+Network+Setup
+https://www.ubiquityhosting.com/blog/bind-ips-solusvm-citrix-xenserver-vmware-esxi/
+https://www.lowendtalk.com/discussion/32361/installing-configuring-kvm-on-ovh-with-solusvm
+
+
+# cat /etc/sysconfig/network-scripts/ifcfg-eth0
+DEVICE="eth0"
+ONBOOT="yes"
+BRIDGE="br0"
+
+# cat /etc/sysconfig/network-scripts/ifcfg-eth1
+DEVICE=eth1
+ONBOOT=yes
+BRIDGE=intbr0
+
+# cat /etc/sysconfig/network-scripts/ifcfg-br0
+DEVICE=br0
+TYPE=Bridge
+BOOTPROTO=static
+BROADCAST=158.69.240.255
+IPADDR=158.69.240.220
+NETMASK=255.255.255.0
+NETWORK=158.69.240.0
+ONBOOT=yes
+GATEWAY=158.69.240.254
+IPV6INIT=yes
+IPV6_AUTOCONF=no
+IPV6ADDR=2607:5300:120:00dc::/64
+
+# cat /etc/sysconfig/network-scripts/ifcfg-intbr0
+DEVICE=intbr0
+ONBOOT=yes
+TYPE=Bridge
+BOOTPROTO=static
+IPV4_FAILURE_FATAL=yes
+IPV6INIT=no
+IPADDR=192.168.0.1
+NETMASK=255.255.255.0
+BROADCAST=192.168.0.255
+NETWORK=192.168.0.0
+
+brctl addif br0 eth0
+brctl addif intbr0 eth1
+
+
+# brctl show
+bridge name	bridge id		STP enabled	interfaces
+br0		8000.0cc47a06b72c	no		eth0
+							kvm103.0
+							kvm105.0
+intbr0		8000.0cc47a06b72d	no		eth1
+							kvm106.0
+virbr0		8000.5254006b7f64	yes		virbr0-nic
+
+#ip route show
+158.69.240.0/24 dev br0  proto kernel  scope link  src 158.69.240.220 
+192.168.0.0/24 dev intbr0  proto kernel  scope link  src 192.168.0.1 
+192.168.122.0/24 dev virbr0  proto kernel  scope link  src 192.168.122.1 
+
+#route
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         158.69.240.254  0.0.0.0         UG    0      0        0 br0
+158.69.240.0    *               255.255.255.0   U     0      0        0 br0
+192.168.0.0     *               255.255.255.0   U     0      0        0 intbr0
+192.168.122.0   *               255.255.255.0   U     0      0        0 virbr0
+
+
+On solusvm master admin bage 
+
+nodelist -> edit 
+Network interface	eth1 
+KVM bridge  		intbr0
+
+valid options: multiple, hold, name, cpu, vcpu, arch, memory, disk, nic, raw, vnc, vnc_password, vnc_listen, spice, spice_password, spice_listen, ssh, net_context, context, boot, files_ds, init, dry
+
+Virtual Server Details
+Main IP Address  192.168.0.13
+VNC Port 	8
+VNC Password   moFwIc8a
+Root Password  team4megam
+
+
+
+Virtual Server Details  kvm109
+
+Main IP Address 	192.168.0.14
+VNC Port 	9
+VNC Password 	8H4QKL1k
+Root Password 	team4megam
+
+
+
+netstat -tuplen
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address               Foreign Address             State       User       Inode      PID/Program name   
+tcp        0      0 0.0.0.0:5903                0.0.0.0:*                   LISTEN      9869       84040410   12871/qemu-kvm      
+tcp        0      0 0.0.0.0:6767                0.0.0.0:*                   LISTEN      0          55874840   25918/lighttpd      
+tcp        0      0 0.0.0.0:6096                0.0.0.0:*                   LISTEN      9869       84800300   28702/qemu-system-x 
+tcp        0      0 0.0.0.0:5905                0.0.0.0:*                   LISTEN      9869       83276945   2272/qemu-kvm       
+tcp        0      0 127.0.0.1:5906              0.0.0.0:*                   LISTEN      9869       84802890   29065/qemu-system-x 
+tcp        0      0 0.0.0.0:5907                0.0.0.0:*                   LISTEN      9869       84702265   659/qemu-kvm        
+tcp        0      0 127.0.0.1:53                0.0.0.0:*                   LISTEN      25         55987597   24646/named         
+tcp        0      0 192.168.122.1:53            0.0.0.0:*                   LISTEN      0          40090      7203/dnsmasq        
+tcp        0      0 0.0.0.0:22                  0.0.0.0:*                   LISTEN      0          55985727   24135/sshd          
+tcp        0      0 127.0.0.1:953               0.0.0.0:*                   LISTEN      25         55987600   24646/named         
+tcp        0      0 127.0.0.1:25                0.0.0.0:*                   LISTEN      0          55986923   24263/master        
+tcp        0      0 ::1:53                      :::*                        LISTEN      25         55987599   24646/named         
+
+
+
+
+

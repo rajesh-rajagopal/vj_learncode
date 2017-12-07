@@ -1,0 +1,204 @@
+ email                   | api_key                                  | authority | created_at                | first_name    | id                     | last_name | password                                                     | password_reset_key | password_reset_sent_at | phone       | status
+-------------------------+------------------------------------------+-----------+---------------------------+---------------+------------------------+-----------+--------------------------------------------------------------+--------------------+------------------------+-------------+--------
+           tour@megam.io |                                 faketour |      demo | 2016-04-01 04:27:10 +0000 |   Vertis Tour | ACT8404663969358719673 |   Call us | $2a$10$ebE.KJITo19bkJ/s8gMFpuXkMh2Tu5vL4eVcgJN7THYD1/YiBNWP2 |                nil |                    nil | 18006186813 |   null
+           test@megam.io |        IamAtlas{74}NobdyCanSedfefdeME#07 |      test | 2016-04-01 04:27:11 +0000 |    Megam Test | ACT8522395403046667932 |   Call us | $2a$10$ebE.KJITo19bkJ/s8gMFpuXkMh2Tu5vL4eVcgJN7THYD1/zjcmxq3 |                nil |                    nil | 18006186813 |   null
+ vijaykanthm28@gmail.com | 7593c6e9f41adf1862d60c0642533826aca01bcf |           | 2016-04-01 04:37:37 +0000 | Vijaykanthm28 | ACT8141372425974917141 |           |                                                         dnM= |                    |                        |             |   null
+
+(3 rows)
+cqlsh:vertice> select * from organizations;
+
+ accounts_id             | id                     | created_at                | json_claz            | name
+-------------------------+------------------------+---------------------------+----------------------+----------
+           tour@megam.io | ORG4907213821198010705 | 2016-03-30 10:19:36 +0000 | Megam::Organizations | megam.io
+           tour@megam.io | ORG7018459808412051553 | 2016-04-01 04:27:12 +0000 | Megam::Organizations | megam.io
+           tour@megam.io | ORG7758226475709782668 | 2016-03-31 04:28:13 +0000 | Megam::Organizations | megam.io
+           tour@megam.io | ORG8140112637921417779 | 2016-03-30 10:19:49 +0000 | Megam::Organizations | megam.io
+           test@megam.io | ORG5983046436300219205 | 2016-04-01 04:27:12 +0000 | Megam::Organizations | megam.io
+           test@megam.io | ORG6573662696983682423 | 2016-03-30 10:19:37 +0000 | Megam::Organizations | megam.io
+           test@megam.io | ORG7249681653634848018 | 2016-03-30 10:19:49 +0000 | Megam::Organizations | megam.io
+           test@megam.io | ORG9220038850151989083 | 2016-03-31 04:28:13 +0000 | Megam::Organizations | megam.io
+ vijaykanthm28@gmail.com | ORG8018443203247765368 | 2016-04-01 04:37:37 +0000 | Megam::Organizations | megam.io
+
+(9 rows)
+cqlsh:vertice> select * from assembly ;
+
+ org_id | id | components | created_at | inputs | json_claz | name | outputs | policies | status | tosca_type
+--------+----+------------+------------+--------+-----------+------+---------+----------+--------+------------
+
+(0 rows)
+cqlsh:vertice> select * from assemblies ;
+
+ org_id | id | assemblies | created_at | inputs | json_claz | name
+--------+----+------------+------------+--------+-----------+------
+
+(0 rows)
+cqlsh:vertice> select * from components ;
+
+ id | artifacts | created_at | envs | inputs | json_claz | name | operations | outputs | related_components | repo | status | tosca_type
+----+-----------+------------+------+--------+-----------+------+------------+---------+--------------------+------+--------+------------
+
+(0 rows)
+cqlsh:vertice> select * from assembly ;
+
+ org_id                 | id                     | components | created_at                | inputs                                                                                                                                                                                                                                                                                                                                                                 | json_claz       | name   | outputs | policies | status   | tosca_type
+------------------------+------------------------+------------+---------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------+--------+---------+----------+----------+----------------------
+ ORG8018443203247765368 | ASM5950115094179140656 |       null | 2016-04-01 04:39:39 +0000 | ['{"key":"domain","value":"megambox.com"}', '{"key":"sshkey","value":"vs"}', '{"key":"provider","value":"one"}', '{"key":"cpu","value":"1 Core"}', '{"key":"ram","value":"1 GB"}', '{"key":"hdd","value":"24 GB SSD"}', '{"key":"version","value":"14.04"}', '{"key":"lastsuccessstatusupdate","value":"01 Apr 16 10:09 IST"}', '{"key":"status","value":"launched"}'] | Megam::Assembly | maxing |    null |     null | launched | tosca.torpedo.ubuntu
+
+(1 rows)
+cqlsh:vertice> select * from assemblies ;
+
+ org_id                 | id                     | assemblies                 | created_at                | inputs | json_claz         | name
+------------------------+------------------------+----------------------------+---------------------------+--------+-------------------+------
+ ORG8018443203247765368 | AMS9022446708072509003 | ['ASM5950115094179140656'] | 2016-04-01 04:39:39 +0000 |   null | Megam::Assemblies |     
+
+(1 rows)
+cqlsh:vertice> select * from assemblies ;
+
+ org_id                 | id                     | assemblies                 | created_at                | inputs | json_claz         | name
+------------------------+------------------------+----------------------------+---------------------------+--------+-------------------+------
+ ORG8018443203247765368 | AMS4939192166567098733 | ['ASM5627540267783389064'] | 2016-04-01 04:40:59 +0000 |   null | Megam::Assemblies |     
+ ORG8018443203247765368 | AMS9022446708072509003 | ['ASM5950115094179140656'] | 2016-04-01 04:39:39 +0000 |   null | Megam::Assemblies |     
+
+(2 rows)
+cqlsh:vertice> select * from components ;
+
+ id | artifacts | created_at | envs | inputs | json_claz | name | operations | outputs | related_components | repo | status | tosca_type
+----+-----------+------------+------+--------+-----------+------+------------+---------+--------------------+------+--------+------------
+
+
+
+
+CREATE TABLE vertice.assembly (
+    org_id text,
+    id text,
+    components list<text>,
+    created_at text,
+    inputs list<text>,
+    json_claz text,
+    name text,
+    outputs list<text>,
+    policies list<text>,
+    status text,
+    tosca_type text,
+    PRIMARY KEY (org_id, id)
+) WITH CLUSTERING ORDER BY (id ASC)
+
+
+ ORG9053704440472309758 | ASM5950115094179140656 |       null | 2016-04-01 04:39:39 +0000 | ['{"key":"domain","value":"megambox.com"}', '{"key":"sshkey","value":"vs"}', '{"key":"provider","value":"one"}', '{"key":"cpu","value":"1 Core"}', '{"key":"ram","value":"1 GB"}', '{"key":"hdd","value":"24 GB SSD"}', '{"key":"version","value":"14.04"}', '{"key":"lastsuccessstatusupdate","value":"01 Apr 16 04:41 UTC"}', '{"key":"status","value":"running"}'] | Megam::Assembly | maxing | ['{"key":"publicipv4","value":"103.56.92.14"}'] |     null | running | tosca.torpedo.ubuntu
+
+KVM108
+
+insert into vertice.assembly(org_id,id,json_claz,name,status,created_at,inputs,tosca_type) values('ORG8543260529316515313', 'ASM5555544443332210000', 'Megam::Assembly', 'kvm108','migrated', '2016-04-11 14:30:54 +0000', ['{"key":"domain","value":"megambox.com"}', '{"key":"sshkey","value":"vs"}', '{"key":"provider","value":"one"}', '{"key":"cpu","value":"1 Core"}', '{"key":"ram","value":"1 GB"}', '{"key":"hdd","value":"24 GB SSD"}', '{"key":"version","value":"14.04"}', '{"key":"lastsuccessstatusupdate","value":"01 Apr 16 04:41 UTC"}', '{"key":"status","value":"migrated"}'],'tosca.torpedo.ubuntu');
+
+insert into vertice.assemblies(org_id,id,assemblies,created_at,json_claz,name) values('ORG8543260529316515313','AMS0000011113332245555',['ASM5555544443332210000'],'2016-04-11 14:30:54 +0000','Megam::Assemblies','');
+
+KVM109
+
+insert into vertice.assembly(org_id,id,json_claz,name,status,created_at,inputs,tosca_type) values('ORG8543260529316515313', 'ASM5555544443332210001', 'Megam::Assembly', 'kvm109','migrated', '2016-04-11 14:30:53 +0000', ['{"key":"domain","value":""}', '{"key":"sshkey","value":"vs"}', '{"key":"provider","value":"one"}', '{"key":"cpu","value":"1 Core"}', '{"key":"ram","value":"1 GB"}', '{"key":"hdd","value":"24 GB SSD"}', '{"key":"version","value":"14.04"}', '{"key":"lastsuccessstatusupdate","value":"01 Apr 16 04:41 UTC"}', '{"key":"status","value":"migrated"}'],'tosca.torpedo.ubuntu');
+
+insert into vertice.assemblies(org_id,id,assemblies,created_at,json_claz,name) values('ORG8543260529316515313','AMS0000011113332245554',['ASM5555544443332210001'],'2016-04-11 14:30:53 +0000','Megam::Assemblies','');
+
+KVM103
+
+insert into vertice.assembly(org_id,id,json_claz,name,status,created_at,inputs,tosca_type) values('ORG9053704440472309758', 'ASM5555544443332210002', 'Megam::Assembly', 'kvm103','running', '2016-04-01 04:51:39 +0000', ['{"key":"domain","value":""}', '{"key":"sshkey","value":"vs"}', '{"key":"provider","value":"one"}', '{"key":"cpu","value":"1 Core"}', '{"key":"ram","value":"1 GB"}', '{"key":"hdd","value":"24 GB SSD"}', '{"key":"version","value":"14.04"}', '{"key":"lastsuccessstatusupdate","value":"01 Apr 16 04:41 UTC"}', '{"key":"status","value":"running"}'],'tosca.torpedo.ubuntu');
+
+insert into vertice.assemblies(org_id,id,assemblies,created_at,json_claz,name) values('ORG9053704440472309758','AMS0000011113332245553',['ASM5555544443332210002'],'2016-04-01 04:51:39 +0000','Megam::Assemblies','');
+
+
+
+
+
+CREATE TABLE vertice.assemblies (
+    org_id text,
+    id text,
+    assemblies list<text>,
+    created_at text,
+    inputs list<text>,
+    json_claz text,
+    name text,
+    PRIMARY KEY (org_id, id)
+) WITH CLUSTERING ORDER BY (id ASC)
+
+
+ ORG8018443203247765368 | AMS9022446708072509003 | ['ASM5950115094179140656'] | 2016-04-01 04:39:39 +0000 |   null | Megam::Assemblies |   
+
+
+insert into vertice.assemblies(org_id,id,assemblies,created_at,json_claz,name) values('ORG8018443203247765368','AMS9000006708072509003',['ASM5000115094179140656'],'2016-04-01 04:51:39 +0000','Megam::Assemblies')
+
+
+CREATE TABLE vertice.sshkeys (
+    org_id text,
+    name text,
+    created_at text,
+    id text,
+    json_claz text,
+    privatekey text,
+    publickey text,
+    PRIMARY KEY (org_id, name)
+) 
+
+
+
+
+CREATE TABLE vertice.marketplaces (
+    settings_name text,
+    flavor text,
+    catorder text,
+    cattype text,
+    envs list<text>,
+    image text,
+    json_claz text,
+    plans map<text, text>,
+    url text,
+    PRIMARY KEY (settings_name, flavor)
+) 
+
+
+insert into marketplaces (settings_name, cattype, flavor, image, catorder, url, json_claz, envs, plans) values ('vertice', 'BITNAMI', 'ProcessMaker Open Source Edition',  'processmaker.png', '7', 'https://bitnami.com/stack/processmaker', 'Megam::MarketPlace' , ['{"key":"bitnami_url", "value":"https://s3-ap-southeast-1.amazonaws.com/megampub/bitnami/BPM/bitnami-processmaker-3.0.1.7-0-linux-x64-installer.run"}'], {'3.0.1.7':'ProcessMaker is an open source Business Process Management (BPM) platform designed to automate workflows and improve business efficiency'});
+
+insert into marketplaces 
+(settings_name, cattype, flavor, image, catorder, url, json_claz, envs, plans) 
+values 
+('vertice', 'COLLABORATION', ' VirtualOffice',  'virtual_office.png', '6', 'www.megam.io', 'Megam::MarketPlace' , ['{"key":"host", "value":""}', '{"key":"port", "value":"806"}'], {'0.9.0':'A virtual office provides bundled applications for everyday office use.'});
+
+
+ vertice |          Zarafa |        6 | COLLABORATION |                                                                                             ['{"key":"port", "value":"9000"}'] |          zarafa.png | Megam::MarketPlace |                                          {'7.2': 'Zarafa gives you the tools that help boost your day-to-day communication. File sharing, web meetings and business apps like email and calendar are integrated in one suite.'} |    
+
+
+
+
+update marketplaces set envs=['{"key":"port", "value":"9004"}','{"key":"oneclick", "value":"yes"}'], options = null where flavor='Spark' and settings_name='vertice' ;
+
+
+
+update assembly set outputs=['{"key":"vmid","value":"58"}']  where id = 'ASM6812080992190424672';
+
+
+insert into assembly (org_id, id , account_id,created_at, inputs  , json_claz , name , outputs , status , tosca_type) values ('ORG8877557914645075628', 'ASM6054404599503290163', 'vijaykanthm28@gmail.com','2016-06-13 09:53:26 +0000', ['{"key":"domain","value":"megambox.com"}', '{"key":"sshkey","value":"key001"}', '{"key":"provider","value":"one"}', '{"key":"cpu","value":"1 Core"}', '{"key":"ram","value":"1 GB"}', '{"key":"hdd","value":"24 GB SSD"}', '{"key":"version","value":"8.x"}', '{"key":"lastsuccessstatusupdate","value":"10 Jun 16 15:20 EAT"}', '{"key":"status","value":"launched"}'], 'Megam::Assembly', 'quip', ['{"key":"vmid","value":"728"}', '{"key":"vnchost","value":"136.243.49.217"}', '{"key":"vncport","value":"6663"}', '{"key":"publicipv4","value":"138.201.98.17"}'],'launched', 'tosca.torpedo.ubuntu');
+
+
+
+insert into assemblies (org_id,id,assemblies,created_at,json_claz,name) values('AMS4797637690447572801','ORG8877557914645075628', ['ASM6054404599503290163'],'2016-06-13 09:53:26 +0000','Megam::Assemblies','quip');
+
+insert into components (id, artifacts,created_at, inputs, json_claz , name, repo, status ,tosca_type) values ('COM7623699376101394708', '{"artifact_type":"","content":"","requirements":[]}', '2016-04-22 13:23:07 +0000',['{"key":"domain","value":"megambox.com"}', '{"key":"sshkey","value":"key001"}', '{"key":"provider","value":"one"}', '{"key":"cpu","value":"1 Core"}', '{"key":"ram","value":"1 GB"}', '{"key":"hdd","value":"24 GB SSD"}', '{"key":"version","value":"0.12.x"}', '{"key":"status","value":"launching"}', '{"key":"lastsuccessstatusupdate","value":"22 Apr 16 13:27 UTC"}'],'Megam::Components','missing','{"rtype":"source","source":"github","oneclick":"true","url":"https://github.com/jaeko44/etherpad-lite.git"}','launching','bitnami.ubuntu.wordpress');
+
+
+
+ COM8921347985673107807 | {"artifact_type":"","content":"","requirements":[]} | 2016-07-21 10:33:03 +0000 |                                                                                                                        null |            ['{"key":"domain","value":"megambox.com"}', '{"key":"keypairoption","value":"1"}', '{"key":"sshkey","value":"1"}', '{"key":"provider","value":"one"}', '{"key":"cpu","value":"2 Cores"}', '{"key":"ram","value":"1 GB"}', '{"key":"hdd","value":"24 GB"}', '{"key":"version","value":""}', '{"key":"region","value":"chennai"}', '{"key":"resource","value":"c1.micro"}', '{"key":"storage_hddtype","value":"HDD"}', '{"key":"ipv4private","value":"true"}', '{"key":"ipv4public","value":"false"}', '{"key":"ipv6private","value":"false"}', '{"key":"ipv6public","value":"false"}', '{"key":"status","value":"launched"}', '{"key":"lastsuccessstatusupdate","value":"21 Jul 16 10:33 UTC"}'] | Megam::Components |        dawn-cloud-1083 |                                                                                                                                                                                                                                                           null |    null |               null | {"rtype":"image","source":"bitnami","oneclick":"true","url":"https://s3-ap-southeast-1.amazonaws.com/megampub/bitnami/Continuous+Integration/bitnami-jenkins-1.655-0-linux-x64-installer.run"} |            launched |         tosca.collaboration.jenkins
+
+
+
+
+
+
+insert into requests(id, action, cat_id, category, cattype, created_at, name) values ('RIP5471985191836923670', 'create', 'AMS8804812038818072511', 'state', 'Torpedo', '2016-06-14 11:04:26 +0000','innovates.megambox.com');
+
+ curl -d '{"name":"","cat_id":"AMS4724795980725157701","cattype":"torpedo","id":"RIP5471985191836923670","category":"control","action":"restart"}' 'http://localhost:4151/put?topic=vms'
+ 
+ 
+ 
+
+ 
+ 
+ 
+

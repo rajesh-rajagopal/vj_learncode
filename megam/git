@@ -1,0 +1,12 @@
+git commands
+
+You could "reset" your repository to any commit you want (e.g. 1 month ago).
+
+Use git-reset for that:
+
+git clone [remote_address_here] my_repo
+cd my_repo
+git reset --hard [ENTER HERE THE COMMIT HASH YOU WANT]
+
+
+git reset --hard 490fa4131dc3e853f5ab5e2d33e96314cde59c06

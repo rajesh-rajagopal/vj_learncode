@@ -1,0 +1,95 @@
+#!/bin/bash
+
+# ACCOUNTS create user 
+
+curl --data '{"name": "megam","email":"info@megam.io","first_name":"vijay","last_name": "mp","phone":"9715754230",
+"api_key": "1234567890","password": "team4megam", "states":"active","approval":"true","suspend":"true","roles":["admin"],"registration_ip_address": "192.168.1.100"}' http://localhost:9636/api/v1/accounts
+# got responds 
+
+	{"id":"811269528712437760","email":"info@megam.io","name":"megam","token":"kmKPcCfkpTbUATNBLv","api_key":"1234567890","flags":0}
+# regenerate token
+
+curl --data '{"email":"info@megam","password": "team4megam"}' http://localhost:9636/api/v1/authenticate
+	
+	{"id":"800518710501580800","email":"info@megam.io","name":"","token":"Gr36eIhdt4gEZIGfag","api_key":"","flags":0}
+
+# ASSEMBLY FACTORY
+
+curl --header "X-AUTH-RIOOS-EMAIL:info@megam.io" --header "Authorization:Bearer kmKPcCfkpTbUATNBLv"  --data '
+{"id":"811274763379941300","name":"ubuntu","uri":"/v1/assemblys/assembly_factorys","description":"ubuntuinstallation","tags":["ubuntu"],"replicas":1,"properties":{"domain":"megambox.com","cloudsetting":"/clouds/one","region":"822339700365729792","storage_type":"ssd"},"type_meta":{"kind":"Assemblyfactory","api_version":"v1"},"object_meta":{"name":"ubuntu-test-1","origin":"","uid":"","created_at":"","cluster_name":"","labels":{"group":"development","key2":"value2"},"annotations":{"key1":"value1","key2":"value2"},"owner_references":[{"kind":"Node","api_version":"v1","name":"ddd","uid":"","block_owner_deletion":true}]},"plan":"/v3/plan/ubuntu","external_management_resource":["rio-system"],"component_collection":{"flavor":"/v3/flavor/1001","network":"/url"},"status":{"phase":"pending","message":"","reason":"","conditions":[{"message":"","reason":"","status":" ","last_transition_time":" ","last_probe_time":" ","condition_type":" "}]},"opssettings":{"nodeselector":"","priority":"","nodename":"","restartpolicy":" "}}' http://localhost:9636/api/v1/assemblyfactorys
+
+curl  -H "Authorization: Bearer Gr36eIhdt4gEZIGfag" -H "X-AUTH-RIOOS-EMAIL: info@megam" http://localhost:9636/api/v1/assemblyfactorys/796881787316871168
+
+curl  -H "Authorization: Bearer Gr36eIhdt4gEZIGfag" -H "X-AUTH-RIOOS-EMAIL: info@megam" http://localhost:9636/api/v1/origins/rioos-system/assemblyfactorys
+
+curl  -H "Authorization: Bearer Gr36eIhdt4gEZIGfag" -H "X-AUTH-RIOOS-EMAIL: info@megam" http://localhost:9636/api/v1/origins/rioos-system/assemblyfactorys/796881787316871168
+
+# ASSEMBLY
+
+curl -H "Authorization: Bearer kmKPcCfkpTbUATNBLv" -H "X-AUTH-RIOOS-EMAIL: info@megam"  --data '{"name": "fresh-mind-9865","uri":"/v1/assemblys","description":"ubuntuinstallation","tags": ["ubuntu"],"parent_id":"822290419063767040", "instance_id":"",
+"type_meta":{"kind":"AssemblyFactory","api_version":"v1"}, "object_meta":{"name":"xyz","origin":"","uid":"","created_at":"","cluster_name":"","labels":{"group":"development","key2":"value2"},"annotations":{"key1":"value1","key2":"value2"},"owner_references": [{"kind":"Node","api_version":"v1","name":"ddd", "uid":"780970728630525952","block_owner_deletion":true}]}, "volumes":[{"id":"","target":"","volume_type":""}] ,"component_collection": " ","urls": {"console":"http://192.168.2.100:5900"}, "status":{"phase":"Pending","message":"","reason":"","conditions":[{"message":"","reason":"","status":" ","last_transition_time":" ","last_probe_time":" ","condition_type":" "}]},"node":"rajesh","ips":{"private_ipv4":["192.168.2.100","192.168.1.100"]}}' http://localhost:9636/api/v1/assemblys
+
+
+
+
+
+curl  -H "Authorization: Bearer Gr36eIhdt4gEZIGfag" -H "X-AUTH-RIOOS-EMAIL: info@megam" http://localhost:9636/api/v1/assemblys/780970728630525952
+
+curl  -H "Authorization: Bearer Gr36eIhdt4gEZIGfag" -H "X-AUTH-RIOOS-EMAIL: info@megam" http://localhost:9636/api/v1/origins/rioos-system/assemblys
+
+curl  -H "Authorization: Bearer Gr36eIhdt4gEZIGfag" -H "X-AUTH-RIOOS-EMAIL: info@megam" http://localhost:9636/api/v1/origins/rioos-system/assemblys/780970728630525952
+
+
+# ASSEMBLYLIST JSON
+
+{"kind":"AssemblyList", "api_version":"v1", "items": [{"type_meta":{"kind":"Assembly","api_version":"v1"},"object_meta":{"name":"ubuntu-test-1","generateName":"","origin":"default","selfLink":"/api/v1/assemblys/789720603266400001","uid":"789720603266400001","resourceVersion":"","generation":0,"deletionGracePeriodSeconds":10,"labels":{"testkey":"value1"},"clusterName":""}, "id":"789720603266400001","parentId":"78090000000001","uri":"/v1/assemblys","name":"ubuntu-test-1","description":"centos installation","tags":["centos","centos_7.2"],"nodeName":"vijaywk","ips":[{"key":"ipv4","value":"192.168.1.100"}],"plan":"","urls":[""],"status":{"instanceID":"","phase":"pending","message":"","reason":"","conditions":[{"type":"","status":"","reason":"","message":""}]},"spec":{"assembly_factory":"nil","nodeselector":{"virtlet":"vijaywk"
+}},"updated_at":"","created_at":""},{"type_meta":{"kind":"Assembly","api_version":"v1"},"object_meta":{"name":"ubuntu-test-2","generateName":"","origin":"default","selfLink":"/api/v1/assemblys/789720603266400002","uid":"789720603266400002","resourceVersion":"","generation":0,"deletionGracePeriodSeconds":10,"labels":{"testkey":"value2"},"clusterName":""}, "id":"789720603266400002","parentId":"78090000000002","uri":"/v1/assemblys","name":"ubuntu-test-2","description":"centos installation","tags":["centos","centos_7.2"],"nodeName":"vijaywk","ips":[{"key":"ipv4","value":"192.168.1.100"}],"plan":"","urls":[""],"status":{"instanceID":"","phase":"pending","message":"","reason":"","conditions":[{"type":"","status":" ","reason":"","message":""}]},"spec":{"assembly_factory":{},"nodeselector":{"virtlet":"vijaywk"
+}},"updated_at":"","created_at":""}]}
+
+
+# HORIZONTALSCALING
+
+    curl -H "Authorization: Bearer kmKPcCfkpTbUATNBLv" -H "X-AUTH-RIOOS-EMAIL:mvijaykanth@megam.io"  --data '{"name":"example1","description":"Horizontal auto scale","tags":["horizontal scale","loadbalancer"],"scale_type":"AUTOHS","representation_skew":"ACTIVE","state":"data","metadata":[], "spec":{"scale_target_ref":"ASM001","min_replicas":4,"max_replicas":5,"metrics":[{"metric_type": "Resource","object":{"target": "hits_as_per_second","target_value":1000,"metric_time_spec":{"scale_up_by":"5m","scale_up_wait_time":"5m","scale_down_by":"5m","scale_down_wait_time":"5m"}},"resource":{"name": "memory","min_target_value":"2","max_target_value":"4","metric_time_spec":{"scale_up_by":"5m","scale_up_wait_time":"5m","scale_down_by":"5m","scale_down_wait_time":"5m"}}}]},"status":{"last_scale_time":"","current_replicas":1,"desired_replicas":1},"type_meta":{"kind":"Assemblyfactory","api_version":"v1"},"object_meta":{"name":"xyz","origin":"","uid":"","created_at":"","cluster_name":"","labels":{"group":"development","key2":"value2"},"annotations":{"key1":"value1","key2":"value2"},"owner_references": [{"kind":"Node","api_version":"v1","name":"ddd", "uid":"","block_owner_deletion":true}]}}' http://localhost:9636/api/v1/horizontalscaling
+
+
+
+#NODES 
+
+
+curl --header "X-AUTH-RIOOS-EMAIL:mvijaykanth@megam.io" --header "Authorization:Bearer kmKPcCfkpTbUATNBLv" --data '{"type_meta":{"kind":"","api_version":""},"object_meta":{"name":"rionode","origin":"","uid":"","creationTimestamp":null,"labels":{"beta.rioos.io/arch":"amd64","beta.rioos.io/os":"linux","rioos.io/hostname":"rajesh"},"annotations":{"volumes.kubernetes.io/controller-managed-attach-detach":"true"},"owner_references":[{"api_version":"","kind":"","name":"","uid":"","block_owner_deletion":false}],"cluster_name":"","created_at":""},"spec":{"assembly_cidr":"","external_id":"rajesh","provider_id":"","unschedulable":false,"taints":[{"key":"","value":"","effect":"","time_added":"2017-09-21T06:35:16Z"}]},"status":{"capacity":{"cpu":"4","memory":"16331164Ki","pods":"110","storage":"0"},"allocatable":{"cpu":"4","memory":"16228764Ki","pods":"110","storage":"0"},"phase":"","conditions":[{"condition_type":"OutOfDisk","status":"False","last_probe_time":"2017-09-21T06:35:16Z","last_transition_time":"2017-09-21T06:35:16Z","reason":"NodeletHasSufficientDisk","message":"nodelet has sufficient disk space available"},{"condition_type":"MemoryPressure","status":"False","last_probe_time":"2017-09-21T06:35:16Z","last_transition_time":"2017-09-21T06:35:16Z","reason":"NodeletHasSufficientMemory","message":"nodelet has sufficient memory available"},{"condition_type":"DiskPressure","status":"False","last_probe_time":"2017-09-21T06:35:16Z","last_transition_time":"2017-09-21T06:35:16Z","reason":"NodeletHasNoDiskPressure","message":"nodelet has no disk pressure"},{"condition_type":"Ready","status":"True","last_probe_time":"2017-09-21T06:35:16Z","last_transition_time":"2017-09-21T06:35:16Z","reason":"NodeletReady","message":"nodelet is posting ready status"}],"addresses":[{"node_type":"InternalIP","address":"192.168.2.47"},{"node_type":"Hostname","address":"rajesh"}],"daemonEndpoints":{"nodeletEndpoint":{"Port":10250}},"node_info":{"machine_id":"589f17c8cc084c078c5d364241433afc","system_uuid":"85EE9345-A1AF-11E3-BE7C-28E347559DE7","boot_id":"560a9cdd-6ec8-463b-9f96-21b90981f344","kernel_version":"4.4.0-93-generic","os_image":"Ubuntu 16.04.3 LTS","containerRuntimeVersion":"docker://Unknown","nodeletVersion":"2.0  (nodelet)  707170ac0e22e4454f9666338eb1f6f3a8d0f6a9","kubeProxyVersion":"2.0  (nodelet)  707170ac0e22e4454f9666338eb1f6f3a8d0f6a9","operating_system":"linux","architecture":"amd64", "bridges":[{"bridge_name":"riopriv","bridge_type":"private_ipv4","physical_device":"eth0"}]}},"id":"","created_at":""}' http://192.168.1.100:9636/api/v1/nodes
+
+
+{"id":"822240955804426240","object_meta":{"name":"822240955804426240","origin":"","uid":"","created_at":"","cluster_name":"","labels":{},"annotations":{},"owner_references":[{"kind":"","api_version":"","name":"","uid":"","block_owner_deletion":false}]},"type_meta":{"kind":"Node","api_version":"v1"},"spec":{"assembly_cidr":"","external_id":"rajesh","provider_id":"","unschedulable":false,"taints":[{"key":"","value":"","effect":"","time_added":"2017-09-21T06:35:16Z"}]},"status":{"capacity":{"cpu":"4","memory":"16331164Ki","pods":"110","storage":"0"},"allocatable":{"cpu":"4","memory":"16228764Ki","pods":"110","storage":"0"},"phase":"","conditions":[{"message":"nodelet has sufficient disk space available","reason":"NodeletHasSufficientDisk","status":"False","last_transition_time":"2017-09-21T06:35:16Z","last_probe_time":"2017-09-21T06:35:16Z","condition_type":"OutOfDisk"},{"message":"nodelet has sufficient memory available","reason":"NodeletHasSufficientMemory","status":"False","last_transition_time":"2017-09-21T06:35:16Z","last_probe_time":"2017-09-21T06:35:16Z","condition_type":"MemoryPressure"},{"message":"nodelet has no disk pressure","reason":"NodeletHasNoDiskPressure","status":"False","last_transition_time":"2017-09-21T06:35:16Z","last_probe_time":"2017-09-21T06:35:16Z","condition_type":"DiskPressure"},{"message":"nodelet is posting ready status","reason":"NodeletReady","status":"True","last_transition_time":"2017-09-21T06:35:16Z","last_probe_time":"2017-09-21T06:35:16Z","condition_type":"Ready"}],"addresses":[{"node_type":"InternalIP","address":"192.168.2.47"},{"node_type":"Hostname","address":"rajesh"}],"node_info":{"machine_id":"589f17c8cc084c078c5d364241433afc","system_uuid":"85EE9345-A1AF-11E3-BE7C-28E347559DE7","kernel_version":"4.4.0-93-generic","os_image":"Ubuntu 16.04.3 LTS","architecture":"amd64","bridges":[{"bridge_name":"riopriv","physical_device":"eth0","bridge_type":"private_ipv4"}]}},"created_at":"2017-10-06T10:15:51.177861+00:00"}
+
+
+
+
+#Networks 
+
+curl --header "X-AUTH-RIOOS-EMAIL:mvijaykanth@megam.io" --header "Authorization:Bearer Yvgr9b7JHGMItR1EYP" --data '{"network_type":"public_ip4","name":"private","subnet_ip":"192.168.2.0/24","netmask": "255.255.255.0", "gateway": "192.168.2.1","created_at": "","status":{"phase":"pending","message":"","reason":"","conditions":[{"message":"","reason":"","status":" ","last_transition_time":" ","last_probe_time":" ","condition_type":" "}]},"bridge_hosts": {"192.168.2.48":"riopub", "192.168.2.47":"riopriv"}}' http://localhost:9636/api/v1/networks
+
+{"id":"822230915873775616","name":"private","network_type":"public_ip4","subnet_ip":"192.168.2.0/24","netmask":"255.255.255.0","gateway":"192.168.2.1","bridge_hosts":{"192.168.2.47":"riopriv","192.168.2.48":"riopub"},"status":{"phase":"pending","message":"","reason":"","conditions":[{"message":"","reason":"","status":" ","last_transition_time":" ","last_probe_time":" ","condition_type":" "}]},"created_at":"2017-10-06T09:55:54.323315+00:00","object_meta":{"name":"822230915873775616","origin":"","uid":"","created_at":"","cluster_name":"","labels":{},"annotations":{}},"type_meta":{"kind":"Networks","api_version":"v1"}}
+
+# StoragesConnector
+
+curl -H "Authorization: Bearer Yvgr9b7JHGMItR1EYP" -H "X-AUTH-RIOOS-EMAIL: mvijaykanth@megam.io" --data '{"name":"192.168.2.100_nfs","host_ip":"192.168.2.100","storage_type": "nfs","parameters":  {"storage_pool": "nfs-pool"}, "storage_info":{"disks": [{"disk": "/dev/sdb","disk_type": "disk","point": "","size": "3.7GB"}]},"status":{"phase":"","message": "","reason": "","conditions":[{"message":"","reason":"","status":" ","last_transition_time":" ","last_probe_time":" ","condition_type":" "}]}}' http://localhost:9636/api/v1/storageconnectors
+
+{"id":"822203663685525504","object_meta":{"name":"","origin":"","uid":"","created_at":"","cluster_name":"","labels":{},"annotations":{}},"type_meta":{"kind":"Storage","api_version":"v1"},"name":"192.168.2.100_nfs","host_ip":"192.168.2.100","storage_type":"nfs","storage_info":{"disks":[{"disk":"/dev/sdb","disk_type":"disk","point":"","size":"3.7GB"}]},"parameters":{"storage_pool":"nfs-pool"},"status":{"phase":"","message":"","reason":"","conditions":[{"message":"","reason":"","status":" ","last_transition_time":" ","last_probe_time":" ","condition_type":" "}]},"created_at":"2017-10-06T09:01:45.610400+00:00"}
+
+# StoragePool 
+
+
+curl -H "Authorization: Bearer Yvgr9b7JHGMItR1EYP" -H "X-AUTH-RIOOS-EMAIL: mvijaykanth@megam.io" --data '{"name":"pool1", "connector_id":"822203663685525504", "storage_info":{"disks":[{"disk":"/dev/sdb", "disk_type":"/dev/sdb0", "point":"/home", "size":"500GB"}]}, "parameters":{"mount_path":"/var/lib/rioos/storage2"}, "status":{"phase":"pending", "message":"", "reason":"", "conditions":[{"message":"", "reason":"", "status":"", "last_transition_time":"", "last_probe_time":"", "condition_type":""}]}}' http://localhost:9636/api/v1/storagespool
+
+{"id":"822203856631898112","object_meta":{"name":"","origin":"","uid":"","created_at":"","cluster_name":"","labels":{},"annotations":{}},"type_meta":{"kind":"StoragePool","api_version":"v1"},"name":"pool1","connector_id":"822203663685525504","storage_info":{"disks":[{"disk":"/dev/sdb","disk_type":"/dev/sdb0","point":"/home","size":"500GB"}]},"parameters":{"mount_path":"/var/lib/rioos/storage2"},"status":{"phase":"initializing","message":"","reason":"","conditions":[{"message":"","reason":"","status":"","last_transition_time":"","last_probe_time":"","condition_type":""}]},"created_at":"2017-10-06T09:02:08.611916+00:00"}
+
+
+#Datacentes
+
+curl -H "Authorization: Bearer Yvgr9b7JHGMItR1EYP" -H "X-AUTH-RIOOS-EMAIL: mvijaykanth@megam.io" --data '{"type_meta": { "kind":"DataCenter", "api_version":"v1" },"object_meta":{"name":"megam", "origin":"rioo:2.0", "uid":"814310923685601280",     "created_at":"", "cluster_name":"", "labels": {"group":"development", "key2":"value2"}, "annotations": {"key1":"value1", "key2":"value2"}},"name":"chennai", "nodes":["822232703209316352"], "storage": "822203663685525504","networks": ["822230915873775616"], "enabled": true, "advanced_settings": {"storage":"true","storage":"false","storage": "true" }, "flag":"ch.png", "currency":"rs", "status": {"phase":"", "message": "", "reason": "", "conditions": [{"message":"", "reason":"","status":" ",   "last_transition_time":" ","last_probe_time":" ","condition_type":" "}]}}' http://localhost:9636/api/v1/datacenters
+
+
+{"id":"822232868355842048","object_meta":{"name":"","origin":"","uid":"","created_at":"","cluster_name":"","labels":{},"annotations":{}},"type_meta":{"kind":"Storage","api_version":"v1"},"name":"chennai","nodes":["822232703209316352"],"networks":["822230915873775616"],"enabled":true,"storage":"822203663685525504","advanced_settings":{"storage":"true"},"flag":"ch.png","currency":"rs","status":{"phase":"","message":"","reason":"","conditions":[{"message":"","reason":"","status":" ","last_transition_time":" ","last_probe_time":" ","condition_type":" "}]},"created_at":"2017-10-06T09:59:47.077686+00:00"}
+
+
+

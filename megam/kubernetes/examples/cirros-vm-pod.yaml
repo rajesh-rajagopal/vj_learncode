@@ -1,0 +1,104 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    VirtletVCPUCount: "1"
+    kubernetes.io/target-runtime: virtlet
+  creationTimestamp: 2017-05-24T06:40:08Z
+  name: cirros-vm
+  namespace: default
+  resourceVersion: "1819"
+  selfLink: /api/v1/namespaces/default/pods/cirros-vm
+  uid: d3e92930-404b-11e7-b2b3-02420ac00002
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: extraRuntime
+            operator: In
+            values:
+            - virtlet
+  containers:
+  - image: virtlet/download.cirros-cloud.net/0.3.5/cirros-0.3.5-x86_64-disk.img
+    imagePullPolicy: Always
+    name: cirros-vm
+    resources:
+      limits:
+        memory: 128Mi
+      requests:
+        memory: 128Mi
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-cr215
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  nodeName: kube-node-1
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.alpha.kubernetes.io/notReady
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.alpha.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - flexVolume:
+      driver: virtlet/flexvolume_driver
+      options:
+        metadata: |
+          {
+            "instance-id": "cirros-vm-001",
+            "local-hostname": "my-cirros-vm",
+            "public-keys": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCaJEcFDXEK2ZbX0ZLS1EIYFZRbDAcRfuVjpstSc0De8+sV1aiu+dePxdkuDRwqFtCyk6dEZkssjOkBXtri00MECLkir6FcH3kKOJtbJ6vy3uaJc9w1ERo+wyl6SkAh/+JTJkp7QRXj8oylW5E20LsbnA/dIwWzAF51PPwF7A7FtNg9DnwPqMkxFo1Th/buOMKbP5ZA1mmNNtmzbMpMfJATvVyiv3ccsSJKOiyQr6UG+j7sc/7jMVz5Xk34Vd0l8GwcB0334MchHckmqDB142h/NCWTr8oLakDNvkfC1YneAfAO41hDkUbxPtVBG5M/o7P4fxoqiHEX+ZLfRxDtHB53 me@localhost"
+          }
+        type: nocloud
+        userdata: |
+          #!/bin/sh
+          echo "Hi there"
+    name: nocloud
+  - name: default-token-cr215
+    secret:
+      defaultMode: 420
+      secretName: default-token-cr215
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: 2017-05-24T06:40:08Z
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: 2017-05-24T06:40:08Z
+    message: 'containers with unready status: [cirros-vm]'
+    reason: ContainersNotReady
+    status: "False"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: 2017-05-24T06:40:08Z
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - image: virtlet/download.cirros-cloud.net/0.3.5/cirros-0.3.5-x86_64-disk.img
+    imageID: ""
+    lastState: {}
+    name: cirros-vm
+    ready: false
+    restartCount: 0
+    state:
+      waiting:
+        reason: ContainerCreating
+  hostIP: 10.192.0.3
+  phase: Pending
+  qosClass: Burstable
+  startTime: 2017-05-24T06:40:08Z
+

@@ -1,0 +1,10 @@
+> cat ds.conf
+NAME = production
+DS_MAD = lvm
+TM_MAD = lvm
+VG_NAME = vg-one
+DISK_TYPE = block
+BRIDGE_LIST = "149.56.16.155"
+
+
+sudo service libvirt-bin restart

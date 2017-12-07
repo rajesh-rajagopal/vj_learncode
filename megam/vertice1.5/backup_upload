@@ -1,0 +1,47 @@
+
+  apidb.megam.io
+Endpoint:  http://apidb.megam.io:8000
+AccessKey: BR902BPU65FXCDRW6IL7 
+SecretKey: pnw9Ko1saN+XH1OSxDWGIkpsmWpf5DPnl7gFtVDV 
+Region:    us-east-1
+
+https://github.com/minio/minio-go
+
+https://docs.minio.io/docs/golang-client-api-reference
+
+{
+ "id":"BAK6296801960567550414",
+      "asm_id":"ASM5001435821298832362",
+      "org_id":"ORG6211302731943335691",
+      "account_id":"testadmin@astimp.ro",
+      "name":"aged-wood-8973.megambox.com62968",
+      "status":"inprogress",
+      "image_id":"",
+      "tosca_type":"vertice.backup.new",
+      "inputs":[
+	{
+          "key":"public_url",
+          "value":"http://apidb.megam.io/mini/buckets/file?access=xekdcdienm"
+        }
+	{
+          "key":"region",
+          "value":"Romania_low_cpu"
+        }
+	{
+          "key":"publ",
+          "value":"185.88.29.229"
+        }
+      ],
+      "outputs":[],
+      "json_claz":"Megam::Backups",
+      "created_at":"2017-05-10T20:24:09.000"
+ }
+
+
+insert into backups (id , asm_id , org_id , account_id , name , status , image_id , tosca_type , inputs , outputs , json_claz , created_at) values( 'BAK8184526435547400400', 'qwertyuiop' ,'ORG6527478750926273715', 'mvijaykanth@megam.io', 'withered-violet-3312.megambox.com81845', 'active', '','vertice.backup.new',['{"key":"region","value":"Romania_low_cpu"}','{"key":"public_url","value":"http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/current/images/netboot/mini.iso"}'], null,'Megam::Backups','2017-02-02T14:18:46.000');
+
+
+curl -d '{"id":"RIP6669853291014354444","cat_id":"BAK7149086773816893989","account_id":"info@megam.io","category":"backup","action":"backupcreate"}' 'http://127.0.0.1:4151/put?topic=vms'
+
+
+

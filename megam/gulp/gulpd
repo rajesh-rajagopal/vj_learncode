@@ -1,0 +1,24 @@
+go get github.com/Bowery/slack github.com/Sirupsen/logrus github.com/crackcomm/nsqueue/producer github.com/mailgun/mailgun-go github.com/megamsys/gocassa github.com/megamsys/whmcs_go/whmcs github.com/pborman/uuid github.com/sajari/fuzzy go.skia.org/infra/go/git/gitinfo golang.org/x/crypto/ssh/terminal gopkg.in/yaml.v2 launchpad.net/gnuflag github.com/BurntSushi/toml github.com/bmizerany/pat github.com/crackcomm/nsqueue/consumer github.com/mitchellh/ioprogress github.com/nsqio/go-nsq github.com/tj/go-spin gopkg.in/check.v1
+
+
+go get github.com/bmizerany/pat github.com/davecgh/go-spew/spew github.com/golang/groupcache/lru github.com/mitchellh/ioprogress github.com/pmezard/go-difflib/difflib github.com/skia-dev/glog github.com/stretchr/testify/assert github.com/zeebo/bencode go.skia.org/infra/go/exec
+ 
+libgo
+go get github.com/megamsys/libgo/action github.com/megamsys/libgo/api github.com/megamsys/libgo/cmd github.com/megamsys/libgo/events github.com/megamsys/libgo/events/alerts github.com/megamsys/libgo/exec github.com/megamsys/libgo/os github.com/megamsys/libgo/pairs github.com/megamsys/libgo/utils 
+
+
+
+
+cat > VERSION << EOF
+git_version=`git rev-parse HEAD`
+git_branch="1.5"
+EOF
+
+tar -zcvpf gulpd.tar.gz bin conf VERSION
+md5sum gulpd.tar.gz > gulpd.tar.gz.md5
+
+s3cmd put --acl-public --guess-mime-type gulpd.tar.gz.md5 s3://vertice/testing/1.5/gulpd.tar.gz.md5
+s3cmd put --acl-public --guess-mime-type VERSION s3://vertice/testing/1.5/VERSION
+s3cmd put --acl-public --guess-mime-type gulpd.tar.gz s3://vertice/testing/1.5/gulpd.tar.gz
+
+http://releases.ubuntu.com/16.04.1/ubuntu-16.04.1-server-amd64.iso?_ga=1.16292351.859650806.1485958340

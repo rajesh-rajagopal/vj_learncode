@@ -1,0 +1,327 @@
+
+enable kvm from bios setup before install onehost
+
+
+apt-get install clvm lvm2 kvm libvirt-bin ruby nfs-common 
+
+
+megdc onehostinstall 
+
+echo 'oneadmin ALL=NOPASSWD: /sbin/lvcreate, /sbin/lvremove, /sbin/lvs, /bin/dd /sbin/vgdisplay' >>/etc/sudoers.d/oneadmin
+
+#add bridge
+
+Reffer:    https://help.ubuntu.com/community/NetworkConnectionBridge
+http://redes-privadas-virtuales.blogspot.in/2011/08/adding-kvm-hypervisor-to-opennebula-i_09.html
+http://docs.opennebula.org/4.14/design_and_installation/quick_starts/qs_ubuntu_kvm.html#step-2-installation-in-the-nodes
+
+sudo apt-get update
+sudo apt-get install bridge-utils
+
+ip addr flush dev <interface 1>
+ip addr flush dev <interface 2>
+
+brctl addbr <bridge name>
+brctl addif <bridge name> <interface 1> <interface 2>
+ip link set dev <bridge name> up
+
+$ brctl show
+bridge name bridge id         STP enabled interfaces
+br0        8000.001e682f02ac no          eth0
+br1        8000.001e682f02ad no          eth1
+
+
+
+
+##one master
+megdc sshpass --host 192.168.1.101
+
+create host on opennebula or use below command 
+
+onehost create [HOSTIP] --im dummy --vm dummy --net dummy
+
+
+http://www.thegeekstuff.com/2010/08/how-to-create-lvm/
+http://www.howtogeek.com/howto/40702/how-to-manage-and-use-lvm-logical-volume-management-in-ubuntu/
+http://www.howtogeek.com/howto/33552/htg-explains-which-linux-file-system-should-you-choose/
+http://computernetworkingnotes.com/file-system-administration/how-to-delete-partition-from-fdisk-command.html
+
+
+lsblk   //to view all the disks and partitions
+
+fdisk -l
+
+fdisk /dev/sdb1   //which disk to format
+
+
+##Warning: The following steps will format your hard drive. Make sure you don’t have any information on this hard drive before following these steps.
+
+n = create new partition
+p = creates primary partition
+1 = makes partition the first on the disk
+
+Push enter twice to accept the default first cylinder and last cylinder.
+
+###To prepare the partition to be used by LVM use the following two commands.
+
+t = change partition type
+8e = changes to LVM partition type
+
+###Verify and write the information to the hard drive.
+
+p = view partition setup so we can review before writing changes to disk
+w = write changes to disk
+
+##After those commands, the fdisk prompt should exit and you will be back to the bash prompt of your terminal.
+
+##Enter pvcreate /dev/sdb1 to create a LVM physical volume on the partition we just created.
+
+##You may be asking why we didn’t format the partition with a file system but don’t worry, that step comes later.
+
+lsblk
+
+pvcreate /dev/sdb1 
+
+Physical volume "/dev/sdb1" successfully created
+
+vgcreate vgpool /dev/sdb1
+
+ Volume group "vgpool" successfully created
+
+Create logical volume
+
+To create the logical volume that LVM will use:
+
+lvcreate -L 3G -n lvstuff vgpool
+
+  Logical volume "lvstuff" created
+
+
+sudo pvscan
+
+sudo pvdisplay 
+
+lvcreate -L 5G -n logical_vol1 my_volume_group
+
+sudo mkfs -t ext3 /dev/my_volume_group/logical_vol1
+
+
+On frondend 
+cd /var/lib/one/
+cat >ds.conf <<EOF
+NAME = "lvmds"
+DS_MAD = lvm
+TM_MAD = lvm
+DISK_TYPE = block
+BRIDGE_LIST = 192.168.1.101
+VG_NAME = "vgpool"
+HOST = "192.168.1.101"
+EOF
+
+cat >sys_ds.conf<<"EOF"
+NAME   = lvm_system
+TM_MAD = fs_lvm
+TYPE   = SYSTEM_DS
+BRIDGE_LIST = "149.56.16.155"
+EOF
+
+cat >fs_ds.conf<<"EOF"
+NAME = lvm_production
+DS_MAD = fs
+TM_MAD = fs_lvm
+DISK_TYPE = "BLOCK"
+TYPE = IMAGE_DS
+SAFE_DIRS="/home/virtengine/images"
+BRIDGE_LIST = "149.56.16.155"
+VG_NAME = "vg-one"
+EOF
+
+
+sudo -H -u oneadmin bash -c "onedatastore create /var/lib/one/ds.conf"
+
+vn.net
+NAME   = "open-lvm"
+TYPE   = FIXED
+BRIDGE = virbr0
+AR = [ TYPE = "IP4", IP   = "publicip", SIZE = "50" ]
+DNS = "8.8.8.8 8.8.4.4"
+GATEWAY    = "publicgwip"
+NETWORK_MASK = "255.255.255.0"
+
+sudo -H -u oneadmin bash -c "onevnet create /var/lib/one/vn.net"
+
+http://docs.opennebula.org/4.4/design_and_installation/quick_starts/qs_ubuntu_kvm.html
+
+
+install nfs-server in frontend
+
+install nfs-common in host/node
+
+
+nano /etc/one/vmm_exec/vm_exec_kvm.conf    // os section add machine="pc"
+
+#rsync -a oneadmin@192.168.1.101:/var/lib/one/datastores/ /var/lib/one/datastores/  //dont need for lvm
+
+
+
+dd if=/dev/vg/kvm101_img | gzip | dd of=/home/kvm101_backup.gz bs=4096
+
+
+
+/var/tmp/one/vmm/kvm/deploy
+
+for deploy error
+
+usermod -a -G disk oneadmin   //oneadmin needs to belong to the disk group (for KVM).
+
+sudo stop/start libvirt-bin
+sudo service libvirt-bin restart
+
+
+http://chr4.org/blog/2014/08/28/online-resizing-lvm-guest-partitions-on-opennebula-slash-libvirt-guests/
+
+
+IN=$2
+arrIN=(${IN//:/ })
+SRC=${SRC#*:}
+SRC=$arrIN":"$SRC
+DST=$2
+
+
+
+##To create group
+	
+Usually you do it like the following.
+
+To assign a primary group to an user:
+
+$ usermod -g primarygroupname username
+To assign secondary groups to an user:
+
+$ usermod -G secondarygroupname username
+From man-page:
+
+...
+-g (primary group assigned to the users)
+-G (Other groups the user belongs to)
+...
+
+when vm launch 
+
+" set -e
+mkdir -p /var/lib/one/datastores/102/1
+sudo lvcreate -L200M -n lv-one-1-0 vg-one-102
+qemu-img convert -O raw "/var/lib/one/datastores/103/e0f4bb86f41aea1d2582c89305595ef9" "/dev/vg-one-102/lv-one-1-0"
+rm -f "/var/lib/one/datastores/102/1/disk.0"
+ln -s "/dev/vg-one-102/lv-one-1-0" "/var/lib/one/datastores/102/1/disk.0"
+"
+
+
+
+
+
+CLONE_TARGET="SYSTEM"
+CONTEXT=[FILES="/megam/init.sh",NETWORK="YES",NODE_NAME="$NAME",SET_HOSTNAME="$NAME",SSH_PUBLIC_KEY="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC1jQliF7Nl3tQ6fPcbSy4MD8bsmDrYkkhxND3jI26ckNxapdiq7ujeU9bFS8ttZB495F9fMHiY0s344FqKLtyTOVogmUesT3ysO2h87iTDN3bkcXL6I3bE5oxlRtlSt9QNygzBR9B7BMerYRkQqTQZwxTu+ETb9Nu+5pBKRXlDHSNssFuhD/8t4ZpLzws+vSYMxpFWnTyIAqZ33oZUl8MK+j5gP77+WRgBByAqztjDO+gP4Wq2Qmj/IIG1L4/z3ZTq2wAkahNIykH8PgKEpLzYL8XSEPo09JAXw+UpEWPyzyway/f35zaNkV15naUBfwQMXhWYL0UjJ7ol7FOn8tR7 oneadmin@megammaster"]
+CPU="1"
+CPU_COST="5"
+DESCRIPTION="test lvm ubuntu"
+DISK=[DRIVER="qcow2",IMAGE="ubuntu_soluslvm",IMAGE="ubuntu_14.04",IMAGE_UNAME="oneadmin",SIZE="10240",TARGET="sdb1"]
+DISK_COST="1024"
+FORMAT="ext3"
+GRAPHICS=[LISTEN="0.0.0.0",TYPE="VNC"]
+HYPERVISOR="kvm"
+LN_TARGET="SYSTEM"
+LOGO="images/logos/ubuntu.png"
+MEMORY="1024"
+MEMORY_COST="10"
+NIC=[NETWORK="open-lvm",NETWORK_UNAME="oneadmin"]
+OS=[ARCH="x86_64"]
+SCHED_REQUIREMENTS="ID=\"7\""
+VCPU="2"
+VL_SIZE="10240"
+
+
+
+
+
+
+CONTEXT=[FILES="/megam/init.sh",GATEWAY="$NETWORK[GATEWAY, NETWORK=\"open-lvm\"]",HOSTNAME="megamcore",IP_ADDRESS="$NIC[IP, NETWORK=\"open-lvm\"]",NETWORK="YES",SSH_PUBLIC_KEY="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC1jQliF7Nl3tQ6fPcbSy4MD8bsmDrYkkhxND3jI26ckNxapdiq7ujeU9bFS8ttZB495F9fMHiY0s344FqKLtyTOVogmUesT3ysO2h87iTDN3bkcXL6I3bE5oxlRtlSt9QNygzBR9B7BMerYRkQqTQZwxTu+ETb9Nu+5pBKRXlDHSNssFuhD/8t4ZpLzws+vSYMxpFWnTyIAqZ33oZUl8MK+j5gP77+WRgBByAqztjDO+gP4Wq2Qmj/IIG1L4/z3ZTq2wAkahNIykH8PgKEpLzYL8XSEPo09JAXw+UpEWPyzyway/f35zaNkV15naUBfwQMXhWYL0UjJ7ol7FOn8tR7 oneadmin@megammaster"]
+CPU="0.5"
+DESCRIPTION="Coreos image test"
+DISK=[IMAGE="coreos_835.12.0",IMAGE_UNAME="oneadmin"]
+GRAPHICS=[LISTEN="0.0.0.0",TYPE="vnc"]
+MEMORY="768"
+NIC=[NETWORK="open-lvm",NETWORK_UNAME="oneadmin"]
+OS=[ARCH="x86_64"]
+SCHED_REQUIREMENTS="ID=\"7\""
+
+
+ lvdisplay
+lsblk
+lv
+lvextend -L6G /dev/vg-one-0/lv-one-287
+lsblk
+lvremove /dev/vg-one-0/lv-one-286
+lvremove /dev/vg-one-0/lv-one-287-1273-0
+  486  lsblk
+
+
+
+https://easyengine.io/tutorials/kvm/convert-qcow2-to-raw-format/
+
+lvm issue
+  /run/lvm/lvmetad.socket: connect failed: No such file or directory
+  WARNING: Failed to connect to lvmetad. Falling back to internal scanning.
+
+
+Assuming you're running Linux, in /etc/lvm/lvm.conf set:
+
+use_lvmetad = 0
+
+service lvm2 stop
+service lvm2 start
+ * Setting up LVM Volume Groups...    [ OK ] 
+
+
+#adds a empty disk or installed disk
+DISK = [ clone=no, type="disk", source="path_to_qcow_diskfile", 
+target="hda"]
+DISK = [ clone=no, type="cdrom", source="path_to_iso", target="hdb"]
+
+
+
+
+/run/libvirt/qemu/one-1296.xml
+
+
+
+
+http://www.yolinux.com/
+
+https://forum.opennebula.org/t/how-to-create-windows-vm/1190
+
+http://lists.opennebula.org/pipermail/users-opennebula.org/2010-January/028896.html
+
+https://www.lrz.de/services/compute/cloud_en/cloud-manual_en/#working_with_templates
+
+
+
+
+
+ Admin Area .......... : http://103.56.92.58:5353/admincp
+ Admin Area (SSL) .... : https://103.56.92.58:5656/admincp
+ Client Area ......... : http://103.56.92.58:5353
+ Client Area (SSL) ... : https://103.56.92.58:5656
+ Admin Username ...... : vpsadmin
+ Admin Password ...... : vpsadmin
+
+
+vgs=$(vgdisplay)
+for i in "${vgs[@]}"
+do
+   echo "$i"
+   # or do whatever with individual element of the array
+done
+
+
+

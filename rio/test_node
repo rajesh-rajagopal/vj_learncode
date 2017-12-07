@@ -1,0 +1,322 @@
+
+{
+TypeMeta:v1.TypeMeta{
+  Kind:"",
+  APIVersion:""
+  },
+ObjectMeta:v1.ObjectMeta{
+  Name:"vijaywk",
+  GenerateName:"",
+  Namespace:"",
+  SelfLink:"",
+  UID:"",
+  ResourceVersion:"",
+  Generation:0,
+  CreationTimestamp:v1.Time{Time:time.Time{wall:0x0, ext:0, loc:(*time.Location)(nil)}},
+  DeletionTimestamp:(*v1.Time)(nil),
+  DeletionGracePeriodSeconds:(*int64)(nil),
+  Labels:map[string]string{"beta.rioos.io/arch":"amd64", "rioos.io/hostname":"vijaywk", "beta.rioos.io/os":"linux"}, Annotations:map[string]string{"volumes.kubernetes.io/controller-managed-attach-detach":"true"},
+  OwnerReferences:[]v1.OwnerReference(nil),
+  Initializers:(*v1.Initializers)(nil),
+  Finalizers:[]string(nil), ClusterName:""},
+
+  Spec:v1.NodeSpec{
+    PodCIDR:"",
+    ExternalID:"vijaywk",
+    ProviderID:"",
+    Unschedulable:false,
+    Taints:[]v1.Taint(nil)},
+  Status:v1.NodeStatus{
+      Capacity:v1.ResourceList{
+        "cpu":resource.Quantity{
+          i:resource.int64Amount{value:4000, scale:-3},
+          d:resource.infDecAmount{Dec:(*inf.Dec)(nil)},
+          s:"", Format:"DecimalSI"},
+        "memory":resource.Quantity{
+          i:resource.int64Amount{value:4082765824, scale:0},
+          d:resource.infDecAmount{Dec:(*inf.Dec)(nil)},
+          s:"", Format:"BinarySI"},
+        "pods":resource.Quantity{
+          i:resource.int64Amount{value:110, scale:0},
+          d:resource.infDecAmount{Dec:(*inf.Dec)(nil)},
+          s:"", Format:"DecimalSI"}},
+      Allocatable:v1.ResourceList{
+        "memory":resource.Quantity{
+          i:resource.int64Amount{value:3977908224, scale:0},
+          d:resource.infDecAmount{Dec:(*inf.Dec)(nil)},
+          s:"", Format:"BinarySI"},
+        "pods":resource.Quantity{
+          i:resource.int64Amount{value:110, scale:0},
+          d:resource.infDecAmount{Dec:(*inf.Dec)(nil)},
+          s:"", Format:"DecimalSI"},
+        "cpu":resource.Quantity{
+          i:resource.int64Amount{value:4000, scale:-3},
+          d:resource.infDecAmount{Dec:(*inf.Dec)(nil)},
+          s:"", Format:"DecimalSI"}},
+      Phase:"",
+      Conditions:[]v1.NodeCondition{
+        v1.NodeCondition{
+          Type:"OutOfDisk",
+          Status:"False",
+          LastHeartbeatTime:v1.Time{Time:time.Time{wall:0xbe616406a14ddca0, ext:6733340078, loc:(*time.Location)(0x2b7d980)}},
+          LastTransitionTime:v1.Time{Time:time.Time{wall:0xbe616406a14ddca0, ext:6733340078, loc:(*time.Location)(0x2b7d980)}},
+          Reason:"NodeletHasSufficientDisk",
+          Message:"nodelet has sufficient disk space available"
+          },
+        v1.NodeCondition{
+          Type:"MemoryPressure",
+          Status:"False",
+          LastHeartbeatTime:v1.Time{Time:time.Time{wall:0xbe616406a14fe21b, ext:6733472552, loc:(*time.Location)(0x2b7d980)}},
+          LastTransitionTime:v1.Time{Time:time.Time{wall:0xbe616406a14fe21b, ext:6733472552, loc:(*time.Location)(0x2b7d980)}},
+          Reason:"NodeletHasSufficientMemory",
+          Message:"nodelet has sufficient memory available"
+          },
+        v1.NodeCondition{
+          Type:"DiskPressure",
+          Status:"False",
+          LastHeartbeatTime:v1.Time{Time:time.Time{wall:0xbe616406a15079f1, ext:6733511446, loc:(*time.Location)(0x2b7d980)}},
+          LastTransitionTime:v1.Time{Time:time.Time{wall:0xbe616406a15079f1, ext:6733511446, loc:(*time.Location)(0x2b7d980)}},
+          Reason:"NodeletHasNoDiskPressure",
+          Message:"nodelet has no disk pressure"
+          },
+        v1.NodeCondition{
+          Type:"Ready",
+          Status:"True",
+          LastHeartbeatTime:v1.Time{Time:time.Time{wall:0xbe616406a15107ce, ext:6733547734, loc:(*time.Location)(0x2b7d980)}},
+          LastTransitionTime:v1.Time{Time:time.Time{wall:0xbe616406a15107ce, ext:6733547734, loc:(*time.Location)(0x2b7d980)}},
+          Reason:"NodeletReady",
+          Message:"nodelet is posting ready status"
+          }
+        },
+        Addresses:[]v1.NodeAddress{
+          v1.NodeAddress{
+            Type:"InternalIP",
+            Address:"192.168.1.100"
+            },
+          v1.NodeAddress{
+            Type:"Hostname",
+            Address:"vijaywk"
+            }
+        },
+        DaemonEndpoints:v1.NodeDaemonEndpoints{
+          NodeletEndpoint:v1.DaemonEndpoint{Port:10250}},
+        NodeInfo:v1.NodeSystemInfo{
+          MachineID:"95835209c18848f38cd188bea1f8682c",
+          SystemUUID:"7B9E1668-DCE1-0C44-8165-54AB3A8328D4",
+          BootID:"d4dc6c26-bd66-4cd4-8a64-0328313f6fd6",
+          KernelVersion:"4.4.0-92-generic",
+          OSImage:"Ubuntu 16.04.2 LTS",
+          ContainerRuntimeVersion:"docker://Unknown",
+          NodeletVersion:"v0.0.0-master+$Format:%h$",
+          KubeProxyVersion:"v0.0.0-master+$Format:%h$",
+          OperatingSystem:"linux",
+          Architecture:"amd64"
+          },
+        Images:[]v1.ContainerImage{
+          v1.ContainerImage{
+            Names:[]string{"kube-build:build-07becd4fe5-5-v1.7.5-2"},
+            SizeBytes:2729896422
+            },
+          v1.ContainerImage{
+            Names:[]string{"gcr.io/google_containers/kube-cross@sha256:cc23578f2498ab64bfa722ac477169539ae5188d1bf06fc7bc646d706dec7846", "gcr.io/google_containers/kube-cross:v1.7.5-2"}, SizeBytes:2151666581}, v1.ContainerImage{Names:[]string{"mirantis/kubeadm-dind-cluster@sha256:6a810e11a79e52bbfa139950891c4303ea1236e3094c254c312ed8e824c87ff3", "mirantis/kubeadm-dind-cluster:v1.6"},
+            SizeBytes:1130420885
+            },
+          v1.ContainerImage{
+            Names:[]string{"mirantis/kubeadm-dind-cluster@sha256:14aa0bd6e8a92d485bc9eecfffe18df77904a7903dee536bd8d587cb33abe917"},
+            SizeBytes:1127055894},
+          v1.ContainerImage{
+            Names:[]string{"virtlet_build:latest"},
+            SizeBytes:1046674593},
+          v1.ContainerImage{
+            Names:[]string{"wavflow:latest"},
+            SizeBytes:1001945386},
+          v1.ContainerImage{
+            Names:[]string{"mirantis/virtlet@sha256:20aa4e034d64167ec98fc12bb18066401ff4db6062979f64bea044b7e5f13480", "mirantis/virtlet:latest"},
+            SizeBytes:696116908},
+          v1.ContainerImage{
+            Names:[]string{"ruby@sha256:52bef497b06d868e77867c95672a6905e95ef3a3ac825c9087224289f852520d", "ruby:latest"},
+            SizeBytes:677863617},
+          v1.ContainerImage{
+            Names:[]string{"<none>@<none>", "<none>:<none>"},
+            SizeBytes:591023978},
+          v1.ContainerImage{
+            Names:[]string{"vertice:1.5.2"},
+          SizeBytes:524300778},
+          v1.ContainerImage{
+            Names:[]string{"mbafna/rhel72-lvm2@sha256:65b69f703426e06d0d1a28fa139b46a15c281b9ea954c113c35eba102be624f4", "mbafna/rhel72-lvm2:latest"},
+            SizeBytes:471290736},
+          v1.ContainerImage{
+            Names:[]string{"megamio/docker_onemaster@sha256:a81725e26d62e7143a0e203870a27fb0f198073509d856c9a7af11ba49212196", "megamio/docker_onemaster:latest"},
+            SizeBytes:426101530},
+          v1.ContainerImage{
+            Names:[]string{"mirantis/hypokube:final"},
+            SizeBytes:323870647},
+          v1.ContainerImage{
+            Names:[]string{"erezhorev/dockerized_nfs_server@sha256:c2e01b8f3b8bb5ea76400bccae0a2cf996988ea6272ebda4c6c6ee8959348694", "erezhorev/dockerized_nfs_server:latest"},
+            SizeBytes:242669331},
+          v1.ContainerImage{
+            Names:[]string{"debian@sha256:72f784399fd2719b4cb4e16ef8e369a39dc67f53d978cd3e2e7bf4e502c7b793", "debian:jessie"},
+            SizeBytes:123393418},
+          v1.ContainerImage{
+            Names:[]string{"ubuntu@sha256:382452f82a8bbd34443b2c727650af46aced0f94a44463c62a9848133ecb1aa8", "ubuntu:16.04"},
+            SizeBytes:117915839},
+          v1.ContainerImage{
+            Names:[]string{"ubuntu@sha256:c2bbf50d276508d73dd865cda7b4ee9b5243f2648647d21e3a471dd3cc4209a0", "ubuntu:latest", "ubuntu:xenial"},
+            SizeBytes:117230596},
+          v1.ContainerImage{
+            Names:[]string{"alpine@sha256:c0537ff6a5218ef531ece93d4984efc99bbf3f7497c0a7726c88e2bb7584dc96", "alpine:3.5"},
+            SizeBytes:3987495},
+          v1.ContainerImage{
+            Names:[]string{"openshift/origin-pod@sha256:478fd0553a9600014256dede2ad4afb0b620421f5e0353a667be3a94d06dc9b0", "openshift/origin-pod:v3.6.0-alpha.1"},
+            SizeBytes:1138998},
+          v1.ContainerImage{
+            Names:[]string{"busybox@sha256:c79345819a6882c31b41bc771d9a94fc52872fa651b36771fbe0c8461d7ee558", "busybox:latest"},
+            SizeBytes:1106304},
+          v1.ContainerImage{
+            Names:[]string{"busybox@sha256:be3c11fdba7cfe299214e46edc642e09514dbb9bbefcd0d3836c05a1e0cd0642", "busybox:1.26.2"},
+            SizeBytes:1106304}, \
+          v1.ContainerImage{
+            Names:[]string{"gcr.io/google_containers/pause-amd64@sha256:163ac025575b775d1c0f9bf0bdd0f086883171eb475b5068e7defa4ca9e76516", "gcr.io/google_containers/pause-amd64:3.0"},
+            SizeBytes:746888}},
+        VolumesInUse:[]v1.UniqueVolumeName(nil),
+        VolumesAttached:[]v1.AttachedVolume(nil)
+      }
+  }
+
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+struct NodeCreateReq {
+   spec: SpecReq,
+   status: StatusReq,
+   object_meta: ObjectMetaReq,
+   type_meta: TypeMetaReq,
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+struct TypeMetaReq {
+   kind: String,
+   api_version: String,
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+struct ObjectMetaReq {
+   name: String,
+   namespace: String,
+   uid: String,
+   created_at: String,
+   cluster_name: String,
+   labels: LabelsReq,
+   annotations: AnnotationsReq,
+   owner_references: Vec<OwnerReferencesReq>,
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+struct LabelsReq {
+   group: String,
+   key2: String,
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+struct AnnotationsReq {
+   key1: String,
+   key2: String,
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+struct OwnerReferencesReq {
+   kind: String,
+   api_version: String,
+   name: String,
+   uid: String,
+   block_owner_deletion: bool,
+}
+#[allow(non_snake_case)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
+struct SpecReq {
+   assemblyCIDR: String,
+   externalID: String,
+   providerID: String,
+   unschedulable: bool,
+   taints: Vec<TaintsReq>,
+}
+#[allow(non_snake_case)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
+struct TaintsReq {
+   key: String,
+   value: String,
+   effect: String,
+   timeAdded: String,
+}
+#[allow(non_snake_case)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
+struct StatusReq {
+   capacity: CapacityReq,
+   allocatable: CapacityReq,
+   phase: String,
+   conditions: Vec<ConditionsReq>,
+   addresses: Vec<AddressesReq>,
+   nodeInfo: NodeInfoReq,
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+struct CapacityReq {
+   cpu: RangeReq,
+   mem: RangeReq,
+   disk: RangeReq,
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+struct RangeReq {
+   fixed_range: FixedRangeReq,
+   infinite_range: InfiniteRangeReq,
+   quantity: String,
+   format: String,
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+struct FixedRangeReq {
+   value: String,
+   scale: String,
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+struct InfiniteRangeReq {
+   unscale: String,
+   scale: String,
+}
+
+#[allow(non_snake_case)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
+struct ConditionsReq {
+   conditionType: String,
+   status: String,
+   lastHeartbeatTime: String,
+   lastTransitionTime: String,
+   reason: String,
+   message: String,
+}
+
+#[allow(non_snake_case)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
+struct AddressesReq {
+   nodeAddress: NodeAddressReq,
+}
+
+#[allow(non_snake_case)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
+struct NodeAddressReq {
+   nodeType: String,
+   addresses: String,
+}
+
+#[allow(non_snake_case)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
+struct NodeInfoReq {
+   machineID: String,
+   systemUUID: String,
+   kernelVersion: String,
+   oSImage: String,
+   architecture: String,
+}
+
+

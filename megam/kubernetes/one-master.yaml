@@ -1,0 +1,115 @@
+---
+kind: Template
+apiVersion: v1
+metadata:
+  name: opennebula-master
+  creationTimestamp:
+  annotations:
+    openshift.io/display-name: OpenNebula(Master)
+    description: |-
+      OpenNebula front-end that executes OpenNebula services. For more information about using this template, including MegamVertice considerations, see https://github.com/megamsys/kubeshift.
+
+      WARNING: Any data stored will be lost upon pod destruction.
+    iconClass: icon-machine
+    tags: compute,opennebula
+    template.openshift.io/long-description: This template provides a standalone OpenNebula
+      master server with a database created.  The database is not stored on persistent storage,
+      so any restart of the service will result in all data being lost.
+    template.openshift.io/provider-display-name: Megam Systems.
+    template.openshift.io/documentation-url: https://docs.megam.io/abcd
+    template.openshift.io/support-url: https://github.com/megamsys/support
+message: |-
+  The following service(s) have been created in your project: ${ONE_SERVICE_NAME}.
+
+         Username: ${ONE_USER}
+         Password:
+   Connection URL: http://${ONE_SERVICE_NAME}:9869/
+
+  For more information about using this template, including OpenShift considerations, see https://github.com/megamsys/kubeshift.
+labels:
+  template: opennebula-ephemeral-template1
+objects:
+- kind: Service
+  apiVersion: v1
+  metadata:
+    name: "${ONE_SERVICE_NAME}"
+  spec:
+    ports:
+    - name: onemaster
+      port: 9869
+      targetPort: 9869
+    protocol: TCP
+    selector:
+      name: "${ONE_SERVICE_NAME}"
+    type: ClusterIP
+    sessionAffinity: None
+  status:
+    loadBalancer: {}
+- kind: DeploymentConfig
+  apiVersion: v1
+  metadata:
+    name: "${ONE_SERVICE_NAME}"
+    creationTimestamp:
+  spec:
+    restartPolicy: Never
+    replicas: 1
+    selector:
+      name: "${ONE_SERVICE_NAME}"
+    template:
+      metadata:
+        creationTimestamp:
+        labels:
+          name: "${ONE_SERVICE_NAME}"
+      spec:
+        containers:
+        - name: onemaster
+          image: "one:latest"
+          imagePullPolicy: "IfNotPresent"
+          env:
+          - name: ssh_private
+            valueFrom:
+              secretKeyRef:
+                name: ssh-vijay
+                key: ssh-privatekey
+          - name: ssh_public
+            valueFrom:
+              secretKeyRef:
+                name: ssh-vijay
+                key: ssh-publickey
+          ports:
+          - containerPort: 9869
+            protocol: TCP
+          resources:
+            limits:
+              memory: "${MEMORY_LIMIT}"
+          status: {}
+parameters:
+- name: MEMORY_LIMIT
+  displayName: Memory Limit
+  description: Maximum amount of memory the container can use.
+  value: 512Mi
+  required: true
+- name: NAMESPACE
+  displayName: Namespace
+  description: The OpenShift Namespace where the ImageStream resides.
+  value: openshift
+- name: ONE_SERVICE_NAME
+  displayName: OpenNebula Service Name
+  description: The name of the ABCD Service exposed for OpenNebula.
+  value: onemaster2
+  required: true
+- name: ONE_USER
+  displayName: OpenNebua Username
+  description: Username for OpenNebula user.
+  value: oneadmin
+  required: true
+- name: ONE_DATASTORE
+  displayName: OpenNebula Datastore
+  description: Name of the OpenNebula datastore accessed.
+  value: datastore
+  required: true
+- name: ONE_VERSION
+  displayName: Version of OpenNebula
+  description: Version of OpenNebula image to be used (5.2 or latest).
+  value: 'latest'
+  required: true

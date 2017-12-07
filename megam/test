@@ -1,0 +1,477 @@
+    1  ls
+    2  vi onecontext.service
+    3  chmod 755 onecontext.service 
+    4  ls -la
+    5  sudo systemctl enable /etc/systemd/system/onecontext.service
+    6  sudo systemctl start onecontext.service
+    7  sudo systemctl status onecontext.service
+    8  cd /usr/share/
+    9  ls
+   10  cd oem/
+   11  ls
+   12  naon cloud-config.yml 
+   13  vi cloud-config.yml 
+   14  ls
+   15  vi cloud-config.yml 
+   16  ls
+   17  cd /etc/systemd/system
+   18  ls
+   19  sudo systemctl restart onecontext.service
+   20  sudo systemctl restart onecontext.service
+   21  sudo systemctl start onecontext.service
+   22  sudo systemctl status onecontext.service
+   23  sudo systemctl restart onecontext.service
+   24  sudo systemctl status onecontext.service
+   25  ls
+   26  cd /etc/
+   27  ls
+   28  cd init.d/
+   29  ls
+   30  cd /etc/one-context.d/
+   31  ls
+   32  cd ~
+   33  exit
+   34  rm *~
+   35  ls
+   36  vi cloud-config.yml 
+   37  exit
+   38  cd /media/configvirtfs/
+   39  ls
+   40  ls -la
+   41  cd openstack/
+   42  ls
+   43  ls -la
+   44  cd latest/
+   45  ls
+   46  cat user_data 
+   47  df -h
+   48  cd /usr/
+   49  ls
+   50  ls -la
+   51  exit
+   52  sudo echo 3 > /proc/sys/vm/drop_caches
+   53  free 0m
+   54  free -m
+   55  df -h
+   56  cd /usr/share/oem/
+   57  ls
+   58  cat cloud-config.yml 
+   59  cd /etc/systemd/
+   60  ls
+   61  cd system
+   62  ls
+   63  exit
+   64  ls
+   65  rm static.network 
+   66  ls
+   67  cd /usr/share/oem/
+   68  ls
+   69  rm *~
+   70  ls
+   71  vi cloud-config.yml 
+   72  cat cloud-config.yml 
+   73  vi /etc/hosts
+   74  ls
+   75  exit
+   76  ip a
+   77  exit
+   78  ping google.com
+   79  cat /etc/systemd/network/static.network 
+   80  exit
+   81  update_engine_client -update
+   82  sudo reboot
+   83  ip a
+   84  ping google.com
+   85  sftp megam@192.168.1.220
+   86  vi /etc/systemd/system/verticegulpd.service
+   87  vi /etc/systemd/system/cadvisor.service
+   88  ls
+   89  mkdir -p /var/lib/megam/verticegulpd
+   90  mkdir -p /var/lib/megam/verticegulpd/bin
+   91  mkdir -p /var/lib/megam/verticegulpd/conf
+   92  mkdir -p /var/lib/megam/cadvisor/bin
+   93  mv cadvisor /var/lib/megam/cadvisor/bin/
+   94  mv gulpd /var/lib/megam/verticegulpd/bin/
+   95  vi /var/lib/megam/verticegulpd/conf/gulpd.conf
+   96  cd /var/lib/megam/
+   97  ls
+   98  vi env.sh
+   99  cat env.sh
+  100  chmod +x env.sh 
+  101  ls
+  102  cd ~
+  103  ls
+  104  rm test 
+  105  ls
+  106  ping google.com
+  107  rname -u
+  108  rname -s
+  109  uname -s
+  110  uname -r
+  111  ip a
+  112  systemctl enable verticegulpd.service
+  113  systemctl enable cadvisor.service
+  114  systemctl start cadvisor
+  115  systemctl start verticegulpd
+  116  systemctl status verticegulpd
+  117  cd /var/lib/megam/verticegulpd/
+  118  ls
+  119  ls bin/
+  120  ls conf/
+  121  cd bin/
+  122  ls
+  123  ./gulpd -v start --config /var/lib/megam/verticegulpd/conf/gulpd.conf
+  124  cd .
+  125  cd ..
+  126  cd ..
+  127  ls
+  128  cd gulp/
+  129  ls
+  130  rm 0.94.tar.gz 
+  131  mkdir -p /var/lib/megam/gulp/chef-repo 
+  132  wget -P /var/lib/megam/gulp https://github.com/megamsys/chef-repo/archive/0.96.tar.gz
+  133  tar xf /var/lib/megam/gulp/0.96.tar.gz -C /var/lib/megam/gulp/chef-repo --strip-components 1
+  134  ls
+  135  rm 0.96.tar.gz 
+  136  ls
+  137  systemctl status verticegulpd
+  138  ls
+  139  cd ..
+  140  cd ~
+  141  ls
+  142  cd gulp/
+  143  ls
+  144  cd ..
+  145  rm -rf gulp/
+  146  ls
+  147  systemctl stop verticegulpd
+  148  systemctl start verticegulpd
+  149  systemctl status verticegulpd
+  150  ls
+  151  ls
+  152  #!/bin/bash
+  153  parent_dir="/var/log/"
+  154  truncate -s 0 $parent_dir/* &> /dev/null 
+  155  shift
+  156  find "$parent_dir" -type d | while IFS= read -r subdir; do   all_present=true;   for file in "$@"; do     if [[ ! -f "$subdir/$file" ]]; then       all_present=false;       break;     fi;   done;   $all_present && truncate -s 0 $subdir/* &> /dev/null ; done
+  157  rm -rf /var/lib/megam/meta/gulp/logs/*
+  158  rm $parent_dir/*.gz
+  159  rm $parent_dir/*.0
+  160  rm $parent_dir/*.1
+  161  ls -la /var/log/
+  162  ls -la /var/log/journal/35109be810ba4df083c8d9734b66d3be/
+  163  exit
+  164  ls
+  165  systemctl status verticegulpd
+  166  systemctl status cadvisor
+  167  systemctl status cadvisor
+  168  vi /etc/systemd/system/cadvisor.service
+  169  systemctl status cadvisor
+  170  systemctl daemon-reload
+  171  systemctl status cadvisor
+  172  systemctl stop cadvisor
+  173  systemctl start cadvisor
+  174  systemctl status cadvisor
+  175  exit
+  176  ip a
+  177  sudo useradd -p "*" -U -m megam -G sudo
+  178  sudo deluser megam
+  179  sudo userdel megam
+  180  sudo useradd -p "*" -U -m megam -G sudo
+  181  sudo passwd megam
+  182  cd /home/
+  183  ls
+  184  cd ..
+  185  exit
+  186  exit
+  187  ls
+  188  exit
+  189  ls
+  190  mv gulpd /var/lib/megam/verticegulpd/bin/
+  191  rm test 
+  192  ls
+  193  truncate -s 0 /var/log/* &> /dev/null
+  194  exit
+  195  ls
+  196  rm test 
+  197  ls
+  198  mv gulpd /var/lib/megam/verticegulpd/bin/
+  199  ls
+  200  exit
+  201  nano /etc/systemd/network/static.network 
+  202  vi /etc/systemd/network/static.network 
+  203  exit
+  204  systemctl restart systemd-networkd
+  205  ip a
+  206  exit
+  207  cd /usr/share/
+  208  ls
+  209  cd /var/lib/
+  210  ls
+  211  cd megam/
+  212  ls
+  213  cd verticegulpd/
+  214  ls
+  215  cd conf/
+  216  ls
+  217  rm -rf gulpd.conf 
+  218  ls
+  219  cd
+  220  ls
+  221  cd ..
+  222  exit
+  223  ls
+  224  cd /var/lib/megam/
+  225  ls
+  226  cd verticegulpd/
+  227  ls
+  228  cd bin/
+  229  ls
+  230  mv ~/gulpd ./
+  231  ls
+  232  ./gulpd --version
+  233  cd ~
+  234  ls
+  235  parent_dir="/var/log/"
+  236  truncate -s 0 /var/log/* &> /dev/null 
+  237  shift
+  238  find "$parent_dir" -type d | while IFS= read -r subdir; do   all_present=true;   for file in "$@"; do     if [[ ! -f "$subdir/$file" ]]; then       all_present=false;       break;     fi;   done;   $all_present && truncate -s 0 $subdir/* &> /dev/null ; done
+  239  exit
+  240  systemctl status verticegulpd
+  241  systemctl status cadvisor
+  242  systemctl stop verticegulpd
+  243  systemctl stop cadvisor
+  244  parent_dir="/var/log/"
+  245  truncate -s 0 /var/log/* &> /dev/null 
+  246  shift
+  247  find "$parent_dir" -type d | while IFS= read -r subdir; do   all_present=true;   for file in "$@"; do     if [[ ! -f "$subdir/$file" ]]; then       all_present=false;       break;     fi;   done;   $all_present && truncate -s 0 $subdir/* &> /dev/null ; done
+  248  rm $parent_dir/*.gz
+  249  rm $parent_dir/*.0
+  250  rm $parent_dir/*.1
+  251  rm -rf /var/lib/megam/gulp/meta
+  252  exit
+  253  systemctl status verticegulpd
+  254  systemctl start verticegulpd
+  255  systemctl status verticegulpd
+  256  cd /var/lib/megam/verticegulpd/
+  257  ls
+  258  cd bin/
+  259  ./gulpd 
+  260  ./gulpd start --config ./
+  261  ./gulpd start --config 
+  262  exit
+  263  ls
+  264  cd gulp/
+  265  ls
+  266  cd ../
+  267  ls
+  268  cd 
+  269  ls
+  270  exit
+  271  ls
+  272  cd /var/lib/megam
+  273  ls
+  274  cd verticegulpd/
+  275  ls
+  276  cd bin/
+  277  ls
+  278  history
+  279  systemctl status verticegulpd
+  280  ls
+  281  cd ../
+  282  cd ../
+  283  ls
+  284  cd cadvisor/
+  285  ls
+  286  cd bin/
+  287  ls
+  288  sftp megam@103.56.92.11
+  289  whoami
+  290  exit
+  291  systemctl status verticegulpd
+  292  cd /var/lib/megam/
+  293  ls
+  294  cd gulp/
+  295  ls
+  296  cd /etc
+  297  ls
+  298  nano netconfig 
+  299  vi netconfig 
+  300  cd systemd/
+  301  ls
+  302  cd network/
+  303  ls
+  304  nano static.network 
+  305  vi static.network 
+  306  cd /etc
+  307  cd one-context.d/
+  308  ls
+  309  ls
+  310  yum install -y epel-release
+  311  cd /usr/bin/
+  312  cd /etc/one-context.d/
+  313  ls
+  314  rm 01-dns 
+  315  rm 02-ssh_public_key 
+  316  rm 04-mount-swap 
+  317  rm 99-execute-scripts 
+  318  cd 
+  319  ls
+  320  cd /home/
+  321  ls
+  322  cd megam/
+  323  ls
+  324  mv 00-network /etc/one-context.d/
+  325  mv 02-ssh_public_key /etc/one-context.d/
+  326  mv 04-mount-swap /etc/one-context.d/
+  327  mv 06-gen-env /etc/one-context.d/
+  328  mv 99-execute-scripts /etc/one-context.d/
+  329  mv 01-dns /etc/one-context.d/
+  330  mv 03-selinux-ssh /etc/one-context.d/
+  331  mv 05-hostname /etc/one-context.d/
+  332  mv 07-grow-rootfs /etc/one-context.d/
+  333  mv 99-start-script /etc/one-context.d/
+  334  ls
+  335  mv growpart /usr/bin/
+  336  cp growpart /usr/bin/
+  337  cd /usr/bin/
+  338  ls
+  339  mv /home/megam/growpart /usr/bin/
+  340  cd /home/megam/
+  341  ls
+  342  ls -la
+  343  chattr -i growpart 
+  344  chattr -i growpart 
+  345  mv /home/megam/growpart /usr/bin/
+  346  cd /usr/bin/
+  347  ls
+  348  sudo -s
+  349  whoami
+  350  cd 
+  351  cd /etc/one-context.d/
+  352  ls
+  353  cd /usr/bin/
+  354  vi growpart
+  355  mv /home/megam/growpart /usr/bin/
+  356  exit
+  357  su megam
+  358  su megam
+  359  ls
+  360  nano megam
+  361  vi megam
+  362  chmod 400 megam
+  363  ls -la
+  364  chmod 440 megam
+  365  ls -la
+  366  su megam
+  367  su megam
+  368  exit
+  369  cd /var/lib/megam/gulp/
+  370  ls
+  371  rm -rf chef-repo/
+  372  wget -P /var/lib/megam/gulp https://github.com/megamsys/chef-repo/archive/0.96.tar.gz
+  373  ls
+  374  tar -xf 0.96.tar.gz 
+  375  ls
+  376  mv chef-repo-0.96/ chef-repo
+  377  ls
+  378  rm -rf 0.96.tar.gz 
+  379  ls
+  380  cd /etc/one-context.d/
+  381  ls
+  382  nano 00-network 
+  383  vi 00-network 
+  384  ls
+  385  cd /etc/one-context.d/
+  386  ls
+  387  cd /etc/init.d/
+  388  cd ../sudoers.d/
+  389  ls
+  390  su megam
+  391  exit
+  392  pwd
+  393  cd /root
+  394  ls
+  395  route
+  396  ping 127.0.0.1
+  397  ping 88.198.139.81
+  398  ping google.com
+  399  cat /etc/systemd/network/static.network 
+  400  route -n
+  401  route add defualt gw 13
+  402  route add defualt gw 136.243.49.217
+  403  cat /etc/hostname
+  404  cat /etc/hosts
+  405  nano /etc/hosts
+  406  vi /etc/hosts
+  407  route add defualt gw 136.243.49.217
+  408  hostname -i
+  409  vi /etc/hostname
+  410  reboot
+  411  cat /etc/hostname
+  412  route add defualt gw 136.243.49.217
+  413  ifconfig
+  414  ifconfig ens3
+  415  route -n
+  416  route add defualt gw 136.243.49.217
+  417  hostname -i
+  418  cat /etc/hostname 
+  419  ping localhost
+  420  cat /etc/hosts
+  421  ping coreos-1
+  422  nano /etc/hosts
+  423  vi /etc/hosts
+  424  ping coreos-1
+  425  route add defualt gw 136.243.49.217
+  426  hostname -i
+  427  route add defualt gw 136.243.49.217
+  428  ping google.com
+  429  route add defualt gw 136.243.49.217
+  430  route
+  431  route -n
+  432  find . -name init.sh
+  433  find / -name init.sh
+  434  vi /tmp/one-context-tmp/init.sh 
+  435  find / -name context.sh
+  436  find / -name context*
+  437  cd /tmp/one-context-tmp/
+  438  ls
+  439  cd ..
+  440  cd ..
+  441  cd /mnt/
+  442  ls
+  443  cd ~
+  444  pwd
+  445  reboot
+  446  history
+  447  pwd
+  448  ip route
+  449  route -n
+  450  cat /etc/hosts
+  451  cat /etc/hostname
+  452  hostname
+  453  hostname -i
+  454  cat /etc/hosts
+  455  nano /tmp/one-context-tmp/init.sh 
+  456  vi /tmp/one-context-tmp/init.sh 
+  457  hostname -i
+  458  vi /etc/hosts
+  459  hostname -i
+  460  route add defualt gw 136.243.49.217
+  461  route
+  462  route -n
+  463  ifconfig ens3
+  464  ping 136.243.49.217
+  465  route add 138.201.98.24 gw 136.243.49.217
+  466  route add 136.243.49.217 ens3
+  467  ping 136.243.49.217
+  468  ssh 136.243.49.217
+  469  ping 136.243.49.217
+  470  ping 88.198.139.81
+  471  vi /etc/systemd/network/static.network 
+  472  vi /etc/systemd/network/static.network 
+  473  route add default gw 136.243.49.217
+  474  ping google.com
+  475  reboot
+  476  history
+  477  history >test

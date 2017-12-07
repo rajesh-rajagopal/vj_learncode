@@ -1,0 +1,164 @@
+service libvirtd stop
+service libvirtd start
+megdc onehostinstall
+
+
+
+
+yum install -y libguestfs-tools
+
+
+cat >/etc/libvirt/qemu.conf<'EOF'
+user  = "root"
+group = "root"
+dynamic_ownership = 0
+EOF
+
+
+virsh shutdown kvm103
+
+dd if=/dev/vg-one-0/kvm101_img | gzip | dd of=/home/kvm101_backup.gz bs=4096
+
+
+wget https://github.com/OpenNebula/addon-context-linux/releases/download/v4.14.4/one-context_4.14.4.deb
+     https://github.com/OpenNebula/addon-context-linux/releases/download/v5.0.3/one-context_5.0.3.deb
+mkdir packages
+cp one-context_4.14.4.rpm packages
+
+
+genisoimage -o packages.iso -R -J -V PACKAGES packages/
+
+
+
+qemu-img create -f qcow2 -b kvm103_backup kvm103.qcow2
+
+
+script.sh
+#!/bin/bash
+mount LABEL=PACKAGES /mnt
+
+# Install opennebula context package
+#dpkg -Uh /mnt/one-context*deb
+
+
+# Script to add a user to Linux system
+if [ $(id -u) -eq 0 ]; then
+        username=vertice
+        password=vertice
+        egrep "^$username" /etc/passwd >/dev/null
+        if [ $? -eq 0 ]; then
+                echo "$username exists!"
+                exit 1
+        else
+            	pass=$(perl -e 'print crypt($ARGV[0], "password")' $password)
+                useradd -m -p $pass $username
+                [ $? -eq 0 ] && echo "User has been added to system!" || echo "Failed to add a user!"
+        fi
+else
+    	echo "Only root may add a user to the system"
+        exit 2
+fi
+
+
+cat >/etc/sudoers.d/vertice <<"EOF" 
+vertice ALL = (root) NOPASSWD:ALL
+EOF
+
+
+
+echo "deb [arch=amd64] http://get.megam.io/0.9/ubuntu/14.04/ trusty testing" >/etc/apt/sources.list.d/vertice.list
+
+apt-key adv --keyserver keyserver.ubuntu.com --recv B3E0C1B7
+
+sudo apt-get update -y
+
+sudo apt-get install -y open-vm-tools git curl
+
+sudo apt-get install -y megamcadvisor
+
+sudo apt-get install -y verticegulpd
+
+
+
+export LIBGUESTFS_ATTACH_METHOD=appliance
+
+virt-customize -v -x --attach packages.iso --format qcow2 -a kvm103.qcow2 --run script.sh --root-password password:pass1234
+
+qemu-img convert -f qcow2 -O qcow2 -o compat=0.10 kvm103.qcow2 kvm103-final.qcow2
+
+lvcreate -n kvm101_img --size 10G /dev/vps   
+
+dd if=kvm103-final.qcow2  of=/dev/vg-one-0/kvm101_img bs=4096
+
+
+
+
+
+
+[root@ns524905 ~]# cat /etc/sysconfig/network-scripts/ifcfg-br0 
+
+DEVICE=br0
+TYPE=Bridge
+BOOTPROTO=static
+IPADDR=158.69.240.220
+NETMASK=255.255.255.0
+ONBOOT=yes
+GATEWAY=158.69.240.254
+IPV6INIT=yes
+IPV6_AUTOCONF=no
+IPV6ADDR=2607:5300:120:00dc::/64
+
+
+create a virtual network in one master with above network config
+
+NAME   = "solus-lvm"
+TYPE   = FIXED
+BRIDGE = br0
+AR = [ TYPE = "IP4", IP   = "89.163.141.206", SIZE = "3" ]
+DNS = "62.141.32.5 62.141.32.4 62.141.32.3"
+GATEWAY    = "83.136.86.1"
+NETWORK_MASK = "255.255.255.0"
+
+
+######################################################################################
+
+
+
+sudo qemu-img resize /var/lib/libvirt/images/myvm.img 255G
+
+ qemu-img convert free_bsd_11.0_r.qcow2 free_bsd_11.0_r.raw
+
+
+
+
+virt-resize --shrink /dev/ada0 free_bsd_11.0 free_bsd_11.0_r.raw 
+[   0.0] Examining free_bsd_11.0
+ 100% ⟦▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒⟧ 00:00
+virt-resize: error: /dev/sda0: partition not found in the source disk image 
+(this error came from '--shrink' option on the command line).  Try running 
+this command: virt-filesystems --partitions --long -a free_bsd_11.0
+
+If reporting bugs, run virt-resize with debugging enabled and include the 
+complete output:
+
+  virt-resize -v -x [...]
+[megam@centos-7 ~]$ virt-filesystems --partitions --long -a free_bsd_11.0
+Name       Type       MBR  Size         Parent
+/dev/sda1  partition  -    16384        /dev/sda
+/dev/sda2  partition  -    1073741824   /dev/sda
+/dev/sda3  partition  -    21474836480  /dev/sda
+[megam@centos-7 ~]$ virt-resize --resize /dev/sda3=-10G free_bsd_11.0 free_bsd_11.0_r.raw 
+[   0.0] Examining free_bsd_11.0
+ 100% ⟦▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒⟧ 00:00
+virt-resize: error: /dev/sda3: This partition has unknown content which 
+might be damaged by shrinking it.  If you want to shrink this partition, 
+you need to use the '--resize-force' option, but that could destroy any 
+data on this partition.  (This error came from '--resize' option on the 
+command line.)
+
+
+
+
+
+
+

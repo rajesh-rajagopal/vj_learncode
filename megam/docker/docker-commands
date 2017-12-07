@@ -1,0 +1,50 @@
+https://docs.docker.com/engine/reference/commandline
+
+docker rmi <imagename> [-f| force remove]
+
+https://github.com/fsouza/go-dockerclient/blob/master/container.go
+
+ docker run --name ubuntu_bash --rm -i -t ubuntu bash
+
+docker ps -a -q         // to get all containers id alone
+/sys/fs/cgroup/blkio/docker/$CONTAINER_ID/
+cat /sys/fs/cgroup/memory/docker/$CONTAINER_ID/memory.usage_in_bytes
+
+http://stackoverflow.com/questions/30271942/get-docker-container-cpu-usage-as-percentage   //for stats cpu calculation
+
+var cpuDelta = res.cpu_stats.cpu_usage.total_usage -  res.precpu_stats.cpu_usage.total_usage;
+var systemDelta = res.cpu_stats.system_cpu_usage - res.precpu_stats.system_cpu_usage;
+var RESULT_CPU_USAGE = cpuDelta / systemDelta * 100;
+
+https://github.com/docker/docker/blob/0d445685b8d628a938790e50517f3fb949b300e0/api/client/stats.go#L199
+https://github.com/bobrik/collectd-docker/pull/40
+https://github.com/docker/docker/pull/13627#issuecomment-107415691
+
+docker exec -i -t <container-id> /bin/bash
+
+docker exec -i -t 857aa8a3ef5b /bin/bash
+
+
+//to add custom values to container 
+ docker -H tcp://192.168.0.132:2375 run -l "vendor=welcome" -d tutum/hello-world
+
+docker -H tcp://192.168.0.132:2375 run -l "account_id=vijay@megam.io" -l "assembly_id=ASM1234" -l "assemblies_id=AMS3214" -d tutum/hello-world
+
+sudo usermod -aG docker vijay
+
+cat /sys/fs/cgroup/memory/docker/04ce23d9056758755cf9541f7c037907d5cc6a97d0907b67d3926a692e154749/memory.usage_in_bytes
+
+04ce23d9056758755cf9541f7c037907d5cc6a97d0907b67d3926a692e154749
+
+ mvijaykanth@megam.io | 2016-12-27 09:09:36.000000+0000 | ASM8244219142000111449 | compute.instance.exists | AMS5884700835278404951 |       wispy-sun-3958.megambox.com | 2016-12-26 19:07:56 +0200 EET | 1.6030790421661113E+01 | 2016-12-26 19:13:38 +0200 EET | SEN7489888338593725167 | vm billing | ['{"metric_name":"cpu_cost","metric_value":"0.1","metric_units":"0.1","metric_type":"delta"}', '{"metric_name":"memory_cost","metric_value":"0.1","metric_units":"1024","metric_type":"delta"}', '{"metric_name":"disk_cost","metric_value":"0.1","metric_units":"20480","metric_type":"delta"}'] | 188.240.231.85 |    one | active |    one
+
+
+
+
+docker network ls
+
+docker network disconnect -f bridge 6ec1a546d6f3
+
+
+
+

@@ -1,0 +1,105 @@
+#! /bin/sh
+
+# coreos is fully docker supported
+
+sudo useradd -p "*" -U -m user1 -G sudo    # create user with sudoer permission
+
+sudo passwd user1                          #set password to user
+
+sudo userdel user1                      #to remove existing user
+
+ip a 
+
+mac=`ethtool -P ens3 | awk -F 'Permanent address:' '{print $2}'`
+
+
+journalctl -f -u hello.service
+
+cd /etc/systemd/network/
+vi static.network
+
+[Match]
+Name=eth0
+
+[Network]
+Address=192.168.0.15/24
+Gateway=192.168.0.1
+DNS=8.8.8.8
+DNS=8.8.4.4
+
+sudo systemctl restart systemd-networkd
+
+
+journalctl -u system-networkd //to view logs
+
+https://www.freedesktop.org/software/systemd/man/systemd.network.html#
+
+# POINT TO POINT GATEWAY
+route add GATEWAY ens3
+route add IP gw GATEWAY 
+route add default gw GATEWAY
+
+
+route add 136.243.49.217 ens3
+route add 138.201.98. gw 136.243.49.217 
+route add default gw 136.243.49.217
+
+# POINT TO POINT GATEWAY to add permanently 
+# edit /etc/systemd/network/static.network
+sudo cat > //etc/systemd/network/static.network <<EOF
+[Match]
+Name=ens3
+
+[Network]
+Address=$ETH0_IP/27
+Gateway=$ETH0_GATEWAY
+DNS=8.8.8.8
+DNS=8.8.4.4
+
+[Address]
+Address=$ETH0_IP/27
+Peer=$ETH0_GATEWAY
+
+EOF
+
+
+ip route
+
+default via 136.243.49.217 dev ens3 
+136.243.49.217 dev ens3  scope link 
+138.201.98.0/27 dev ens3  proto kernel  scope link  src 138.201.98.24 
+172.17.0.0/16 dev docker0  proto kernel  scope link  src 172.17.0.1 
+
+route -n
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+0.0.0.0         136.243.49.217  0.0.0.0         UG    0      0        0 ens3
+136.243.49.217  0.0.0.0         255.255.255.255 UH    0      0        0 ens3
+138.201.98.0    0.0.0.0         255.255.255.224 U     0      0        0 ens3
+172.17.0.0      0.0.0.0         255.255.0.0     U     0      0        0 docker0
+
+cat /etc/hosts
+127.0.0.1 coreos-1 localhost
+
+
+
+
+
+
+A point of delivery, or PoD, is "a module of network, compute, storage, and application components that work together to deliver networking services. The PoD is a repeatable design pattern, and its components maximize the modularity, scalability, and manageability of data centers."
+
+
+route -v add 138.201.98.0 netmask 255.255.255.0 gw 136.243.49.217 metric 1 dev ens3
+
+route add default gw 69.225.48.254
+SIOCADDRT: Network is unreachable
+
+
+route add -net 138.201.98.0 netmask 255.255.255.0 dev ens3
+route add default gw 136.243.49.217
+
+
+
+/sbin/route add -net 0.0.0.0 gw 136.243.49.217 eth0
+
+

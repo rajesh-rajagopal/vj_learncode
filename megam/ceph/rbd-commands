@@ -1,0 +1,11 @@
+#!/bin/sh
+
+rbd diff one/one-2 | awk '{ SUM += $2 } END { print SUM/1024/1024 " MB" }' # to get original block storage size
+
+rbd ls one  # list images(block storage) in the pool
+
+rbd export --pool=one one-34 	centos_7.1.img  # get raw image from the pool
+
+rbd rm one/one-94-953-0          # remove the image from the pool
+
+

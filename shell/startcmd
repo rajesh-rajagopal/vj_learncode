@@ -1,0 +1,763 @@
+
+.03#! /bin/bash
+176.9.145.15	root  iTsP@frica2015
+
+
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 9B46B611
+
+echo 'deb [arch=amd64] http://get.megam.io/repo/1.0/ubuntu/14.04/stable trusty stable' >/etc/apt/sources.list.d/megam.list;
+deb [arch=amd64] http://get.megam.io/repo/1.0/ubuntu/14.04/testing trusty testing
+deb [arch=amd64] http://get.megam.io/repo/1.5/ubuntu/14.04/testing trusty testing
+deb [arch=amd64] http://get.megam.io/repo/1.5/debian/8.5/testing jessie testing
+
+#########Before install megdc packages run following
+
+echo 'deb [arch=amd64] http://get.megam.io/1.0/ubuntu/14.04/ trusty testing' >/etc/apt/sources.list.d/megam.list
+
+apt-key adv --keyserver keyserver.ubuntu.com --recv B3E0C1B7
+
+apt-get update
+
+#############install megdc
+
+apt-get install megdc
+
+#**********setup megam********************
+
+apt-get install riak
+apt-get install rabbitmq-server
+
+############ to enable UI in web browser IP:15672
+
+rabbitmq-plugins enable rabbitmq_management //(restart rabbitmq) 
+
+service rabbitmq-server start/stop
+rabbitmqctl status
+
+megdc megaminstall --megamnowflake --megamd
+
+
+
+######## To setup gateway install java
+
+sudo apt-get -y install software-properties-common python-software-properties
+sudo apt-add-repository -y ppa:openjdk-r/ppa
+
+sudo apt-get -y update
+sudo apt-get -y install openjdk-8-jdk
+
+megdc megaminstall --megamgateway
+
+#####change gateway config(/var/lib/megam/megamgateway/gateway.conf) riak =ip [192.168.1.1]
+
+#### To check http://192.168.1.1:9000  [check all(riak,rabbitmq,snowflake) service enable or not]
+
+
+##### To setup Megamnilavu
+
+megdc megaminstall --megamnilavu
+
+#####start up change nilavu config (/etc/init/megamnilavu.conf) original ip example {127.0.0.1  as 192.168.1.1}
+
+#*************setup opennebula-frontend *************
+
+megdc oneinstall
+
+##(run the below command after install onehostinstall in host [192.168.1.2])
+
+megdc sshpass --hostip [192.168.1.2]   
+
+
+Host add in opennebula 
+
+
+sudo echo 3 > /proc/sys/vm/drop_caches                           	//cache memory clean
+
+if [ ! -d "$DIRECTORY" ]; then
+//do if file doesnot exist 
+fi
+
+/etc/init.d/haproxy start
+
+
+lsof -i -P | grep "3000"
+
+###########clean nilavu rails for fresh run
+rake asset:clean
+rake tmp:clear
+rake assets:clean
+rake tmp:clean
+
+bundle exec passenger start -p 3000 --max-pool-size 8             	//rails run
+
+ps -ef | grep cadvisor  						//check which service runing by name
+
+
+//check os type version
+
+  lsb_release -a [-c -d -r] to check os version type                    //for ubuntu
+
+  cat /etc/redhat-release						      //for centos
+
+  cat /etc/os-release  						     //for coreos/ubuntu/debian
+
+##############swasa
+
+stop megamd
+stop megamgateway
+stop megamnilavu
+start megamd
+start megamnilavu
+sunstone-server start
+econe-server start
+sudo -H -u oneadmin bash -c "one restart"
+
+service rabbitmq-server stop
+service rabbitmq-server start
+start megamgateway
+rabbitmqctl status
+
+
+############adhi
+
+ceph status
+sudo /etc/init.d/radosgw start
+
+arr=( $(ls ./vijay/*.war) )   //to get name of unknow file by extension
+ echo $arr 
+./vijay/hello.war
+ 
+sudo rm /var/lib/dpkg/lock
+sudo dpkg --configure -a
+
+
+stat --format '%a' <secret.xml>   // to get value for the file mode 
+
+
+
+lshw -c network
+
+ReactDOM.render(React.createElement(NewOverview, {url:"/json", timeInterval: $.timeInt}), document.getElementById('overview'));
+
+
+sudo stop ceph-all
+sudo start ceph-all
+
+
+dpkg --configure -a
+mysqldumb -u root -p > mysqldump.sql 
+mysql -u root -p -h localhost <databasename> < mysqldump.sql
+
+rbd ls one
+
+rbd export --pool=one one-34 	centos_7.1.img
+
+tar -zcvpf centos_7.1.tar.gz ./centos_7.1.img
+
+tar -zcpf coreos.tar.gz ./megam-coreos.img
+
+
+rbd rm one/one-94-953-0
+
+
+sudo cp /etc/network/interfaces /etc/network/interfaces.backup.$(date +%F_%R)
+
+ceph osd lspools
+
+
+
+apt-get remove -y megamgulpd 
+apt-get purge -y megamgulpd 
+apt-get autoremove
+
+mkdir -p /var/lib/megam/chef-repo ;wget -P /var/lib/megam https://github.com/megamsys/chef-repo/archive/0.92.tar.gz
+tar xf /var/lib/megam/0.92.tar.gz -C /var/lib/megam/chef-repo --strip-components 1;rm /var/lib/megam/0.92.tar.gz
+
+nano .ssh/authorized_keys 
+
+cat .ssh/authorized_keys
+
+dpkg --get-selections 
+
+apt-get remove megamgulpd megamcommon heka megamcadvisor
+
+https://github.com/megamsys/chef-repo/archive/0.91.tar.gz
+
+
+tar -zcvpf abc.tar.gz ./new/
+   // mkdir -p /var/lib/megam/chef-repo ;tar xf /var/lib/megam/0.91.tar.gz -C /var/lib/megam/chef-repo --strip-components 1
+tar -xvf abc.tar.gz
+
+$ tar -rv -f abc.tar abc.txt
+
+ tar -xvzf abc.tar.gz -C /opt/folder/ 
+
+truncate -s 0 directory/* &> /dev/null  //clear file contents in a directory
+
+
+
+rm /usr/bin/ruby
+rm /usr/bin/gem
+ln -s /usr/bin/ruby2.0 /usr/bin/ruby
+ln -s /usr/bin/gem2.0 /usr/bin/gem
+
+##################### write array to a file with new line
+testa=( 1 2 3 )
+printf "%s\n" "${testa[@]}" > file.txt
+
+output:
+cat file.txt    
+1
+2
+3
+
+
+## declare an array variable
+declare -a arr=("element1" "element2" "element3")
+
+## now loop through the above array
+for i in "${arr[@]}"
+do
+   echo "$i"
+   # or do whatever with individual element of the array
+done
+
+
+traceroute IP  //
+
+
+
+
+curl -sS https://getcomposer.org/installer | php 
+
+php composer.phar install
+
+composer global require "laravel/installer"
+
+cd .composer/vendor/bin/
+
+./laravel new blog
+
+
+
+
+sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password'
+sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password'
+sudo apt-get -y install mysql-server
+
+
+
+dpkg -l | grep libapache2-mod-php5
+
+ls /etc/apache2/mods-enabled/|grep mpm
+
+ls /etc/apache2/mods-enabled/
+
+
+nano /etc/apache2/mods-enabled/php5.conf 
+nano /etc/apache2/mods-enabled/php5.load 
+
+sudo a2enmod mpm_prefork
+nano /etc/apache2/mods-enabled/mpm_event.load   //comment the line 
+service apache2 restart
+                                                                                                      [ OK ] 
+ 
+
+apache2: Could not reliably determine the server's fully qualified domain name, using 127.0.0.1. Set the 'ServerName' directive globally to suppress this message'
+
+echo 'ServerName localhost' >>/etc/apache2/apach2.conf
+
+
+chef-solo -c solo.rb -j solo.json -o 'recipe[megam_run]'
+
+
+
+install mysql-server php5-gd php5-mysql
+
+php.ini remove ';' in extension=/usr/lib/perl5/auto/DBD/mysql/mysql.so
+
+in the end i found a solution First, make sure MySQL server is running. Type the following command at a shell prompt: # /etc/init.d/mysql status
+
+If MySQL is not running, enter: # /etc/init.d/mysql start
+
+If MySQL is not installed, type the following command to install MySQL server: # apt-get install mysql-server
+
+Make sure MySQL module for php5 is installed: # dpkg --list | grep php5-mysql
+
+To install php5-mysql module enter: # apt-get install php5-mysql
+
+Next, restart the Apache2 web server: # /etc/init.d/apache2 restart
+
+cd /var/www/html/current/
+chmod 777 tmp upload cache config
+
+sudo DEBIAN_FRONTEND=noninteractive aptitude install -q -y mysql-server  //without popup window 
+
+
+fengoffice  
+
+sudo DEBIAN_FRONTEND=noninteractive aptitude install -q -y mysql-server php5-mysql php5-gd
+cd /var/www/html/current/;chmod 777 tmp upload cache config
+service apache2 restart 
+http://IP_ADDRESS/current
+
+mysql -uroot
+create user fengoffice'@'%' IDENTIFIED BY 'megam';            //create username with password 
+
+//grand fengoffice database's all  privileses to fengoffice user
+GRANT ALL PRIVILEGES ON fengoffice_db.* TO 'fengoffice'@'localhost' IDENTIFIED BY 'megam'; 
+
+GRANT ALL PRIVILEGES ON fengoffice.* TO 'fengoffice'@'localhost.localdomain' IDENTIFIED BY 'megam';
+
+
+sed -i '14,18 s/^/#/' bla.conf      //comment lines 14 - 18
+sed -i '14,18 s/^##*//' bla.conf    //uncomment lines 14 - 18
+
+wordpress   sudo DEBIAN_FRONTEND=noninteractive aptitude install -q -y mysql-server php5-mysql
+
+
+Wordpress (https://github.com/megamsys/WordPress) - http://IP/current
+                     It’s a big file so it takes time to clone and start mysql-server 
+        Create a database  in mysql server manually in your Wordpress VM
+       
+Launch WordPress in browser
+
+http://IP/current
+
+And then 
+DB name : your db name
+Username: root
+Password : leave it blank 
+Host:localhost
+Prefix : wp_
+
+
+Copy the content of wp-config.php shown in next page 
+Create a file in 
+/var/www/html/current/wp-config.php paste the content 
+And then click run install 
+
+
+megam @ihAzEraOdLo0S*09i
+
+chef-solo -c solo.rb -j solo.json -o 'recipe[megam_run]'
+
+
+execute "curl -sL https://deb.nodesource.com/setup | sudo bash -"
+execute "apt-get install -y nodejs build-essential"
+
+
+CREATE USER 'megam'@'103.56.92.69' IDENTIFIED BY 'megam';
+
+GRANT ALL PRIVILEGES ON * . * TO 'megam'@'103.56.92.69';
+
+
+File.open("/home/megam/temp1.txt", 'w') { |file| file.write(params) }
+
+Orion-client :
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"  //to get CWD 
+
+
+SCRIPTPATH=`pwd -P`
+
+sudo systemctl start nsqlookupd
+sudo systemctl start nsqd
+nsqadmin --lookupd-http-address=103.56.92.4:4161
+
+sudo systemctl stop docker
+sudo systemctl stop nsqlookupd
+sudo systemctl stop nsqd
+ps -ef | grep nsqadmin
+
+kill -9 [processid]
+
+
+service start nslookupd
+service start nsqd
+
+
+wget -P /var/lib/megam/gulp/ https://s3-ap-southeast-1.amazonaws.com/megampub/chef/eclipse-orion-10.0linux.gtk.x86_64.tar.gz
+tar xf /var/lib/megam/gulp/eclipse-orion-10.0linux.gtk.x86_64.tar.gz -C /var/lib/megam/eclipse --strip-components 1;rm /var/lib/megam/gulp/eclipse-orion-10.0linux.gtk.x86_64.tar.gz
+
+curl -X DELETE http://103.56.92.7:8098/riak/accounts/vijay@megam.io
+
+
+
+chef-solo --config solo.rb --json-attributes solo.json
+
+https://github.com/vijaykanthm28/php_wordpress.git
+
+
+cat >solo.json <<"EOF"
+{"run_list":["recipe[megam_run]"],"tosca_type":"php","scm":"https://github.com/vijaykanthm28/www.megam.io.git"}
+EOF
+
+cat >solo.rb <<"EOF"
+cookbook_path "/var/lib/megam/gulp/chef-repo/cookbooks"
+ssl_verify_mode :verify_peer
+EOF
+chef-solo --config solo.rb --json-attributes solo.json
+
+
+
+chef-solo.rb cookbook_path ["/root/chef-repo/cookbooks/"]
+chef-solo.json :{"run_list":["recipe[apt]"],"rhh":"tfytyjhfgngh"}
+
+
+
+execute "get orion" do
+wget -P /var/lib/megam/gulp/ https://s3-ap-southeast-1.amazonaws.com/megampub/chef/eclipse-orion-10.0linux.gtk.x86_64.tar.gz
+tar xf /var/lib/megam/gulp/eclipse-orion-10.0linux.gtk.x86_64.tar.gz -C /var/lib/megam/eclipse --strip-components 1
+rm /var/lib/megam/gulp/eclipse-orion-10.0linux.gtk.x86_64.tar.gz
+end
+
+
+
+#script.sh
+#!/bin/sh
+
+for P; do
+    dpkg -s "$P" >/dev/null 2>&1 && {
+        echo "$P is installed."
+    } || {
+        echo "$P is not installed."
+    }
+done
+
+./script.sh java tomcat nodejs
+
+
+
+tasklist |find / -name "Tomcat" || echo "Tomcat not running"   //to check is there any file like tomcat
+
+
+cookbook_path ["/var/lib/megam/chef-repo/cookbooks/"]  
+
+{"run_list":["recipe[megam_orion]"]} chef-solo.json
+
+
+
+
+/var/www/html/releases/6c8c7828d0df9620b044d9c97c9ec8a4a9ccfed1/
+/var/www/html/releases/6c8c7828d0df9620b044d9c97c9ec8a4a9ccfed1/
+
+knife cookbook site download application_ruby [version]
+
+
+
+"poise":"~> 2.0","application":"~> 5.0","poise-ruby":"~> 2.1","poise-service":"~> 1.0"
+
+
+######  To find OS name #################################
+
+Novell SUSE         /etc/SUSE-release
+Red Hat             /etc/redhat-release, /etc/redhat_version
+Fedora              /etc/fedora-release
+Slackware           /etc/slackware-release, /etc/slackware-version
+Debian              /etc/debian_release, /etc/debian_version, or /etc/os-release
+Mandrake            /etc/mandrake-release
+Yellow dog          /etc/yellowdog-release
+Sun JDS             /etc/sun-release
+Solaris/Sparc       /etc/release
+Gentoo              /etc/gentoo-release
+UnitedLinux         /etc/UnitedLinux-release
+ubuntu              /etc/lsb-release
+
+
+#############################################################
+
+
+A=$(cat /etc/debian_version)
+
+
+unetbootin
+
+sudo add-apt-repository ppa:gezakovacs/ppa
+sudo apt-get update
+sudo apt-get install unetbootin
+
+
+######################### centos
+
+sudo adduser username
+sudo passwd username
+sudo gpasswd -a username wheel #We can do this by adding the user to the wheel group (which gives sudo access to all of its members by default) through the gpasswd command. This is the safest and easiest way to manage sudo user rights.
+
+#To change CentOS interfacename
+ethtool -P ens3
+Permanent address: 02:00:67:38:5c:41
+
+To rename interface wan0 to eth0, edit 
+
+/etc/udev/rules.d/70-persistent-net.rules #change name as NAME="eth0" .
+
+# PCI device 0x11ab:0x4363 (sky2)
+SUBSYSTEM=="net", ACTION=="add", DRIVERS=="?*",
+ATTR{address}=="02:00:67:38:5c:41",ATTR{dev_id}=="0x0", ATTR{type}=="1",
+KERNEL=="eth*", NAME="wan0"            #change NAME="eth0"
+
+
+cd /etc/sysconfig/network-scripts
+nano ifcfg-wan0          #and the edit the NAME and DIVICE=eth0 
+mv ifcfg-enp2s0 ifcfg-eth0 
+
+
+
+
+   
+To restore the old naming convention, you need to edit the /etc/default/grub file and add net.ifnames=0 biosdevname=0 at the end of the GRUB_CMDLINE_LINUX variable:
+
+nano /etc/default/grub 
+
+GRUB_CMDLINE_LINUX="rd.lvm.lv=centos/swap vconsole.keymap=us crashkernel=auto rd.lvm.lv=centos/root vconsole.font=latarcyrheb-sun16 rhgb quiet net.ifnames=0 biosdevname=0"
+Then, test the new configuration to see if no mistake has been made:
+grub2-mkconfig -o /boot/grub2/grub.cfg
+
+
+
+
+aptly repo create -comment="nightly" -component="jessie" -distribution="jessie" -architectures="amd64, all" jessie
+cd testing-jessie
+aptly repo add jessie *.deb
+
+aptly publish repo -component="jessie" jessie 0.9/debian/8
+
+
+
+
+saravana.kumar.m4@gmail.com
+sbt native packager
+
+
+
+
+ 
+dist=`grep DISTRIB_ID /etc/*-release | awk -F '=' '{print $2}'`  # to get os name for ubuntu and coreos
+
+dist=`grep PRETTY_NAME /etc/*-release | awk -F '=' '{print $2}'`  #to get os name for ubuntu,debian,centos and coreos
+
+
+
+dist=`grep PRETTY_NAME /etc/*-release | awk -F '="' '{print $2}'`
+os=$(echo $dist | awk '{print $1;}')
+if [ "$os" == "Ubuntu" ]; then
+  echo $dist
+else if [ "$os" == "Debian" ]; then
+  echo $os
+else
+   echo "Unsupported Linux OS"
+fi
+fi
+
+
+Red Hat/Fedora Core/CentOS Linux
+Type the following command to get list of all installed software
+# rpm -qa | less
+
+
+
+#######extract deb file 
+
+mkdir -p extract/DEBIAN
+dpkg-deb -x megamcadvisor_0.9_amd64.deb extract/
+dpkg-deb -e megamcadvisor_0.9_amd64.deb extract/DEBIAN
+# do changes
+sudo find . -type f -name "*.*~" -exec rm -f {} \;
+mkdir build
+dpkg-deb -b extract/ build/
+
+
+
+
+'systemctl status cadvisor.service' and 'journalctl -xn' 
+
+
+
+
+####################centos open PORT to access outside 
+rpm -qa | less       #to list installed packages
+
+grep -RnisI ens34 *
+
+
+sudo firewall-cmd --zone=public --add-port=80/tcp --permanent
+
+sudo firewall-cmd --reload
+
+
+
+###########################coreos interfacename change
+sudo userdel user1 //to remove existing user
+sudo useradd -p "*" -U -m user1 -G sudo
+
+$ sudo passwd user1
+New password: 
+Re-enter new password: 
+passwd: password changed.
+
+
+journalctl -f -u hello.service
+
+
+
+
+/usr/bin/toolbox
+dnf -y install nano
+
+cd /etc/systemd/network/
+vi static.network
+
+[Match]
+Name=eth0
+
+[Network]
+Address=192.168.0.15/24
+Gateway=192.168.0.1
+
+
+sudo systemctl restart systemd-networkd
+
+
+journalctl -u system-networkd //to view logs
+
+
+	
+You need to add the user to the sudo group (which is the "administrators" group in Ubuntu).
+
+If you have already created the user, you can add the user to the sudo group by running the following command in a Terminal.
+
+sudo usermod -a -G sudo hduser
+
+
+
+edit echo "vijay  ALL=(ALL:ALL) ALL" >/etc/sudoers
+
+echo 'USERNAME  ALL = (root) NOPASSWD:ALL' >/etc/sudoers.d/USERNAME
+
+sudo apt-get remove scala-library scala
+sudo wget www.scala-lang.org/files/archive/scala-2.10.4.deb
+sudo dpkg -i scala-2.10.4.deb
+sudo apt-get update
+sudo apt-get install scala
+ sudo wget https://bintray.com/artifact/download/sbt/debian/sbt-0.13.6.deb
+sudo dpkg -i sbt.deb
+sudo apt-get update
+sudo apt-get install sbt
+
+
+
+
+This works great, thanks for the post!
+To install with the latest versions of scala/sbt I changed the following lines:
+...
+2: sudo wget www.scala-lang.org/files/archive/scala-2.11.4.deb
+...
+6: sudo wget https://bintray.com/artifact/download/sbt/debian/sbt-0.13.6.deb
+7: sudo dpkg -i sbt-0.13.6.deb 
+...
+
+
+grep -vE '^($|#)' /etc/libvirt/libvirtd.conf   //to view only uncommented lines
+
+####add knowhost list manually
+
+ssh -o StrictHostKeyChecking=no username@hostname.com
+
+
+cqlsh -u 'my_username' -p 'my_password' -f /mydir/myfile.cql
+
+
+first setup java openjdk7 or later and maven
+
+sudo apt-get purge maven maven2 maven3
+sudo apt-add-repository ppa:andrei-pozolotin/maven3
+sudo apt-get update
+sudo apt-get install maven3
+
+(or)
+
+wget http://mirror.fibergrid.in/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
+
+sudo mkdir -p /usr/local/apache-maven
+sudo mv apache-maven-3.3.9-bin.tar.gz /usr/local/apache-maven
+cd /usr/local/apache-maven
+sudo tar -xzvf apache-maven-3.3.9-bin.tar.gz
+
+
+mvn --version
+
+
+
+ofbiz.sh
+
+
+./startofbiz.sh  
+
+[6:11] 
+Open a browser and go to http://127.0.0.1:8080/ecommerce/control/main for the ecommerce application or https://127.0.0.1:8443/webtools/control/main for the WebTools application or https://127.0.0.1:8443/catalog/control/main for the Catalog Manager 
+
+mvn install -Dmaven.test.skip=true
+
+
+find . -path "**/target/*.war"
+
+
+To get a count of files in the directory:
+
+numfiles=(*)
+numfiles=${#numfiles[@]}
+
+
+
+You can instead use find -type f or you can count the directories and subtract:
+
+# continuing from above
+numdirs=(*/)
+numdirs=${#numdirs[@]}
+(( numfiles -= numdirs ))
+
+echo "HI ">>test
+(echo 1a; echo 'Line to insert'; echo .; echo w) | ed - test          // insert a line into file as nth line
+
+
+echo mysql-server mysql-server/root_password password strangehat | sudo debconf-set-selections
+echo mysql-server mysql-server/root_password_again password strangehat | sudo debconf-set-selections
+
+sudo apt-get install mysql-server
+
+
+
+up vote
+1
+down vote
+// copy /tmp/abc.txt to /tmp/abc.txt (target path)
+
+// username and password of 10.1.1.2 is "username" and "password"
+
+sshpass -p "password" scp /tmp/abc.txt username@10.1.1.2:/tmp/abc.txt
+// install sshpass (ubuntu)
+
+sudo apt-get install sshpass
+
+
+
+
+There are multiple remote linux machines, and I need to write a shell script which will execute the same set of commands in each machine. (Including some sudo operations). How can this be done using shell scripting?
+You can do this with ssh, for example:
+
+#!/bin/bash
+USERNAME=someUser
+HOSTS="host1 host2 host3"
+SCRIPT="pwd; ls"
+for HOSTNAME in ${HOSTS} ; do
+    ssh -l ${USERNAME} ${HOSTNAME} "${SCRIPT}"
+done
+
+
+
+journalctl -u virtengine --since '2016-12-24 18:35:41'
+
+
+
+

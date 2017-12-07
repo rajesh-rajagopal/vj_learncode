@@ -1,0 +1,38 @@
+
+Sort the file randomly and pick first 100 lines:
+
+$ sort -R input | head -n 100 >output
+
+for ((i=1; i<=47; i++)); do
+  echo 
+done
+The simplest way to read each line of a file into a bash array is this:
+
+IFS=$'\n' read -d '' -r -a lines < /etc/passwd
+Now just index in to the array lines to retrieve each line, e.g.
+
+printf "line 1: %s\n" "${lines[0]}"
+printf "line 5: %s\n" "${lines[4]}"
+
+# all lines
+echo "${lines[@]}"
+
+awk 'BEGIN{srand();print int(rand()*(63000-2000))+2000 }'
+
+shuf -i 0-365 -n 1
+
+You can iterate over the indices of the array, i.e. from 0 to ${#array[@]} - 1.
+
+
+array=(one two three)
+
+# ${#array[@]} is the number of elements in the array
+for ((i = 0; i < ${#array[@]}; ++i)); do
+    # bash arrays are 0-indexed
+    position=$(( $i + 1 ))
+    echo "$position, ${array[$i]}"
+done
+
+#while read -r line; do
+#     l=$([[ -n "$line" && "$line" != [[:blank:]#]* ]] && echo "$line" | sed -e 's/^\w*\ *//')
+#done < "$input"

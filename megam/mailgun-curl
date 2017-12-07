@@ -1,0 +1,75 @@
+curl -s --user 'api:key-6a67c805f2aeade6c9cc4bc519caf608' \
+    https://api.mailgun.net/v3/ojamail.megambox.com/messages \
+    -F from='Excited User <mailgun@ojamail.megambox.com>' \
+    -F to=postmaster@ojamail.megambox.com \
+    -F to=mvijaykanth@megam.io \
+    -F subject='Hello' \
+    -F text='Testing some Mailgun awesomness!'
+    
+    
+    
+    php 
+    
+  # Install Composer
+curl -sS https://getcomposer.org/installer | php
+
+append composer.json    "php-http/guzzle6-adapter": "^1.0"
+
+# Add Mailgun as a dependency (x.x is the SDK version, see Github README below)
+php composer.phar require mailgun/mailgun-php
+
+ 
+ 
+  
+    
+    # Include the Autoloader (see "Libraries" for install instructions)
+require 'vendor/autoload.php';
+use Mailgun\Mailgun;
+
+# Instantiate the client.
+$mgClient = new Mailgun('YOUR_API_KEY');
+$domain = "YOUR_DOMAIN_NAME";
+
+# Make the call to the client.
+$result = $mgClient->sendMessage($domain, array(
+    'from'    => 'Excited User <mailgun@YOUR_DOMAIN_NAME>',
+    'to'      => 'Baz <YOU@YOUR_DOMAIN_NAME>',
+    'subject' => 'Hello',
+    'text'    => 'Testing some Mailgun awesomness!'
+));
+
+
+
+    <?php
+//composer require mailgun/mailgun-php:~1.7.2
+# Include the Autoloader (see "Libraries" for install instructions)
+require 'vendor/autoload.php';
+use Mailgun\Mailgun;
+
+if (isset($_POST['user_name'])) {
+$user_name		= $_POST["user_name"];
+$user_email		= $_POST["user_email"];
+$message		= $_POST["msg"];
+
+}
+	//email body
+	//Your credentials
+	$client = new \Http\Adapter\Guzzle6\Client(); 
+    $mg = new \Mailgun\Mailgun('key-6a67c805f2aeade6c9cc4bc519caf608', $client);
+
+	//$mg = new Mailgun("key-6a67c805f2aeade6c9cc4bc519caf608");
+	$domain = "ojamail.megambox.com";
+	$subject = "Thank you for you feed back";
+
+	//Customise the email - self explanatory
+	$mg->sendMessage($domain, array(
+	'from'=>'postmaster@ojamail.megambox.com',
+	'to'=> $user_email,
+	'subject' => $subject,
+	'text' => $message
+	    )
+	)
+
+
+?>
+

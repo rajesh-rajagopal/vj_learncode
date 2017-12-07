@@ -1,0 +1,12 @@
+
+
+curl -d '{"id":"","accounts_id":"ACT5563357690126932758","type":"user","action":"4","inputs":[{"key":"email","value":"mvijaykanth@megam.io"},{"key":"oauth","value":"true"},{"key":"nilavu_password","value":"team4megam"}]}' 'http://192.168.0.100:4151/put?topic=events'
+
+curl -d '{"id":"","cat_id":"AMS4714339800541063288","category":"done","action":"running","created_at":"2016-06-22 11:53:15 +0000"}' 'http://192.168.0.101:4151/put?topic=vms'
+
+
+curl -H "Content-Type: application/json" -XGET  "http://apidb.megam.io:8080/api/v1/nodes"
+
+
+
+curl -d '{"action":"running", "category":"done", "id":"RIP12345", "account_id":"ranjitha@megam.io", "cat_id":"AMS6317905480745207189"}' 'http://188.240.231.85:4151/put?topic=vms'

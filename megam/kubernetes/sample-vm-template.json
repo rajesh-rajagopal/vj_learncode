@@ -1,0 +1,250 @@
+{
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "v1",
+            "kind": "Template",
+            "labels": {
+                "template": "opennebula-ephemeral-template1"
+            },
+            "message": "The following service(s) have been created in your project: ${ONE_SERVICE_NAME}.\n\n       Username: ${ONE_USER}\n       Password:\n Connection URL: http://${ONE_SERVICE_NAME}:9869/\n\nFor more information about using this template, including OpenShift considerations, see https://github.com/megamsys/kubeshift.",
+            "metadata": {
+                "annotations": {
+                    "description": "OpenNebula front-end that executes OpenNebula services. For more information about using this template, including MegamVertice considerations, see https://github.com/megamsys/kubeshift.\n\nWARNING: Any data stored will be lost upon pod destruction.",
+                    "iconClass": "icon-machine",
+                    "openshift.io/display-name": "OpenNebula(Master)",
+                    "tags": "compute,opennebula",
+                    "template.openshift.io/documentation-url": "https://docs.megam.io/abcd",
+                    "template.openshift.io/long-description": "This template provides a standalone OpenNebula master server with a database created.  The database is not stored on persistent storage, so any restart of the service will result in all data being lost.",
+                    "template.openshift.io/provider-display-name": "Megam Systems.",
+                    "template.openshift.io/support-url": "https://github.com/megamsys/support"
+                },
+                "creationTimestamp": "2017-05-30T04:11:14Z",
+                "name": "opennebula-master",
+                "namespace": "vijay-first",
+                "resourceVersion": "2094",
+                "selfLink": "/oapi/v1/namespaces/vijay-first/templates/opennebula-master",
+                "uid": "05d67407-44ee-11e7-9106-54ab3a8328d4"
+            },
+            "objects": [
+                {
+                    "apiVersion": "v1",
+                    "kind": "Service",
+                    "metadata": {
+                        "creationTimestamp": null,
+                        "name": "${ONE_SERVICE_NAME}"
+                    },
+                    "spec": {
+                        "ports": [
+                            {
+                                "name": "onemaster",
+                                "port": 9869,
+                                "targetPort": 9869
+                            }
+                        ],
+                        "protocol": "TCP",
+                        "selector": {
+                            "name": "${ONE_SERVICE_NAME}"
+                        },
+                        "sessionAffinity": "None",
+                        "type": "ClusterIP"
+                    },
+                    "status": {
+                        "loadBalancer": {}
+                    }
+                },
+                {
+                    "apiVersion": "v1",
+                    "kind": "DeploymentConfig",
+                    "metadata": {
+                        "creationTimestamp": null,
+                        "name": "${ONE_SERVICE_NAME}"
+                    },
+                    "spec": {
+                        "replicas": 1,
+                        "restartPolicy": "Never",
+                        "selector": {
+                            "name": "${ONE_SERVICE_NAME}"
+                        },
+                        "template": {
+                            "metadata": {
+                                "creationTimestamp": null,
+                                "labels": {
+                                    "name": "${ONE_SERVICE_NAME}"
+                                }
+                            },
+                            "spec": {
+                                "containers": [
+                                    {
+                                        "env": [
+                                            {
+                                                "name": "ssh_private",
+                                                "valueFrom": {
+                                                    "secretKeyRef": {
+                                                        "key": "ssh-privatekey",
+                                                        "name": "ssh-vijay"
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "name": "ssh_public",
+                                                "valueFrom": {
+                                                    "secretKeyRef": {
+                                                        "key": "ssh-publickey",
+                                                        "name": "ssh-vijay"
+                                                    }
+                                                }
+                                            }
+                                        ],
+                                        "image": "one:latest",
+                                        "imagePullPolicy": "IfNotPresent",
+                                        "name": "onemaster",
+                                        "ports": [
+                                            {
+                                                "containerPort": 9869,
+                                                "protocol": "TCP"
+                                            }
+                                        ],
+                                        "resources": {
+                                            "limits": {
+                                                "memory": "${MEMORY_LIMIT}"
+                                            }
+                                        },
+                                        "status": {}
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            ],
+            "parameters": [
+                {
+                    "description": "Maximum amount of memory the container can use.",
+                    "displayName": "Memory Limit",
+                    "name": "MEMORY_LIMIT",
+                    "required": true,
+                    "value": "512Mi"
+                },
+                {
+                    "description": "The OpenShift Namespace where the ImageStream resides.",
+                    "displayName": "Namespace",
+                    "name": "NAMESPACE",
+                    "value": "openshift"
+                },
+                {
+                    "description": "The name of the ABCD Service exposed for OpenNebula.",
+                    "displayName": "OpenNebula Service Name",
+                    "name": "ONE_SERVICE_NAME",
+                    "required": true,
+                    "value": "onemaster2"
+                },
+                {
+                    "description": "Username for OpenNebula user.",
+                    "displayName": "OpenNebua Username",
+                    "name": "ONE_USER",
+                    "required": true,
+                    "value": "oneadmin"
+                },
+                {
+                    "description": "Name of the OpenNebula datastore accessed.",
+                    "displayName": "OpenNebula Datastore",
+                    "name": "ONE_DATASTORE",
+                    "required": true,
+                    "value": "datastore"
+                },
+                {
+                    "description": "Version of OpenNebula image to be used (5.2 or latest).",
+                    "displayName": "Version of OpenNebula",
+                    "name": "ONE_VERSION",
+                    "required": true,
+                    "value": "latest"
+                }
+            ]
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Template",
+            "labels": {
+                "template": "ubuntu",
+                "tosca_type": "vertice.torpedo"
+            },
+            "message": "The following service(s) have been created in your project: ${ONE_SERVICE_NAME}.\n\n       Username: ${ONE_USER}\n       Password:\n Connection URL: http://${ONE_SERVICE_NAME}:9869/\n\nFor more information about using this template, including OpenShift considerations, see https://github.com/megamsys/kubeshift.",
+            "metadata": {
+                "annotations": {
+                    "description": "Ubuntu is a Debian-based Linux operating system. Xenial Xerus is the Ubuntu codename for version 16.04 LTS of the Ubuntu Linux-based operating system., see http://www.ubuntu.com/server.\n\nWARNING: Any data stored will be lost upon pod destruction.",
+                    "iconClass": "icon-machine",
+                    "openshift.io/display-name": "Ubuntu",
+                    "tags": "torpeto,ubuntu",
+                    "template.openshift.io/documentation-url": "https://docs.megam.io",
+                    "template.openshift.io/long-description": "This template provides a standalone OpenNebula master server with a database created.  The database is not stored on persistent storage, so any restart of the service will result in all data being lost.",
+                    "template.openshift.io/provider-display-name": "Megam Systems.",
+                    "template.openshift.io/support-url": "https://github.com/megamsys/support"
+                },
+                "creationTimestamp": "2017-05-30T04:28:36Z",
+                "name": "ubuntu",
+                "namespace": "vijay-first",
+                "resourceVersion": "2304",
+                "selfLink": "/oapi/v1/namespaces/vijay-first/templates/ubuntu",
+                "uid": "72f97a47-44f0-11e7-bed8-54ab3a8328d4"
+            },
+            "objects": [
+                {
+                    "apiVersion": "v1",
+                    "kind": "Pod",
+                    "metadata": {
+                        "annotations": {
+                            "kubernetes.io/target-runtime": "virtlet"
+                        },
+                        "name": "ubuntu-vm"
+                    },
+                    "spec": {
+                        "affinity": {
+                            "nodeAffinity": {
+                                "requiredDuringSchedulingIgnoredDuringExecution": {
+                                    "nodeSelectorTerms": [
+                                        {
+                                            "matchExpressions": [
+                                                {
+                                                    "key": "extraRuntime",
+                                                    "operator": "In",
+                                                    "values": [
+                                                        "virtlet"
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "containers": [
+                            {
+                                "image": "virtlet/cloud-images.ubuntu.com/xenial/current/xenial-server-cloudimg-amd64-disk1.img",
+                                "name": "ubuntu-vm"
+                            }
+                        ],
+                        "volumes": [
+                            {
+                                "flexVolume": {
+                                    "driver": "virtlet/flexvolume_driver",
+                                    "options": {
+                                        "metadata": "instance-id: ubuntu-vm-001\nlocal-hostname: ubuntu-vm\n",
+                                        "type": "nocloud",
+                                        "userdata": "#cloud-config\nusers:\n- name: root\n  ssh-authorized-keys:\n  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCaJEcFDXEK2ZbX0ZLS1EIYFZRbDAcRfuVjpstSc0De8+sV1aiu+dePxdkuDRwqFtCyk6dEZkssjOkBXtri00MECLkir6FcH3kKOJtbJ6vy3uaJc9w1ERo+wyl6SkAh/+JTJkp7QRXj8oylW5E20LsbnA/dIwWzAF51PPwF7A7FtNg9DnwPqMkxFo1Th/buOMKbP5ZA1mmNNtmzbMpMfJATvVyiv3ccsSJKOiyQr6UG+j7sc/7jMVz5Xk34Vd0l8GwcB0334MchHckmqDB142h/NCWTr8oLakDNvkfC1YneAfAO41hDkUbxPtVBG5M/o7P4fxoqiHEX+ZLfRxDtHB53 me@localhost\nssh_pwauth: True\n"
+                                    }
+                                },
+                                "name": "test"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ],
+    "kind": "List",
+    "metadata": {},
+    "resourceVersion": "",
+    "selfLink": ""
+}
+

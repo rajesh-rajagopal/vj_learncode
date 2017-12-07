@@ -1,0 +1,81 @@
+#! /bin/bash
+
+######## Centos commands 
+
+yum update  & yum install package-name # install and update 
+
+# Install rpm package
+rpm -Uvh /mnt/one-context*rpm
+
+rpm -qa | less          # list all installed packages
+
+
+sudo find . -type f -name "*.*~"
+
+
+
+
+
+#### add user and change network interface name
+
+sudo adduser username
+sudo passwd username
+sudo gpasswd -a username wheel #We can do this by adding the user to the wheel group (which gives sudo access to all of its members by default) through the gpasswd command. This is the safest and easiest way to manage sudo user rights.
+
+
+
+
+ethtool -P ens3					#to get system mac address
+Permanent address: 02:00:67:38:5c:41
+
+echo $(ethtool -P eth0 | awk -F 'Permanent address: ' '{print $2}')
+
+
+To rename interface eth0 to wan0, edit 
+
+/etc/udev/rules.d/70-persistent-net.rules     #file and change NAME="eth0" to NAME="wan0".
+
+# PCI device 0x11ab:0x4363 (sky2)
+SUBSYSTEM=="net", ACTION=="add", DRIVERS=="?*",
+ATTR{address}=="02:00:67:38:5c:41",ATTR{dev_id}=="0x0", ATTR{type}=="1",
+KERNEL=="eth*", NAME="wan0"
+
+
+
+nano /etc/default/grub
+
+To restore the old naming convention, you need to edit the /etc/default/grub file and add net.ifnames=0 biosdevname=0 at the end of the GRUB_CMDLINE_LINUX variable:
+
+GRUB_CMDLINE_LINUX="rd.lvm.lv=centos/swap vconsole.keymap=us crashkernel=auto rd.lvm.lv=centos/root vconsole.font=latarcyrheb-sun16 rhgb quiet net.ifnames=0 biosdevname=0"
+Then, test the new configuration to see if no mistake has been made:
+
+grub2-mkconfig -o /boot/grub2/grub.cfg
+
+
+(or)
+
+cd /etc/sysconfig/network-scripts
+cp ifcfg-enp2s0 ifcfg-eth0            #   and the edit the DIVICE=eth0 
+
+
+############################
+
+ip addr / ip a   #  to see network configuration]]
+
+sudo firewall-cmd --zone=public --add-port=80/tcp --permanent      # to open port for public access permanently 
+sudo firewall-cmd --reload
+
+
+
+ip route add default via 136.243.49.217
+
+
+
+journalctl -u virtengine --since '2016-12-24 18:35:41' 
+
+zcat -f syslog-20161223-1482474901.gz | grep " virtengine\["  # get logs from .gz file 
+
+
+works on centso7.1
+echo root:team4megam | /usr/sbin/chpasswd
+

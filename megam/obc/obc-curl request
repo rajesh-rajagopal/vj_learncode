@@ -1,0 +1,205 @@
+ curl -d '{"name":"","cat_id":"AMS4724795980725157701","cattype":"torpedo","id":"RIP6449383516555041291","category":"control","action":"restart"}' 'http://localhost:4151/put?topic=vms'
+ 
+
+Use the -H header again before the Authorization:Basic things. So it will be
+
+ curl -i \
+    -H 'Accept:application/json' \
+    -H 'Authorization:Basic username:password' \
+    http://example.com
+    
+curl -i -H 'Authorization:Basic api-key:asdf' -d '{"email":"hello@megamio","password":"megam"}' http://localhost:9005/accounts/content
+
+curl -d '{"first_name":"megam","last_name":"welcome", "phone":"9876543210", "email":"sriram@megam.io", "api_key":"yse8wdmwckm38ns783nsd74jsdhmncxl2", "password":"xEMdeklimdsio#83m/zd%3kjlvd", "authority":"megam",       "password_reset_key":"qwerty", "password_reset_sent_at":"poiuyt" }' -X POST http://192.168.0.105:9005/accounts/content
+
+    
+curl -i -H 'Authorization:Basic api_key:asdf email:ram123@megam.io' -d '{"email":"hello@megamio","password":"megam"}' http://localhost:9005/login
+
+
+curl -i -H 'Authorization:Basic api_key:asdf email:ram123@megam.io' -d '{"email":"hello@megam.io","password":"megam"}' -X GET http://localhost:9005/migrate
+
+
+'Authorization:Basic api_key:asdf email:ram123@megam.io'
+
+curl -i -H 'Authorization:Basic api_key:asdf email:ram123@megam.io' -d '{"email":"hello@megam.io","password":"megam"}' -X POST http://192.168.0.101:9005/login
+
+curl -i -H 'Authorization:Basic api_key:asdf email:ram123@megam.io' -d '{"password":"megam"}' -X GET http://localhost:9005/migrate
+
+
+
+
+curl -i -H 'Authorization:Basic api_key:asdf email:ram123@megam.io' -X GET http://localhost:9005/licensing
+
+curl -d '{"first_name":"vijay","last_name":"megam","phone":"9876543210", "email":"ram123@megam.io","api_key":"qwerty", "password":"megam","authority":"megam","password_reset_key":"qwerty","password_reset_sent_at":"asdf"}'-X POST http://192.168.0.101:9005/accounts/content
+
+
+curl -i -H 'Authorization:Basic api_key:asdf email:ram123@megam.io' -d '{"password":"megam"}' -X GET http://localhost:9005/migrate
+
+
+curl -i -H 'Authorization:Basic api_key:asdf email:ram123@megam.io' -d '{"id":"ACT12345","first_name":"megam","last_name":"welcome","phone":"9876543210", "api_key":"asdf", "email":"ram123@megam.io", "password":"megam","authority":"megam","password_reset_key":"qwerty","password_reset_sent_at":"asdf","status":"creating", "created_at":""}' -X POST http://localhost:9005/accounts/content
+
+curl -i -H 'Authorization:Basic api_key:asdf email:ram123@megam.io' -d '{"email":"ram123@megam.io", "password":"megam"}' -X POST http://localhost:9005/login
+
+
+
+email: w@w.comcvfsdgsdg
+curl -i -H 'Authorization:Basic api_key:f49f7f2bafb57ce3363c4bd29bb9cb6ff690bc0f email:w@w.comcvfsdgsdg' -X GET http://192.168.0.116:9005/subscriptions
+
+
+curl -i -H 'Authorization:Basic api_key:asdf email:ram123@megam.io' -d '{"plan_name":"minified"}' -X POST http://192.168.0.108:9005/subscriptions/content
+
+curl -i -H 'Authorization:Basic api_key:asdf email:ram123@megam.io' -X GET http://192.168.0.108:9005/subscriptions
+
+
+curl -i -H 'Authorization:Basic api_key:asdf email:ram123@megam.io' -d '{"regions":[{"name":"chennai","cpu_cost_per_hour":"0.1","ram_cost_per_hour":"0.1","storage_cost_per_hour":"0.1","max_cpu":"3","hdd":"true","ssd":"false","flavors": [{"key":"s1.micro","value":"1 GB,1 Core,24 GB"},{"key":"s1.small","value":"2 GB,2 Core,48 GB"},{"key":"s1.medium","value":"3 GB,4 Core,96 GB"}]}]}' -X POST http://192.168.0.108:9005/regions/content
+
+
+curl -i -H 'Authorization:Basic api_key:asdf email:ram123@megam.io' -X GET http://192.168.0.108:9005/regions/chennai
+
+curl -i -H 'Authorization:Basic api_key:asdf email:ram123@megam.io' -X GET http://192.168.0.108:9005/regions
+
+
+curl -i -H 'Authorization:Basic api_key:asdf email:ram123@megam.io' -d '{"hosts":[{"region":"chennai","ipaddress":"192.168.0.2","username":"megdc","password":"howdareyou","created_at":"09/07/2016","updated_at":"09/07/2016","status":"created","vnets":[{"name":"pri-ipv4"},{"name":"pri-ipv4"},{"name":"pri-ipv4"}]}]}' -X POST http://192.168.0.101:9005/hosts/content
+
+
+curl -i -H 'Authorization:Basic api_key:asdf email:ram123@megam.io' -X GET http://192.168.0.108:9005/hosts/fab4f4ed-9316-4692-918c-943307deadc9
+
+curl -i -H 'Authorization:Basic api_key:asdf email:ram123@megam.io' -X GET http://192.168.0.108:9005/hosts
+
+
+curl -i -H 'Authorization:Basic api_key:asdf email:ram123@megam.io' -d '{"vnets":[{"name":"pub-ipv4","network_addr":"192.168.0.1","network_mask":"255.255.255.0","bridge":"one","dns":"8.8.8.8 8.8.4.4","gateway":"192.168.0.0","addrs": [{"type":"ipv4","size":"2","ip":"192.168.0.2"},{"type":"ipv4","size":"5","ip":"192.168.1.7"}]},{"name":"pri-ipv4","network_addr":"127.0.0.1","network_mask":"255.255.255.0","bridge":"one","dns":"8.8.8.8 8.8.4.4","gateway":"192.168.0.0","addrs": [{"type":"ipv4","size":"2","ip":"192.168.0.2"},{"type":"ipv4","size":"5","ip":"192.168.1.7"}]}]}' -X POST http://192.168.0.108:9005/networks/content
+
+curl -i -H 'Authorization:Basic api_key:asdf email:ram123@megam.io' -X GET http://192.168.0.108:9005/networks/pri-ipv4
+
+curl -i -H 'Authorization:Basic api_key:asdf email:ram123@megam.io' -X GET http://192.168.0.108:9005/networks
+
+
+
+func test(rw http.ResponseWriter, req *http.Request) {
+    decoder := json.NewDecoder(req.Body)
+    var t test_struct   
+    err := decoder.Decode(&t)
+    if err != nil {
+        panic()
+    }
+    log.Println(t.Test)
+}
+
+
+ {"hostsinfo":[{"ip":"192.168.0.2","password":"megam","username":"megam","cpu":"8","os": "ubuntu 15.04","hostname":"megamadhi","disk":[{"disk":"sda","type":"","point":"","size":"1024"},{"disk":"sda1","type":"","point":"/","size":"1024"},{"disk":"sdb1","type":"","point":"/var","size":"1024"}],"status":"success","statusmsg":"successfully fetch"},{"ip":"192.168.0.101","password":"megam","username":"megdc","cpu":"8","os": "ubuntu 15.04","hostname":"megamadhi","disk":[{"disk":"sda","type":"","point":"","size":"1024"},{"disk":"sda1","type":"","point":"/","size":"1024"},{"disk":"sdb1","type":"","point":"/var","size":"1024"}],"status":"success","statusmsg":"successfully fetch"}]}
+ 
+ 
+curl -i -H 'Authorization:Basic api_key:asdf email:ram123@megam.io' -d '{"host":"192.168.0.101","username":"alrin","password":"speed"}' -X GET http://192.168.0.101:9005/hosts
+ 
+ 
+ 
+curl -i -H 'Authorization:Basic api_key:fcfedb1bbbd80f9ef952aa6669d0ad2fd8e7702f email:vijaykanthm28@megam.io' -d '{"ipaddress":"192.168.0.100","username":"vijay","password":"speed"}' -X GET http://192.168.0.100:9005/hostinfos
+ 
+ email: grggreg
+> api_key: 2fa30dda1ae21381c0eeb96e52e51d9238898b30
+ 
+curl -i -H 'Authorization:Basic api_key:asdf email:ram123@megam.io' -X GET http://192.168.0.101:9005/hosts/192.168.0.2
+
+curl -d '{"email":"123ram@megam.io"}' -X GET http://192.168.0.101:9005/accounts/validation
+
+
+curl -i -H 'Authorization:Basic api_key:asdf email:ram123@megam.io' -d '{"hosts": [{"ipaddress":"192.168.0.130","hostname":"megam","ram":"15490","cpu":"4","username":"megam", "password":"megam", "storages":"lvm","region":"chennai", "disks":[{"disk":"sda2", "type":"part", "point":"/", "size":"449.4G"}, {"disk":"sda", "type":"disk", "point":"", "size":"465.8G"}], "vnet":["pri-ipv4"]}]}' -X POST http://192.168.0.100:9005/hosts/install
+
+
+
+{"hosts": [{"ipaddress":"192.168.0.101", "username":"alrin", "password":"speed", "plan":"lvm", "isexist":"true","regions":"chennai", "disk":[{"disk":"sda2", "type":"part", "point":"/", "size":"449.4G"}, {"disk":"sda", "type":"disk", "point":"", "size":"465.8G"}], "vnet":"pri-ipv4"}]}
+
+
+curl -i -H 'Authorization:Basic api_key:asdf email:ram123@megam.io' -X GET http://192.168.0.116:9005/hosts
+
+
+curl -i -H 'Authorization:Basic api_key:asdf email:ram123@megam.io' -d '{"ipaddress":"192.168.0.101","username":"alrin","password":"speed","disks":["df -h","asdf"],"repos":"hello"}' -X POST http://192.168.0.101:9005/templates/scripts
+
+
+curl -i -H 'Authorization:Basic api_key:76195e8073ff4c9ac5f3dbf418259aa833408dd6 email:vijaykanth@megam.io' -d '{"hosts":[{"ipaddress":"192.168.0.130","username":"megam","password":"megam","storages":["ceph"],"computes":["one"],"region":"Chennai","disks":[{"disk":"vda","type":"disk","point":"","size":"40G"}],"vnets":["pub"],"cpu":"1","os":"Ubuntu 14.04.4 LTS","ram":"993","hostname":"node1"}],"format":"json","controller":"hosts","action":"create","email":"vijaykanth@megam.io","api_key":"76195e8073ff4c9ac5f3dbf418259aa833408dd6","host":"http://192.168.0.100:9005"}' -X POST http://192.168.0.100:9005/hosts/install
+
+
+
+curl -i -H 'Authorization:Basic api_key:asdf email:ram123@megam.io' -d '{"hosts": [{"ipaddress":"192.168.0.126","hostname":"ceph-test","ram":"993","cpu":"1","username":"root", "password":"", "storage":"ceph","region":"chennai", "disks":[{"disk":"sdc","type":"disk","point":"","size":"40G"}], "vnets":["pri-ipv4"]}]}' -X POST http://192.168.0.101:9005/hosts/install
+
+
+
+
+curl -i -H 'Authorization:Basic api_key:asdf email:ram123@megam.io' -d '{"masters":[{"region":"chennai","ipaddress":"192.168.0.2","username":"megdc","password":"howdareyou","status":"created","vertice":"nilavu gateway engine","one":"opennebula"}]}' -X POST http://192.168.0.101:9005/masters/content
+
+curl -i -H 'Authorization:Basic api_key:asdf email:aa@gmail.com' -X GET http://192.168.0.116:9005/masters
+
+curl -i -H 'Authorization:Basic api_key:asdf email:ram123@megam.io' -X GET http://192.168.0.101:9005/masters/192.168.0.2
+
+curl -i -H 'Authorization:Basic api_key:asdf email:ram123@megam.io' -X GET http://192.168.0.100:9005/masters/type/ceph
+
+curl -i -H 'Authorization:Basic api_key:asdf email:ram123@megam.io' -X POST http://192.168.0.101:9005/masters/install
+
+
+
+curl -i -H 'Authorization:Basic api_key:asdf email:ram123@megam.io' -X POST http://192.168.0.101:9005/masters/connect/{region}
+
+insert into masters(id,account_id,regions,ipaddress,username,password,created_at,inputs,outputs,status) values('cd948c82-57a2-43b9-bcbd-82b715ffbaa5','aa@gmail.com',['chennai'],'192.168.0.125','megam','megam','2016-10-20 10:25:24:00IST', ['{"key":"one","value":"true"}','{"key":"vertice","value":""}','{"key":"distro","value":"Ubuntu 14.04"}','{"key":"hostname","value":"master-1"}'],['{"key":"one_master","value":"installed"}'],'running');
+
+insert into components(id,account_id,region,master_id,type,hosts,status) values('82b715ffbaa5-57a2-43b9-bcbd-cd948c82','aa@gmail.com','chennai','cd948c82-57a2-43b9-bcbd-82b715ffbaa5','ceph',['192.168.0.124','192.168.0.125'],'success');
+
+{"masters":[{"ipaddress":"192.168.0.125","username":"megam","password":"megam","inputs":['{"key":"one","value":"true"}','{"key":"vertice","value":"true"}','{"key":"distro","value":"Ubuntu 14.04"}','{"key":"hostname","value":"master-1"}'],['{"key":"one_master","value":"installed"}']}]}
+
+insert into hosts(account_id,ipaddress, id,compute,cpu,created_at, hostname ,outputs, password, ram,region ,state ,status ,storage,username , vnets) values ('aa@gmail.com', '94.23.19.228','73bd60ee-5133-42aa-9328-f5a37fb39ca1','one','4','2016-10-21 21:51:01.102267385 +0000 UTC', 'kvm.cloudizz.com',['{"key":"ceph_master","value":"ceph-deploy ceph-deploy ceph-common ceph-mds ceph"}', '{"key":"one_node","value":"opennebula-node bridge-utils build-essential qemu-utils libvirt"}'], 'vertice', '128940','Amsterdam', 'lanching', 'lanching',  'ceph', 'vertice',['pub-ipv4']) ;
+
+
+insert into networks(account_id ,name ,addr_range , bridge, dns , gateway ,id,network_mask , subnet) values ( 'mvijaykanth@megamio','pub-ipv4', ['{"type":"ipv4","size":"2","ip":"192.168.0.140"}'],'one', '8.8.8.8','192.168.0.1', '663cf9e7-d9f0-4fce-8e11-aac687dd4a5e' , '255.255.255.0', '192.168.0.0');
+
+curl -i -H 'Authorization:Basic api_key:hi3660156c58cb7 email:mvijaykanth@megamio' -d '{"regions":[{"name":"chennai","cpu_cost_per_hour":"0.1","ram_cost_per_hour":"0.1","storage_cost_per_hour":"0.1","max_cpu":"4","currency":"inr","flavors":[{"key":"s1.micro","value":"2GB"}],"flag":"au"}]}' -X POST http://192.168.0.100:9005/masters/content
+
+
+
+curl -i -H 'Authorization:Basic api_key:fcbd020e18edd8a8d3f93d81c0e3660156c58cb7 email:aa@gmail.com' -X GET http://192.168.0.100:9005/masters/type/ceph
+
+
+{"ipaddress":"192.168.0.123", "username":"megam", "password":"megam",
+"inputs":[ "{\"key\":\"one\",\"value\":\"true\"}","{\"key\":\"vertice\",\"value\":\"\"}", "{\"key\":\"distro\",\"value":\"Ubuntu 14.04\"}"]}
+
+
+curl -i -H 'Authorization:Basic api_key:hi3660156c58cb7 email:mvijaykanth@megamio' -d '{"ipaddress":"1.1.1.1","username":"ra@g.com","password":"123456789","inputs":["{\"key\":\"vertice\",\"value\":\"true\"}","{\"key\":\"one\",\"value\":\"true\"}","{\"key\":\"distro\",\"value\":\"Ubuntu 14.04\"}"],"controller":"master","action":"install","email":"qq@g.com","api_key":"dd91d01daa65bae307ec15e9374d66096caa1e67","host":"http://192.168.0.100:9005"}' -X POST http://192.168.0.100:9005/masters/content
+
+
+{"ipaddress":"192.168.0.130","username":"megam","password":"megam","inputs":['{"key":"vertice","value":"true"}','{"key":"one","value":"true"}","{\"key\":\"distro\",\"value\":\"Ubuntu 14.04\"}"],"controller":"master","action":"install","email":"hello@megam.io","api_key":"e51d1a437f7a782f651fa8aa9111a6663a211629","host":"http://192.168.0.100:9005"}
+
+{"ipaddress":"192.168.0.130","username":"megam","password":"megam","inputs":["{\"key\":\"vertice\",\"value\":\"true\"}","{\"key\":\"one\",\"value\":\"true\"}","{\"key\":\"distro\",\"value\":\"Ubuntu 14.04\"}"],"controller":"master","action":"install","email":"hello@megam.io","api_key":"e51d1a437f7a782f651fa8aa9111a6663a211629","host":"http://192.168.0.100:9005"}
+
+
+curl -i -H 'Authorization:Basic api_key:hi3660156c58cb7 email:mvijaykanth@megamio' -X POST http://localhost:9005/masters/install
+
+
+curl -i -H 'Authorization:Basic api_key:5948e63ae97bf58be7596adb81c530188c1858eb email:mvijaykanth@megamio' -X GET http://192.168.0.100:9005/events
+
+curl -i -H 'Authorization:Basic api_key:5948e63ae97bf58be7596adb81c530188c1858eb email:mvijaykanth@megam.io' -d '{"hosts":["192.168.0.123","192.168.0.128"],"type":"ceph","controller":"ceph","action":"connect","email":"mvijaykanth@megam.io","api_key":"5948e63ae97bf58be7596adb81c530188c1858eb","host":"http://192.168.0.100:9005"}' -X POST http://192.168.0.100:9005/masters/connect/32432006-589c-4bdd-90bb-84f7c5b006a8
+
+
+
+{"hosts":[{"ipaddress":"192.168.0.130","username":"megam","password":"megam","storages":["ceph"],"computes":["one"],"region":"Chennai","disks":[{"disk":"vda","type":"disk","point":"","size":"40G"}],"vnets":["pub"],"cpu":"1","os":"Ubuntu 14.04.4 LTS","ram":"993","hostname":"node1"}],"format":"json","controller":"hosts","action":"create","email":"vijaykanth@megam.io","api_key":"76195e8073ff4c9ac5f3dbf418259aa833408dd6","host":"http://192.168.0.100:9005"}
+
+
+
+
+
+curl -i -H 'Authorization:Basic api_key:baf3538f8986aaf4e5f2f4d3387e786172e5c977 email:megam@megam.ioo' -d '{"hosts":[{"ipaddress":"192.168.0.127","username":"megam","password":"megam","storages":["ceph"],"computes":["one"],"region":"Chennai","disks":[{"disk":"vda","type":"disk","point":"","size":"40G"}],"vnets":["pub"],"cpu":"1","os":"Ubuntu 14.04.4 LTS","ram":"1896","hostname":"node1"}],"format":"json","controller":"hosts","action":"create","email":"vijaykanth@megam.io","api_key":"76195e8073ff4c9ac5f3dbf418259aa833408dd6","host":"http://192.168.0.100:9005"}' -X POST http://192.168.0.100:9005/hosts/install
+
+
+
+curl -i -H 'Authorization:Basic api_key:fcfedb1bbbd80f9ef952aa6669d0ad2fd8e7702f email:vijaykanthm28@megam.io' -d '{"hosts":[{"ipaddress":"192.168.0.126","username":"megam","password":"megam","storages":["ceph"],"computes":["one"],"region":"Chennai","disks":[{"disk":"vda","type":"disk","point":"","size":"40G"}],"vnets":["pub"],"cpu":"1","os":"Ubuntu 14.04.4 LTS","ram":"1896","hostname":"node1"}],"format":"json","controller":"hosts","action":"create","email":"vijaykanth@megam.io","api_key":"76195e8073ff4c9ac5f3dbf418259aa833408dd6","host":"http://192.168.0.100:9005"}' -X POST http://192.168.0.100:9005/hosts/install
+
+curl -d '{"first_name":"megam","last_name":"welcome", "phone":"9876543210", "email":"sriram@megam.io","api_key":"yse8wdmwckm38ns783nsd74jsdhmncxl2", "password":"xEMdeklimdsio#83m/zd%3kjlvd", "authority":"megam", "password_reset_key":"qwerty", "password_reset_sent_at":"poiuyt" }' -X POST http://192.168.0.100:9005/accounts/content
+
+
+          {"first_name":"megam","last_name":"welcome", "phone":"9876543210", "email":"sriram@megam.io", "api_key":"yse8wdmwckm38ns783nsd74jsdhmncxl2", "password":"xEMdeklimdsio#83m/zd%3kjlvd", "authority":"megam",       "password_reset_key":"qwerty", "password_reset_sent_at":"poiuyt" }
+
+
+curl -d '{"email":"sriram@megam.io","password":"xEMdeklimdsio#83m/zd%3kjlvd"}' -X POST http://192.168.0.100:9005/login
+
+curl -d '{"email":"sriram@megam.io","password":"xEMdeklimdsio#83m/zd%3kjlvd"}' -X POST http://52.183.25.155:9000/login
+bundle exec passenger start -p 9001 --max-pool-size 8
+
+404 
+401

@@ -1,0 +1,318 @@
+    email               -  order_id - quota_id
+
+chungkingsing@gmail.com     - 266 - cloud-s-01
+informsrivijay@gmail.com    - 208 - cloud-s-01
+informsrivijay@gmail.com    - 209 - cloud-s-01
+saddiq@flamehosting.net     - 260 - cloud-s-01
+cewodulof@yahoo.com         - 255 - cloud-s-01
+admin@hostonorion.com       - 280 - cloud-s-01 
+iccforyouth@yahoo.com       - 224 - cloud-s-01 
+rajesh@megam.io             - 173 - cloud-s-01 
+marcus.chiang@raid1.org     - 150 - cloud-s-01 
+blogthisite@gmail.com       - 190 - cloud-s-01 
+patrick@fusioncloud.co      - 243 - cloud-s-01 
+admin@nodelogics.com        - 262 - cloud-s-01 
+sagnik@blazingservers.net   - 244 - cloud-s-01 
+entrailz@googlemail.com     - 261 - cloud-s-01
+sp_136@hotmail.com          - 284 - cloud-s-01
+jaws171@hotmail.com         - 271 - cloud-s-01 
+thechiragaggarwal@gmail.com - 210 - cloud-s-01
+denzeck@gmail.com           - 267 - cloud-m-03
+denzeck@gmail.com           - 268 - cloud-m-03
+denzeck@gmail.com           - 166 - cloud-s-01
+denzeck@gmail.com           - 167 - cloud-s-01 
+ranjithar@megam.io          - 238 - cloud-s-01 
+jmannbbk@gmail.com	    - 165 - cloud-s-01 
+s.claeys@radwebhosting.com  - 158 - cloud-s-01 
+maksmtdjob@gmail.com        - 275 - cloud-s-01 
+nkishore@megam.io           - 170 - cloud-s-01 
+admin@piohost.co.uk         - 184 - cloud-s-02
+alex@dagroup.bg             - 200 - cloud-s-01 
+pbgben@gmail.com            - 186 - cloud-s-01 
+steventhaiusa@yahoo.com     - 263 - cloud-s-01
+apoclypse@gmail.com         - 219 - cloud-s-01
+apoclypse@gmail.com         - 220 - cloud-s-01
+rajthilak@megam.io          - 172 - cloud-s-01
+mike.hallmen@web.de         - 196 - cloud-s-01
+calaurent@mail.com	    - 272 - cloud-s-01
+1all3n@gmail.com            - 214 - cloud-s-01
+logosysindia@gmail.com      - 276 - cloud-s-01
+ola.abdul@mail.ru           - 197 - cloud-s-02
+bobrovichs60@gmail.com      - 273 - cloud-s-01
+bobrovichs60@gmail.com      - 252 - cloud-s-01
+admin@surihost.xyz          - 217 - cloud-s-01
+email@jacyhung.com          - 278 - cloud-s-01
+rajeshr@megam.io            - 164 - cloud-s-01
+zac@packet.net              - 254 - cloud-s-01
+
+
+
+informsrivijay@gmail.com    - 208 - cloud-s-01 2017-02-21 16:30:58.000000+0000 | QUO6537711291199675621
+informsrivijay@gmail.com    - 209 - cloud-s-01 2017-02-21 16:34:48.000000+0000 | QUO5340340279077892478
+
+denzeck@gmail.com           - 268 - cloud-m-03  2017-02-26 19:09:22.000000+0000 | QUO8443416095500046508
+denzeck@gmail.com           - 267 - cloud-m-03  2017-02-26 10:19:34.000000+0000 | QUO4880113850521583137
+denzeck@gmail.com           - 166 - cloud-s-01  2017-02-17 00:21:49.000000+0000 | QUO5250055527485344895
+denzeck@gmail.com           - 167 - cloud-s-01  2017-02-17 00:21:48.000000+0000 | QUO5737051432284049884
+
+
+apoclypse@gmail.com         - 219 - cloud-s-01 2017-02-22 17:15:37.000000+0000 | QUO7672942184734308699
+apoclypse@gmail.com         - 220 - cloud-s-01 2017-02-22 17:15:38.000000+0000 | QUO5646637097959199896
+
+
+bobrovichs60@gmail.com      - 273 - cloud-s-01  2017-02-27 09:42:25.000000+0000 | QUO6892647544653587018
+bobrovichs60@gmail.com      - 252 - cloud-s-01  2017-02-24 20:02:27.000000+0000 | QUO7082472355020869597
+
+
+
+2 Records are not in the whmcs.
+
+ gg@ss.co | 2017-02-06 05:51:39.000000+0000 | QUO7043364649036284356 |                        |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |       null |   null | 2017-02-06 05:51:39.000000+0000
+        
+
+            gg@ss.co | 2017-02-06 05:58:48.000000+0000 | QUO5952217753200070768 |                        |  ['{"key":"RAM","value":"2 GB"}', '{"key":"CPU","value":"2 Core"}', '{"key":"DISK","value":"20 GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"4 TB"}'] |   null | Megam::Quotas | cloud-s-02 |       null |   null | 2017-02-06 05:58:48.000000+0000
+
+
+
+
+     chungkingsing@gmail.com | 2017-02-26 08:08:52.000000+0000 | QUO5688150107851859763 |                        |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM |   paid | 2017-02-26 08:08:52.000000+0000
+   
+
+ informsrivijay@gmail.com | 2017-02-21 16:30:58.000000+0000 | QUO6537711291199675621 |                        |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM |   paid | 2017-02-21 16:45:16.000000+0000
+   
+
+ informsrivijay@gmail.com | 2017-02-21 16:34:48.000000+0000 | QUO5340340279077892478 |                        |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM |   paid | 2017-02-21 16:34:48.000000+0000
+ 
+    saddiq@flamehosting.net | 2017-02-25 22:23:44.000000+0000 | QUO6362024844613811440 | ASM5396619451969874303 |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM |   paid | 2017-02-28 15:13:57.000000+0000
+
+         cewodulof@yahoo.com | 2017-02-25 07:31:22.000000+0000 | QUO7040186006217225152 | ASM8343802789068001331 |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM |   paid | 2017-02-25 07:34:15.000000+0000
+
+       admin@hostonorion.com | 2017-03-02 15:56:28.000000+0000 | QUO7937787128931987551 |                        |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM |   paid | 2017-03-03 13:42:24.000000+0000
+   
+    iccforyouth@yahoo.com | 2017-02-23 10:01:00.000000+0000 | QUO8965267464819432330 |                        |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM |   paid | 2017-02-23 10:01:00.000000+0000
+   
+
+          rajesh@megam.io | 2017-02-17 15:15:06.000000+0000 | QUO6639739197199477705 |                        |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM |   paid | 2017-02-17 15:15:06.000000+0000
+   
+
+  marcus.chiang@raid1.org | 2017-02-01 07:17:04.000000+0000 | QUO5506321078806930247 | ASM8957205260377935636 |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |       null |   null | 2017-02-01 07:27:55.000000+0000
+    
+
+   blogthisite@gmail.com | 2017-02-21 02:31:41.000000+0000 | QUO7796268007025937835 |                        |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM |   paid | 2017-02-21 02:31:41.000000+0000
+    
+
+  patrick@fusioncloud.co | 2017-02-23 15:23:22.000000+0000 | QUO5829126438064426694 |                        |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM |   paid | 2017-02-23 15:26:11.000000+0000
+    
+    admin@nodelogics.com | 2017-02-25 23:23:57.000000+0000 | QUO9184510686931101828 | ASM9175257048019783156 |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM |   paid | 2017-02-25 23:27:55.000000+0000
+
+   sagnik@blazingservers.net | 2017-02-23 15:31:15.000000+0000 | QUO8540944687509170325 | ASM5475578918507339848 |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM |   paid | 2017-02-23 15:47:17.000000+0000
+
+
+
+    entrailz@googlemail.com | 2017-02-25 23:13:47.000000+0000 | QUO4723327246335156434 | ASM6040791563453200128 |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM |   paid | 2017-02-26 11:37:47.000000+0000
+  
+
+        sp_136@hotmail.com | 2017-03-08 12:43:36.000000+0000 | QUO5259015999332040085 |                        |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM |   paid | 2017-03-08 12:43:36.000000+0000
+   
+
+      jaws171@hotmail.com | 2017-02-27 07:40:39.000000+0000 | QUO5163181246899212006 | ASM4770703160140759286 |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM |   paid | 2017-02-27 07:41:54.000000+0000
+ 
+
+thechiragaggarwal@gmail.com | 2017-02-21 20:04:30.000000+0000 | QUO7508782696280955200 |                        |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM |   paid | 2017-02-21 20:04:30.000000+0000
+ 
+
+          denzeck@gmail.com | 2017-02-17 00:21:48.000000+0000 | QUO5737051432284049884 |                        |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM | active | 2017-03-10 21:12:26.000000+0000
+  
+
+         denzeck@gmail.com | 2017-02-17 00:21:49.000000+0000 | QUO5250055527485344895 |                        |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM | active | 2017-02-17 00:21:49.000000+0000
+      
+
+     denzeck@gmail.com | 2017-02-26 10:19:34.000000+0000 | QUO4880113850521583137 |                        | ['{"key":"RAM","value":"4 GB"}', '{"key":"CPU","value":"4 Core"}', '{"key":"DISK","value":"40 GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"20 TB"}'] |   null | Megam::Quotas | cloud-m-03 |         VM |   paid | 2017-02-26 10:19:34.000000+0000
+  
+
+         denzeck@gmail.com | 2017-02-26 19:09:22.000000+0000 | QUO8443416095500046508 |                        | ['{"key":"RAM","value":"4 GB"}', '{"key":"CPU","value":"4 Core"}', '{"key":"DISK","value":"40 GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"20 TB"}'] |   null | Megam::Quotas | cloud-m-03 |         VM |   paid | 2017-02-26 19:09:22.000000+0000
+     
+
+ ranjithar@megam.io | 2017-02-23 15:12:41.000000+0000 | QUO7199600194677919989 |                        |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM |   paid | 2017-02-23 15:31:02.000000+0000
+    
+
+      jmannbbk@gmail.com | 2017-02-15 14:45:27.000000+0000 | QUO4757059173710096577 | ASM7069111941869477928 |                                                                                                                                                                             null |   null | Megam::Quotas | cloud-s-01 |         VM |        | 2017-02-16 15:59:26.000000+0000
+ 
+
+ s.claeys@radwebhosting.com | 2017-02-04 23:43:41.000000+0000 | QUO4635944087057157343 |                        |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |       null |   null | 2017-02-04 23:43:41.000000+0000
+    
+
+    maksmtdjob@gmail.com | 2017-02-27 12:46:07.000000+0000 | QUO8986569234400752626 | ASM7073073145631675022 |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM |   paid | 2017-02-27 15:47:38.000000+0000
+   
+
+        nkishore@megam.io | 2017-02-16 11:56:41.000000+0000 | QUO8191244857465814603 | ASM6175303264964690317 |                                                                                                                                                                             null |   null | Megam::Quotas | cloud-s-01 |         VM |        | 2017-02-16 11:58:44.000000+0000
+       
+
+  admin@piohost.co.uk | 2017-02-20 23:35:27.000000+0000 | QUO9147594036555236595 |                        |  ['{"key":"RAM","value":"2 GB"}', '{"key":"CPU","value":"2 Core"}', '{"key":"DISK","value":"20 GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"4 TB"}'] |   null | Megam::Quotas | cloud-s-02 |         VM |   paid | 2017-02-20 23:54:44.000000+0000
+     
+
+        alex@dagroup.bg | 2017-02-21 11:25:03.000000+0000 | QUO4647630156044562904 | ASM8042100463685886393 |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM |   paid | 2017-02-21 11:32:06.000000+0000
+     
+
+    pbgben@gmail.com | 2017-02-17 00:22:08.000000+0000 | QUO7412788853497642493 | ASM6582203996306703546 |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM | active | 2017-02-20 23:37:00.000000+0000
+   
+
+
+  steventhaiusa@yahoo.com | 2017-02-26 04:12:18.000000+0000 | QUO9179361192249210236 |                        |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM |   paid | 2017-02-26 04:12:18.000000+0000
+    
+
+     apoclypse@gmail.com | 2017-02-22 17:15:37.000000+0000 | QUO7672942184734308699 |                        |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM |   paid | 2017-02-22 17:15:37.000000+0000
+   
+
+      apoclypse@gmail.com | 2017-02-22 17:15:38.000000+0000 | QUO5646637097959199896 |                        |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM |   paid | 2017-02-22 17:15:38.000000+0000
+
+
+rajthilak@megam.io | 2017-02-17 14:40:34.000000+0000 | QUO6760392793598527882 |                        |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM |   paid | 2017-02-23 04:43:14.000000+0000
+    
+
+     mike.hallmen@web.de | 2017-02-21 08:01:18.000000+0000 | QUO6498950099921358035 | ASM8087536001697200185 |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM |   paid | 2017-02-21 11:32:43.000000+0000
+   
+
+
+       calaurent@mail.com | 2017-02-27 09:22:08.000000+0000 | QUO5476066708028972873 | ASM4914231233265220891 |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM |   paid | 2017-02-27 09:30:12.000000+0000
+   
+
+         1all3n@gmail.com | 2017-02-22 17:15:22.000000+0000 | QUO5132014528991876953 |                        |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM |   paid | 2017-02-22 17:15:22.000000+0000
+    
+
+  logosysindia@gmail.com | 2017-02-27 13:09:19.000000+0000 | QUO6108117311163692197 |                        |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM |   paid | 2017-02-27 13:10:50.000000+0000
+     
+
+      ola.abdul@mail.ru | 2017-02-21 11:24:04.000000+0000 | QUO8563168493699092112 |                        |  ['{"key":"RAM","value":"2 GB"}', '{"key":"CPU","value":"2 Core"}', '{"key":"DISK","value":"20 GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"4 TB"}'] |   null | Megam::Quotas | cloud-s-02 |         VM |   paid | 2017-02-21 11:24:04.000000+0000
+   
+
+   bobrovichs60@gmail.com | 2017-02-24 20:02:27.000000+0000 | QUO7082472355020869597 | ASM4703887901191759658 |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM |   paid | 2017-02-27 09:43:21.000000+0000
+  
+
+
+    bobrovichs60@gmail.com | 2017-02-27 09:42:25.000000+0000 | QUO6892647544653587018 | ASM7298156216237365496 |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM |   paid | 2017-03-01 06:42:52.000000+0000
+  
+admin@surihost.xyz | 2017-02-22 17:15:00.000000+0000 | QUO5802290403207522223 |                        |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM |   paid | 2017-02-22 17:15:00.000000+0000
+    
+
+      email@jacyhung.com | 2017-02-27 23:41:03.000000+0000 | QUO4914558670490426569 |                        |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM |   paid | 2017-02-27 23:46:09.000000+0000
+     
+
+       rajeshr@megam.io | 2017-02-15 13:02:03.000000+0000 | QUO5959298452978554521 |                        |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM | active | 2017-02-15 13:02:03.000000+0000
+     
+
+         zac@packet.net | 2017-02-25 03:47:25.000000+0000 | QUO4613451422465896553 |                        |   ['{"key":"RAM","value":"1 GB"}', '{"key":"CPU","value":"1 Core"}', '{"key":"DISK","value":"10GB"}', '{"key":"DISK_TYPE","value":"HDD"}', '{"key":"BANDWIDTH","value":"2 TB"}'] |   null | Megam::Quotas | cloud-s-01 |         VM |   paid | 2017-02-25 03:47:25.000000+0000
+
+
+
+update balances set biller_credit='0' where account_id='simon@kirbyfamily.com.au';
+update balances set biller_credit='20.0' where account_id='ventas@dedicados.com.mx';
+update balances set biller_credit='0' where account_id='chungkingsing@gmail.com';
+update balances set biller_credit='0' where account_id='new@acc.com';
+update balances set biller_credit='18.413140' where account_id='vynt.kenshiro@gmail.com';
+update balances set biller_credit='0' where account_id='yesno@hotmail.com';
+update balances set biller_credit='0' where account_id='nospam@zelon.com';
+update balances set biller_credit='0' where account_id='WonderMcGee@mailinator.com';
+update balances set biller_credit='9.779970' where account_id='deniskaaaden@gmail.com';
+update balances set biller_credit='0' where account_id='vasily@outlook.com.au';
+update balances set biller_credit='20.000000' where account_id='informsrivijay@gmail.com';
+update balances set biller_credit='0.000000' where account_id='saddiq@flamehosting.net';
+update balances set biller_credit='20.000000' where account_id='cewodulof@yahoo.com';
+update balances set biller_credit='10.0' where account_id='perryoo11@gmail.com';
+update balances set biller_credit='0.000000' where account_id='admin@hostonorion.com';
+update balances set biller_credit='0' where account_id='anhtai@fvnup.com';
+update balances set biller_credit='0' where account_id='aa@gg.co';
+update balances set biller_credit='0' where account_id='iccforyouth@yahoo.com';
+update balances set biller_credit='10.0' where account_id='rajesh@megam.io';
+update balances set biller_credit='0' where account_id='jrsmith@gmail.com';
+update balances set biller_credit='0' where account_id='marcus.chiang@raid1.org';
+update balances set biller_credit='0' where account_id='blogthisite@gmail.com';
+update balances set biller_credit='0.0' where account_id='rajsona@gmail.com';
+update balances set biller_credit='0.000000' where account_id='patrick@fusioncloud.co';
+update balances set biller_credit='0.000000' where account_id='admin@nodelogics.com';
+update balances set biller_credit='10.0' where account_id='einmicroz@gmail.com';
+update balances set biller_credit='0.000000' where account_id='sagnik@blazingservers.net';
+update balances set biller_credit='10.0' where account_id='karatekidmonkey@outlook.com';
+update balances set biller_credit='0' where account_id='me@gagah.me';
+update balances set biller_credit='0.000000' where account_id='entrailz@googlemail.com';
+update balances set biller_credit='30.0' where account_id='sp_136@hotmail.com';
+update balances set biller_credit='499357.280686' where account_id='hello@virtengine.com';
+update balances set biller_credit='0' where account_id='new@secondtest.com';
+update balances set biller_credit='0.000000' where account_id='jaws171@hotmail.com';
+update balances set biller_credit='0' where account_id='pavilion.vps@gmail.com';
+update balances set biller_credit='0' where account_id='thechiragaggarwal@gmail.com';
+update balances set biller_credit='0' where account_id='ms@gawk.com';
+update balances set biller_credit='519.281789' where account_id='denzeck@gmail.com';
+update balances set biller_credit='0' where account_id='info@fbrandstetter.eu.org';
+update balances set biller_credit='27.460664' where account_id='cristi@whi.ro';
+update balances set biller_credit='0' where account_id='faisalfalah@gmail.com';
+update balances set biller_credit='0' where account_id='dd@ss.co';
+update balances set biller_credit='0.000000' where account_id='ranjithar@megam.io';
+update balances set biller_credit='0' where account_id='rathishvbr@megam.io';
+update balances set biller_credit='-145.044164' where account_id='jmannbbk@gmail.com';
+update balances set biller_credit='99.929965' where account_id='mvijaykanth@megam.io';
+update balances set biller_credit='8.333221' where account_id='s.claeys@radwebhosting.com';
+update balances set biller_credit='39.261564' where account_id='maksmtdjob@gmail.com';
+update balances set biller_credit='0' where account_id='nkishore@megam.io';
+update balances set biller_credit='20.0' where account_id='ja.tavara@gmail.com';
+update balances set biller_credit='10.0' where account_id='admin@piohost.co.uk';
+update balances set biller_credit='10.0' where account_id='klajdi@atomdeploy.com';
+update balances set biller_credit='0' where account_id='CaptainCop@mailinator.com';
+update balances set biller_credit='-1500.127072' where account_id='alex@dagroup.bg';
+update balances set biller_credit='0' where account_id='mgbhard@gmail.com';
+update balances set biller_credit='18.958079' where account_id='294168881@qq.com';
+update balances set biller_credit='20.0' where account_id='gg@ss.co';
+
+update balances set biller_credit='10.0' where account_id='compgeek28@dr.com';
+update balances set biller_credit='-5149.243132' where account_id='rorossf@gmail.com';
+update balances set biller_credit='19.778556' where account_id='luxmartinsmax@gmail.com';
+
+update balances set biller_credit='0' where account_id='pavilion.vps@outlook.com';
+update balances set biller_credit='994.998857' where account_id='pbgben@gmail.com';
+update balances set biller_credit='10.0' where account_id='rxww10@europe.com';
+
+update balances set biller_credit='49.912752' where account_id='monarhking@gmail.com';
+update balances set biller_credit='10.0' where account_id='daniel@dextronox.com';
+update balances set biller_credit='10.0' where account_id='admin@dawgy.pw';
+
+update balances set biller_credit='10.0' where account_id='junior@serversp.com';
+update balances set biller_credit='0' where account_id='steventhaiusa@yahoo.com';
+update balances set biller_credit='-1.151409' where account_id='info@megam.io';
+
+update balances set biller_credit='30.0' where account_id='apoclypse@gmail.com';
+
+update balances set biller_credit='6.593360' where account_id='rajthilak@megam.io';
+update balances set biller_credit='29.936401' where account_id='radeon8080@gmail.com';
+update balances set biller_credit='0.000000' where account_id='mike.hallmen@web.de';
+
+update balances set biller_credit='10.0' where account_id='cas@reuver.co';
+update balances set biller_credit='10.000000' where account_id='calaurent@mail.com';
+update balances set biller_credit='0' where account_id='1all3n@gmail.com';
+
+update balances set biller_credit='0' where account_id='contato@paulocarmino.com';
+update balances set biller_credit='0' where account_id='logosysindia@gmail.com';
+update balances set biller_credit='18.333767' where account_id='gubernatorst@gmail.com';
+
+update balances set biller_credit='0' where account_id='christoph.litschauer@logahaus.at';
+update balances set biller_credit='9.885943' where account_id='artnager@mail.com';
+update balances set biller_credit='10.0' where account_id='hi@youneeda.pw';
+
+update balances set biller_credit='29.333955' where account_id='jtbrown_11@hotmail.com';
+update balances set biller_credit='10.0' where account_id='ola.abdul@mail.ru';
+update balances set biller_credit='29.947974' where account_id='bobrovichs60@gmail.com';
+
+update balances set biller_credit='49838.317221' where account_id='sistemas@ticservicios.com.ar';
+update balances set biller_credit='-2468.547236' where account_id='rajeshr@virtengine.com';
+update balances set biller_credit='0' where account_id='admin@surihost.xyz';
+
+update balances set biller_credit='3.331442' where account_id='alex@subnetlabs.com';
+update balances set biller_credit='10.0' where account_id='email@jacyhung.com';
+update balances set biller_credit='924.994958' where account_id='rajeshr@megam.io';
+
+update balances set biller_credit='0' where account_id='apple@bees.com';
+update balances set biller_credit='0' where account_id='zac@packet.net';
+update balances set biller_credit='-106.676385' where account_id='lux@melted.me';
+
+
+
+

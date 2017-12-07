@@ -1,0 +1,141 @@
+root@virt-open:~# ifconfig
+docker0   Link encap:Ethernet  HWaddr 02:42:40:b4:c8:3b  
+          inet addr:172.17.0.1  Bcast:0.0.0.0  Mask:255.255.0.0
+          inet6 addr: fe80::42:40ff:feb4:c83b/64 Scope:Link
+          UP BROADCAST MULTICAST  MTU:1500  Metric:1
+          RX packets:1986 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:2013 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:461298 (461.2 KB)  TX bytes:188990 (188.9 KB)
+
+ens3      Link encap:Ethernet  HWaddr 02:00:b9:58:1d:ef  
+          inet addr:185.88.29.239  Bcast:185.88.29.255  Mask:255.255.255.224
+          inet6 addr: fe80::b9ff:fe58:1def/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:20940496 errors:0 dropped:1311 overruns:0 frame:0
+          TX packets:693073 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:2307178224 (2.3 GB)  TX bytes:622551134 (622.5 MB)
+
+lo        Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          inet6 addr: ::1/128 Scope:Host
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:963137 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:963137 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1 
+          RX bytes:383886898 (383.8 MB)  TX bytes:383886898 (383.8 MB)
+
+
+root@virt-open:~# docker network create --subnet 10.192.0.0/16 openshift
+44ef1fa68dca82a41c1a811a500908893375da18aeb3e00d67c7b29e9245eaca
+root@virt-open:~# docker network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+87eca366ea1d        bridge              bridge              local
+9725d77483e1        host                host                local
+8543de83c34b        none                null                local
+44ef1fa68dca        openshift           bridge              local
+root@virt-open:~# ifconfig
+br-44ef1fa68dca Link encap:Ethernet  HWaddr 02:42:94:c5:42:88  
+          inet addr:10.192.0.1  Bcast:0.0.0.0  Mask:255.255.0.0
+          UP BROADCAST MULTICAST  MTU:1500  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+
+docker0   Link encap:Ethernet  HWaddr 02:42:40:b4:c8:3b  
+          inet addr:172.17.0.1  Bcast:0.0.0.0  Mask:255.255.0.0
+          inet6 addr: fe80::42:40ff:feb4:c83b/64 Scope:Link
+          UP BROADCAST MULTICAST  MTU:1500  Metric:1
+          RX packets:1986 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:2013 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:461298 (461.2 KB)  TX bytes:188990 (188.9 KB)
+
+ens3      Link encap:Ethernet  HWaddr 02:00:b9:58:1d:ef  
+          inet addr:185.88.29.239  Bcast:185.88.29.255  Mask:255.255.255.224
+          inet6 addr: fe80::b9ff:fe58:1def/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:21116729 errors:0 dropped:1311 overruns:0 frame:0
+          TX packets:694863 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:2318186173 (2.3 GB)  TX bytes:622835168 (622.8 MB)
+
+lo        Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          inet6 addr: ::1/128 Scope:Host
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:963137 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:963137 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1 
+          RX bytes:383886898 (383.8 MB)  TX bytes:383886898 (383.8 MB)
+
+
+--cluster-cidr=10.10.255.0/24
+
+etcd \
+--listen-client-urls=http://127.0.0.1:2379 \
+--advertise-client-urls=http://127.0.0.1:2379 \
+--data-dir=/var/lib/etcd
+
+
+
+./kube-controller-manager \
+--service-account-private-key-file=openshift.local.config/master/serviceaccounts.private.key \
+--cluster-signing-key-file=openshift.local.config/master/ca.key \
+--address=127.0.0.1 \
+--use-service-account-credentials=true \
+--kubeconfig=/etc/kubernetes/controller-manager.conf \
+--root-ca-file=openshift.local.config/master/ca.crt \
+--cluster-signing-cert-file=openshift.local.config/master/ca.crt \
+--leader-elect=true \
+--insecure-experimental-approve-all-kubelet-csrs-for-group=system:bootstrappers \
+--controllers=*,bootstrapsigner,tokencleaner \
+--allocate-node-cidrs=true \
+--cluster-cidr=10.10.255.0/24
+
+
+./kube-apiserver \
+--requestheader-username-headers=X-Remote-User \
+--requestheader-group-headers=X-Remote-Group \
+--requestheader-extra-headers-prefix=X-Remote-Extra- \
+--service-cluster-ip-range=10.96.0.0/12 \
+    --admission-control=NamespaceLifecycle,LimitRanger,ServiceAccount,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds \
+--kubelet-client-key=openshift.local.config/master/master.kubelet-client.crt \
+--requestheader-client-ca-file=openshift.local.config/master/master.proxy-client.crt \
+--allow-privileged=true \
+--storage-backend=etcd3 \
+--kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname \
+--service-account-key-file=openshift.local.config/master/serviceaccounts.public.key \
+--client-ca-file=openshift.local.config/master/ca.crt \
+--tls-private-key-file=openshift.local.config/master/master.server.key \
+--secure-port=6443 \
+--requestheader-allowed-names=master.proxy-client \
+--kubelet-client-certificate=openshift.local.config/master/master.kubelet-client.crt \
+--experimental-bootstrap-token-auth=true \
+--authorization-mode=RBAC \
+--advertise-address=185.88.29.239 \
+--etcd-servers=http://127.0.0.1:2379 \
+--insecure-bind-address=0.0.0.0 \
+--tls-cert-file=openshift.local.config/master/master.server.crt \
+--experimental-bootstrap-token-auth=true \
+--authorization-mode=RBAC \
+--advertise-address=185.88.29.239 \
+--etcd-servers=http://127.0.0.1:2379 \
+--insecure-bind-address=0.0.0.0 \
+--insecure-port=8080 
+
+
+
+./kube-scheduler \
+--address=127.0.0.1 \
+--leader-elect=true \
+--kubeconfig=/etc/kubernetes/scheduler.conf
+
+/var/run/kubernetes/
+
+
+
+
+

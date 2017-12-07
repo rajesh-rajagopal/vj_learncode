@@ -1,0 +1,15 @@
+{
+ "kind": "ConfigMap",
+ "apiVersion": "v1",
+ "metadata": {
+   "name": "test",
+   "namespace": "default",
+   "selfLink": "/api/v1/namespaces/default/configmaps/test",
+   "uid": "b8364c4e-5d76-11e7-a800-2c600cb66703",
+   "resourceVersion": "137968",
+   "creationTimestamp": "2017-06-30T09:30:13Z"
+ },
+ "data": {
+   "CLUSTER_NAME": "onecluster"
+ }
+}

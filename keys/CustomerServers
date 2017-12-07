@@ -1,0 +1,79 @@
+
+Customer Servers 
+###########################################################################################################################################
+ Customers & Incharge   Servers & App Urls               		 Username &  Password  	            Packages                   
+###########################################################################################################################################
+Jonathan &Detio 	 52.183.25.155 -  https://get.virtengine.com    jonathan: VirtEngineUnleashed2016!   reprepo (package manager)  
+													                    		  
+			 104.210.91.250 - demo.virtengine               megam : VirtEngineUnleashed2016!     whmcs                      
+ 							                                                                                 													                    		  
+###########################################################################################################################################
+ Xavier -  		 ssh aesstore1@176.158.2.126 -p 9022             aesstore1:aes3109                                            
+                         xavier.alternative-energies.fr -p 9022                                                                        
+													                    		  
+			 ssh aesmaster@176.158.2.126 -p 8022 -           aesmaster:aes3109!    
+ 			 xavier.alternative-energies.fr -p 8022					                    		  
+													                    		  
+###########################################################################################################################################
+ Klajdi  - Atomdeploy    ssh root@146.0.247.2                            root : GmhNV9NMSN                  vertice packages, cassandra 
+									 oneadmin:yoinobEryak3	            opennebula 		  
+ 		    						         	                    		  
+		rathish							 				                    		  
+###########################################################################################################################################
+Astimp -Dedicat server   ssh gabriel@188.240.231.85                        burebistA31                     HA vertice packages,   	  
+			 ssh gabriel@188.240.231.84    		 				      cassandra, opennebula      
+                         ssh gabriel@188.240.231.86
+                         ssh gabriel@188.240.231.83
+ ssh oneadmin@188.240.231.12  - pwd:oneadmin
+ 			 188.240.231.85 & 188.240.231.84:9869           oneadmin:GhatpewfAut6                                          
+              Ranjitha 	cqlsh 188.240.231.84 -u vertadmin -p vertadmin				                
+					                    		  
+
+https://minio.dedicatserver.ro/minio/login 
+			6YSBQTQHF3HP52062XY5
+			4h5opVTnxqS5JJ4upiMbhqbgeRvBcCow/0qZPe7k
+http://188.240.231.85:8085
+			U27XH3PHIB85Q6R13BV5
+			hBpwfX/jqrlP1eID/mI6myPzmzhPf1YLwDl/7WSI
+
+###########################################################################################################################################
+bruce - QuadCloud      45.112.246.5 - ve1.quadcloud.com.au 	         brucem : Orpheous+-0687                           		  
+													                    		  
+		Rajesh				
+							                    		  
+###########################################################################################################################################
+Salvatore De Pascali	 213.4.127.109	        			 flexengine : $H767_Fs99!	                    		  
+  - FlexVPC Vinothini	
+					
+					                    		  
+###########################################################################################################################################
+Cheapy.SG(Marcus)     
+  213.32.30.57
+			Master    -  ssh -i ~/privatekey root@167.114.244.54        oneadmin:CepGerojFed0   vertice ,cassandra,opennebula
+			node2     -  ssh -i ~/privatekey root@151.80.110.23
+			compute   -  ssh -i ~/privatekey root@193.70.12.126
+			storage   -  ssh -i ~/privatekey root@193.70.12.127
+			failover  -  ssh -i ~/privatekey root@193.70.12.131
+                        node1     -  ssh -i ~/privatekey root@193.70.7.70
+
+###########################################################################################################################################
+
+Mehul Butt(Simha) - 
+				 ssh -i  ~/learncode/keys/simha_pkey root@88.99.204.132     Master(nilavu,vnc,gateway,vertice, OneMaster, casssandra)                                                          oneadmin:virtengine  
+
+			         ssh -i  ~/learncode/keys/simha_pkey root@88.99.204.134      OneNode
+
+
+###########################################################################################################################################
+
+ inspirededi.com                  198.98.54.12      oneadmin:claiQuoHirj2
+                                                    root:hb10z8#  
+                                  107.173.28.130    root:lk181z$
+
+
+###########################################################################################################################################
+
+
+
+
+

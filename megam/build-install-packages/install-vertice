@@ -1,0 +1,43 @@
+sudo apt-add-repository "deb [arch=amd64] https://get.megam.io/repo/1.5.1/ubuntu/16.04/stable xenial stable"
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 9B46B611
+
+sudo apt-get update
+
+sudo apt-get update -y
+sudo apt-get remove vertice -y
+sudo apt-get remove verticegateway -y
+sudo apt-get remove verticenilavu -y
+
+sudo apt-get purge vertice -y --allow-unauthenticated
+sudo apt-get purge verticegateway -y --allow-unauthenticated
+sudo apt-get purge verticenilavu -y --allow-unauthenticated
+
+sudo apt-get autoremove -y
+
+sudo apt-get update -y
+
+sudo apt-get install vertice -y --allow-unauthenticated
+sudo apt-get install verticegateway -y --allow-unauthenticated
+sudo apt-get install verticenilavu -y --allow-unauthenticated
+
+
+sudo cp /var/lib/backup/default  /etc/nginx/sites-available/default
+sudo cp -r /var/lib/backup/images/ /var/www/verticenilavu/public
+
+sudo cp /var/lib/backup/nilavu.conf /var/lib/megam/
+sudo cp /var/lib/backup/site_settings.yml /var/lib/megam/
+sudo cp /var/lib/backup/regions.yml /var/lib/megam/
+
+sudo sv stop nginx
+sudo sv start nginx
+sudo sv stop unicorn
+sudo sv start unicorn
+
+sudo cp /var/lib/backup/virtenginegateway/gateway.conf /var/lib/megam/verticegateway/
+
+sudo service verticegateway stop 
+sudo service verticegateway start
+sudo service vertice stop
+sudo service vertice start
+
+

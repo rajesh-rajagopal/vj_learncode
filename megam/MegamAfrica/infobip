@@ -1,0 +1,52 @@
+application id : AE8B4CFF8078118475FE6E85D8620AF8
+
+{
+    "messageId": "262C575F0C20096DC663F33BEC2F687E",
+    "applicationId": "AE8B4CFF8078118475FE6E85D8620AF8",
+    "pinPlaceholder": "<pin>",
+    "messageText": "Welcome to Megam! Your verification pin is <pin>",
+    "pinLength": 4,
+    "pinType": "NUMERIC",
+    "language": "en"
+}
+
+
+API KEY : a2dc4c7763a40d902ade9d270235253a-a1547e96-a65d-44c6-baf6-96fde71388af
+
+
+
+megamrajesh:team4megam   
+
+API KEY : 7c2881ca44f4a18b40fca46b261b7605-9c89d2a2-0d9d-4961-b312-d7e221d24f1f
+
+ACCOUNT KEY: 6105129D2A8CCC02ED56FF9BEF8A239E
+
+APPLICATION ID:
+{
+    "applicationId": "71EC8B24CE103F695A6BCE60E01E8624",
+    "name": "megamafrica",
+    "configuration": {
+        "pinTimeToLive": 900000,
+        "pinAttempts": 10,
+        "verificationAttempts": 1,
+        "verificationIntervalLength": 3000,
+        "initiationAttempts": 3,
+        "initiationIntervalLength": 86400000,
+        "overallInitiationAttempts": 10000,
+        "overallInitiationIntervalLength": 86400000,
+        "allowMultiplePinVerifications": true
+    },
+    "enabled": true,
+    "processId": "09A4286A518BA5251225A28FB1B584AC"
+}
+
+
+{
+    "messageId": "7312EE79E57A991CE282C0E39B1248D1",
+    "applicationId": "71EC8B24CE103F695A6BCE60E01E8624",
+    "pinPlaceholder": "<pin>",
+    "messageText": "Welcome to MegamAfrica Hosting your verification pin: <pin>",
+    "pinLength": 4,
+    "pinType": "NUMERIC",
+    "language": "en"
+}

@@ -1,0 +1,209 @@
+setup node 
+
+/opt/criproxy/bin/criproxy -v 3 -alsologtostderr -connect docker,virtlet:/run/virtlet.sockroot       
+
+
+ps -ef | grep kube
+
+684   668  0 06:20 ?        00:00:01 
+/usr/local/bin/kube-proxy --kubeconfig=/var/lib/kube-proxy/kubeconfig.conf --cluster-cidr=10.244.0.0/16 --cluster-cidr=172.17.0.1/16 --masquerade-all --conntrack-max=0 --conntrack-max-per-core=0
+
+
+root       845     1  1 06:20 ?        00:00:09 
+/k8s/hyperkube kubelet --kubeconfig=/etc/kubernetes/kubelet.conf --require-kubeconfig=true --feature-gates=DynamicKubeletConfig=true --pod-manifest-path=/etc/kubernetes/manifests --allow-privileged=true --network-plugin=cni --cni-conf-dir=/etc/cni/net.d --cni-bin-dir=/opt/cni/bin --cluster-dns=10.96.0.10 --cluster-domain=cluster.local --cgroups-per-qos=false --enforce-node-allocatable= --v=4
+
+https://github.com/containernetworking/cni
+
+tar -czf /opt/cni 
+/etc/cni/net.d# cat cni.conf 
+{
+    "name": "dindnet",
+    "type": "bridge",
+    "bridge": "dind0",
+    "ipam": {
+        "type": "host-local",
+        "subnet": "10.192.0.0/16",
+        "rangeStart": "10.192.2.1",
+        "rangeEnd": "10.192.2.254",
+        "gateway": "10.192.0.1",
+        "routes": [
+            { "dst": "0.0.0.0/0" }
+        ]
+    }
+}
+
+
+
+ps -ef | grep cri
+root       335   319  1 06:19 ?        00:00:22 /opt/criproxy/bin/criproxy -v 3 -alsologtostderr -connect docker,virtlet:/run/virtlet.sock
+root      2766  2062  0 06:39 ?        00:00:00 grep --color=auto cri
+
+tar -czf /opt/criproxy
+
+/etc/criproxy/kubelet.conf
+
+{"address":"0.0.0.0","allowPrivileged":true,"authentication":{"anonymous":{"enabled":true},"webhook":{"cacheTTL":"2m0s","enabled":false},"x509":{"clientCAFile":""}},"authorization":{"mode":"AlwaysAllow","webhook":{"cacheAuthorizedTTL":"5m0s","cacheUnauthorizedTTL":"30s"}},"babysitDaemons":false,"cAdvisorPort":4194,"certDirectory":"/var/run/kubernetes","cgroupDriver":"cgroupfs","cgroupRoot":"","cgroupsPerQOS":false,"cloudConfigFile":"","cloudProvider":"auto-detect","clusterDNS":["10.96.0.10"],"clusterDomain":"cluster.local","cniBinDir":"/opt/cni/bin","cniConfDir":"/etc/cni/net.d","containerRuntime":"docker","containerized":false,"contentType":"application/vnd.kubernetes.protobuf","cpuCFSQuota":true,"dockerEndpoint":"unix:///var/run/docker.sock","dockerExecHandlerName":"native","enableCRI":true,"enableContentionProfiling":false,"enableControllerAttachDetach":true,"enableCustomMetrics":false,"enableDebuggingHandlers":true,"enableServer":true,"enforceNodeAllocatable":[],"eventBurst":10,"eventRecordQPS":5,"evictionHard":"memory.available\u003c100Mi","evictionMaxPodGracePeriod":0,"evictionMinimumReclaim":"","evictionPressureTransitionPeriod":"5m0s","evictionSoft":"","evictionSoftGracePeriod":"","exitOnLockContention":false,"experimentalKernelMemcgNotification":false,"experimentalQOSReserved":{},"featureGates":"DynamicKubeletConfig=true","fileCheckFrequency":"20s","hairpinMode":"promiscuous-bridge","healthzBindAddress":"127.0.0.1","healthzPort":10248,"hostIPCSources":["*"],"hostNetworkSources":["*"],"hostPIDSources":["*"],"hostnameOverride":"","httpCheckFrequency":"20s","imageGCHighThresholdPercent":90,"imageGCLowThresholdPercent":80,"imageMinimumGCAge":"2m0s","imagePullProgressDeadline":"1m0s","iptablesDropBit":15,"iptablesMasqueradeBit":14,"kubeAPIBurst":10,"kubeAPIQPS":5,"kubeReserved":{},"kubeletCgroups":"","lockFilePath":"","lowDiskSpaceThresholdMB":256,"makeIPTablesUtilChains":true,"manifestURL":"","manifestURLHeader":"","masterServiceNamespace":"default","maxContainerCount":-1,"maxOpenFiles":1000000,"maxPerPodContainerCount":1,"maxPods":110,"minimumGCAge":"0s","networkPluginDir":"","networkPluginMTU":0,"networkPluginName":"cni","nodeIP":"","nodeLabels":{},"nodeStatusUpdateFrequency":"10s","nonMasqueradeCIDR":"10.0.0.0/8","oomScoreAdj":-999,"outOfDiskTransitionFrequency":"5m0s","podCIDR":"","podInfraContainerImage":"gcr.io/google_containers/pause-amd64:3.0","podManifestPath":"/etc/kubernetes/manifests","podsPerCore":0,"port":10250,"protectKernelDefaults":false,"readOnlyPort":10255,"registerNode":true,"registerSchedulable":true,"registerWithTaints":[],"registryBurst":10,"registryPullQPS":5,"remoteImageEndpoint":"","remoteRuntimeEndpoint":"","resolvConf":"/etc/resolv.conf","rktAPIEndpoint":"localhost:15441","rktPath":"","rktStage1Image":"","rootDirectory":"/var/lib/kubelet","runtimeCgroups":"","runtimeRequestTimeout":"2m0s","seccompProfileRoot":"/var/lib/kubelet/seccomp","serializeImagePulls":true,"streamingConnectionIdleTimeout":"4h0m0s","syncFrequency":"1m0s","systemCgroups":"","systemReserved":{},"tlsCertFile":"","tlsPrivateKeyFile":"","volumePluginDir":"/usr/libexec/kubernetes/kubelet-plugins/volume/exec/","volumeStatsAggPeriod":"1m0s"}
+
+root@kube-node-1:~# docker images
+mirantis/hypokube                                     final               30acb993c727        2 days ago          323.9 MB
+mirantis/virtlet                                      latest              6d17ad0e4b24        2 days ago          696.7 MB
+nginx                                                 latest              958a7ae9e569        5 days ago          109.4 MB
+mirantis/hypokube                                     base                aa6973c9c795        9 days ago          133 MB
+alpine                                                3.5                 75b63e430bd1        10 days ago         3.987 MB
+busybox                                               1.26.2              c75bebcdd211        2 weeks ago         1.106 MB
+gcr.io/google_containers/kubernetes-dashboard-amd64   v1.6.0              416701f962f2        11 weeks ago        108.6 MB
+gcr.io/google_containers/kube-discovery-amd64         1.0                 c5e0c9a457fc        8 months ago        134.2 MB
+gcr.io/google_containers/kubedns-amd64                1.7                 bec33bc01f03        9 months ago        55.06 MB
+gcr.io/google_containers/exechealthz-amd64            1.1                 c3a89c92ef5b        10 months ago       8.332 MB
+gcr.io/google_containers/kube-dnsmasq-amd64           1.3                 9a15e39d0db8        11 months ago       5.13 MB
+gcr.io/google_containers/pause-amd64                  3.0                 99e59f495ffa        13 months ago       746.9 kB
+gcr.io/google_containers/etcd-amd64                   2.2.5               72bd8a257d7a        13 months ago       30.45 MB
+
+
+
+
+0ff585dda29f  30acb993c727   "/usr/local/bin/kube-"   39 minutes ago      Up 39 minutes       k8s_kube-proxy_kube-proxy-8ptxb_kube-system_0d0d18dd-477b-11e7-9e0d-02420ac00002_1
+	
+docker exec -i -t 0ff585dda29f /bin/bash
+
+/usr/local/bin# ls -la
+kube-proxy -> /hyperkube
+
+root@kube-node-1:/var/lib/kube-proxy# ls
+kubeconfig.conf
+root@kube-node-1:/var/lib/kube-proxy# cat kubeconfig.conf 
+apiVersion: v1
+kind: Config
+clusters:
+- cluster:
+    certificate-authority: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+    server: https://10.192.0.2:6443
+  name: default
+contexts:
+- context:
+    cluster: default
+    namespace: default
+    user: default
+  name: default
+current-context: default
+users:
+- name: default
+  user:
+    tokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+
+
+
+
+cat /etc/systemd/system/kubelet.service 
+[Unit]
+Description=kubelet: The Kubernetes Node Agent
+Documentation=http://kubernetes.io/docs/
+
+[Service]
+Environment="KUBELET_KUBECONFIG_ARGS=--kubeconfig=/etc/kubernetes/kubelet.conf --require-kubeconfig=true"
+Environment="KUBELET_FEATURE_ARGS= --feature-gates=DynamicKubeletConfig=true"
+Environment="KUBELET_SYSTEM_PODS_ARGS=--pod-manifest-path=/etc/kubernetes/manifests --allow-privileged=true"
+Environment="KUBELET_NETWORK_ARGS=--network-plugin=cni --cni-conf-dir=/etc/cni/net.d --cni-bin-dir=/opt/cni/bin"
+Environment="KUBELET_DNS_ARGS=--cluster-dns=10.96.0.10 --cluster-domain=cluster.local"
+Environment="KUBELET_EXTRA_ARGS=--v=4"
+ExecStart=
+ExecStart=/k8s/hyperkube kubelet $KUBELET_KUBECONFIG_ARGS $KUBELET_FEATURE_ARGS $KUBELET_SYSTEM_PODS_ARGS $KUBELET_NETWORK_ARGS $KUBELET_DNS_ARGS $KUBELET_EXTRA_ARGS
+Restart=always
+StartLimitInterval=0
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+
+
+systemctl daemon-reload
+systemctl kubelet enable 
+systemctl start kubelet
+
+/etc/kubernetes$ cat kubelet.conf 
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUN5RENDQWJDZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRFM01EWXdNakV3TURJek9Wb1hEVEkzTURVek1URXdNREl6T1Zvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTlI5CjVSMlpMRlppUUtJMkZmVDVzQUNxU1BEb2dxVEx6UUhXb2JMSGRPRlg2VXoxODYvbzM2M2w4Z2pJTzJoUUdoZGoKajEyd0xJYjB4WTFCQnZXdUdzSk04UXJwemV4N2RUTnB0R1JvMzM0QWZIQmJTdzJwSFYxblZ3RnNFQzFEb1RoWApRTFFrdjFtb0d5YlJjOTV1NmpiT3luK1BNQlFJWnZmM1YycFJKK0RLWE04N2tMbU9vajF0RU90ZVl3Vk82N3Z5CnA4eElZeDlpSmFCN21wTFpoTDVzNzJmMG16WWxIajBhSnlLWnZSZ21ObHJEOXcyZWZNbXdpZ2ZYQjZBWSs3djkKWnJnR0tqcENCWEl0RzRmSnBNZjVtK1dSOUIvWVFSRUsveGcwZWV0QTB5MkhiWVdXdENpK0ZaaERDWHdBd0p0Kwo2cE9UYmQ3Q1ZpUW5jNUI4Nk9FQ0F3RUFBYU1qTUNFd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0RRWUpLb1pJaHZjTkFRRUxCUUFEZ2dFQkFMOUtUQlIrOTJmMDBPYUVrMTQ0bmVUUkpwbEgKZnVqdzNSRGNMU1M1bm45ckc2ZWZtWHFETUNkdXBZdlZmQTcxUFdRR0FuZWhRMHJSdkVwTGtETzdVNFNmZHBrMQo3dm5wM0VUemRCVXhVMDVDR3NzZjJNRzN1TW1kZHVwa2FIY0xCWVYrU2RIWUlyWHVVM0xidkRvWVB4eGE1RlphCmJYSVBpcjFZalUwTTVEbDdxNExnZXFSYlpHekRySU5NSm1YdTgvUDV4VTNXcmNNODFDZ0QxVmpaY2RqRGZjeW8KU2N6YncyYW4yNFlVdm45b0JMWUl3VmlPKzJKV2ZMYSsyeWxWS2JmWlJWOEtBQ0JPeHVDdnk2aWtNRkZESHdQQwpXNUVWSXJvTVFmTEN6ZG9nSy9PelA4Nys5VTRKQ0hXVEtHWlByWGQ0M0F2TVlyZ1lGNlM1Zy92R040ST0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+    server: https://10.192.0.2:6443
+  name: kubernetes
+contexts:
+- context:
+    cluster: kubernetes
+    user: kubelet-csr
+  name: kubelet-csr
+- context:
+    cluster: kubernetes
+    user: tls-bootstrap-token-user
+  name: tls-bootstrap-token-user@kubernetes
+current-context: kubelet-csr
+kind: Config
+preferences: {}
+users:
+- name: kubelet-csr
+  user:
+    client-certificate-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUNYekNDQVVlZ0F3SUJBZ0lUUHRDLzNQc3VBVFdlYUM0S2hsYkphNkFjS1RBTkJna3Foa2lHOXcwQkFRc0YKQURBVk1STXdFUVlEVlFRREV3cHJkV0psY201bGRHVnpNQjRYRFRFM01EWXdNakV5TVRrd01Gb1hEVEU0TURZdwpNakV5TVRrd01Gb3dOREVWTUJNR0ExVUVDaE1NYzNsemRHVnRPbTV2WkdWek1Sc3dHUVlEVlFRREV4SnplWE4wClpXMDZibTlrWlRweVlXcGxjMmd3V1RBVEJnY3Foa2pPUFFJQkJnZ3Foa2pPUFFNQkJ3TkNBQVF6STZaZG81UnAKUUFseVhsdFBzV3lrMktzd3NmVkRxREM5b2xYdStLTXpkUWVpaGJlelBpN1VQdXdRYU5EcVpwQmFtbHpWRU5uVgpEbEJOdnhQMlNRSWFvMVF3VWpBT0JnTlZIUThCQWY4RUJBTUNCYUF3RXdZRFZSMGxCQXd3Q2dZSUt3WUJCUVVICkF3SXdEQVlEVlIwVEFRSC9CQUl3QURBZEJnTlZIUTRFRmdRVWxNTDE4NnhzaVlZbm5KaHQwcXI5SzN6cGVIUXcKRFFZSktvWklodmNOQVFFTEJRQURnZ0VCQUc2MDhEekNrRThtRVVsK0RlUEo0WTNWb1Jnc2xFSGhLTmdvVElIRAppTExBQVhQZkFCeUcyVk9ONjhmdmZ3ZFE3K0tLNHk3TkJEQ1ZNWHBlaUtHQVhZemJPbkl5dkVJZFc3bXpDUjJ1Ck5XdHhkZi92Y2ZvVURZUHlHWnBZbnlYZzErSXJ3Tm5iOWVZTTU0K1JCcTlDZUR1Qk9oNDVCZVV4R1U5djJmdUkKVVRPbmVDemlqKzZwSEhUREplQzRxYXNsY3BueUd6a2pQem9NMVFEcHhnai9nYlFnZWhHNFRZUDhZT1lpVDJ5TwpqemsvY255aFNxditMOGk1OUlEeUxHY2dkUHJOUG13ZjVlQnFZU2x2WVUvMGZyRWRKa1RhQlNOM3RKQnc5a21lCkdBcjEwU3EwOTNKOHZld3lzRDV4ZWJqcGN5YzQzSkkvQzhHaFJYTEdRQjY4OUpNPQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+    client-key-data: LS0tLS1CRUdJTiBFQyBQUklWQVRFIEtFWS0tLS0tCk1IY0NBUUVFSU16bWV4SWRyY2RscThMZEdQaHcva2Q4MDZ0MVFwblZIN0FnVElxdDNkZzBvQW9HQ0NxR1NNNDkKQXdFSG9VUURRZ0FFTXlPbVhhT1VhVUFKY2w1YlQ3RnNwTmlyTUxIMVE2Z3d2YUpWN3Zpak0zVUhvb1czc3o0dQoxRDdzRUdqUTZtYVFXcHBjMVJEWjFRNVFUYjhUOWtrQ0dnPT0KLS0tLS1FTkQgRUMgUFJJVkFURSBLRVktLS0tLQo=
+- name: tls-bootstrap-token-user
+  user:
+    token: 98da02.4aadf8a7aef5a21c
+
+
+kubeadm join --token 563641.f6cbb3a75a7b7f02 10.192.0.2:6443
+
+mkdir /k8s
+cp hyperkube /k8s/
+	
+./kubeadm join --skip-preflight-checks --token 98da02.4aadf8a7aef5a21c 10.192.0.2:6443
+
+./kubectl label --overwrite node kube-node-1 extraRuntime=virt 
+node "kube-node-1" labeled
+
+./kubectl label node rajesh extraRuntime=virtlet
+node "rajesh" labeled
+
+./oc get nodes -l extraRuntime=virtlet
+NAME      STATUS    AGE
+rajesh    Ready     2d
+
+./oc logs virtlet-hnph9 -n kube-system
+INFO: /dev/kvm exists
+KVM acceleration can be used
+/usr/sbin/libvirtd: error while loading shared libraries: libvirt-admin.so.0: cannot open shared object file: Permission denied
+
+find / -name libvirt-admin.so.0
+/usr/lib/x86_64-linux-gnu/libvirt-admin.so.0
+
+ls -la /usr/lib/x86_64-linux-gnu/libvirt-admin.so.0
+lrwxrwxrwx 1 root root 25 May 16 17:20 /usr/lib/x86_64-linux-gnu/libvirt-admin.so.0 -> libvirt-admin.so.0.1003.1
+rajesh@rajesh:~$ sudo chmod +x /usr/lib/x86_64-linux-gnu/libvirt-admin.so.0.1003.1
+
+
+/etc/systemd/system/multi-user.target.wants/kubelet.service -> /lib/systemd/system/kubelet.service
+
+cat >/lib/systemd/system/kubelet.service <<EOF
+[Unit]
+Description=kubelet: The Kubernetes Node Agent
+Documentation=http://kubernetes.io/docs/
+
+[Service]
+Environment="KUBELET_KUBECONFIG_ARGS=--kubeconfig=/etc/kubernetes/kubelet.conf --require-kubeconfig=true"
+Environment="KUBELET_FEATURE_ARGS= --feature-gates=DynamicKubeletConfig=true"
+Environment="KUBELET_SYSTEM_PODS_ARGS=--pod-manifest-path=/etc/kubernetes/manifests --allow-privileged=true"
+Environment="KUBELET_NETWORK_ARGS=--network-plugin=cni --cni-conf-dir=/etc/cni/net.d --cni-bin-dir=/opt/cni/bin"
+Environment="KUBELET_DNS_ARGS=--cluster-dns=10.96.0.10 --cluster-domain=cluster.local"
+Environment="KUBELET_EXTRA_ARGS=--v=4"
+Environment="KUBELET_HOSTNAME=--hostname-override=10.192.0.4"
+ExecStart=
+ExecStart=/k8s/hyperkube kubelet --kubeconfig=/etc/kubernetes/kubelet.conf --require-kubeconfig=true --feature-gates=DynamicKubeletConfig=true --pod-manifest-path=/etc/kubernetes/manifests --allow-privileged=true --network-plugin=cni --cni-conf-dir=/etc/cni/net.d --cni-bin-dir=/opt/cni/bin --cluster-dns=10.96.0.10 --cluster-domain=cluster.local --cgroups-per-qos=false --enforce-node-allocatable= --v=4 --hostname-override=10.192.0.4
+Restart=always
+StartLimitInterval=0
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+
+
+

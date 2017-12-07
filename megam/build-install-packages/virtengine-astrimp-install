@@ -1,0 +1,46 @@
+sudo apt-get update -y
+sudo apt-get remove virtengine -y
+sudo apt-get purge virtengine -y --allow-unauthenticated
+
+
+sudo apt-get remove virtenginegateway -y
+sudo apt-get purge virtenginegateway -y --allow-unauthenticated
+
+sudo apt-get remove virtenginenilavu -y
+sudo apt-get purge virtenginenilavu -y --allow-unauthenticated
+
+sudo apt-get autoremove -y
+
+sudo apt-get update -y
+
+sudo apt-get install virtengine -y --allow-unauthenticated
+sudo apt-get install virtenginegateway -y --allow-unauthenticated
+sudo apt-get install virtenginenilavu -y --allow-unauthenticated
+
+sudo service virtenginegateway status;
+
+sudo cp -r /var/lib/backup/* /var/lib/detio/
+
+sudo cp /var/lib/backup/default  /etc/nginx/sites-available/default
+sudo cp -r /var/lib/backup/images/ /var/www/virtenginenilavu/public
+sudo cp /var/lib/backup/nilavu.conf /var/lib/detio/
+sudo cp /var/lib/backup/site_settings.yml /var/lib/detio/
+sudo cp /var/lib/backup/regions.yml /var/lib/detio/
+sudo sv stop nginx
+sudo sv start nginx
+sudo sv stop unicorn
+sudo sv start unicorn
+
+sudo service corosync stop
+sudo service pacemaker stop
+
+sudo service corosync start
+sudo service pacemaker start
+sudo crm status
+
+sudo service virtenginegateway stop; sudo service virtenginegateway start;
+sudo service virtengine stop; sudo service virtengine start;
+
+Trusty 
+sudo mv _vendor-c2776a5f987ed0ae1acbadc8bf4b4c14a2a0547d1d07f7ea02c55a150bc4c2b8.js vendor-c2776a5f987ed0ae1acbadc8bf4b4c14a2a0547d1d07f7ea02c55a150bc4c2b8.js
+

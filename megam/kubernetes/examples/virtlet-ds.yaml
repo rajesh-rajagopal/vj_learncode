@@ -1,0 +1,170 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  creationTimestamp: 2017-05-24T06:38:06Z
+  generation: 1
+  labels:
+    runtime: virtlet
+  name: virtlet
+  namespace: kube-system
+  resourceVersion: "23031"
+  selfLink: /apis/extensions/v1beta1/namespaces/kube-system/daemonsets/virtlet
+  uid: 8b983364-404b-11e7-b2b3-02420ac00002
+spec:
+  selector:
+    matchLabels:
+      runtime: virtlet
+  template:
+    metadata:
+      annotations:
+        pod.alpha.kubernetes.io/init-containers: '[{"name":"prepare-node","image":"mirantis/virtlet","command":["/prepare-node.sh"],"resources":{},"volumeMounts":[{"name":"k8s-flexvolume-plugins-dir","mountPath":"/kubelet-volume-plugins"},{"name":"criproxybin","mountPath":"/opt/criproxy/bin"},{"name":"run","mountPath":"/run"},{"name":"dockersock","mountPath":"/var/run/docker.sock"},{"name":"criproxyconf","mountPath":"/etc/criproxy"},{"name":"log","mountPath":"/hostlog"},{"name":"var-lib","mountPath":"/host-var-lib"}],"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","imagePullPolicy":"IfNotPresent"}]'
+        pod.beta.kubernetes.io/init-containers: '[{"name":"prepare-node","image":"mirantis/virtlet","command":["/prepare-node.sh"],"resources":{},"volumeMounts":[{"name":"k8s-flexvolume-plugins-dir","mountPath":"/kubelet-volume-plugins"},{"name":"criproxybin","mountPath":"/opt/criproxy/bin"},{"name":"run","mountPath":"/run"},{"name":"dockersock","mountPath":"/var/run/docker.sock"},{"name":"criproxyconf","mountPath":"/etc/criproxy"},{"name":"log","mountPath":"/hostlog"},{"name":"var-lib","mountPath":"/host-var-lib"}],"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","imagePullPolicy":"IfNotPresent"}]'
+      creationTimestamp: null
+      labels:
+        runtime: virtlet
+      name: virtlet
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: extraRuntime
+                operator: In
+                values:
+                - virtlet
+      containers:
+      - env:
+        - name: VIRTLET_LOGLEVEL
+          value: "3"
+        - name: VIRTLET_DOWNLOAD_PROTOCOL
+          value: https
+        - name: VIRTLET_DOWNLOAD_PROTOCOL
+          value: http
+        image: mirantis/virtlet
+        imagePullPolicy: IfNotPresent
+        name: virtlet
+        resources: {}
+        securityContext:
+          privileged: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /sys/fs/cgroup
+          name: cgroup
+        - mountPath: /lib/modules
+          name: modules
+          readOnly: true
+        - mountPath: /boot
+          name: boot
+          readOnly: true
+        - mountPath: /run
+          name: run
+        - mountPath: /var/lib/virtlet
+          name: virtlet
+        - mountPath: /var/lib/libvirt
+          name: libvirt
+        - mountPath: /etc/cni
+          name: cniconf
+        - mountPath: /opt/cni/bin
+          name: cnibin
+        - mountPath: /var/lib/cni
+          name: cnidata
+        - mountPath: /usr/libexec/kubernetes/kubelet-plugins/volume/exec
+          name: k8s-flexvolume-plugins-dir
+        - mountPath: /var/lib/kubelet/pods
+          name: k8s-pods-dir
+      dnsPolicy: ClusterFirstWithHostNet
+      hostNetwork: true
+      hostPID: true
+      initContainers:
+      - command:
+        - /prepare-node.sh
+        image: mirantis/virtlet
+        imagePullPolicy: IfNotPresent
+        name: prepare-node
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /kubelet-volume-plugins
+          name: k8s-flexvolume-plugins-dir
+        - mountPath: /opt/criproxy/bin
+          name: criproxybin
+        - mountPath: /run
+          name: run
+        - mountPath: /var/run/docker.sock
+          name: dockersock
+        - mountPath: /etc/criproxy
+          name: criproxyconf
+        - mountPath: /hostlog
+          name: log
+        - mountPath: /host-var-lib
+          name: var-lib
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: virtlet
+      serviceAccountName: virtlet
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - hostPath:
+          path: /sys/fs/cgroup
+        name: cgroup
+      - hostPath:
+          path: /lib/modules
+        name: modules
+      - hostPath:
+          path: /boot
+        name: boot
+      - hostPath:
+          path: /run
+        name: run
+      - hostPath:
+          path: /var/run/docker.sock
+        name: dockersock
+      - hostPath:
+          path: /var/lib/virtlet
+        name: virtlet
+      - hostPath:
+          path: /var/lib/libvirt
+        name: libvirt
+      - hostPath:
+          path: /etc/cni
+        name: cniconf
+      - hostPath:
+          path: /opt/cni/bin
+        name: cnibin
+      - hostPath:
+          path: /var/lib/cni
+        name: cnidata
+      - hostPath:
+          path: /opt/criproxy/bin
+        name: criproxybin
+      - hostPath:
+          path: /etc/criproxy
+        name: criproxyconf
+      - hostPath:
+          path: /var/log
+        name: log
+      - hostPath:
+          path: /usr/libexec/kubernetes/kubelet-plugins/volume/exec
+        name: k8s-flexvolume-plugins-dir
+      - hostPath:
+          path: /var/lib/kubelet/pods
+        name: k8s-pods-dir
+      - hostPath:
+          path: /var/lib
+        name: var-lib
+  templateGeneration: 1
+  updateStrategy:
+    type: OnDelete
+status:
+  currentNumberScheduled: 1
+  desiredNumberScheduled: 1
+  numberMisscheduled: 0
+  numberReady: 0
+  numberUnavailable: 1
+  observedGeneration: 1
+  updatedNumberScheduled: 1
+

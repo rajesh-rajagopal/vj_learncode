@@ -1,0 +1,10 @@
+
+
+curl -d '{"id":"","accounts_id":"ACT8793205391845886346","type":"user","action":"4","inputs":[{"key":"email","value":"vijaykanth@megam.io"}]}' 'http://192.168.10.107:4151/put?topic=events'
+
+insert into addons(account_id,provider_name,created_at,id,json_claz,provider_id) values('mvijaykanth@megam.io','WHMCS','2016-11-09 11:50:34 +0000','ADN6152295630525770623', 'Megam::Addons','104');
+vertadmin@cqlsh:vertice> select * from addons where account_id = 'mvijaykanth@megam.io';
+
+insert into balances(account_id,created_at,credit,id,json_claz,updated_at) values('rathishvbr@megam.io','2016-11-09 11:49:33 +0000','-0.1','BAL7045748824129222646','Megam::Balances','2016-11-09 11:49:33 +0000');
+
+insert into balances(account_id,created_at,credit,id,json_claz,updated_at) values('ab@c.com','2016-11-10 12:49:33 +0000','-0.1','BAL7045748824129222646','Megam::Balances','2016-11-10 12:49:33 +0000');

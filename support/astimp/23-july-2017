@@ -1,0 +1,32 @@
+is very important!!!- 
+
+Synchronisation between virtengine (4 RUNNING VMs, 50 DESTROYED) and opennebula (18 RUNNING VMs)
+- need to see the SSD space in each server node!!! how much space is occupied!!! the total IO on each SSD!!! - is very important!!!
+
+
+- need to see the CPU/Memory load in each server node - in OpenNebula are so tinny i can´t see the real load
+
+- add credit in virtengine from WHMCS client credit to
+- need to have the possibility to unsuspend / unsuspend until xx.xx.xxxx ( Day)? even when the client have not pay  - my decision to give them more time for payment / or the possibility to set " do not suspend until Date"
+
+- set a global rule for every VDS and for the future ones to 100mbit/s = 12,5MB/s inbound AND outbound !!!!!! 
+
+
+feature that can be really useful in Virtengine .
+
+- full WHMCS module and functionality - i belive 80-90% from your future clients work with WHMCS ( like Cubedata)- api function to import/change user/Vm data in one management site
+- CPU/Memory load / HDD-SSD space, load , IO / network bandwitch on each node , load on each node 
+- this feature help the admin to find issue in short time
+- network bandwitch for Vm with pay options ( we dont use them but most providern due)
+- import function for WM from VmWare,Solus,.....& co
+
+- no IP limit on one Vm ( now we can use only 4xIP, but we have allready user they need /25 or /24 ...even BGP sesion)
+- set a global/individual rules for every VDS- individual management site for admin 
+  - mostly Networking rules. like bandwidth allowance (1 Client can make 10TB traffic, other Client unlimited), Firewall rules, threshold (like ACL on cisco)
+
+- to have the possibility to chosse what i wannt to see ( graphics ) like admin- see SolusVm - admin options - they have really useful feature 
+- reseller option
+
+
+
+

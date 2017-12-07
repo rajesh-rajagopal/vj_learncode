@@ -1,0 +1,1 @@
+{ "name": "vendor-module", "dependencies": { "abc": { "from": "abc@2.4.0", "resolved": "https://some.special.url", "version": "2.4.0" }, "acme": { "from": "acme@1.2.3", "resolved": "<CHANGE_THIS>", "version": "1.2.3" } }, "data": { "freshly1": "added" } }

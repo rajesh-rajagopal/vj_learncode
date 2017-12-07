@@ -1,0 +1,142 @@
+188.240.231.12  10.0.0.5
+
+oneadmin@storage] /% nfsstat 
+Client Info:
+Rpc Counts:
+  Getattr   Setattr    Lookup  Readlink      Read     Write    Create    Remove
+        0         0         0         0         0         0         0         0
+   Rename      Link   Symlink     Mkdir     Rmdir   Readdir  RdirPlus    Access
+        0         0         0         0         0         0         0         0
+    Mknod    Fsstat    Fsinfo  PathConf    Commit
+        0         0         0         0         0
+Rpc Info:
+ TimedOut   Invalid X Replies   Retries  Requests
+        0         0         0         0         0
+Cache Info:
+Attr Hits    Misses Lkup Hits    Misses BioR Hits    Misses BioW Hits    Misses
+        0         0         0         0         0         0         0         0
+BioRLHits    Misses BioD Hits    Misses DirE Hits    Misses Accs Hits    Misses
+        0         0         0         0         0         0         0         0
+
+Server Info:
+  Getattr   Setattr    Lookup  Readlink      Read     Write    Create    Remove
+  1745909       490      1304         0   1906059   3563979         9       145
+   Rename      Link   Symlink     Mkdir     Rmdir   Readdir  RdirPlus    Access
+        7         0         0        46        37       286       778    271723
+    Mknod    Fsstat    Fsinfo  PathConf    Commit
+        0    588903         0         0     33076
+Server Ret-Failed
+                0
+Server Faults
+            0
+Server Cache Stats:
+   Inprog      Idem  Non-idem    Misses
+        0         0         0   7980249
+Server Write Gathering:
+ WriteOps  WriteRPC   Opsaved
+  3563979   3563979         0
+ 
+
+
+[oneadmin@storage] /% zpool iostat
+                 capacity     operations    bandwidth
+pool          alloc   free   read  write   read  write
+------------  -----  -----  -----  -----  -----  -----
+S18TB6HDD     1.23T  20.5T      4     67   504K  4.30M
+Storage        187G   609G      0      7  23.7K   443K
+freenas-boot  1.12G  13.8G      0      0    821  4.69K
+------------  -----  -----  -----  -----  -----  -----
+
+
+[oneadmin@storage] /% zpool iostat S18TB6HDD 15
+               capacity     operations    bandwidth
+pool        alloc   free   read  write   read  write
+----------  -----  -----  -----  -----  -----  -----
+S18TB6HDD   1.23T  20.5T      4     67   503K  4.30M
+S18TB6HDD   1.23T  20.5T      0     24      0   156K
+S18TB6HDD   1.23T  20.5T      0     36  8.53K   244K
+S18TB6HDD   1.23T  20.5T      0     24  8.44K   166K
+S18TB6HDD   1.23T  20.5T      0     37      0   300K
+S18TB6HDD   1.23T  20.5T      0     24  8.52K   157K
+S18TB6HDD   1.23T  20.5T      0     24  8.53K   166K
+S18TB6HDD   1.23T  20.5T      0     24      0   223K
+S18TB6HDD   1.23T  20.5T      0     23  8.52K   169K
+S18TB6HDD   1.23T  20.5T      0     37      0   296K
+
+
+zpool iostat S18TB6HDD 15
+               capacity     operations    bandwidth
+pool        alloc   free   read  write   read  write
+----------  -----  -----  -----  -----  -----  -----
+S18TB6HDD   1.23T  20.5T      4     67   500K  4.27M
+S18TB6HDD   1.23T  20.5T      0    587   111K  69.7M
+S18TB6HDD   1.23T  20.5T      2    261   333K  22.3M
+S18TB6HDD   1.23T  20.5T      0    770  25.4K  88.8M
+S18TB6HDD   1.23T  20.5T      0    417   128K  41.5M
+S18TB6HDD   1.23T  20.5T      0    599  25.3K  67.8M
+S18TB6HDD   1.23T  20.5T      0    983  51.0K   116M
+S18TB6HDD   1.23T  20.5T      0  1.10K  25.6K   140M
+S18TB6HDD   1.23T  20.5T      1    420   153K  50.6M
+S18TB6HDD   1.23T  20.5T      0    437      0  48.5M
+S18TB6HDD   1.23T  20.5T      0     52  25.6K   956K
+S18TB6HDD   1.23T  20.5T      0     42      0   679K
+S18TB6HDD   1.23T  20.5T      0     34      0   173K
+
+
+
+
+
+oneadmin@storage] gpart show
+=>      34  31457213  vtbd0  GPT  (15G)
+        34      1024      1  bios-boot  (512K)
+      1058         6         - free -  (3.0K)
+      1064  31456176      2  freebsd-zfs  (15G)
+  31457240         7         - free -  (3.5K)
+
+=>        34  1677721533  vtbd1  GPT  (800G)
+          34          94         - free -  (47K)
+         128     4194304      1  freebsd-swap  (2.0G)
+     4194432  1673527128      2  freebsd-zfs  (798G)
+  1677721560           7         - free -  (3.5K)
+
+=>        34  7814037101  vtbd2  GPT  (3.6T)
+          34          94         - free -  (47K)
+         128     4194304      1  freebsd-swap  (2.0G)
+     4194432  7809842696      2  freebsd-zfs  (3.6T)
+  7814037128           7         - free -  (3.5K)
+
+
+
+
+oneadmin@storage] sudo diskinfo -c -t -v vtbd2
+Password:
+vtbd2
+	512         	# sectorsize
+	4000787030016	# mediasize in bytes (3.6T)
+	7814037168  	# mediasize in sectors
+	0           	# stripesize
+	0           	# stripeoffset
+	7752021     	# Cylinders according to firmware.
+	16          	# Heads according to firmware.
+	63          	# Sectors according to firmware.
+	            	# Disk ident.
+
+I/O command overhead:
+	time to read 10MB block      0.088704 sec	=    0.004 msec/sector
+	time to read 20480 sectors   4.014427 sec	=    0.196 msec/sector
+	calculated command overhead			=    0.192 msec/sector
+
+Seek times:
+	Full stroke:	  250 iter in   5.434520 sec =   21.738 msec
+	Half stroke:	  250 iter in   3.593273 sec =   14.373 msec
+	Quarter stroke:	  500 iter in   4.131542 sec =    8.263 msec
+	Short forward:	  400 iter in   0.983089 sec =    2.458 msec
+	Short backward:	  400 iter in   1.295669 sec =    3.239 msec
+	Seq outer:	 2048 iter in   0.399539 sec =    0.195 msec
+	Seq inner:	 2048 iter in   0.413612 sec =    0.202 msec
+Transfer rates:
+	outside:       102400 kbytes in   0.622011 sec =   164627 kbytes/sec
+	middle:        102400 kbytes in   0.718478 sec =   142524 kbytes/sec
+	inside:        102400 kbytes in   1.174179 sec =    87210 kbytes/sec
+
+

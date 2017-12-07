@@ -1,0 +1,30 @@
+########setup nginx (we need nginx tar file)
+
+sudo apt-get install nginx
+
+sudo service nginx start
+cd nginx-key        #should have nginx keys
+
+sudo mkdir -p /etc/nginx/private
+sudo mkdir -p /etc/nginx/certs
+
+sudo cp ./console.megam.io /etc/nginx/sites-available/console.megam.io
+sudo cp ./api.megam.io /etc/nginx/sites-available/api.megam.io
+sudo cp ./madai.megam.io /etc/nginx/sites-available/madai.megam.io
+
+sudo cp ./console.megam.io.pub /etc/nginx/certs/console.megam.io.pub
+sudo cp ./console.megam.io.key /etc/nginx/private/console.megam.io.key
+
+sudo cp ./api.megam.io.pub /etc/nginx/certs/api.megam.io.pub
+sudo cp ./api.megam.io.key /etc/nginx/private/api.megam.io.key
+
+
+sudo cp ./madai.megam.io.pub /etc/nginx/certs/madai.megam.io.pub
+sudo cp ./madai.megam.io.key /etc/nginx/private/madai.megam.io.key
+
+sudo ln -s /etc/nginx/sites-available/api.megam.io  /etc/nginx/sites-enabled/api.megam.io
+sudo ln -s /etc/nginx/sites-available/console.megam.io /etc/nginx/sites-enabled/console.megam.io
+sudo ln -s /etc/nginx/sites-available/madai.megam.io  /etc/nginx/sites-enabled/madai.megam.io
+
+sudo service nginx stop
+sudo service nginx start

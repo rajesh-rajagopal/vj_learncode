@@ -1,0 +1,43 @@
+
+ip route flush all proto static scope global
+
+ip route add 10.0.0.3/24 dev eth0 table 5000
+ip route add default via 10.0.0.254 dev eth0 table 5000
+
+ip route add 10.0.1.1/24 dev eth1 table 5001
+
+
+https://www.centos.org/forums/viewtopic.php?t=46142
+
+
+
+192.168.0.0/24 dev eth0  src 192.168.0.1
+192.168.2.0/24 dev eth1  src 192.168.2.1
+
+
+8.8.4.0/24 via 192.168.0.7 dev eth0
+default via 192.168.2.254 dev eth1
+
+
+ip route del 84.247.54.169/26 dev eth1  src 84.247.54.170
+ip route del 185.88.29.224/27 dev eth1  src 185.88.29.230
+
+ip route del default via 185.88.29.225 dev eth0
+ip route del default via 84.247.54.129 dev eth1
+
+ip route flush all
+
+
+ip route add 185.88.29.224/27 dev eth0  src 185.88.29.230
+ip route add 84.247.54.128/26 dev eth1  src 84.247.54.170
+
+ip route add 8.8.4.0/24 via 185.88.29.225 dev eth0
+ip route add default via 84.247.54.129 dev eth1
+
+default via 84.247.54.129 dev eth0 
+8.8.4.0/24 via 185.88.29.240 dev eth0 
+84.247.54.128/26 dev eth0  scope link  src 84.247.54.170 
+185.88.29.224/27 dev eth0  scope link  src 185.88.29.230 
+
+
+

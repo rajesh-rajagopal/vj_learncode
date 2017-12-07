@@ -1,0 +1,28 @@
+apt-get update
+ sudo apt-get install apache2 mysql-server postfix samba
+ 
+ installation will ask (mysql-password(wordpress) ,postfix - intersit or smarthost  (we choosed intersite)
+ nano /etc/hosts
+  service apache2 restart
+ apt-get install php5 libapache2-mod-php5 php5-mcrypt
+  wget http://download.zarafa.com/community/final/7.1/7.1.14-51822/zcp-7.1.14-51822-ubuntu-14.04-x86_64-opensource.tar.gz
+  tar xvfz zcp-7.1.14-51822-ubuntu-14.04-x86_64-opensource.tar.gz 
+   sudo bash install.sh
+   cd zcp-7.1.14-51822-ubuntu-14.04-x86_64/
+   sudo bash install.sh
+   tail -200 /var/log/zarafa/server.log
+   cd /etc/zarafa/
+   nano server.cfg
+   service apache2 restart
+   
+   
+   
+man zarafa-admin
+   zarafa-admin -c username -P username
+   zarafa-admin -c username -P 
+   zarafa-admin -c username 
+   zarafa-admin -c username -P -f "Full name" -e emailaddress
+http://www.dirk-hagedorn.de/?page_id=1238
+
+
+localhost/webaccess

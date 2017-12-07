@@ -1,0 +1,59 @@
+REF: http://www.linux.com/learn/tutorials/747145-how-to-route-subnets-and-share-an-internet-connection-on-a-linux-network
+
+https://www.aelius.com/njh/subnet_sheet.html
+
+
+cibadmin@megammaster:~$ sudo ip addr add 192.168.122.10/24 dev eth0
+
+sudo ip addr remove 192.168.122.10/24 dev eth0
+
+
+sudo ifconfig eth0 hw ether 00:50:56:07:04:c0
+
+
+
+cibadmin@megammaster:~$ route
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         192.168.1.1     0.0.0.0         UG    0      0        0 eth0
+192.168.1.0     *               255.255.255.0   U     0      0        0 eth0
+192.168.122.0   *               255.255.255.0   U     0      0        0 virbr0
+192.168.122.0   *               255.255.255.0   U     0      0        0 eth0
+
+
+nano /etc/network/interfaces
+
+iface eth0 inet static
+   address 192.168.1.100
+   netmask 255.255.255.0
+   broadcast 192.168.1.255
+   up ip addr add 192.168.122.10/24 dev eth0
+   down ip addr del 192.168.122.10/24 dev eth0
+
+NEW NETWORK CREATION
+====================
+    NAME   = "open-vs"
+    TYPE   = FIXED
+    BRIDGE = one
+   AR = [ TYPE = "IP4", IP   = "7.7.9.30", SIZE = "100" ]
+  DNS = "8.8.8.8 8.8.4.4"
+   GATEWAY         = "7.7.7.1"
+NETWORK_MASK = "255.255.0.0"
+
+
+public NETWORK CREATION
+====================
+cd /var/lib/one
+
+cat >vnet.net <<EOF
+NAME   = "ipv4-pri"
+TYPE   = FIXED
+BRIDGE = one
+AR = [ TYPE = "IP4", IP   = "192.168.1.2", SIZE = "2" ]
+DNS = "8.8.8.8 8.8.4.4"
+GATEWAY         = "198.168.1.1"
+NETWORK_MASK = "255.255.252.0"
+VN_MAD = "dummy"
+EOF
+onevnet create vnet.net
+

@@ -1,0 +1,85 @@
+
+ssh jonathan@52.183.25.155       -    get.virtengine.com
+jonathan: VirtEngineUnleashed2016!
+
+cd ~/repo/1.5.2/ubuntu/14.04/stable/stable-ubuntu/  
+cd ~/repo/1.5.2/ubuntu/16.04/stable/stable-ubuntu/
+
+cd ~/code/detio/gitpackager/vertice
+rake clean; 
+rake trusty; rake xenial; rake centos7;
+
+sudo cp build/xenial/virtengine_1.5.2-1_amd64.deb ~/repo/1.5.2/ubuntu/16.04/testing/testing-ubuntu/
+sudo cp build/trusty/virtengine_1.5.2-1_amd64.deb ~/repo/1.5.2/ubuntu/14.04/testing/testing-ubuntu/
+sudo cp build/centos7/virtengine-1.5.2-1.x86_64.rpm ~/centos_1.5.2
+
+cd ~/code/detio/gitpackager/verticegateway
+sudo rake clean; 
+rake xenial; rake centos7;
+
+sudo cp build/xenial/usr/share/detio/virtenginegateway/target/virtenginegateway_1.5.6_all.deb ~/repo/1.5.2/ubuntu/16.04/testing/testing-ubuntu/
+sudo cp build/xenial/usr/share/detio/virtenginegateway/target/virtenginegateway_1.5.6_all.deb ~/repo/1.5.2/ubuntu/14.04/testing/testing-ubuntu/
+sudo cp build/centos7/virtenginegateway-1.5.2-1.x86_64.rpm ~/centos_1.5.2
+
+
+
+cd ~/code/detio/gitpackager/verticenilavu/
+sudo rake clean;
+rake trusty;
+rake xenial;
+rake centos7
+
+sudo cp build/trusty/virtenginenilavu_1.5.2-1_amd64.deb ~/repo/1.5.2/ubuntu/14.04/testing/testing-ubuntu/
+sudo cp build/xenial/virtenginenilavu_1.5.2-1_amd64.deb ~/repo/1.5.2/ubuntu/16.04/testing/testing-ubuntu/
+sudo cp build/centos7/virtenginenilavu-1.5.2-1.x86_64.rpm ~/centos_1.5.2
+
+~/reprepro.sh --root /home/jonathan --version 1.5.2 --distro ubuntu --distroversion 14.04 --distroname trusty --release testing
+~/reprepro.sh --root /home/jonathan --version 1.5.2 --distro ubuntu --distroversion 16.04 --distroname xenial --release testing
+~/reprepro_cent.sh version=1.5.2 distro=centos release=stable
+
+
+#!/bin/bash
+
+gitLoc="~/code/detio/gitpackager"
+repoLoc="~/repo/1.5/ubuntu/16.04/stable/stable-ubuntu/"
+
+parse_params() {
+
+  while
+    (( $# > 0 ))
+  do
+    token="$1"
+    shift
+    case "$token" in
+     (--package)
+        package="$1"
+        if [ -z "$package" ]
+         then
+          usage
+          exit
+        fi
+        shift
+        ;;
+    (--distro)
+        distro="$1"
+        if [ -z "$distro" ]
+        then
+        usage
+        exit
+        fi
+        shift
+        ;;
+     (help|usage)
+        usage
+        exit 0
+        ;;
+
+      (*)
+        usage
+        exit 1
+        ;;
+
+    esac
+  done
+}
+

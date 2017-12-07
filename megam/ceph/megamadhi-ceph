@@ -1,0 +1,69 @@
+clean removed ceph
+
+
+umount /storage1
+umount /storage2
+umount /storage3
+#change /etc/fstab when change the installation mount point
+cat /etc/fstab
+
+sudo blkid
+
+/dev/sda1: UUID="2f6bd939-d7f8-4ab5-8540-56b9ccbce5c3" TYPE="ext4" 
+/dev/sda2: UUID="a94cd401-473c-4a46-99a2-b3b3759bf5c2" TYPE="swap" 
+/dev/sdb1: UUID="420d39f1-59ad-4985-b3bc-731de3f966f4" TYPE="xfs" 
+/dev/sdc1: UUID="243c099a-66bc-4e62-939a-ddaefd8ae8c5" TYPE="xfs" 
+/dev/sdd1: UUID="4d028e8a-993e-4e09-bd5c-fbf6a55a10f0" TYPE="xfs"
+
+#change /etc/fstab when change the installation mount point
+ceph-deploy new megamadhi
+ceph-deploy mon create-initial
+ceph-deploy disk zap megamadhi:sdb 
+ceph-deploy disk zap megamadhi:sdc 
+ceph-deploy disk zap megamadhi:sdd
+ceph-deploy osd prepare megamadhi:sdb
+ceph-deploy osd prepare megamadhi:sdc 
+ceph-deploy osd prepare megamadhi:sdd
+
+ceph-deploy disk list megamadhi /to know about ceph-deploy journal and data
+
+ceph-deploy osd activate megamadhi:/dev/sdb1:/dev/sdb2
+ceph-deploy osd activate megamadhi:/dev/sdc1:/dev/sdc2
+ceph-deploy osd activate megamadhi:/dev/sdd1:/dev/sdb2
+
+ceph admin megamadhi
+
+root@megamadhi:~/ceph-cluster# cat /etc/ceph/ceph.conf 
+[global]
+fsid = e6cc4d74-1bbd-4b8c-9007-b097cb5c5daf
+mon_initial_members = megamadhi
+mon_host = 192.168.1.102
+auth_cluster_required = cephx
+auth_service_required = cephx
+auth_client_required = cephx
+osd_crush_chooseleaf_type = 0
+osd_pool_default_size = 2
+public_network = 192.168.1.0/22
+cluster_network = 192.168.1.0/22
+mon_pg_warn_max_per_osd = 0
+
+mkdir ceph-cluster
+cd ceph-cluster
+ceph auth get-or-create client.libvirt mon 'allow r' osd 'allow class-read object_prefix rbd_children, allow rwx pool="rio"
+ceph auth get-key client.libvirt | tee client.libvirt.key
+ceph auth get client.libvirt -o ceph.client.libvirt.keyring
+cp ceph.client.* /etc/ceph
+genuuid >>uuid
+pass ceph.client.libvirt.keyring and uuid to add nodes 
+
+
+`<secret ephemeral='no' private='no'>
+  <uuid> <secret_uuid> </uuid>
+  <usage type='ceph'>
+          <name>client.libvirt secret</name>
+  </usage>
+</secret>` 
+write into file secret.xml with mode 644
+sudo virsh secret-define secret.xml
+sudo virsh secret-set-value --secret <secret_uuid> --base64 $(cat client.libvirt.key)
+

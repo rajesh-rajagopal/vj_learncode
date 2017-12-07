@@ -1,0 +1,38 @@
+
+insert into domains(org_id,name,created_at,id,json_claz) values('ORG5974328833925662422','whesy.com','2016-03-17 15:30:35 +0000','DMN6776194616419662763','Megam::Domains');
+insert into domains(org_id,name,created_at,id,json_claz) values('ORG6615918377499245482','whesy.com','2016-03-17 15:22:39 +0000','DMN6507944746273787588','Megam::Domains');
+insert into domains(org_id,name,created_at,id,json_claz) values('ORG7677107365222366785','whesy.com','2016-03-17 15:21:39 +0000','DMN7059728955023869871','Megam::Domains');
+insert into domains(org_id,name,created_at,id,json_claz) values('ORG5409648447255904084','whesy.com','2016-03-17 15:21:39 +0000','DMN8732778027513550397','Megam::Domains');
+insert into domains(org_id,name,created_at,id,json_claz) values('ORG5542677305646436074','whesy.com','2016-03-18 03:20:12 +0000','DMN8155907125209604524','Megam::Domains');
+insert into domains(org_id,name,created_at,id,json_claz) values('ORG8445887652184509402','whesy.com','2016-03-21 08:56:41 +0000','DMN5826040418865071616','Megam::Domains');
+insert into domains(org_id,name,created_at,id,json_claz) values('ORG9053704440472309758','whesy.com','2016-03-17 16:10:46 +0000','DMN7742442439557210219','Megam::Domains');
+insert into domains(org_id,name,created_at,id,json_claz) values('ORG7716078698862158222','whesy.com','2016-03-17 16:57:05 +0000','DMN6739640520521347137','Megam::Domains');
+
+
+whesy.com
+
+delete from domains where name='wheezy.com' and org_id='ORG5974328833925662422';
+delete from domains where name='wheezy.com' and org_id='ORG6615918377499245482';
+delete from domains where name='wheezy.com' and org_id='ORG7677107365222366785';
+delete from domains where name='wheezy.com' and org_id='ORG5409648447255904084';
+delete from domains where name='wheezy.com' and org_id='ORG5542677305646436074';
+delete from domains where name='wheezy.com' and org_id='ORG8445887652184509402';
+delete from domains where name='wheezy.com' and org_id='ORG9053704440472309758';
+delete from domains where name='wheezy.com' and org_id='ORG7716078698862158222';
+
+
+ 
+insert into domains(org_id,name,created_at,id,json_claz) values('ORG4827726324451943088', 'whesy.com', '2016-03-21 10:58:11 +0000', 'DMN6952274960427416231', 'Megam::Domains');
+
+
+
+delete from domains where name='megambox.com' and org_id='ORG4827726324451943088';
+
+
+
+#to clear vm_boxes from UI
+
+delete from assembly where org_id='ORG7879663326321337888';
+delete from assemblies where org_id='ORG7879663326321337888';
+
+

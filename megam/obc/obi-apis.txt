@@ -1,0 +1,111 @@
+
+POST  /accounts/content
+
+password: yes@123  encoded as eWVzQDEyMw==
+
+curl -d '{"first_name":"vijay","last_name":"megam","phone":"9876543210","api_key":"hi3660156c58cb7", "password":"megam","password_reset_key":"3660156c58cb7hi","password_reset_sent_at":"2016-10-20 10:25:24:00IST", "email":"mvijaykanth@megamio","password":"eWVzQDEyMw=="}' http://192.168.0.100:9005/accounts/content
+
+
+200 
+
+{"id":"eca6d8b2-b03f-4cf8-ad81-d22abe45cb91","first_name":"vijay","last_name":"megam","phone":"9876543210","email":"mvijaykanth@megamio","api_key":"hi3660156c58cb7","password":"eWVzQDEyMw==","authority":"","password_reset_key":"3660156c58cb7hi","password_reset_sent_at":"2016-10-20 10:25:24:00IST","status":"created","created_at":"2016-10-21 14:57:47.469584428 +0530 IST"}
+
+
+
+GET /accounts/{email}   
+
+curl -d '{"password":"eWVzQDEyMw=="}' -X GET http://192.168.0.100:9005/accounts/mvijaykanth@megamio
+   
+401
+Account already exist
+404 
+Account doesn't exist
+
+
+curl -i -H 'Authorization:Basic api_key:hi3660156c58cb7 email:mvijaykanth@megamio' -d '{"password":"eWVzQDEyMw=="}' -X POST http://192.168.0.100:9005/login
+
+
+
+POST /subscriptions/content 
+
+curl -i -H 'Authorization:Basic api_key:hi3660156c58cb7 email:mvijaykanth@megamio' -d '{"plan_name":"minified"}' -X POST http://192.168.0.100:9005/subscriptions/content
+
+
+http://192.168.0.100:9005/subscriptions/content
+HTTP/1.1 200 OK
+Content-Type: application/json
+Vary: Origin
+Date: Fri, 21 Oct 2016 09:46:28 GMT
+Transfer-Encoding: chunked
+
+{"id":"bf9390ae-13a4-4c3c-b125-f7acd86845bd","email":"mvijaykanth@megamio","plan_name":"minified","created_at":"2016-10-21 15:16:27.390008263 +0530 IST"}
+
+   
+GET /subscriptions   
+
+curl -i -H 'Authorization:Basic api_key:hi3660156c58cb7 email:mvijaykanth@megamio' -X GET http://192.168.0.100:9005/subscriptions  
+HTTP/1.1 200 OK
+Content-Type: application/json
+Vary: Origin
+Date: Fri, 21 Oct 2016 09:47:53 GMT
+Transfer-Encoding: chunked
+
+{"id":"bf9390ae-13a4-4c3c-b125-f7acd86845bd","email":"mvijaykanth@megamio","plan_name":"minified","created_at":"2016-10-21 15:16:27.390008263 +0530 IST"}
+
+
+POST /login  
+
+
+/regions/content     
+/regions/{name}    
+/regions     
+
+
+/migrates     
+
+/configurations     
+
+/networks     
+/networks/content     
+/networks/{name}     
+
+/hosts     
+
+GET /hostinfos    
+
+curl -i -H 'Authorization:Basic api_key:hi3660156c58cb7 email:mvijaykanth@megamio' -d '{"ipaddress":"192.168.0.123","username":"megam","password":"megam"}' -X GET http://192.168.0.100:9005/hostinfos
+
+Response
+HTTP/1.1 200 OK
+Content-Type: application/json
+Vary: Origin
+Date: Fri, 21 Oct 2016 09:52:52 GMT
+Transfer-Encoding: chunked
+
+{"status":"success","statusmsg":"Host 192.168.0.126 information parsed successfully","cpu":"2","ram":"3008","os":"Ubuntu 16.04 LTS","hostname":"rathish-test","disks":[{"disk":"sda","type":"disk","point":"","size":"3G"},{"disk":"sda1","type":"part","point":"/","size":"3G"},{"disk":"sr0","type":"rom","point":"","size":"380K"}],"kvm":"enabled"}
+
+
+/hosts/content 
+curl -i -H 'Authorization:Basic api_key:asdf email:mvijaykanth@megamio' -d '{"hosts":[{"region":"chennai","computes":["one"],"storages":["lvm"],"ipaddress":"192.168.0.2","username":"megdc","password":"howdareyou","created_at":"09/07/2016","updated_at":"09/07/2016","status":"created","vnets":[{"name":"pri-ipv4"},{"name":"pri-ipv4"},{"name":"pri-ipv4"}]}]}' -X POST http://192.168.0.101:9005/hosts/content
+
+   
+/hosts/{ip}    
+/hosts/install    
+
+/masters     
+/masters/content   
+
+
+curl -i -H 'Authorization:Basic api_key:hi3660156c58cb7 email:mvijaykanth@megamio' -d '{"masters":[{"ipaddress":"192.168.0.125","username":"megam","password":"megam","inputs":["{\"key\":\"one\",\"value\":\"true\"}","{\"key\":\"distro\",\"value\":\"Ubuntu 14.04\"}","{\"key\":\"hostname\",\"value\":\"master-1\"}"]}]}' -X POST http://192.168.0.100:9005/masters/content
+  
+/masters/install    
+/masters/{ip}     
+/masters/type/{type}
+/masters/connect/{id}
+
+email":"ra@g.comm","api_key":"21809c1310fdb4253016f11643001147c8bd9a11" {"ipaddress":"192.168.0.125","username":"megam","password":"megam","one":"true","vertice":"","distro":"Ubuntu 14.04"} http://192.168.0.100:9005
+
+
+/masters/oneimage
+
+

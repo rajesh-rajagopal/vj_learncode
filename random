@@ -1,0 +1,4 @@
+sudo update-alternatives --config java  ## command to change java version 
+
+
+

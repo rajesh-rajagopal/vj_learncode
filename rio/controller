@@ -1,0 +1,6 @@
+./_outputs/rio-controller-manager --vmodule= --service-account-private-key-file=$MEGAM_HOME/kube-serviceaccount.key --root-ca-file=$MEGAM_HOME/kubernetes/server-ca.crt --cluster-signing-cert-file=$MEGAM_HOME/kubernetes/server-ca.crt --cluster-signing-key-file=$MEGAM_HOME/kubernetes/server-ca.key --enable-hostpath-provisioner=false --pvclaimbinder-sync-period=15s --feature-gates=AllAlpha=false --cloud-provider= --cloud-config= --rioconfig $MEGAM_HOME/kubernetes/controller.kubeconfig --use-service-account-credentials --aran-server=http://localhost:9636
+
+./_outputs/rio-controller-manager --service-account-private-key-file=$MEGAM_HOME/kube-serviceaccount.key --root-ca-file=$MEGAM_HOME/kubernetes/server-ca.crt --cluster-signing-cert-file=$MEGAM_HOME/kubernetes/server-ca.crt --cluster-signing-key-file=$MEGAM_HOME/kubernetes/server-ca.key --enable-hostpath-provisioner=false --pvclaimbinder-sync-period=15s --feature-gates=AllAlpha=false --cloud-provider= --cloud-config= --rioconfig $MEGAM_HOME/kubernetes/controller.kubeconfig --api-server=http://192.168.2.4:9636
+
+
+./_outputs/rio-controller-manager --api-server=http://192.168.2.4:9636 --v=4 --leader-elect=false

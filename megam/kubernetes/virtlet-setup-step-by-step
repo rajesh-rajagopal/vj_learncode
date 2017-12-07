@@ -1,0 +1,27 @@
+Step by step Process in Virtlet Setup 
+
+up 
+
+Pulls latest image mirantis/kubeadm-dind-cluster:v1.6
+   
+   dind::prepare-sys-mounts 
+      checks the mount points avail in local system sys_volume_args=(-v /boot:/boot) sys_volume_args=(-v /lib/modules:/lib/modules)
+                                                        # local name="$1"
+      dind::volume-exists                               # docker volume inspect "${name}" 
+        - if no dind::create-volume kubeadm-dind-sys    # docker volume create --label mirantis.kubeadm_dind_cluster --name "${name}"
+        - local nsenter="nsenter --mount=/proc/1/ns/mnt --"
+          docker run --rm --privileged -v kubeadm-dind-sys:/dest --pid=host busybox:1.26.2  /bin/sh -c "if nsenter --mount=/proc/1/ns/mnt -- test -d /lib/modules; then nsenter --mount=/proc/1/ns/mnt -- tar -C / -c lib/modules >/dest/sys.tar; fi"
+        - sys_volume_args=(-v kubeadm-dind-sys:/dind-sys)
+
+
+  dind::ensure-kubectl
+   checks is kubectl command avail in local system other wise download latest version kubectl binary
+   curl -sSLo "${HOME}/.kubeadm-dind-cluster/kubectl-v1.6.1" "https://storage.googleapis.com/kubernetes-release/release/v1.6.1/bin/linux/amd64/kubectl"
+   ln -fs "${HOME}/.kubeadm-dind-cluster/kubectl-v1.6.1" "{HOME}/.kubeadm-dind-cluster/kubectl"
+
+
+   if dind::check-binary kubectl
+	  local dockerized="_output/dockerized/bin/linux/amd64/kubectl"
+	  local plain="_output/local/bin/linux/amd64/kubectl"
+
+

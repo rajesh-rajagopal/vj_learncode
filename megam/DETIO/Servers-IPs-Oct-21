@@ -1,0 +1,63 @@
+Compute Node - Virtual Machines
+(128 GB - RAM, 16 -core , 2TB, 2.6TB storage partition, ubuntu 14.04.5 os)
+
+IP:94.23.19.228
+root Password:qHmgk7GvdfjH
+
+	address 94.23.19.228
+	netmask 255.255.255.0
+	network 94.23.19.0
+	broadcast 94.23.19.255
+	gateway 94.23.19.254
+	# dns-* options are implemented by the resolvconf package, if installed
+	dns-nameservers 8.8.8.8
+
+#####   interface 
+auto eth0
+iface eth0 inet static
+   address 94.23.19.228
+   netmask 255.255.255.0
+   network 94.23.19.0
+   broadcast 94.23.19.255
+   gateway 94.23.19.254
+
+iface eth0 inet6 static
+   address 2001:41d0:0002:14e4::
+   netmask 64
+   dns-nameservers 2001:41d0:3:163::1
+   post-up /sbin/ip -family inet6 route add 2001:41d0:0002:14ff:ff:ff:ff:ff dev eth0
+   post-up /sbin/ip -family inet6 route add default via 2001:41d0:0002:14ff:ff:ff:ff:ff
+   pre-down /sbin/ip -family inet6 route del default via 2001:41d0:0002:14ff:ff:ff:ff:ff
+   pre-down /sbin/ip -family inet6 route del 2001:41d0:0002:14ff:ff:ff:ff:ff dev eth0
+
+
+IP Allocation:
+213.32.56.128/28
+
+
+If you use this block in a virtual rack or a Dedicated Cloud, the following addresses must be freed up:
+Address  		: 94.23.19.228
+
+
+Network IP              : 213.32.56.128
+Gateway IP              : 213.32.56.142 (not usable)
+Broadcast IP:           : 213.32.56.143
+Netmask      		: 255.255.255.240
+
+
+
+
+##   IP Allocation:
+164.132.144.128/28
+
+If you use this block in a virtual rack or a Dedicated Cloud, the following addresses must be freed up:
+
+Network IP              : 164.132.144.128
+Gateway IP              : 164.132.144.142 (not usable)
+Broadcast IP:           : 164.132.144.143
+
+Then use the sub-netmask 255.255.255.240.
+
+
+
+

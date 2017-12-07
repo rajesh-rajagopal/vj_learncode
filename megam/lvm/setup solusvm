@@ -1,0 +1,65 @@
+Setup solusvm Master and Slave
+
+
+Register with Solusvm licensing FREE 30days trial 
+
+get license key   -- SVMTL-X2NW1-K9ZG9-V26JG-5Z96Q-VO2BO-0BE7J
+
+
+
+Master installation(centos6) 
+
+wget http://soluslabs.com/installers/solusvm/install
+chmod 755 install
+./install
+
+
+Admin area http://IP:5353/admincp
+Admin area(SSl) https://IP:5656/admincp
+Client area http://IP:5353
+Client area SSl https://IP:5656
+Admin username:vpsadmin
+Admin password:vpsadmin
+
+
+Slave installaion 
+
+Setup LVM VG disk
+
+vgdisplay 
+
+get VG NAME
+
+wget http://soluslabs.com/installers/solusvm/install
+chmod 755 install
+./install
+
+ ID Key .......... : 56IPSP3XER7OR03N7DW3FYKRIYLEO5AFY71Y9B3
+ ID Password ..... : 5QEWBYYREKHVZ3ARG0M76CC1J7Q7ZUL392K04N
+
+
+
+The final steps of a slave installation provide the user with both a Key and Password for the APIconnection.
+These keys are randomly generated and required by your SolusVM Master. If you forget to note these down you can recover them later.
+
+Master Setup 
+
+
+Login Admin 
+
+Save licensing key
+
+add Node 
+
+wget iso images and mv to /home/solusvm/kvm/iso/  in Solusvm Master 
+
+Add media
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,9 @@
+cqlsh -u [username] -p [password] IP  -f [cql file path]
+or
+cqlsh IP
+
+desc vertice;  //list all tables structure in vertice database
+
+desc tables;   //
+
+

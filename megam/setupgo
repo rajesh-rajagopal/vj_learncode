@@ -1,0 +1,131 @@
+
+##############To Set up Go for Build or run Go Packages 
+
+https://golang.org/dl/
+
+wget https://storage.googleapis.com/golang/go1.5.1.linux-amd64.tar.gz
+
+mkdir ~/software
+
+tar -C ~/software/ -xzf go1.5.1.linux-amd64.tar.gz
+
+export GOPATH=~/.go
+export GOROOT=~/software/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+############# To Build package 
+
+go to package path 
+
+rake clean
+
+rake trusty
+
+
+########### To Run go packages 
+
+
+
+
+firt make path for your work environment ( yourworkPath/go/src/github.com/megamsys/) then paste here your project ex. megamd,gulp or libgo, etc.,
+
+export GOPATH=$GOPATH:/home/USER/code/megam/workspace/go
+
+source ~/.bashrc
+
+
+then go to your project path
+for example:
+
+cd /home/megam/code/workspace/go/src/github.com/megamsys/megamd/
+
+
+
+Install the dependencies mercurial and bzr
+
+	   sudo apt-get install mercurial meld
+
+	   sudo apt-get install bzr
+           
+           sudo apt-get -f install
+
+ make   (only at first time bcz it download dependcies every time so to avoid it  next time use make test)
+
+ make test
+NOTE: if you got any error while make or make test remove ~/.go then do make
+
+
+
+
+raz#1OneEye
+
+
+
+####  
+
+rm -r Godeps
+rm ~/.go
+
+## go get github.com/tools/godep
+
+
+
+make 
+
+## godep restore ./... only
+
+godep: open Godeps/Godeps.json: no such file or directory
+
+godep save ./...
+
+export GOPATH=~/.go
+export GOPATH=$GOPATH:/home/alrin/code/megam/workspace/go
+rm -r Godeps/
+ls
+rm -rf ~/.go
+make
+ls
+godep save ./...
+go get golang.org/x/sys/unix
+godep save ./...
+ls
+cat Godeps/Godeps.json 
+ls
+rm -rf vendor
+
+
+
+
+
+
+
+
+2160  make test
+ 2161  export GOPATH=~/.go
+ 2162  make test
+ 2163  ls
+ 2164  godep save ./...
+ 2165  export GOPATH=$GOPATH:/home/alrin/code/megam/workspace/go
+ 2166  godep save ./...
+ 2167  ls
+ 
+ 
+ 2168  rm -r Godeps/
+ 2169  ls
+ 2170  rm -r ~/.go
+ 2171  rm -rf ~/.go
+ 2172  make
+ 2173  ls
+ 2174  godep save ./...
+ 2175  go get golang.org/x/sys/unix
+ 2176  godep save ./...
+ 2177  ls
+ 2178  cat Godeps/Godeps.json 
+ 2179  ls
+ 2180  rm -rf vendor
+
+https://github.com/kubevirt/kubevirt/blob/master/Makefile
+go get github.com/kardianos/govendor
+
+go get golang.org/x/tools/cmd/goimports
+ 	

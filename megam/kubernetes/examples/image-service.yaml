@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: 2017-05-24T10:10:33Z
+  name: image-service
+  namespace: kube-system
+  resourceVersion: "20826"
+  selfLink: /api/v1/namespaces/kube-system/services/image-service
+  uid: 3903759b-4069-11e7-b2b3-02420ac00002
+spec:
+  clusterIP: 10.110.23.71
+  ports:
+  - name: web
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    role: image-server
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+

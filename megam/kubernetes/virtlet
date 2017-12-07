@@ -1,0 +1,150 @@
+https://asciinema.org/a/1a6xp5j4o22rnsx9wpvumd4kt
+https://asciinema.org/a/96275
+
+./openshift start
+
+
+$ ./oc login
+Authentication required for https://localhost:8443 (openshift)
+Username: vijaykanth
+Password: 
+Login successful.
+
+You have access to the following projects and can switch between them with 'oc project <projectname>':
+
+  * default
+    kube-system
+    openshift
+    openshift-infra
+
+Using project "default".
+
+./oadm policy add-cluster-role-to-user cluster-admin vijaykanth --config=./openshift.local.config/master/admin.kubeconfig
+
+$ ./oc get nodes
+NAME      STATUS    AGE
+vijaywk   Ready     6d
+
+./kubectl create -f image-service.yaml -f image-server.yaml
+
+service "image-service" created
+deployment "image-server" created
+
+./oc get pods -o wide -w -n kube-system
+NAME                            READY     STATUS                  RESTARTS   AGE       IP           NODE
+image-server-2869504739-54fpw   0/1       Init:CrashLoopBackOff   6          10m       172.17.0.2   vijaywk
+
+
+./kubectl get pods -o wide -w -n kube-system
+NAME                            READY     STATUS                  RESTARTS   AGE       IP           NODE
+image-server-2869504739-54fpw   0/1       Init:CrashLoopBackOff   6          10m       172.17.0.2   vijaywk
+
+
+./kubectl label node kube-node-1 extraRuntime=virtlet 
+node "vijaywk" labeled
+
+ok, we're ready to start virtlet!  
+
+./kubectl label --overwrite node kube-node-1 extraRuntime=virt 
+
+
+./kubectl create -f virtlet-ds.yaml
+
+error: error validating "virtlet-ds.yaml": error validating data: [found invalid field initContainers for v1.PodSpec, found invalid field affinity for v1.PodSpec]; if you choose to ignore these errors, turn validation off with --validate=false
+
+$ ./kubectl create -f virtlet-ds.yaml --validate=false
+serviceaccount "virtlet" created
+Error from server (Invalid): error when creating "virtlet-ds.yaml": DaemonSet.extensions "virtlet" is invalid: spec.template.spec.dnsPolicy: Unsupported value: "ClusterFirstWithHostNet": supported values: ClusterFirst, Default
+[unable to recognize "virtlet-ds.yaml": no matches for rbac.authorization.k8s.io/, Kind=ClusterRoleBinding, unable to recognize "virtlet-ds.yaml": no matches for rbac.authorization.k8s.io/, Kind=ClusterRole]
+
+./kubectl create -f virtlet-ds.yaml --validate=false
+clusterrole "virtlet" created
+
+Error from server (Invalid): error when creating "virtlet-ds.yaml": DaemonSet.extensions "virtlet" is invalid: spec.template.spec.dnsPolicy: Unsupported value: "ClusterFirstWithHostNet": supported values: ClusterFirst, Default
+Error from server (NotFound): error when creating "virtlet-ds.yaml": role.authorization.openshift.io "virtlet" not found
+
+
+
+./kubectl create -f cirros-vm.yaml
+
+./kubectl create -f cirros-vm.yaml --validate=false
+Error from server (Forbidden): error when creating "cirros-vm.yaml": pods "cirros-vm" is forbidden: unable to validate against any security context constraint: [spec.containers[0].securityContext.volumes[0]: Invalid value: "flexVolume": flexVolume volumes are not allowed to be used]
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cirros-vm
+  annotations:
+  kubernetes.io/target-runtime: virtlet
+  scheduler.alpha.kubernetes.io/affinity: >
+        { 
+         "nodeAffinity": {
+         "requiredDuringSchedulingIgnoredDuringExecution": {
+            "nodeSelectorTerms": [
+              {  "matchExpressions": [
+                {
+                  "key": "extraRuntime",
+                  "operator": "In",
+                  "values": ["virtlet"]
+                }
+               ]
+              }
+            ]
+          }
+         }
+        }
+spec:
+containers:
+- name: cirros-vm
+  image: virtlet/image-service/cirros
+
+./kubectl create -f cirros-vm.yaml
+
+pod "cirros-vm" created
+
+./oc get pods -o wide -w
+
+NAME        READY     STATUS             RESTARTS   AGE       IP           NODE
+cirros-vm   0/1       ImagePullBackOff   0          1m        172.17.0.3   vijaywk
+
+
+./oc get pods -o wide -w -n kube-system
+
+kubectl exec ${opts} -n kube-system "${pod}" -- virsh ${args[@]+"${args[@]}"}
+
+
+kubectl run -it --rm busybox --image busybox /bin/sh
+
+
+PR #13293 added a safety check to not remove a pod directory if the child
+volumes directory is not empty. This logic is faulty because kubelet may have
+directory structures podUID/volumes/volumeKind/volumeName. E.g.,
+056db95d-50ee-11e5-a2e4-42010af0ba1d/volumes/kubernetes.io~empty-dir/default-token-al3r2
+
+This change fixes that by properly listing all volumes under a pod.
+
+Hi @maciaszczykm , we recently have a fix #27970 to unmount orphaned pods volumes when kubelet restarts. Basically It will periodically scans pods directories, and put this information into volume reconciler in kubelet and eventually the volume will be cleaned up (unmounted) if it belongs to an orphaned pod. Please let us know if you still experience any issue related to this.
+
+
+{                                                                                  "metadata": {                                                                     "name": "testvm"                                                              },                                                                              "apiVersion": "kubevirt.io/v1alpha1",                                           "kind": "VM",                                                                   "spec": {                                                         
+
+                      "nodeSelector": {"kubernetes.io/hostname":"master"}                     }                                                                            }  
+
+
+https://github.com/kubevirt/kubevirt/blob/master/Makefile
+go get github.com/kardianos/govendor
+
+go get golang.org/x/tools/cmd/goimports
+
+root@vijaywk:~/code/megam/workspace/go/src/github.com/megamsys/abcd/_output/local/bin/linux/amd64/openshift.local.volumes/pods# ls
+0978fe0a-3f8b-11e7-9c21-54ab3a8328d4  c7c77dea-3c81-11e7-96a4-54ab3a8328d4  ff20c8d3-3f83-11e7-8660-54ab3a8328d4
+0a4d0053-3f83-11e7-8660-54ab3a8328d4  cd2fc158-3fa1-11e7-a22e-54ab3a8328d4
+
+~/code/megam/workspace/go/src/github.com/megamsys/abcd/_output/local/bin/linux/amd64/openshift.local.volumes/pods# mv ./*
+
+docker stop 7e3853b4de96 738876d8a39c 468ee0ca544b
+
+oc create -f ~/learncode/megam/kubernetes/secret.yaml 
+
+oc create -f ~/learncode/megam/kubernetes/one-master.yaml
+

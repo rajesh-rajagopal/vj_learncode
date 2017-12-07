@@ -1,0 +1,84 @@
+demo.virtengine server
+https://docs.google.com/document/d/1G74M2TgXaXOz2fQuuQiWSZnH8ES929A7LRY7vcc1HfU/edit
+
+Azure account
+user      : megam
+# Name : cloud.det.io
+password  : Verticeunleashed2016!
+IP address : 13.73.206.106
+
+ssh megam@13.73.206.106
+Verticeunleashed2016!
+
+Server Gateway IP : 40.112.217.239
+
+Ransom IT server details
+
+180.149.228.226 - packages, master, cassandra
+180.149.228.227 - lvm, node
+180.149.228.228 - Not Used ( Working)
+
+Root password for all servers is: a9bjr2s7dxv2
+
+ssh root@180.149.228.226
+a9bjr2s7dxv2
+
+OpenNebula 
+180.149.228.226:9869
+
+ipaddress : 180.149.228.226
+port : 9869
+user : oneadmin
+pass : 6cdbe0b7efca649ab083dfc516778bfb
+
+Cassandra
+cqlsh 180.149.228.226 -u vertadmin -p vertadmin
+
+Pschyz server
+
+IPaddress	Username	Password
+
+45.35.249.70	jonathan	VirtEngineUnleashed2016! - Opennebula Master 
+45.35.249.73	jonathan	VirtEngineUnleashed2016! - 
+45.35.249.76	jonathan	VirtEngineUnleashed2016! - Opennebula node
+
+SSH
+ssh jonathan@45.35.249.70
+VirtEngineUnleashed2016!
+
+Opennebula Sunstone UI
+IP address : 45.35.249.70
+Port       : 9869
+Username   : oneadmin
+Password   : ugNivyirkEj4
+OpenNebula
+45.35.249.70:9869
+oneadmin:ugNivyirkEj4
+
+IPv4 block: 45.35.249.64/27
+Gateway: 45.35.249.65
+Subnet: 255.255.255.224
+Nameserver: 8.8.8.8
+
+
+get.virtengine.com
+ssh jonathan@52.183.25.155
+VirtEngineUnleashed2016!
+Build packages
+
+
+Server info:Hostname: 
+acloud-ams0001
+IP: 147.75.82.85 
+Root password: /I;637HeyROS:  
+Ubuntu 16.04
+
+
+acloud-ams0001
+IP: 147.75.82.85
+Root password: /I;637HeyROS:  
+Ubuntu 16.04
+Passw: BPz^03G@9DdMGjQTuV
+
+
+

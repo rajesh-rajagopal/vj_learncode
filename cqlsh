@@ -1,0 +1,6 @@
+#!/bin/sh
+
+
+##  Delete all rows from a table
+
+TRUNCATE table_name;   (or)  TRUNCATE keyspace_name.table_name; 

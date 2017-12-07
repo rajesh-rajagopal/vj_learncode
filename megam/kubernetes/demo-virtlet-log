@@ -1,0 +1,603 @@
+vijay@vijaywk:~/code/megam/workspace/go/src/github.com/megamsys/abcd/_output/bin$ ./demo.sh --help
+bash: ./demo.sh: Permission denied
+vijay@vijaywk:~/code/megam/workspace/go/src/github.com/megamsys/abcd/_output/bin$ chmod +x demo.sh 
+vijay@vijaywk:~/code/megam/workspace/go/src/github.com/megamsys/abcd/_output/bin$ ./demo.sh 
+* Will download dind-cluster-v1.6.sh into current directory 
+Press Enter to continue or Ctrl-C to stop.
+
+--2017-05-24 11:47:07--  https://raw.githubusercontent.com/Mirantis/kubeadm-dind-cluster/master/fixed/dind-cluster-v1.6.sh
+Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 151.101.8.133
+Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|151.101.8.133|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 29182 (28K) [text/plain]
+Saving to: ‘dind-cluster-v1.6.sh’
+
+dind-cluster-v1.6.sh                100%[==================================================================>]  28.50K  --.-KB/s    in 0.04s   
+
+2017-05-24 11:47:09 (634 KB/s) - ‘dind-cluster-v1.6.sh’ saved [29182/29182]
+
+* Will now clear any kubeadm-dind-cluster data on the current Docker 
+VM console will be attached after Virtlet setup is complete, press Ctrl-] to detach.
+To clean up the cluster, use './dind-cluster-v1.6.sh clean'
+Press Enter to continue or Ctrl-C to stop.
+
+WARNING: No swap limit support
+WARNING: No swap limit support
+WARNING: No swap limit support
+WARNING: No swap limit support
+* Making sure DIND image is up to date 
+v1.6: Pulling from mirantis/kubeadm-dind-cluster
+952132ac251a: Pull complete 
+82659f8f1b76: Pull complete 
+c19118ca682d: Pull complete 
+8296858250fe: Pull complete 
+24e0251a0e2c: Pull complete 
+2545d638d973: Pull complete 
+e0b45d7ea196: Pull complete 
+8d7d40f3e602: Pull complete 
+216f5a138844: Pull complete 
+c71de27d6b60: Pull complete 
+bfd6840ec69e: Pull complete 
+7e8087634df1: Pull complete 
+36a837335877: Pull complete 
+5c22733dbb50: Pull complete 
+151695f59fdf: Pull complete 
+6d1e38c49f4b: Pull complete 
+363775216787: Pull complete 
+d9fa4bdf14ff: Pull complete 
+08ea4cd83760: Pull complete 
+1cdfe2de326d: Pull complete 
+76baaff3308a: Pull complete 
+7e35f6c681cb: Pull complete 
+b54cfe8b33b6: Pull complete 
+85b2e6963eb6: Pull complete 
+Digest: sha256:14aa0bd6e8a92d485bc9eecfffe18df77904a7903dee536bd8d587cb33abe917
+Status: Downloaded newer image for mirantis/kubeadm-dind-cluster:v1.6
+--2017-05-24 11:51:07--  https://storage.googleapis.com/kubernetes-release/release/v1.6.1/bin/linux/amd64/kubectl
+Resolving storage.googleapis.com (storage.googleapis.com)... 172.217.27.16, 2404:6800:4003:803::2010
+Connecting to storage.googleapis.com (storage.googleapis.com)|172.217.27.16|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 70704507 (67M) [application/octet-stream]
+Saving to: ‘/home/vijay/.kubeadm-dind-cluster/kubectl-v1.6.1’
+
+/home/vijay/.kubeadm-dind-cluster/k 100%[==================================================================>]  67.43M  1.99MB/s    in 37s     
+
+2017-05-24 11:51:46 (1.83 MB/s) - ‘/home/vijay/.kubeadm-dind-cluster/kubectl-v1.6.1’ saved [70704507/70704507]
+
+/home/vijay/.kubeadm-dind-cluster/kubectl-v1.6.1: OK
+* Starting DIND container: kube-master
+* Running kubeadm: init --pod-network-cidr=10.244.0.0/16 --skip-preflight-checks
+Initializing machine ID from random generator.
+Synchronizing state of docker.service with SysV init with /lib/systemd/systemd-sysv-install...
+Executing /lib/systemd/systemd-sysv-install enable docker
+Loaded image: gcr.io/google_containers/exechealthz-amd64:1.1
+Loaded image: gcr.io/google_containers/kube-dnsmasq-amd64:1.3
+Loaded image: gcr.io/google_containers/pause-amd64:3.0
+Loaded image: gcr.io/google_containers/etcd-amd64:2.2.5
+Loaded image: mirantis/hypokube:base
+Loaded image: gcr.io/google_containers/kube-discovery-amd64:1.0
+Loaded image: gcr.io/google_containers/kubedns-amd64:1.7
+
+real	0m39.278s
+user	0m0.816s
+sys	0m0.664s
+Sending build context to Docker daemon 190.8 MB
+Step 1 : FROM mirantis/hypokube:base
+ ---> 23ee60a4ed28
+Step 2 : COPY hyperkube /hyperkube
+ ---> b3622eeec773
+Removing intermediate container 43bcca1d9a5d
+Successfully built b3622eeec773
+Created symlink from /etc/systemd/system/multi-user.target.wants/kubelet.service to /lib/systemd/system/kubelet.service.
+[kubeadm] WARNING: kubeadm is in beta, please do not use it for production clusters.
+[init] Using Kubernetes version: v1.6.4
+[init] Using Authorization mode: RBAC
+[preflight] Skipping pre-flight checks
+[certificates] Generated CA certificate and key.
+[certificates] Generated API server certificate and key.
+[certificates] API Server serving cert is signed for DNS names [kube-master kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local] and IPs [10.96.0.1 10.192.0.2]
+[certificates] Generated API server kubelet client certificate and key.
+[certificates] Generated service account token signing key and public key.
+[certificates] Generated front-proxy CA certificate and key.
+[certificates] Generated front-proxy client certificate and key.
+[certificates] Valid certificates and keys now exist in "/etc/kubernetes/pki"
+[kubeconfig] Wrote KubeConfig file to disk: "/etc/kubernetes/scheduler.conf"
+[kubeconfig] Wrote KubeConfig file to disk: "/etc/kubernetes/admin.conf"
+[kubeconfig] Wrote KubeConfig file to disk: "/etc/kubernetes/kubelet.conf"
+[kubeconfig] Wrote KubeConfig file to disk: "/etc/kubernetes/controller-manager.conf"
+[apiclient] Created API client, waiting for the control plane to become ready
+[apiclient] All control plane components are healthy after 46.307312 seconds
+[apiclient] Waiting for at least one node to register
+[apiclient] First node has registered after 6.071463 seconds
+[token] Using token: 563641.f6cbb3a75a7b7f02
+[apiconfig] Created RBAC rules
+[addons] Created essential addon: kube-proxy
+[addons] Created essential addon: kube-dns
+
+Your Kubernetes master has initialized successfully!
+
+To start using your cluster, you need to run (as a regular user):
+
+  sudo cp /etc/kubernetes/admin.conf $HOME/
+  sudo chown $(id -u):$(id -g) $HOME/admin.conf
+  export KUBECONFIG=$HOME/admin.conf
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  http://kubernetes.io/docs/admin/addons/
+
+You can now join any number of machines by running the following on each node
+as root:
+
+  kubeadm join --token 563641.f6cbb3a75a7b7f02 10.192.0.2:6443
+
+
+real	1m1.153s
+user	0m4.248s
+sys	0m0.344s
+Warning: kubectl apply should be used on resource created by either kubectl create --save-config or kubectl apply
+daemonset "kube-proxy" configured
+No resources found
+* Setting cluster config 
+Cluster "dind" set.
+Context "dind" set.
+Switched to context "dind".
+* Deploying k8s dashboard 
+deployment "kubernetes-dashboard" created
+service "kubernetes-dashboard" created
+clusterrolebinding "add-on-cluster-admin" created
+* Starting node container: 1
+* Starting DIND container: kube-node-1
+* Node container started: 1
+* Starting node container: 2
+* Starting DIND container: kube-node-2
+* Node container started: 2
+* Joining node: 1
+* Joining node: 2
+* Running kubeadm: join --skip-preflight-checks --token 563641.f6cbb3a75a7b7f02 10.192.0.2:6443
+* Running kubeadm: join --skip-preflight-checks --token 563641.f6cbb3a75a7b7f02 10.192.0.2:6443
+Initializing machine ID from random generator.
+Initializing machine ID from random generator.
+Synchronizing state of docker.service with SysV init with /lib/systemd/systemd-sysv-install...
+Executing /lib/systemd/systemd-sysv-install enable docker
+Synchronizing state of docker.service with SysV init with /lib/systemd/systemd-sysv-install...
+Executing /lib/systemd/systemd-sysv-install enable docker
+Loaded image: gcr.io/google_containers/exechealthz-amd64:1.1
+Loaded image: gcr.io/google_containers/kube-dnsmasq-amd64:1.3
+Loaded image: gcr.io/google_containers/pause-amd64:3.0
+Loaded image: gcr.io/google_containers/etcd-amd64:2.2.5
+Loaded image: mirantis/hypokube:base
+Loaded image: gcr.io/google_containers/kube-discovery-amd64:1.0
+Loaded image: gcr.io/google_containers/kubedns-amd64:1.7
+
+real	2m22.152s
+user	0m1.092s
+sys	0m0.868s
+Loaded image: gcr.io/google_containers/exechealthz-amd64:1.1
+Loaded image: gcr.io/google_containers/kube-dnsmasq-amd64:1.3
+Loaded image: gcr.io/google_containers/pause-amd64:3.0
+Loaded image: gcr.io/google_containers/etcd-amd64:2.2.5
+Loaded image: mirantis/hypokube:base
+Loaded image: gcr.io/google_containers/kube-discovery-amd64:1.0
+Loaded image: gcr.io/google_containers/kubedns-amd64:1.7
+
+real	2m23.588s
+user	0m1.040s
+sys	0m0.896s
+Sending build context to Docker daemon 190.8 MB
+Step 1 : FROM mirantis/hypokube:base
+ ---> 23ee60a4ed28ext to Docker daemon 155.4 MB
+Step 2 : COPY hyperkube /hyperkube
+Sending build context to Docker daemon 190.8 MB
+Step 1 : FROM mirantis/hypokube:base
+ ---> 23ee60a4ed28
+Step 2 : COPY hyperkube /hyperkube
+
+
+ ---> 47b41c65b31b
+Removing intermediate container a6c07cc00a25
+Successfully built 47b41c65b31b
+ ---> 410e7e808178
+Removing intermediate container e0c1f5bab535
+Successfully built 410e7e808178
+Created symlink from /etc/systemd/system/multi-user.target.wants/kubelet.service to /lib/systemd/system/kubelet.service.
+Created symlink from /etc/systemd/system/multi-user.target.wants/kubelet.service to /lib/systemd/system/kubelet.service.
+[kubeadm] WARNING: kubeadm is in beta, please do not use it for production clusters.
+[preflight] Skipping pre-flight checks
+[kubeadm] WARNING: kubeadm is in beta, please do not use it for production clusters.
+[preflight] Skipping pre-flight checks
+[discovery] Trying to connect to API Server "10.192.0.2:6443"
+[discovery] Trying to connect to API Server "10.192.0.2:6443"
+[discovery] Created cluster-info discovery client, requesting info from "https://10.192.0.2:6443"
+[discovery] Created cluster-info discovery client, requesting info from "https://10.192.0.2:6443"
+[discovery] Cluster info signature and contents are valid, will use API Server "https://10.192.0.2:6443"
+[discovery] Successfully established connection with API Server "10.192.0.2:6443"
+[discovery] Cluster info signature and contents are valid, will use API Server "https://10.192.0.2:6443"
+[discovery] Successfully established connection with API Server "10.192.0.2:6443"
+[bootstrap] Detected server version: v1.6.2
+[bootstrap] The server supports the Certificates API (certificates.k8s.io/v1beta1)
+[csr] Created API client to obtain unique certificate for this node, generating keys and certificate signing request
+[bootstrap] Detected server version: v1.6.2
+[bootstrap] The server supports the Certificates API (certificates.k8s.io/v1beta1)
+[csr] Created API client to obtain unique certificate for this node, generating keys and certificate signing request
+[csr] Received signed certificate from the API server, generating KubeConfig...
+[kubeconfig] Wrote KubeConfig file to disk: "/etc/kubernetes/kubelet.conf"
+
+Node join complete:
+* Certificate signing request sent to master and response
+  received.
+* Kubelet informed of new secure connection details.
+
+Run 'kubectl get nodes' on the master to see this machine join.
+
+real	0m9.285s
+user	0m0.308s
+sys	0m0.068s
+[csr] Received signed certificate from the API server, generating KubeConfig...
+[kubeconfig] Wrote KubeConfig file to disk: "/etc/kubernetes/kubelet.conf"
+
+Node join complete:
+* Certificate signing request sent to master and response
+  received.
+* Kubelet informed of new secure connection details.
+
+Run 'kubectl get nodes' on the master to see this machine join.
+
+real	0m9.763s
+user	0m0.288s
+sys	0m0.056s
+* Node joined: 1
+* Node joined: 2
+* Patching kube-dns deployment to make it start faster 
+Warning: kubectl apply should be used on resource created by either kubectl create --save-config or kubectl apply
+deployment "kube-dns" configured
+* Taking snapshot of the cluster 
+deployment "kube-dns" scaled
+deployment "kubernetes-dashboard" scaled
+WARNING: controller manager glitch: dns & dashboard won't stop; pods may 'blink' for some time after restore
+* Waiting for kube-proxy and the nodes 
+..[done]
+* Bringing up kube-dns and kubernetes-dashboard 
+deployment "kube-dns" scaled
+deployment "kubernetes-dashboard" scaled
+...................................[done]
+NAME          STATUS    AGE       VERSION
+kube-master   Ready     9m        v1.6.2
+kube-node-1   Ready     4m        v1.6.2
+kube-node-2   Ready     4m        v1.6.2
+* Access dashboard at: http://localhost:8080/ui
+* Applying label to kube-node-1: extraRuntime=virtlet
+node "kube-node-1" labeled
+* Checking for KVM support... 
+Unable to find image 'mirantis/virtlet:latest' locally
+latest: Pulling from mirantis/virtlet
+b6f892c0043b: Pulling fs layer
+55010f332b04: Pulling fs layer
+2955fb827c94: Pulling fs layer
+3deef3fcbd30: Pulling fs layer
+cf9722e506aa: Pulling fs layer
+cc37771a2381: Pulling fs layer
+6b8ddb10ffdd: Pulling fs layer
+c6401bc82498: Pulling fs layer
+3d2e84bbdb2b: Pulling fs layer
+b77445d0c93c: Pulling fs layer
+7e00862f6d43: Pulling fs layer
+0cecda4041c6: Pulling fs layer
+c6401bc82498: Waiting
+3d2e84bbdb2b: Waiting
+3deef3fcbd30: Waiting
+b77445d0c93c: Waiting
+0cecda4041c6: Waiting
+7e00862f6d43: Waiting
+cf9722e506aa: Waiting
+cc37771a2381: Waiting
+6b8ddb10ffdd: Waiting
+55010f332b04: Download complete
+2955fb827c94: Verifying Checksum
+2955fb827c94: Download complete
+3deef3fcbd30: Verifying Checksum
+3deef3fcbd30: Download complete
+cf9722e506aa: Download complete
+6b8ddb10ffdd: Verifying Checksum
+6b8ddb10ffdd: Download complete
+c6401bc82498: Verifying Checksum
+c6401bc82498: Download complete
+3d2e84bbdb2b: Verifying Checksum
+3d2e84bbdb2b: Download complete
+b77445d0c93c: Verifying Checksum
+b77445d0c93c: Download complete
+7e00862f6d43: Download complete
+b6f892c0043b: Verifying Checksum
+b6f892c0043b: Download complete
+0cecda4041c6: Verifying Checksum
+0cecda4041c6: Download complete
+b6f892c0043b: Pull complete
+55010f332b04: Pull complete
+2955fb827c94: Pull complete
+3deef3fcbd30: Pull complete
+cf9722e506aa: Pull complete
+cc37771a2381: Verifying Checksum
+cc37771a2381: Download complete
+cc37771a2381: Pull complete
+6b8ddb10ffdd: Pull complete
+c6401bc82498: Pull complete
+3d2e84bbdb2b: Pull complete
+b77445d0c93c: Pull complete
+7e00862f6d43: Pull complete
+0cecda4041c6: Pull complete
+Digest: sha256:20aa4e034d64167ec98fc12bb18066401ff4db6062979f64bea044b7e5f13480
+Status: Downloaded newer image for mirantis/virtlet:latest
+INFO: /dev/kvm does not exist
+HINT:   sudo modprobe kvm_amd
+INFO: Your CPU supports KVM extensions
+KVM acceleration can be used
+* Deploying Virtlet DaemonSet with KVM support 
+running in local mode...
+daemonset "virtlet" created
+clusterrolebinding "virtlet" created
+clusterrole "virtlet" created
+serviceaccount "virtlet" created
+* Waiting for: Virtlet DaemonSet
+...............................................[done]
+service "nginx" created
+deployment "nginx" created
+* Starting Image Server 
+deployment "image-server" created
+service "image-service" created
+* Waiting for: Image Service
+.....................................[done]
+* Starting sample CirrOS VM 
+pod "cirros-vm" created
+* Waiting for: CirrOS VM
+error: unable to upgrade connection: container not found ("virtlet")
+.error: unable to upgrade connection: container not found ("virtlet")
+
+
+
+
+
+
+
+docker exec -i -t 738876d8a39c /bin/bash
+root@kube-master:/# cd
+root@kube-master:~# kubectl get vms
+the server doesn't have a resource type "vms"
+root@kube-master:~# kubectl get pods
+NAME                    READY     STATUS              RESTARTS   AGE
+cirros-vm               0/1       ContainerCreating   0          9m
+nginx-158599303-gfmb8   1/1       Running             0          10m
+root@kube-master:~# kubectl get nodes
+NAME          STATUS    AGE       VERSION
+kube-master   Ready     25m       v1.6.2
+kube-node-1   Ready     20m       v1.6.2
+kube-node-2   Ready     20m       v1.6.2
+root@kube-master:~# docker ps
+CONTAINER ID        IMAGE                                                                                                         COMMAND                  CREATED             STATUS              PORTS               NAMES
+679a821d33f5        b3622eeec773                                                                                                  "/usr/local/bin/kube-"   19 minutes ago      Up 19 minutes                           k8s_kube-proxy_kube-proxy-bbl36_kube-system_a2b6e734-4049-11e7-a41e-02420ac00002_1
+d9ca4a801c8c        gcr.io/google_containers/pause-amd64:3.0                                                                      "/pause"                 19 minutes ago      Up 19 minutes                           k8s_POD_kube-proxy-bbl36_kube-system_a2b6e734-4049-11e7-a41e-02420ac00002_1
+8ae8b2574e62        gcr.io/google_containers/etcd-amd64@sha256:d83d3545e06fb035db8512e33bd44afb55dea007a3abd7b17742d3ac6d235940   "etcd --listen-client"   19 minutes ago      Up 19 minutes                           k8s_etcd_etcd-kube-master_kube-system_7075157cfd4524dbe0951e00a8e3129e_1
+a892a9093d67        b3622eeec773                                                                                                  "/hyperkube controlle"   19 minutes ago      Up 19 minutes                           k8s_kube-controller-manager_kube-controller-manager-kube-master_kube-system_848a1375670b2356a719b526aa06ab97_1
+83234954f5fa        b3622eeec773                                                                                                  "/hyperkube apiserver"   19 minutes ago      Up 19 minutes                           k8s_kube-apiserver_kube-apiserver-kube-master_kube-system_5ab8bd97cf7ca95b6a1cad0c04bd8ba5_1
+a0e56579e2be        b3622eeec773                                                                                                  "/hyperkube scheduler"   19 minutes ago      Up 19 minutes                           k8s_kube-scheduler_kube-scheduler-kube-master_kube-system_0b6b6a3f0e7950c30079334f3c0d3545_1
+17859a1750ed        gcr.io/google_containers/pause-amd64:3.0                                                                      "/pause"                 19 minutes ago      Up 19 minutes                           k8s_POD_kube-controller-manager-kube-master_kube-system_848a1375670b2356a719b526aa06ab97_1
+89f66a43fe81        gcr.io/google_containers/pause-amd64:3.0                                                                      "/pause"                 19 minutes ago      Up 19 minutes                           k8s_POD_kube-apiserver-kube-master_kube-system_5ab8bd97cf7ca95b6a1cad0c04bd8ba5_1
+db595a033175        gcr.io/google_containers/pause-amd64:3.0                                                                      "/pause"                 19 minutes ago      Up 19 minutes                           k8s_POD_etcd-kube-master_kube-system_7075157cfd4524dbe0951e00a8e3129e_1
+a5027bdf6d48        gcr.io/google_containers/pause-amd64:3.0                                                                      "/pause"                 19 minutes ago      Up 19 minutes                           k8s_POD_kube-scheduler-kube-master_kube-system_0b6b6a3f0e7950c30079334f3c0d3545_1
+root@kube-master:~# curl http://nginx.default.svc.cluster.local
+curl: (6) Could not resolve host: nginx.default.svc.cluster.local
+root@kube-master:~# 
+root@kube-master:~# 
+root@kube-master:~# ls -la /k8s/
+total 254584
+drwxr-xr-x  2 root root        38 May 18 15:14 .
+drwxr-xr-x 74 root root       231 May 24 06:24 ..
+-rwxr-xr-x  1 root root 190821568 May 18 15:14 hyperkube
+-rwxr-xr-x  1 root root  69865962 May 18 15:14 kubeadm
+root@kube-master:~#  kubectl get node kube-node-1 -o yaml
+apiVersion: v1
+kind: Node
+metadata:
+  annotations:
+    node.alpha.kubernetes.io/ttl: "0"
+  creationTimestamp: 2017-05-24T06:29:15Z
+  labels:
+    beta.kubernetes.io/arch: amd64
+    beta.kubernetes.io/os: linux
+    extraRuntime: virtlet
+    kubernetes.io/hostname: kube-node-1
+  name: kube-node-1
+  resourceVersion: "3379"
+  selfLink: /api/v1/nodeskube-node-1
+  uid: 4f1504fe-404a-11e7-a41e-02420ac00002
+spec:
+  externalID: kube-node-1
+  podCIDR: 10.244.1.0/24
+status:
+  addresses:
+  - address: 10.192.0.3
+    type: LegacyHostIP
+  - address: 10.192.0.3
+    type: InternalIP
+  - address: kube-node-1
+    type: Hostname
+  allocatable:
+    cpu: "4"
+    memory: 3884708Ki
+    pods: "110"
+  capacity:
+    cpu: "4"
+    memory: 3987108Ki
+    pods: "110"
+  conditions:
+  - lastHeartbeatTime: 2017-05-24T06:57:32Z
+    lastTransitionTime: 2017-05-24T06:29:15Z
+    message: kubelet has sufficient disk space available
+    reason: KubeletHasSufficientDisk
+    status: "False"
+    type: OutOfDisk
+  - lastHeartbeatTime: 2017-05-24T06:57:32Z
+    lastTransitionTime: 2017-05-24T06:29:15Z
+    message: kubelet has sufficient memory available
+    reason: KubeletHasSufficientMemory
+    status: "False"
+    type: MemoryPressure
+  - lastHeartbeatTime: 2017-05-24T06:57:32Z
+    lastTransitionTime: 2017-05-24T06:29:15Z
+    message: kubelet has no disk pressure
+    reason: KubeletHasNoDiskPressure
+    status: "False"
+    type: DiskPressure
+  - lastHeartbeatTime: 2017-05-24T06:57:32Z
+    lastTransitionTime: 2017-05-24T06:29:16Z
+    message: kubelet is posting ready status
+    reason: KubeletReady
+    status: "True"
+    type: Ready
+  daemonEndpoints:
+    kubeletEndpoint:
+      Port: 10250
+  images:
+  - names:
+    - mirantis/virtlet@sha256:20aa4e034d64167ec98fc12bb18066401ff4db6062979f64bea044b7e5f13480
+    - mirantis/virtlet:latest
+    sizeBytes: 696116908
+  - names:
+    - mirantis/hypokube:final
+    sizeBytes: 322725192
+  - names:
+    - gcr.io/google_containers/kube-discovery-amd64:1.0
+    sizeBytes: 134189396
+  - names:
+    - mirantis/hypokube:base
+    sizeBytes: 131903624
+  - names:
+    - gcr.io/google_containers/kubernetes-dashboard-amd64@sha256:4ad64dfa7159ff4a99a65a4f96432f2fdb6542857cf230858b3159017833a882
+    - gcr.io/google_containers/kubernetes-dashboard-amd64:v1.6.0
+    sizeBytes: 108572029
+  - names:
+    - gcr.io/google_containers/kubedns-amd64:1.7
+    sizeBytes: 55064828
+  - names:
+    - gcr.io/google_containers/k8s-dns-kube-dns-amd64@sha256:33914315e600dfb756e550828307dfa2b21fb6db24fe3fe495e33d1022f9245d
+    - gcr.io/google_containers/k8s-dns-kube-dns-amd64:1.14.1
+    sizeBytes: 52360891
+  - names:
+    - gcr.io/google_containers/k8s-dns-dnsmasq-nanny-amd64@sha256:89c9a1d3cfbf370a9c1a949f39f92c1dc2dbe8c3e6cc1802b7f2b48e4dfe9a9e
+    - gcr.io/google_containers/k8s-dns-dnsmasq-nanny-amd64:1.14.1
+    sizeBytes: 44848461
+  - names:
+    - gcr.io/google_containers/k8s-dns-sidecar-amd64@sha256:d33a91a5d65c223f410891001cd379ac734d036429e033865d700a4176e944b0
+    - gcr.io/google_containers/k8s-dns-sidecar-amd64:1.14.1
+    sizeBytes: 44520920
+  - names:
+    - gcr.io/google_containers/etcd-amd64:2.2.5
+    sizeBytes: 30445938
+  - names:
+    - gcr.io/google_containers/exechealthz-amd64:1.1
+    sizeBytes: 8332223
+  - names:
+    - gcr.io/google_containers/kube-dnsmasq-amd64:1.3
+    sizeBytes: 5129712
+  - names:
+    - busybox@sha256:c79345819a6882c31b41bc771d9a94fc52872fa651b36771fbe0c8461d7ee558
+    - busybox:1.26.2
+    sizeBytes: 1106304
+  - names:
+    - gcr.io/google_containers/pause-amd64:3.0
+    sizeBytes: 746888
+  nodeInfo:
+    architecture: amd64
+    bootID: 172d24eb-511b-412c-b8ef-ae3a88cdafaf
+    containerRuntimeVersion: docker://1.12.6
+    kernelVersion: 4.4.0-75-generic
+    kubeProxyVersion: v1.6.2
+    kubeletVersion: v1.6.2
+    machineID: 89d535617f844cea801816686e7b333c
+    operatingSystem: linux
+    osImage: Ubuntu 16.04.2 LTS
+    systemUUID: 7B9E1668-DCE1-0C44-8165-54AB3A8328D4
+  volumesInUse:
+  - virtlet/flexvolume_driver/nocloud
+root@kube-master:~# 
+
+root@kube-master:~# kubectl get pods 
+NAME                    READY     STATUS              RESTARTS   AGE
+cirros-vm               0/1       ContainerCreating   0          28m
+nginx-158599303-gfmb8   1/1       Running             0          29m
+root@kube-master:~# kubectl get nodes
+NAME          STATUS    AGE       VERSION
+kube-master   Ready     44m       v1.6.2
+kube-node-1   Ready     39m       v1.6.2
+kube-node-2   Ready     39m       v1.6.2
+root@kube-master:~# ps -ef | grep kube
+root      3010     1  3 06:30 ?        00:01:27 /k8s/hyperkube kubelet --kubeconfig=/etc/kubernetes/kubelet.conf --require-kubeconfig=true --feature-gates=DynamicKubeletConfig=true --pod-manifest-path=/etc/kubernetes/manifests --allow-privileged=true --network-plugin=cni --cni-conf-dir=/etc/cni/net.d --cni-bin-dir=/opt/cni/bin --cluster-dns=10.96.0.10 --cluster-domain=cluster.local --cgroups-per-qos=false --enforce-node-allocatable= --v=4
+root      3426  3410  0 06:30 ?        00:00:05 /hyperkube scheduler --address=127.0.0.1 --leader-elect=true --kubeconfig=/etc/kubernetes/scheduler.conf
+root      3485  3451  3 06:30 ?        00:01:24 /hyperkube apiserver --service-cluster-ip-range=10.96.0.0/12 --service-account-key-file=/etc/kubernetes/pki/sa.pub --requestheader-group-headers=X-Remote-Group --admission-control=NamespaceLifecycle,LimitRanger,ServiceAccount,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds --allow-privileged=true --requestheader-username-headers=X-Remote-User --requestheader-extra-headers-prefix=X-Remote-Extra- --requestheader-allowed-names=front-proxy-client --kubelet-client-key=/etc/kubernetes/pki/apiserver-kubelet-client.key --secure-port=6443 --requestheader-client-ca-file=/etc/kubernetes/pki/front-proxy-ca.crt --tls-cert-file=/etc/kubernetes/pki/apiserver.crt --storage-backend=etcd3 --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname --client-ca-file=/etc/kubernetes/pki/ca.crt --tls-private-key-file=/etc/kubernetes/pki/apiserver.key --kubelet-client-certificate=/etc/kubernetes/pki/apiserver-kubelet-client.crt --experimental-bootstrap-token-auth=true --authorization-mode=RBAC --advertise-address=10.192.0.2 --etcd-servers=http://127.0.0.1:2379 --insecure-bind-address=0.0.0.0 --insecure-port=8080
+root      3499  3452  4 06:30 ?        00:01:53 /hyperkube controller-manager --service-account-private-key-file=/etc/kubernetes/pki/sa.key --cluster-signing-cert-file=/etc/kubernetes/pki/ca.crt --cluster-signing-key-file=/etc/kubernetes/pki/ca.key --address=127.0.0.1 --leader-elect=true --insecure-experimental-approve-all-kubelet-csrs-for-group=system:bootstrappers --kubeconfig=/etc/kubernetes/controller-manager.conf --root-ca-file=/etc/kubernetes/pki/ca.crt --use-service-account-credentials=true --controllers=*,bootstrapsigner,tokencleaner --allocate-node-cidrs=true --cluster-cidr=10.244.0.0/16
+root      3710  3694  0 06:31 ?        00:00:09 /usr/local/bin/kube-proxy --kubeconfig=/var/lib/kube-proxy/kubeconfig.conf --cluster-cidr=10.244.0.0/16 --cluster-cidr=172.17.0.1/16 --masquerade-all --conntrack-max=0 --conntrack-max-per-core=0
+root      5566  4573  0 07:09 ?        00:00:00 grep --color=auto kube
+
+
+
+
+ docker exec -i -t 468ee0ca544b /bin/bash
+root@kube-node-1:/# cd
+root@kube-node-1:~# ls
+root@kube-node-1:~# docker ps
+CONTAINER ID        IMAGE                                                                                                                         COMMAND                  CREATED             STATUS              PORTS               NAMES
+57fc2b2fecdd        busybox:1.26.2                                                                                                                "nsenter --mount=/pro"   24 minutes ago      Up 24 minutes                           criproxy-1495607902646436896
+299477a8a6f0        gcr.io/google_containers/pause-amd64:3.0                                                                                      "/pause"                 24 minutes ago      Up 24 minutes                           k8s_POD_virtlet-8bs8z_kube-system_8bdcafa2-404b-11e7-b2b3-02420ac00002_0
+051e25733ee4        gcr.io/google_containers/kubernetes-dashboard-amd64@sha256:4ad64dfa7159ff4a99a65a4f96432f2fdb6542857cf230858b3159017833a882   "/dashboard --port=90"   29 minutes ago      Up 29 minutes                           k8s_kubernetes-dashboard_kubernetes-dashboard-2396447444-wg6wj_kube-system_bbc81a7f-404a-11e7-b2b3-02420ac00002_0
+31a6bbcc7ca5        gcr.io/google_containers/pause-amd64:3.0                                                                                      "/pause"                 30 minutes ago      Up 30 minutes                           k8s_POD_kubernetes-dashboard-2396447444-wg6wj_kube-system_bbc81a7f-404a-11e7-b2b3-02420ac00002_0
+edd6496fd681        47b41c65b31b                                                                                                                  "/usr/local/bin/kube-"   31 minutes ago      Up 31 minutes                           k8s_kube-proxy_kube-proxy-k2trl_kube-system_503b01ae-404a-11e7-a41e-02420ac00002_1
+406569e99d32        gcr.io/google_containers/pause-amd64:3.0                                                                                      "/pause"                 31 minutes ago      Up 31 minutes                           k8s_POD_kube-proxy-k2trl_kube-system_503b01ae-404a-11e7-a41e-02420ac00002_1
+root@kube-node-1:~# 
+
+root@kube-node-1:~# ps -ef | grep kube
+root       739   723  0 10:43 ?        00:00:07 /usr/local/bin/kube-proxy --kubeconfig=/var/lib/kube-proxy/kubeconfig.conf --cluster-cidr=10.244.0.0/16 --cluster-cidr=172.17.0.1/16 --masquerade-all --conntrack-max=0 --conntrack-max-per-core=0
+root       890     1  2 10:43 ?        00:00:53 /k8s/hyperkube kubelet --kubeconfig=/etc/kubernetes/kubelet.conf --require-kubeconfig=true --feature-gates=DynamicKubeletConfig=true --pod-manifest-path=/etc/kubernetes/manifests --allow-privileged=true --network-plugin=cni --cni-conf-dir=/etc/cni/net.d --cni-bin-dir=/opt/cni/bin --cluster-dns=10.96.0.10 --cluster-domain=cluster.local --cgroups-per-qos=false --enforce-node-allocatable= --v=4
+root      3037  2969  0 11:13 ?        00:00:00 grep --color=auto kube
+root@kube-node-1:~# ps -ef | grep virt
+root       314   298  3 10:42 ?        00:00:57 /opt/criproxy/bin/criproxy -v 3 -alsologtostderr -connect docker,virtlet:/run/virtlet.sock
+root      3039  2969  0 11:13 ?        00:00:00 grep --color=auto virt
+
+
+root@kube-node-2:~# docker ps
+CONTAINER ID        IMAGE                                                                                                                          COMMAND                  CREATED             STATUS              PORTS               NAMES
+4c0764725e99        nginx@sha256:12d30ce421ad530494d588f87b2328ddc3cae666e77ea1ae5ac3a6661e52cde6                                                  "nginx -g 'daemon off"   8 minutes ago       Up 8 minutes                            k8s_web_image-server-1782580915-pfdf8_kube-system_b1e77918-404b-11e7-b2b3-02420ac00002_0
+de66e9829034        nginx@sha256:12d30ce421ad530494d588f87b2328ddc3cae666e77ea1ae5ac3a6661e52cde6                                                  "nginx -g 'daemon off"   8 minutes ago       Up 8 minutes                            k8s_nginx_nginx-158599303-gfmb8_default_b0bc78c6-404b-11e7-b2b3-02420ac00002_0
+a40ff9b168bd        gcr.io/google_containers/pause-amd64:3.0                                                                                       "/pause"                 9 minutes ago       Up 9 minutes                            k8s_POD_image-server-1782580915-pfdf8_kube-system_b1e77918-404b-11e7-b2b3-02420ac00002_0
+0323574a0b79        gcr.io/google_containers/pause-amd64:3.0                                                                                       "/pause"                 9 minutes ago       Up 9 minutes                            k8s_POD_nginx-158599303-gfmb8_default_b0bc78c6-404b-11e7-b2b3-02420ac00002_0
+a2e626c38886        gcr.io/google_containers/k8s-dns-sidecar-amd64@sha256:d33a91a5d65c223f410891001cd379ac734d036429e033865d700a4176e944b0         "/sidecar --v=2 --log"   14 minutes ago      Up 14 minutes                           k8s_sidecar_kube-dns-3946503078-rqvph_kube-system_baddd3d2-404a-11e7-b2b3-02420ac00002_0
+3abe0cdd5b92        gcr.io/google_containers/k8s-dns-dnsmasq-nanny-amd64@sha256:89c9a1d3cfbf370a9c1a949f39f92c1dc2dbe8c3e6cc1802b7f2b48e4dfe9a9e   "/dnsmasq-nanny -v=2 "   15 minutes ago      Up 15 minutes                           k8s_dnsmasq_kube-dns-3946503078-rqvph_kube-system_baddd3d2-404a-11e7-b2b3-02420ac00002_0
+b768a34a8ede        gcr.io/google_containers/k8s-dns-kube-dns-amd64@sha256:33914315e600dfb756e550828307dfa2b21fb6db24fe3fe495e33d1022f9245d        "/kube-dns --domain=c"   15 minutes ago      Up 15 minutes                           k8s_kubedns_kube-dns-3946503078-rqvph_kube-system_baddd3d2-404a-11e7-b2b3-02420ac00002_0
+eb06d3fe41c4        gcr.io/google_containers/pause-amd64:3.0                                                                                       "/pause"                 16 minutes ago      Up 15 minutes                           k8s_POD_kube-dns-3946503078-rqvph_kube-system_baddd3d2-404a-11e7-b2b3-02420ac00002_0
+2a29ee46d46b        410e7e808178                                                                                                                   "/usr/local/bin/kube-"   16 minutes ago      Up 16 minutes                           k8s_kube-proxy_kube-proxy-30c30_kube-system_503b00a1-404a-11e7-a41e-02420ac00002_1
+86e8fd2dc9b1        gcr.io/google_containers/pause-amd64:3.0                                                                                       "/pause"                 16 minutes ago      Up 16 minutes                           k8s_POD_kube-proxy-30c30_kube-system_503b00a1-404a-11e7-a41e-02420ac00002_1
+root@kube-node-2:~# kubectl get vms
+
+
+root@kube-node-2:~# ps -ef | grep kube
+root        67     1  3 10:42 ?        00:01:25 /k8s/hyperkube kubelet --kubeconfig=/etc/kubernetes/kubelet.conf --require-kubeconfig=true --feature-gates=DynamicKubeletConfig=true --pod-manifest-path=/etc/kubernetes/manifests --allow-privileged=true --network-plugin=cni --cni-conf-dir=/etc/cni/net.d --cni-bin-dir=/opt/cni/bin --cluster-dns=10.96.0.10 --cluster-domain=cluster.local --cgroups-per-qos=false --enforce-node-allocatable= --v=4
+root       715   699  0 10:43 ?        00:00:06 /usr/local/bin/kube-proxy --kubeconfig=/var/lib/kube-proxy/kubeconfig.conf --cluster-cidr=10.244.0.0/16 --cluster-cidr=172.17.0.1/16 --masquerade-all --conntrack-max=0 --conntrack-max-per-core=0
+root       747   730  0 10:43 ?        00:00:02 /kube-dns --domain=cluster.local. --dns-port=10053 --config-dir=/kube-dns-config --v=2
+nobody     993   977  0 10:43 ?        00:00:04 /sidecar --v=2 --logtostderr --probe=kubedns,127.0.0.1:10053,kubernetes.default.svc.cluster.local,5,A --probe=dnsmasq,127.0.0.1:53,kubernetes.default.svc.cluster.local,5,A
+root      2607  2581  0 11:17 ?        00:00:00 grep --color=auto kube
+
+
+
+vijay@vijaywk:~/code/megam/workspace/go/src/github.com/megamsys/abcd/_output/bin$ oc get pods -n kube-system
+NAME                                    READY     STATUS             RESTARTS   AGE
+etcd-kube-master                        1/1       Running            2          4h
+image-server-1782580915-60kzw           1/1       Running            1          35m
+kube-apiserver-kube-master              1/1       Running            2          4h
+kube-controller-manager-kube-master     1/1       Running            2          4h
+kube-dns-3946503078-rqvph               3/3       Running            3          4h
+kube-proxy-30c30                        1/1       Running            2          4h
+kube-proxy-bbl36                        1/1       Running            2          4h
+kube-proxy-k2trl                        1/1       Running            2          4h
+kube-scheduler-kube-master              1/1       Running            2          4h
+kubernetes-dashboard-2396447444-wg6wj   1/1       Running            1          4h
+virtlet-8bs8z                           0/1       CrashLoopBackOff   49         4h
+
+

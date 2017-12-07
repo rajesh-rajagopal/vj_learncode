@@ -1,0 +1,28 @@
+#! /bin/bash
+stop vertice
+stop verticegateway
+stop verticenilavu
+start vertice
+sunstone-server stop
+econe-server stop
+sudo -H -u oneadmin bash -c "one stop"
+sunstone-server start
+econe-server start
+sudo -H -u oneadmin bash -c "one start"
+
+stop nsqd
+stop nsqlookupd
+stop nsqadmin
+start nsqd
+start nsqlookupd
+start nsqadmin
+#service rabbitmq-server stop
+#service rabbitmq-server start
+start verticegateway
+start verticenilavu
+#rabbitmqctl status
+sudo echo 3 > /proc/sys/vm/drop_caches
+sudo echo 3 > /proc/sys/vm/drop_caches
+df -h
+free -m
+

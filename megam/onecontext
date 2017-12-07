@@ -1,0 +1,15 @@
+mount LABEL=PACKAGES /mnt
+wget https://github.com/OpenNebula/addon-context-linux/releases/download/v4.14.4/one-context_4.14.4.deb
+dpkg -i one-context_4.14.4.deb
+# Install opennebula context package
+apt-get install -y unzip
+unzip /mnt/v4.14.4*zip
+
+#Install shellinabox
+
+deb http://us.archive.ubuntu.com/ubuntu/ precise universe >/etc/apt/sources.list
+deb-src http://us.archive.ubuntu.com/ubuntu/ precise universe >/etc/apt/sources.list
+
+wget http://archive.ubuntu.com/ubuntu/pool/universe/s/shellinabox/shellinabox_2.14-1_amd64.deb
+
+dpkg -i shellinabox_2.14-1_amd64.deb

@@ -1,0 +1,42 @@
+#!/bin/bash
+
+if [ -f /etc/lsb-release ]; then
+    . /etc/lsb-release
+    DISTRO=$DISTRIB_ID
+elif [ -f /etc/debian_version ]; then
+    DISTRO=Debian
+    # XXX or Ubuntu
+elif [ -f /etc/redhat-release ]; then
+    DISTRO="Red Hat"
+    # XXX or CentOS or Fedora
+else
+    DISTRO=$(uname -s)
+fi
+
+
+case "$DISTRO" in
+   "Ubuntu") 
+dist=`grep VERSION_ID /etc/*-release | awk -F '="' '{print $2}'`
+v=$(echo $dist | awk -F '"' '{print $1;}')
+echo $v >> test2
+  case "$v" in
+         "14.04")
+          stop verticegulpd
+	  echo $v "- 14"  >>test2
+          start verticegulpd  
+          ;;
+         "16.04")
+	  echo $v "- 16" >> test2
+          service verticegulpd stop
+          service verticegulpd start 
+          service cadvisor stop
+          service cadvisor start
+          ;;
+  esac
+HOSTNAME=`hostname`
+sudo cat >> //etc/hosts <<EOF
+127.0.0.1  $HOSTNAME localhost
+EOF
+   ;;
+esac
+

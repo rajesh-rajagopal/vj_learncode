@@ -1,0 +1,182 @@
+cat /etc/network/interfaces
+
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+source /etc/network/interfaces.d/*
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+auto enp2s0f1
+iface enp2s0f1 inet static
+	address 103.231.90.154
+	netmask 255.255.255.248
+	network 103.231.90.152
+	broadcast 103.231.90.159
+	gateway 103.231.90.153
+	# dns-* options are implemented by the resolvconf package, if installed
+	dns-nameservers 8.8.8.8
+	dns-search intergrid.com.au
+
+
+******************************************************************************
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+source /etc/network/interfaces.d/*
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+auto one
+iface one inet static
+	address 103.231.90.154
+	netmask 255.255.255.248
+	network 103.231.90.152
+	broadcast 103.231.90.159
+	gateway 103.231.90.153
+	# dns-* options are implemented by the resolvconf package, if installed
+	dns-nameservers 8.8.8.8
+	dns-search intergrid.com.au
+        bridge_ports enp2s0f1
+        bridge_stp off
+        bridge_fd 1
+        bridge_hello 2
+        bridge_maxage 12   
+
+
+	
+
+******************************************************************************
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+source /etc/network/interfaces.d/*
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+auto enp2s0f1
+iface enp2s0f1 inet static
+	address 103.231.90.154
+	netmask 255.255.255.248
+	network 103.231.90.152
+	broadcast 103.231.90.159
+	gateway 103.231.90.153
+	# dns-* options are implemented by the resolvconf package, if installed
+	dns-nameservers 8.8.8.8
+	dns-search intergrid.com.au
+
+auto one
+iface one inet static
+  address   103.231.90.154
+  netmask   255.255.255.248
+  bridge_ports none
+  bridge_stp off
+  bridge_fd 1
+  bridge_hello 2
+  bridge_maxage 12
+
+
+sudo ifconfig one down && sudo brctl delbr one && sudo brctl addbr one && sudo reboot
+
+
+megdc@megamadhi:~$ route
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         192.168.0.1     0.0.0.0         UG    0      0        0 one
+192.168.0.0     *               255.255.255.0   U     0      0        0 one
+
+
+megdc@megamadhi:~$ ip route show
+default via 192.168.0.1 dev one onlink 
+192.168.0.0/24 dev one  proto kernel  scope link  src 192.168.0.115 
+
+
+VM
+
+root@morning-mountain-7601-megambox-com:~# route
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         192.168.0.1     0.0.0.0         UG    0      0        0 eth0
+192.168.0.0     *               255.255.255.0   U     0      0        0 eth0
+
+
+default via 192.168.0.1 dev eth0 
+192.168.0.0/24 dev eth0  proto kernel  scope link  src 192.168.0.129 
+
+
+auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet static
+  address 192.168.0.129
+  network 192.168.0.0
+  netmask 255.255.255.0
+  gateway 198.168.0.1
+  dns-nameservers 8.8.8.8 8.8.4.4
+
+source /etc/network/interfaces.d/*.cfg
+
+
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         103.231.90.153  0.0.0.0         UG    0      0        0 enp2s0f1
+localnet        *               255.255.255.248 U     0      0        0 one
+localnet        *               255.255.255.248 U     0      0        0 enp2s0f1
+
+default via 103.231.90.153 dev enp2s0f1 onlink 
+103.231.90.152/29 dev one  proto kernel  scope link  src 103.231.90.154 
+103.231.90.152/29 dev enp2s0f1  proto kernel  scope link  src 103.231.90.154 
+
+
+
+
+
+root@megam-one3:~# route
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         103.231.90.154  0.0.0.0         UG    0      0        0 eth0
+103.231.90.152  *               255.255.255.248 U     0      0        0 eth0
+
+
+root@megam-one3:~# ip route show
+default via 103.231.90.154 dev eth0 
+103.231.90.152/29 dev eth0  proto kernel  scope link  src 103.231.90.157 
+
+
+auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet static
+  address 103.231.90.157
+  network 103.231.90.0
+  netmask 255.255.255.248
+  gateway 103.231.90.154
+  dns-nameservers 8.8.8.8 8.8.4.4
+
+source /etc/network/interfaces.d/*.cfg
+
+
+manula 
+
+ifconfig lo 127.0.0.1
+
+root@megam-test:~# route
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+cat /etcdefault         103.231.90.154  0.0.0.0         UG    0      0        0 eth0
+103.231.90.154  *               255.255.255.255 UH    0      0        0 eth0
+
+
+root@megam-test:~# ip route show
+default via 103.231.90.154 dev eth0 
+103.231.90.154 dev eth0  proto kernel  scope link  src 103.231.90.158 
+

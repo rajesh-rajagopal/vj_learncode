@@ -1,0 +1,26 @@
+https://github.com/sttts/kubernetes-dind-cluster
+https://github.com/sttts/kubernetes-dind-cluster/blob/master/image/Dockerfile
+https://github.com/Mirantis/kubeadm-dind-cluster/blob/master/Dockerfile
+https://github.com/Mirantis/kubeadm-dind-cluster/blob/master/fixed/dind-cluster-v1.6.sh
+https://github.com/sttts/kubernetes-dind-cluster/blob/master/dind-up-cluster.sh
+
+https://raw.githubusercontent.com/karlkfi/resolveip/v1.0.2/resolveip.sh
+
+https://www.ianlewis.org/en/how-kubeadm-initializes-your-kubernetes-master
+
+
+    Create a two-machine cluster with one master (which controls the cluster),
+    and one node (where your workloads, like Pods and ReplicaSets run).
+
+    ┌──────────────────────────────────────────────────────────┐
+    │ On the first machine                                     │
+    ├──────────────────────────────────────────────────────────┤
+    │ master# kubeadm init                                     │
+    └──────────────────────────────────────────────────────────┘
+
+    ┌──────────────────────────────────────────────────────────┐
+    │ On the second machine                                    │
+    ├──────────────────────────────────────────────────────────┤
+    │ node# kubeadm join --token=<token> <ip-of-master>:<port> │
+    └──────────────────────────────────────────────────────────┘
+

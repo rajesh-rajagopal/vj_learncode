@@ -1,0 +1,101 @@
+#!/bin/bash
+
+# -------------------------------------------------------------------------- #
+# Copyright 2010-2017, OpenNebula Systems                                    #
+#                                                                            #
+# Licensed under the Apache License, Version 2.0 (the "License"); you may    #
+# not use this file except in compliance with the License. You may obtain    #
+# a copy of the License at                                                   #
+#                                                                            #
+# http://www.apache.org/licenses/LICENSE-2.0                                 #
+#                                                                            #
+# Unless required by applicable law or agreed to in writing, software        #
+# distributed under the License is distributed on an "AS IS" BASIS,          #
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.   #
+# See the License for the specific language governing permissions and        #
+# limitations under the License.                                             #
+#--------------------------------------------------------------------------- #
+
+rm -f /etc/udev/rules.d/70-persistent-cd.rules
+rm -f /etc/udev/rules.d/70-persistent-net.rules
+
+# Reload udev rules
+udevadm control --reload >/dev/null 2>&1 || :
+
+# Register service
+if which systemctl >/dev/null 2>&1 && \
+    [ -d /etc/systemd ] && \
+    [ -f /usr/lib/systemd/system/one-context.service ];
+then
+    systemctl enable one-context-local.service
+    systemctl enable one-context.service
+fi
+
+if [ -f /etc/init.d/one-context ]; then
+    if [ -d /etc/sysconfig/network-scripts ] || [ -d /etc/sysconfig/network ]; then
+        chkconfig --add one-context-local
+        chkconfig --add one-context
+
+        # EL6: refresh initramfs via dracut for growroot module
+        if [ -f /usr/share/dracut/modules.d/50growroot/install ]; then
+            for I in $(find /boot -name 'initramfs-*.img'); do
+                KERNEL_VERS=$(echo "${I}" | sed -e 's/.*initramfs-\(.*\)\.img/\1/')
+                dracut -f "${I}" "${KERNEL_VERS}" || :
+            done
+        fi
+
+    elif [ -d /etc/network ]; then
+        for S in one-context-local one-context; do
+            update-rc.d ${S} enable   >/dev/null 2>&1
+            update-rc.d ${S} defaults >/dev/null 2>&1
+        done
+    else
+        echo 'WARNING: Contextualization service not enabled' >&2
+    fi
+fi
+
+# Debian based distros
+if [ -d /etc/network ]; then
+    # Prepare network files
+    cp /etc/network/interfaces /etc/network/interfaces.$(date "+%s")
+    cat > /etc/network/interfaces <<EOT
+# The loopback network interface
+auto lo
+iface lo inet loopback
+EOT
+    rm -rf /etc/network/interfaces.d
+
+    # Do not reconfigure network interfaces on boot
+#    if [ -f /etc/default/networking ]; then
+#        if ! grep -q ^CONFIGURE_INTERFACES /etc/default/networking; then
+#            echo 'CONFIGURE_INTERFACES=no' >> /etc/default/networking
+#        fi
+#    fi
+
+    # Remove ttyS* from the grub
+    if [ -f /etc/default/grub ]; then
+        sed -i 's/console=ttyS[a-zA-Z0-9,]*//g' /etc/default/grub
+    fi
+
+    if [ -f /boot/grub/grub.cfg ]; then
+        sed -i 's/console=ttyS[a-zA-Z0-9,]*//g' /boot/grub/grub.cfg
+    fi
+fi
+
+# RedHat based distros
+if [ -d /etc/sysconfig/network-scripts ]; then
+    # Prepare network files
+    rm -f /etc/sysconfig/network-scripts/ifcfg-eth*
+fi
+
+# openSUSE based distros
+if [ -d /etc/sysconfig/network ]; then
+    # Prepare network files
+    rm -f /etc/sysconfig/network/ifcfg-eth*
+    rm -f /etc/sysconfig/network/ifroute-eth*
+    rm -f /etc/sysconfig/network/routes
+    rm -f /etc/sysconfig/network/ifsysctl
+    rm -f /etc/sysconfig/network/ifsysctl-eth*
+    sed -i '/^NETCONFIG_DNS_STATIC_SERVERS=/ s/=.*$/=""/' /etc/sysconfig/network/config
+    sed -i '/^NETCONFIG_DNS_STATIC_SEARCHLIST=/ s/=.*$/=""/' /etc/sysconfig/network/config
+fi

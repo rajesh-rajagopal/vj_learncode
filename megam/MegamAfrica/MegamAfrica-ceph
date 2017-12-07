@@ -1,0 +1,123 @@
+
+ceph-deploy uninstall node1 node2 master
+ceph-deploy purgedata node1 node2 master
+ceph-deploy forgetkeys
+ceph-deploy purge node1 node2 master
+
+In all Nodes
+
+sudo apt-get -y autoremove
+sudo apt-get -y remove ceph-deploy ceph-common ceph-mds ceph
+sudo apt-get -y purge ceph-deploy ceph-common ceph-mds ceph
+sudo apt-get -y autoremove
+
+sudo rm -r /run/ceph
+sudo rm -r /var/lib/ceph
+sudo rm /var/log/upstart/ceph*
+sudo rm -rf /home/megdc/ceph-cluster/*
+sudo rm -rf /storage1/osd
+sudo rm -rf /storage2/osd
+
+sudo rm -rf /storage3/osd
+sudo rm -rf /storage4/osd
+
+sudo rm -rf /storage5/osd
+sudo rm -rf /storage6/osd
+
+
+###     Node1   
+sudo apt-get remove libradosstriper1 librbd1
+
+sudo echo deb https://download.ceph.com/debian-jewel/ $(lsb_release -sc) main | tee /etc/apt/sources.list.d/ceph.list
+wget -q -O- 'https://download.ceph.com/keys/release.asc' | sudo apt-key add -
+
+sudo apt-get update
+sudo apt-get install -y ceph ceph-mds ceph-deploy radosgw
+
+cd /home/megdc/ceph-cluster
+ceph-deploy new node1
+echo "osd_pool_default_size = 2" >> ceph.conf
+sudo echo "osd crush chooseleaf type = 0" >> ceph.conf
+sudo echo "mon_pg_warn_max_per_osd = 0" >> ceph.conf
+sudo echo "osd max object name len = 256" >> ceph.conf
+sudo echo "osd max object namespace len = 64" >>ceph.conf
+
+ceph-deploy install node1 node2 master
+
+ceph-deploy osd activate doesn't change ownership of journal partitions
+ ** ERROR: error creating empty object store in /storage1/osd: (13) Permission denied  //Error because /storage1/osd on root:root ownership
+
+sudo mkdir -p /storage1/osd
+sudo mkdir -p /storage2/osd
+sudo chown -R ceph:ceph /storage1/osd
+sudo chown -R ceph:ceph /storage2/osd
+
+###     Node2
+sudo mkdir -p /storage3/osd
+sudo mkdir -p /storage4/osd
+sudo chown -R ceph:ceph /storage3/osd
+sudo chown -R ceph:ceph /storage4/osd
+
+###     Master
+sudo mkdir -p /storage5/osd
+sudo mkdir -p /storage6/osd
+sudo chown -R ceph:ceph /storage5/osd
+sudo chown -R ceph:ceph /storage6/osd
+
+rm -rf /etc/ceph/ceph.conf
+#### Node1
+ceph-deploy mon create-initial
+
+ceph-deploy osd prepare --fs-type ext4 node1:/storage1/osd node1:/storage2/osd 
+ceph-deploy osd prepare --fs-type ext4 node2:/storage3/osd node2:/storage4/osd
+ceph-deploy osd prepare --fs-type ext4 master:/storage5/osd master:/storage6/osd
+
+ 
+
+ceph-deploy osd activate node1:/storage1/osd node1:/storage2/osd
+ceph-deploy osd activate node2:/storage3/osd node2:/storage4/osd
+ceph-deploy osd activate master:/storage5/osd master:/storage6/osd 
+
+ceph-deploy admin node1 node2 master
+
+sudo chmod +r /etc/ceph/ceph.client.admin.keyring
+
+sleep 400
+ceph osd pool set rbd pg_num 128 --allow-experimental-feature
+sleep 400
+ceph osd pool set rbd pgp_num 512
+
+should give you something like:
+   cluster a4398fb2-e766-4c8c-ae4e-4993bd7022ca
+    health HEALTH_ERR
+           64 pgs stuck inactive
+           64 pgs stuck unclean
+           no osds
+    monmap e1: 1 mons at {a=10.246.251.78:6789/0}
+           election epoch 2, quorum 0 a
+    osdmap e1: 0 osds: 0 up, 0 in
+     pgmap v2: 64 pgs, 1 pools, 0 bytes data, 0 objects
+           0 kB used, 0 kB / 0 kB avail
+                 64 creating
+This is normal. You haven't given ceph any place to create placement groups, so it will be stuck until you do.
+Fix up the crush parameters:
+ceph osd crush tunables optimal
+If you are running all this on a single system, you'll have to change the failure zone from host, to osd in the osd crush maps:
+ceph osd getcrushmap -o /tmp/crushmap
+crushtool -d  /tmp/crushmap -o /tmp/crushmap.txt
+Edit /tmp/crushmap.txt and change
+step chooseleaf firstn 0 type host
+to
+step chooseleaf firstn 0 type osd
+
+
+
+
+
+ceph osd pool delete rbd  rbd --yes-i-really-really-mean-it
+
+
+
+ceph osd pool create rbd 
+
+

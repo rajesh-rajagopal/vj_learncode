@@ -1,0 +1,1638 @@
+Script started on Mon 23 May 2016 10:50:59 AM EAT
+]0;megdc@node1: ~megdc@node1:~$ lsblk
+NAME    MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINT
+sda       8:0    0 223.6G  0 disk  
+├─sda1    8:1    0   512M  0 part  
+│ └─md0   9:0    0 511.4M  0 raid1 /boot
+├─sda2    8:2    0    32G  0 part  
+│ └─md1   9:1    0    32G  0 raid1 [SWAP]
+└─sda3    8:3    0   190G  0 part  
+  └─md2   9:2    0 189.9G  0 raid1 /
+sdb       8:16   0 223.6G  0 disk  
+├─sdb1    8:17   0   512M  0 part  
+│ └─md0   9:0    0 511.4M  0 raid1 /boot
+├─sdb2    8:18   0    32G  0 part  
+│ └─md1   9:1    0    32G  0 raid1 [SWAP]
+└─sdb3    8:19   0   190G  0 part  
+  └─md2   9:2    0 189.9G  0 raid1 /
+sdc       8:32   0   5.5T  0 disk  
+└─sdc1    8:33   0   5.5T  0 part  
+sdd       8:48   0   5.5T  0 disk  
+└─sdd1    8:49   0   5.5T  0 part  
+]0;megdc@node1: ~megdc@node1:~$ sudo apt-get update
+0% [Working]            Ign http://mirror.hetzner.de trusty InRelease
+            4% [Connecting to de.archive.ubuntu.com (141.30.13.20)] [Connecting to security                                                                               Hit http://mirror.hetzner.de trusty-backports InRelease
+8% [Connecting to de.archive.ubuntu.com (141.30.13.20)] [Connecting to security                                                                               Hit http://mirror.hetzner.de trusty-updates InRelease
+                                                                               Hit http://mirror.hetzner.de trusty-security InRelease
+8% [Connecting to de.archive.ubuntu.com (141.30.13.20)] [Connecting to security8% [InRelease gpgv 65.9 kB] [Waiting for headers] [Connecting to de.archive.ubu                                                                               Hit http://mirror.hetzner.de trusty Release.gpg
+14% [InRelease gpgv 65.9 kB] [Connecting to de.archive.ubuntu.com (141.30.13.20                                                                               Hit http://mirror.hetzner.de trusty Release
+14% [InRelease gpgv 65.9 kB] [Connecting to de.archive.ubuntu.com (141.30.13.2014% [Waiting for headers] [Waiting for headers] [Connecting to get.megam.io] [C14% [InRelease gpgv 65.9 kB] [Waiting for headers] [Waiting for headers] [Conne                                                                               Hit http://mirror.hetzner.de trusty-backports/main amd64 Packages
+14% [InRelease gpgv 65.9 kB] [Waiting for headers] [Waiting for headers] [Waiti                                                                               Hit http://mirror.hetzner.de trusty-backports/restricted amd64 Packages
+                                                                               Hit http://mirror.hetzner.de trusty-backports/universe amd64 Packages
+                                                                               Ign http://de.archive.ubuntu.com trusty InRelease
+                                                                               Hit http://security.ubuntu.com trusty-security InRelease
+17% [InRelease gpgv 65.9 kB] [Waiting for headers] [Waiting for headers] [Waiti17% [Packages 57.6 kB] [InRelease gpgv 65.9 kB] [Waiting for headers] [Waiting 16% [Packages 57.6 kB] [Waiting for headers] [Waiting for headers] [Waiting for100% [Waiting for headers] [Waiting for headers] [Waiting for headers] [Connect100% [InRelease gpgv 65.9 kB] [Waiting for headers] [Waiting for headers] [Wait100% [Packages 0 B] [InRelease gpgv 65.9 kB] [Waiting for headers] [Waiting for100% [InRelease gpgv 65.9 kB] [Waiting for headers] [Waiting for headers] [Wait100% [Packages 220 kB] [InRelease gpgv 65.9 kB] [Waiting for headers] [Waiting 100% [InRelease gpgv 65.9 kB] [Waiting for headers] [Waiting for headers] [Wait                                                                               Hit http://de.archive.ubuntu.com trusty-updates InRelease
+100% [InRelease gpgv 65.9 kB] [Waiting for headers] [Waiting for headers] [Conn100% [Waiting for headers] [Waiting for headers] [Waiting for headers] [Connect100% [Release gpgv 58.5 kB] [Waiting for headers] [Waiting for headers] [Waitin100% [Waiting for headers] [Waiting for headers] [Waiting for headers] [Connect100% [InRelease gpgv 65.9 kB] [Waiting for headers] [Waiting for headers] [Wait                                                                               Hit http://de.archive.ubuntu.com trusty-backports InRelease
+100% [InRelease gpgv 65.9 kB] [Waiting for headers] [Waiting for headers] [Conn                                                                               Hit http://mirror.hetzner.de trusty-backports/multiverse amd64 Packages
+100% [InRelease gpgv 65.9 kB] [Waiting for headers] [Waiting for headers] [Conn100% [Packages 3,396 B] [InRelease gpgv 65.9 kB] [Waiting for headers] [Waiting100% [InRelease gpgv 65.9 kB] [Waiting for headers] [Waiting for headers] [Wait                                                                               Hit http://mirror.hetzner.de trusty-backports/main i386 Packages
+100% [InRelease gpgv 65.9 kB] [Waiting for headers] [Waiting for headers] [Wait100% [Packages 57.5 kB] [InRelease gpgv 65.9 kB] [Waiting for headers] [Waiting                                                                               Hit http://mirror.hetzner.de trusty-backports/restricted i386 Packages
+100% [Packages 57.5 kB] [InRelease gpgv 65.9 kB] [Waiting for headers] [Waiting                                                                               Hit http://mirror.hetzner.de trusty-backports/universe i386 Packages
+100% [Packages 57.5 kB] [InRelease gpgv 65.9 kB] [Waiting for headers] [Waiting                                                                               Hit http://mirror.hetzner.de trusty-backports/multiverse i386 Packages
+100% [Packages 57.5 kB] [Waiting for headers] [Waiting for headers] [Waiting fo100% [Waiting for headers] [Waiting for headers] [Waiting for headers] [Connect100% [InRelease gpgv 65.9 kB] [Waiting for headers] [Waiting for headers] [Wait100% [Packages 0 B] [InRelease gpgv 65.9 kB] [Waiting for headers] [Waiting for100% [InRelease gpgv 65.9 kB] [Waiting for headers] [Waiting for headers] [Wait100% [Packages 219 kB] [InRelease gpgv 65.9 kB] [Waiting for headers] [Waiting                                                                                Hit http://de.archive.ubuntu.com trusty Release.gpg
+100% [Packages 219 kB] [InRelease gpgv 65.9 kB] [Waiting for headers] [Waiting 100% [InRelease gpgv 65.9 kB] [Waiting for headers] [Waiting for headers] [Wait100% [Packages 3,341 B] [InRelease gpgv 65.9 kB] [Waiting for headers] [Waiting100% [InRelease gpgv 65.9 kB] [Waiting for headers] [Waiting for headers] [Wait100% [Waiting for headers] [Waiting for headers] [Waiting for headers] [Waiting100% [InRelease gpgv 65.9 kB] [Waiting for headers] [Waiting for headers] [Wait                                                                               Hit http://security.ubuntu.com trusty-security/main Sources
+100% [InRelease gpgv 65.9 kB] [Waiting for headers] [Waiting for headers] [Wait100% [Sources 588 kB] [InRelease gpgv 65.9 kB] [Waiting for headers] [Waiting f                                                                               Hit http://de.archive.ubuntu.com trusty Release
+100% [Sources 588 kB] [InRelease gpgv 65.9 kB] [Waiting for headers] [Waiting f100% [Sources 588 kB] [Waiting for headers] [Waiting for headers] [Waiting for 100% [Sources 588 kB] [Release gpgv 58.5 kB] [Waiting for headers] [Waiting for100% [Release gpgv 58.5 kB] [Waiting for headers] [Waiting for headers] [Waitin100% [Waiting for headers] [Waiting for headers] [Waiting for headers] [Waiting                                                                               Hit http://security.ubuntu.com trusty-security/restricted Sources
+100% [Waiting for headers] [Waiting for headers] [Waiting for headers] [Connect100% [Sources 23.0 kB] [Waiting for headers] [Waiting for headers] [Waiting for100% [Waiting for headers] [Waiting for headers] [Waiting for headers] [Waiting                                                                               Hit http://de.archive.ubuntu.com trusty-updates/main Sources
+100% [Waiting for headers] [Waiting for headers] [Waiting for headers] [Connect100% [Sources 1,485 kB] [Waiting for headers] [Waiting for headers] [Waiting fo                                                                               Hit http://mirror.hetzner.de trusty-updates/main amd64 Packages
+100% [Sources 1,485 kB] [Waiting for headers] [Waiting for headers] [Waiting fo                                                                               Hit http://mirror.hetzner.de trusty-updates/restricted amd64 Packages
+100% [Sources 1,485 kB] [Waiting for headers] [Waiting for headers] [Waiting fo                                                                               Hit http://mirror.hetzner.de trusty-updates/universe amd64 Packages
+100% [Sources 1,485 kB] [Waiting for headers] [Waiting for headers] [Waiting fo                                                                               Hit http://mirror.hetzner.de trusty-updates/multiverse amd64 Packages
+100% [Sources 1,485 kB] [Waiting for headers] [Waiting for headers] [Waiting fo                                                                               Hit http://mirror.hetzner.de trusty-updates/main i386 Packages
+100% [Sources 1,485 kB] [Waiting for headers] [Waiting for headers] [Waiting fo                                                                               Hit http://mirror.hetzner.de trusty-updates/restricted i386 Packages
+100% [Sources 1,485 kB] [Waiting for headers] [Waiting for headers] [Waiting fo                                                                               Hit http://security.ubuntu.com trusty-security/universe Sources
+100% [Sources 1,485 kB] [Waiting for headers] [Waiting for headers] [Waiting fo                                                                               Hit http://de.archive.ubuntu.com trusty-updates/restricted Sources
+100% [Sources 1,485 kB] [Waiting for headers] [Waiting for headers] [Waiting fo100% [Waiting for headers] [Waiting for headers] [Waiting for headers] [Waiting100% [Packages 5,186 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Hit http://de.archive.ubuntu.com trusty-updates/universe Sources
+100% [Packages 5,186 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Hit http://security.ubuntu.com trusty-security/multiverse Sources
+100% [Packages 5,186 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Hit http://mirror.hetzner.de trusty-updates/universe i386 Packages
+100% [Packages 5,186 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Hit http://mirror.hetzner.de trusty-updates/multiverse i386 Packages
+100% [Packages 5,186 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Hit http://mirror.hetzner.de trusty-security/main amd64 Packages
+100% [Packages 5,186 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Hit http://mirror.hetzner.de trusty-security/restricted amd64 Packages
+100% [Packages 5,186 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Hit http://mirror.hetzner.de trusty-security/universe amd64 Packages
+100% [Packages 5,186 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Hit http://mirror.hetzner.de trusty-security/multiverse amd64 Packages
+100% [Packages 5,186 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Hit http://mirror.hetzner.de trusty-security/main i386 Packages
+100% [Packages 5,186 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Hit http://mirror.hetzner.de trusty-security/restricted i386 Packages
+100% [Packages 5,186 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Hit http://mirror.hetzner.de trusty-security/universe i386 Packages
+100% [Packages 5,186 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Hit http://mirror.hetzner.de trusty-security/multiverse i386 Packages
+100% [Packages 5,186 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Hit http://mirror.hetzner.de trusty/main amd64 Packages
+100% [Packages 5,186 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Hit http://mirror.hetzner.de trusty/restricted amd64 Packages
+100% [Packages 5,186 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Hit http://mirror.hetzner.de trusty/universe amd64 Packages
+100% [Packages 5,186 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Hit http://mirror.hetzner.de trusty/multiverse amd64 Packages
+100% [Packages 5,186 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Hit http://de.archive.ubuntu.com trusty-updates/multiverse Sources
+100% [Packages 5,186 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Hit http://mirror.hetzner.de trusty/main i386 Packages
+100% [Packages 5,186 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Hit http://mirror.hetzner.de trusty/restricted i386 Packages
+100% [Packages 5,186 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Hit http://mirror.hetzner.de trusty/universe i386 Packages
+100% [Packages 5,186 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Hit http://mirror.hetzner.de trusty/multiverse i386 Packages
+100% [Packages 5,186 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Hit http://security.ubuntu.com trusty-security/main amd64 Packages
+100% [Packages 5,186 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Hit http://de.archive.ubuntu.com trusty-updates/main amd64 Packages
+100% [Packages 5,186 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Hit http://security.ubuntu.com trusty-security/restricted amd64 Packages
+100% [Packages 5,186 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Hit http://de.archive.ubuntu.com trusty-updates/restricted amd64 Packages
+100% [Packages 5,186 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Hit http://security.ubuntu.com trusty-security/universe amd64 Packages
+100% [Packages 5,186 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Hit http://de.archive.ubuntu.com trusty-updates/universe amd64 Packages
+100% [Packages 5,186 kB] [Waiting for headers] [Waiting for headers] [Waiting f100% [Waiting for headers] [Waiting for headers] [Waiting for headers] [Waiting100% [Packages 223 kB] [Waiting for headers] [Waiting for headers] [Waiting for100% [Waiting for headers] [Waiting for headers] [Waiting for headers] [Waiting100% [Packages 2,143 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Hit http://security.ubuntu.com trusty-security/multiverse amd64 Packages
+100% [Packages 2,143 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Hit http://de.archive.ubuntu.com trusty-updates/multiverse amd64 Packages
+100% [Packages 2,143 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Hit http://security.ubuntu.com trusty-security/main i386 Packages
+100% [Packages 2,143 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Hit http://de.archive.ubuntu.com trusty-updates/main i386 Packages
+100% [Packages 2,143 kB] [Waiting for headers] [Waiting for headers] [Waiting f100% [Waiting for headers] [Waiting for headers] [Waiting for headers] [Waiting100% [Packages 66.3 kB] [Waiting for headers] [Waiting for headers] [Waiting fo100% [Waiting for headers] [Waiting for headers] [Waiting for headers] [Waiting100% [Packages 4,947 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Hit http://security.ubuntu.com trusty-security/restricted i386 Packages
+100% [Packages 4,947 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Hit http://de.archive.ubuntu.com trusty-updates/restricted i386 Packages
+100% [Packages 4,947 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Ign http://downloads.opennebula.org stable InRelease
+100% [Packages 4,947 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Hit http://security.ubuntu.com trusty-security/universe i386 Packages
+100% [Packages 4,947 kB] [Waiting for headers] [Waiting for headers] [Connectin                                                                               Hit http://de.archive.ubuntu.com trusty-updates/universe i386 Packages
+100% [Packages 4,947 kB] [Waiting for headers] [Waiting for headers] [Connectin                                                                               Hit http://security.ubuntu.com trusty-security/multiverse i386 Packages
+100% [Packages 4,947 kB] [Waiting for headers] [Waiting for headers] [Connectin                                                                               Hit http://de.archive.ubuntu.com trusty-updates/multiverse i386 Packages
+100% [Packages 4,947 kB] [Waiting for headers] [Connecting to downloads.openneb100% [Waiting for headers] [Waiting for headers] [Connecting to downloads.openn100% [Packages 221 kB] [Waiting for headers] [Waiting for headers] [Connecting 100% [Waiting for headers] [Waiting for headers] [Connecting to downloads.openn100% [Sources 148 kB] [Waiting for headers] [Waiting for headers] [Connecting t100% [Waiting for headers] [Waiting for headers] [Connecting to downloads.openn100% [Sources 28.1 kB] [Waiting for headers] [Waiting for headers] [Connecting 100% [Waiting for headers] [Waiting for headers] [Connecting to downloads.openn100% [Sources 735 kB] [Waiting for headers] [Waiting for headers] [Connecting t                                                                               Hit http://de.archive.ubuntu.com trusty-backports/main Sources
+100% [Sources 735 kB] [Waiting for headers] [Connecting to downloads.opennebula100% [Waiting for headers] [Waiting for headers] [Connecting to downloads.openn100% [Sources 7,860 B] [Waiting for headers] [Waiting for headers] [Connecting 100% [Waiting for headers] [Waiting for headers] [Connecting to downloads.openn100% [Packages 2,148 kB] [Waiting for headers] [Waiting for headers] [Connectin100% [Waiting for headers] [Waiting for headers] [Connecting to downloads.openn100% [Packages 68.2 kB] [Waiting for headers] [Waiting for headers] [Connecting100% [Waiting for headers] [Waiting for headers] [Connecting to downloads.openn100% [Packages 3,304 kB] [Waiting for headers] [Waiting for headers] [Connectin                                                                               Hit http://get.megam.io trusty InRelease
+100% [Packages 3,304 kB] [Waiting for headers] [Connecting to downloads.openneb100% [Packages 3,304 kB] [InRelease gpgv 5,059 B] [Waiting for headers] [Connec100% [Packages 3,304 kB] [Waiting for headers] [Connecting to downloads.openneb                                                                               Hit http://de.archive.ubuntu.com trusty-backports/restricted Sources
+100% [Packages 3,304 kB] [Waiting for headers] [Connecting to downloads.openneb100% [Waiting for headers] [Waiting for headers] [Connecting to downloads.openn100% [Packages 188 kB] [Waiting for headers] [Waiting for headers] [Connecting 100% [Waiting for headers] [Waiting for headers] [Connecting to downloads.openn100% [Packages 766 kB] [Waiting for headers] [Waiting for headers] [Connecting                                                                                Hit http://de.archive.ubuntu.com trusty-backports/universe Sources
+100% [Packages 766 kB] [Waiting for headers] [Connecting to downloads.opennebul100% [Waiting for headers] [Waiting for headers] [Connecting to downloads.openn100% [Packages 20.0 kB] [Waiting for headers] [Waiting for headers] [Connecting100% [Waiting for headers] [Waiting for headers] [Connecting to downloads.openn100% [Packages 3,074 kB] [Waiting for headers] [Waiting for headers] [Connectin                                                                               Hit http://de.archive.ubuntu.com trusty-backports/multiverse Sources
+                                                                               100% [Packages 3,074 kB] [Waiting for headers] [Waiting for headers]                                                                    Hit http://de.archive.ubuntu.com trusty-backports/main amd64 Packages
+100% [Packages 3,074 kB] [Waiting for headers] [Waiting for headers]                                                                    100% [Waiting for headers] [Waiting for headers] [Waiting for headers]                                                                      100% [Packages 186 kB] [Waiting for headers] [Waiting for headers] [Waiting for                                                                               100% [Waiting for headers] [Waiting for headers] [Waiting for headers]                                                                      100% [Packages 765 kB] [Waiting for headers] [Waiting for headers] [Waiting for                                                                               Hit http://de.archive.ubuntu.com trusty-backports/restricted amd64 Packages
+                                                                               100% [Packages 765 kB] [Waiting for headers] [Waiting for headers]                                                                  100% [Waiting for headers] [Waiting for headers] [Waiting for headers]                                                                      100% [Packages 20.9 kB] [Waiting for headers] [Waiting for headers] [Waiting fo                                                                               100% [Waiting for headers] [Waiting for headers] [Waiting for headers]                                                                      100% [Packages 8,235 kB] [Waiting for headers] [Waiting for headers] [Waiting f                                                                               Hit http://de.archive.ubuntu.com trusty-backports/universe amd64 Packages
+                                                                               100% [Packages 8,235 kB] [Waiting for headers] [Waiting for headers]                                                                    Hit http://de.archive.ubuntu.com trusty-backports/multiverse amd64 Packages
+100% [Packages 8,235 kB] [Waiting for headers] [Waiting for headers]                                                                    Hit http://de.archive.ubuntu.com trusty-backports/main i386 Packages
+100% [Packages 8,235 kB] [Waiting for headers] [Waiting for headers]                                                                    Hit http://de.archive.ubuntu.com trusty-backports/restricted i386 Packages
+100% [Packages 8,235 kB] [Waiting for headers] [Waiting for headers]                                                                    Hit http://de.archive.ubuntu.com trusty-backports/universe i386 Packages
+100% [Packages 8,235 kB] [Waiting for headers] [Waiting for headers]                                                                    Hit http://downloads.opennebula.org stable Release.gpg
+100% [Packages 8,235 kB] [Waiting for headers] [Waiting for headers]                                                                    100% [Waiting for headers] [Waiting for headers] [Connecting to downloads.openn100% [Packages 184 kB] [Waiting for headers] [Waiting for headers] [Connecting                                                                                Hit http://de.archive.ubuntu.com trusty-backports/multiverse i386 Packages
+100% [Packages 184 kB] [Waiting for headers] [Connecting to downloads.opennebul100% [Waiting for headers] [Waiting for headers] [Connecting to downloads.openn100% [Packages 31.7 MB] [Waiting for headers] [Waiting for headers] [Connecting                                                                               Hit http://get.megam.io trusty/testing amd64 Packages
+100% [Packages 31.7 MB] [Waiting for headers] [Connecting to downloads.opennebu                                                                               Hit http://de.archive.ubuntu.com trusty/main Sources
+100% [Packages 31.7 MB] [Connecting to downloads.opennebula.org (173.255.246.10                                                                               Hit http://de.archive.ubuntu.com trusty/restricted Sources
+100% [Packages 31.7 MB] [Connecting to downloads.opennebula.org (173.255.246.10                                                                               Hit http://de.archive.ubuntu.com trusty/universe Sources
+100% [Packages 31.7 MB] [Connecting to downloads.opennebula.org (173.255.246.10                                                                               Hit http://de.archive.ubuntu.com trusty/multiverse Sources
+100% [Packages 31.7 MB] [Connecting to downloads.opennebula.org (173.255.246.10                                                                               Hit http://de.archive.ubuntu.com trusty/main amd64 Packages
+100% [Packages 31.7 MB] [Connecting to downloads.opennebula.org (173.255.246.10                                                                               Hit http://de.archive.ubuntu.com trusty/restricted amd64 Packages
+100% [Packages 31.7 MB] [Connecting to downloads.opennebula.org (173.255.246.10                                                                               Hit http://de.archive.ubuntu.com trusty/universe amd64 Packages
+100% [Packages 31.7 MB] [Connecting to downloads.opennebula.org (173.255.246.10                                                                               Hit http://de.archive.ubuntu.com trusty/multiverse amd64 Packages
+                                                                               100% [Packages 31.7 MB] [Waiting for headers]                                             Hit http://de.archive.ubuntu.com trusty/main i386 Packages
+100% [Packages 31.7 MB] [Waiting for headers]                                             Hit http://de.archive.ubuntu.com trusty/restricted i386 Packages
+100% [Packages 31.7 MB] [Waiting for headers]                                             Hit http://de.archive.ubuntu.com trusty/universe i386 Packages
+100% [Packages 31.7 MB] [Waiting for headers]                                             Hit http://de.archive.ubuntu.com trusty/multiverse i386 Packages
+100% [Packages 31.7 MB] [Waiting for headers]                                             Hit http://downloads.opennebula.org stable Release
+                                             100% [Packages 31.7 MB]                       100% [Packages 31.7 MB] [Release gpgv 1,107 B]                                              100% [Packages 31.7 MB]                       100% [Connecting to downloads.opennebula.org (173.255.246.101)]                                                               100% [Packages 664 kB] [Connecting to downloads.opennebula.org (173.255.246.101                                                                               100% [Connecting to downloads.opennebula.org (173.255.246.101)]                                                               100% [Sources 19.1 kB] [Connecting to downloads.opennebula.org (173.255.246.101                                                                               100% [Connecting to downloads.opennebula.org (173.255.246.101)]                                                               100% [Packages 8,205 kB] [Connecting to downloads.opennebula.org (173.255.246.1                                                                               100% [Waiting for headers]                          100% [Packages 185 kB] [Waiting for headers]                                            100% [Waiting for headers]                          100% [Packages 31.7 MB] [Waiting for headers]                                             Hit https://download.ceph.com trusty InRelease
+100% [Packages 31.7 MB] [Waiting for headers]                                             100% [Packages 31.7 MB] [InRelease gpgv 7,810 B] [Waiting for headers]                                                                      100% [Packages 31.7 MB] [Waiting for headers]                                             Hit http://downloads.opennebula.org stable/opennebula amd64 Packages
+                                             100% [Packages 31.7 MB]                       Hit https://download.ceph.com trusty/main amd64 Packages
+                       100% [Packages 31.7 MB] [Connecting to downloads.opennebula.org (173.255.246.10                                                                               Hit https://download.ceph.com trusty/main i386 Packages
+100% [Packages 31.7 MB] [Connecting to downloads.opennebula.org (173.255.246.10                                                                               100% [Waiting for headers]                          100% [Packages 674 kB] [Waiting for headers]                                            Hit http://downloads.opennebula.org stable/opennebula i386 Packages
+                                            100% [Packages 674 kB]                      100% [Working]              100% [Packages 3,304 kB]                        100% [Working]              100% [Packages 5,186 kB]                        100% [Working]              100% [Packages 188 kB]                      100% [Working]              100% [Packages 223 kB]                      100% [Working]              100% [Packages 766 kB]                      100% [Working]              100% [Packages 2,143 kB]                        100% [Working]              100% [Packages 20.0 kB]                       100% [Working]              100% [Packages 66.3 kB]                       100% [Working]              100% [Packages 3,074 kB]                        100% [Working]              100% [Packages 4,947 kB]                        100% [Working]              100% [Packages 186 kB]                      100% [Working]              100% [Packages 221 kB]                      100% [Working]              100% [Packages 765 kB]                      100% [Working]              100% [Packages 2,148 kB]                        100% [Working]              100% [Packages 20.9 kB]                       100% [Working]              100% [Packages 68.2 kB]                       100% [Working]              100% [Sources 33.6 kB]                      100% [Working]              100% [Sources 0 B]                  100% [Working]              100% [Sources 141 kB]                     100% [Working]              100% [Sources 4,444 B]                      100% [Working]              100% [Packages 57.6 kB]                       100% [Working]              100% [Packages 0 B]                   100% [Working]              100% [Packages 220 kB]                      100% [Working]              100% [Packages 3,396 B]                       100% [Working]              100% [Packages 57.5 kB]                       100% [Working]              100% [Packages 0 B]                   100% [Working]              100% [Packages 219 kB]                      100% [Working]              100% [Packages 3,341 B]                       100% [Working]              100% [Packages 11.3 kB]                       100% [Working]              100% [Sources 5,000 kB]                       100% [Working]              100% [Sources 22.9 kB]                      100% [Working]              100% [Sources 27.9 MB]                      100% [Working]              100% [Sources 711 kB]                     100% [Working]              100% [Packages 8,235 kB]                        100% [Working]              100% [Packages 184 kB]                      100% [Working]              100% [Packages 31.7 MB]                       100% [Working]              100% [Packages 664 kB]                      100% [Working]              100% [Packages 8,205 kB]                        100% [Working]              100% [Packages 185 kB]                      100% [Working]              100% [Packages 31.7 MB]                       100% [Working]              100% [Packages 674 kB]                      100% [Working]              100% [Packages 11.4 kB]                       100% [Working]              100% [Packages 46.8 kB]                       100% [Working]              100% [Packages 1,304 B]                       100% [Working]              100% [Packages 10.0 kB]                       100% [Working]              Reading package lists... 0%Reading package lists... 0%Reading package lists... 1%Reading package lists... 3%Reading package lists... 3%Reading package lists... 3%Reading package lists... 3%Reading package lists... 18%Reading package lists... 18%Reading package lists... 19%Reading package lists... 19%Reading package lists... 23%Reading package lists... 23%Reading package lists... 23%Reading package lists... 23%Reading package lists... 25%Reading package lists... 38%Reading package lists... 38%Reading package lists... 38%Reading package lists... 38%Reading package lists... 38%Reading package lists... 38%Reading package lists... 38%Reading package lists... 38%Reading package lists... 38%Reading package lists... 38%Reading package lists... 38%Reading package lists... 38%Reading package lists... 38%Reading package lists... 38%Reading package lists... 38%Reading package lists... 38%Reading package lists... 38%Reading package lists... 38%Reading package lists... 38%Reading package lists... 38%Reading package lists... 41%Reading package lists... 41%Reading package lists... 41%Reading package lists... 41%Reading package lists... 42%Reading package lists... 42%Reading package lists... 42%Reading package lists... 42%Reading package lists... 44%Reading package lists... 44%Reading package lists... 44%Reading package lists... 44%Reading package lists... 45%Reading package lists... 45%Reading package lists... 45%Reading package lists... 45%Reading package lists... 47%Reading package lists... 47%Reading package lists... 47%Reading package lists... 47%Reading package lists... 47%Reading package lists... 47%Reading package lists... 47%Reading package lists... 47%Reading package lists... 49%Reading package lists... 49%Reading package lists... 49%Reading package lists... 49%Reading package lists... 49%Reading package lists... 49%Reading package lists... 49%Reading package lists... 49%Reading package lists... 53%Reading package lists... 53%Reading package lists... 53%Reading package lists... 53%Reading package lists... 68%Reading package lists... 68%Reading package lists... 69%Reading package lists... 69%Reading package lists... 69%Reading package lists... 73%Reading package lists... 73%Reading package lists... 73%Reading package lists... 73%Reading package lists... 88%Reading package lists... 88%Reading package lists... 88%Reading package lists... 88%Reading package lists... 90%Reading package lists... 90%Reading package lists... 90%Reading package lists... 90%Reading package lists... 91%Reading package lists... 91%Reading package lists... 92%Reading package lists... 92%Reading package lists... 94%Reading package lists... 94%Reading package lists... 94%Reading package lists... 94%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 95%Reading package lists... 97%Reading package lists... 97%Reading package lists... 97%Reading package lists... 97%Reading package lists... 97%Reading package lists... 97%Reading package lists... 97%Reading package lists... 97%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... 99%Reading package lists... Done
+]0;megdc@node1: ~megdc@node1:~$ sudo apt-get install -y ceph ceph-mds ceph-deploy radosgw dnsmasq openssh-server ntp sshpass
+Reading package lists... 0%Reading package lists... 100%Reading package lists... Done
+Building dependency tree... 0%Building dependency tree... 0%Building dependency tree... 50%Building dependency tree... 50%Building dependency tree       
+Reading state information... 0%Reading state information... 0%Reading state information... Done
+sshpass is already the newest version.
+ntp is already the newest version.
+openssh-server is already the newest version.
+dnsmasq is already the newest version.
+The following extra packages will be installed:
+  ceph-base ceph-common ceph-fs-common ceph-fuse ceph-mon ceph-osd
+  cryptsetup-bin libbabeltrace-ctf1 libbabeltrace1
+  libboost-program-options1.54.0 libboost-regex1.54.0 libcephfs1
+  libcryptsetup4 libfcgi0ldbl libgoogle-perftools4 libjs-jquery libleveldb1
+  libradosstriper1 librgw2 libsnappy1 libtcmalloc-minimal4 libunwind8
+  python-blinker python-cephfs python-flask python-itsdangerous python-jinja2
+  python-markupsafe python-openssl python-pkg-resources python-pyinotify
+  python-rados python-rbd python-setuptools python-werkzeug
+Suggested packages:
+  javascript-common python-flask-doc python-jinja2-doc python-openssl-doc
+  python-openssl-dbg python-distribute python-distribute-doc
+  python-pyinotify-doc ipython python-genshi python-lxml python-greenlet
+  python-redis python-pylibmc python-memcache python-werkzeug-doc
+The following NEW packages will be installed:
+  ceph ceph-base ceph-common ceph-deploy ceph-fs-common ceph-fuse ceph-mds
+  ceph-mon ceph-osd cryptsetup-bin libbabeltrace-ctf1 libbabeltrace1
+  libboost-program-options1.54.0 libboost-regex1.54.0 libcephfs1
+  libcryptsetup4 libfcgi0ldbl libgoogle-perftools4 libjs-jquery libleveldb1
+  libradosstriper1 librgw2 libsnappy1 libtcmalloc-minimal4 libunwind8
+  python-blinker python-cephfs python-flask python-itsdangerous python-jinja2
+  python-markupsafe python-openssl python-pkg-resources python-pyinotify
+  python-rados python-rbd python-setuptools python-werkzeug radosgw
+0 upgraded, 39 newly installed, 0 to remove and 0 not upgraded.
+Need to get 0 B/107 MB of archives.
+After this operation, 503 MB of additional disk space will be used.
+Extracting templates from packages: 76%Extracting templates from packages: 100%
+Selecting previously unselected package libboost-program-options1.54.0:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 41860 files and directories currently installed.)
+Preparing to unpack .../libboost-program-options1.54.0_1.54.0-4ubuntu3.1_amd64.deb ...
+Unpacking libboost-program-options1.54.0:amd64 (1.54.0-4ubuntu3.1) ...
+Selecting previously unselected package libboost-regex1.54.0:amd64.
+Preparing to unpack .../libboost-regex1.54.0_1.54.0-4ubuntu3.1_amd64.deb ...
+Unpacking libboost-regex1.54.0:amd64 (1.54.0-4ubuntu3.1) ...
+Selecting previously unselected package libsnappy1.
+Preparing to unpack .../libsnappy1_1.1.0-1ubuntu1_amd64.deb ...
+Unpacking libsnappy1 (1.1.0-1ubuntu1) ...
+Selecting previously unselected package libleveldb1:amd64.
+Preparing to unpack .../libleveldb1_1.15.0-2_amd64.deb ...
+Unpacking libleveldb1:amd64 (1.15.0-2) ...
+Selecting previously unselected package libunwind8.
+Preparing to unpack .../libunwind8_1.1-2.2ubuntu3_amd64.deb ...
+Unpacking libunwind8 (1.1-2.2ubuntu3) ...
+Selecting previously unselected package libbabeltrace1:amd64.
+Preparing to unpack .../libbabeltrace1_1.2.1-2_amd64.deb ...
+Unpacking libbabeltrace1:amd64 (1.2.1-2) ...
+Selecting previously unselected package libbabeltrace-ctf1:amd64.
+Preparing to unpack .../libbabeltrace-ctf1_1.2.1-2_amd64.deb ...
+Unpacking libbabeltrace-ctf1:amd64 (1.2.1-2) ...
+Selecting previously unselected package libtcmalloc-minimal4.
+Preparing to unpack .../libtcmalloc-minimal4_2.1-2ubuntu1.1_amd64.deb ...
+Unpacking libtcmalloc-minimal4 (2.1-2ubuntu1.1) ...
+Selecting previously unselected package libgoogle-perftools4.
+Preparing to unpack .../libgoogle-perftools4_2.1-2ubuntu1.1_amd64.deb ...
+Unpacking libgoogle-perftools4 (2.1-2ubuntu1.1) ...
+Selecting previously unselected package libradosstriper1.
+Preparing to unpack .../libradosstriper1_10.2.1-1trusty_amd64.deb ...
+Unpacking libradosstriper1 (10.2.1-1trusty) ...
+Selecting previously unselected package libfcgi0ldbl.
+Preparing to unpack .../libfcgi0ldbl_2.4.0-8.1ubuntu5_amd64.deb ...
+Unpacking libfcgi0ldbl (2.4.0-8.1ubuntu5) ...
+Selecting previously unselected package librgw2.
+Preparing to unpack .../librgw2_10.2.1-1trusty_amd64.deb ...
+Unpacking librgw2 (10.2.1-1trusty) ...
+Selecting previously unselected package python-rados.
+Preparing to unpack .../python-rados_10.2.1-1trusty_amd64.deb ...
+Unpacking python-rados (10.2.1-1trusty) ...
+Selecting previously unselected package libcephfs1.
+Preparing to unpack .../libcephfs1_10.2.1-1trusty_amd64.deb ...
+Unpacking libcephfs1 (10.2.1-1trusty) ...
+Selecting previously unselected package python-cephfs.
+Preparing to unpack .../python-cephfs_10.2.1-1trusty_amd64.deb ...
+Unpacking python-cephfs (10.2.1-1trusty) ...
+Selecting previously unselected package python-rbd.
+Preparing to unpack .../python-rbd_10.2.1-1trusty_amd64.deb ...
+Unpacking python-rbd (10.2.1-1trusty) ...
+Selecting previously unselected package ceph-common.
+Preparing to unpack .../ceph-common_10.2.1-1trusty_amd64.deb ...
+Unpacking ceph-common (10.2.1-1trusty) ...
+dpkg: warning: ceph-common: conffile 'etc/default/ceph' is not a plain file or symlink (= '/etc/default/ceph')
+Selecting previously unselected package libcryptsetup4.
+Preparing to unpack .../libcryptsetup4_2%3a1.6.1-1ubuntu1_amd64.deb ...
+Unpacking libcryptsetup4 (2:1.6.1-1ubuntu1) ...
+Selecting previously unselected package cryptsetup-bin.
+Preparing to unpack .../cryptsetup-bin_2%3a1.6.1-1ubuntu1_amd64.deb ...
+Unpacking cryptsetup-bin (2:1.6.1-1ubuntu1) ...
+Selecting previously unselected package python-pkg-resources.
+Preparing to unpack .../python-pkg-resources_3.3-1ubuntu2_all.deb ...
+Unpacking python-pkg-resources (3.3-1ubuntu2) ...
+Selecting previously unselected package ceph-base.
+Preparing to unpack .../ceph-base_10.2.1-1trusty_amd64.deb ...
+Unpacking ceph-base (10.2.1-1trusty) ...
+Selecting previously unselected package libjs-jquery.
+Preparing to unpack .../libjs-jquery_1.7.2+dfsg-2ubuntu1_all.deb ...
+Unpacking libjs-jquery (1.7.2+dfsg-2ubuntu1) ...
+Selecting previously unselected package python-werkzeug.
+Preparing to unpack .../python-werkzeug_0.9.4+dfsg-1.1ubuntu2_all.deb ...
+Unpacking python-werkzeug (0.9.4+dfsg-1.1ubuntu2) ...
+Selecting previously unselected package python-markupsafe.
+Preparing to unpack .../python-markupsafe_0.18-1build2_amd64.deb ...
+Unpacking python-markupsafe (0.18-1build2) ...
+Selecting previously unselected package python-jinja2.
+Preparing to unpack .../python-jinja2_2.7.2-2_all.deb ...
+Unpacking python-jinja2 (2.7.2-2) ...
+Selecting previously unselected package python-itsdangerous.
+Preparing to unpack .../python-itsdangerous_0.22+dfsg1-1build1_all.deb ...
+Unpacking python-itsdangerous (0.22+dfsg1-1build1) ...
+Selecting previously unselected package python-flask.
+Preparing to unpack .../python-flask_0.10.1-2build1_all.deb ...
+Unpacking python-flask (0.10.1-2build1) ...
+Selecting previously unselected package ceph-mon.
+Preparing to unpack .../ceph-mon_10.2.1-1trusty_amd64.deb ...
+Unpacking ceph-mon (10.2.1-1trusty) ...
+Selecting previously unselected package ceph-osd.
+Preparing to unpack .../ceph-osd_10.2.1-1trusty_amd64.deb ...
+Unpacking ceph-osd (10.2.1-1trusty) ...
+Selecting previously unselected package ceph.
+Preparing to unpack .../ceph_10.2.1-1trusty_amd64.deb ...
+Unpacking ceph (10.2.1-1trusty) ...
+Selecting previously unselected package python-setuptools.
+Preparing to unpack .../python-setuptools_3.3-1ubuntu2_all.deb ...
+Unpacking python-setuptools (3.3-1ubuntu2) ...
+Selecting previously unselected package ceph-deploy.
+Preparing to unpack .../ceph-deploy_1.5.33_all.deb ...
+Unpacking ceph-deploy (1.5.33) ...
+Selecting previously unselected package ceph-fs-common.
+Preparing to unpack .../ceph-fs-common_10.2.1-1trusty_amd64.deb ...
+Unpacking ceph-fs-common (10.2.1-1trusty) ...
+Selecting previously unselected package ceph-fuse.
+Preparing to unpack .../ceph-fuse_10.2.1-1trusty_amd64.deb ...
+Unpacking ceph-fuse (10.2.1-1trusty) ...
+Selecting previously unselected package ceph-mds.
+Preparing to unpack .../ceph-mds_10.2.1-1trusty_amd64.deb ...
+Unpacking ceph-mds (10.2.1-1trusty) ...
+Selecting previously unselected package python-blinker.
+Preparing to unpack .../python-blinker_1.3.dfsg1-1ubuntu2_all.deb ...
+Unpacking python-blinker (1.3.dfsg1-1ubuntu2) ...
+Selecting previously unselected package python-openssl.
+Preparing to unpack .../python-openssl_0.13-2ubuntu6_amd64.deb ...
+Unpacking python-openssl (0.13-2ubuntu6) ...
+Selecting previously unselected package python-pyinotify.
+Preparing to unpack .../python-pyinotify_0.9.4-1build1_all.deb ...
+Unpacking python-pyinotify (0.9.4-1build1) ...
+Selecting previously unselected package radosgw.
+Preparing to unpack .../radosgw_10.2.1-1trusty_amd64.deb ...
+Unpacking radosgw (10.2.1-1trusty) ...
+Processing triggers for man-db (2.6.7.1-1ubuntu1) ...
+Processing triggers for ureadahead (0.100.0-16) ...
+Setting up libboost-program-options1.54.0:amd64 (1.54.0-4ubuntu3.1) ...
+Setting up libboost-regex1.54.0:amd64 (1.54.0-4ubuntu3.1) ...
+Setting up libsnappy1 (1.1.0-1ubuntu1) ...
+Setting up libleveldb1:amd64 (1.15.0-2) ...
+Setting up libunwind8 (1.1-2.2ubuntu3) ...
+Setting up libbabeltrace1:amd64 (1.2.1-2) ...
+Setting up libbabeltrace-ctf1:amd64 (1.2.1-2) ...
+Setting up libtcmalloc-minimal4 (2.1-2ubuntu1.1) ...
+Setting up libgoogle-perftools4 (2.1-2ubuntu1.1) ...
+Setting up libradosstriper1 (10.2.1-1trusty) ...
+Setting up libfcgi0ldbl (2.4.0-8.1ubuntu5) ...
+Setting up librgw2 (10.2.1-1trusty) ...
+Setting up python-rados (10.2.1-1trusty) ...
+Setting up libcephfs1 (10.2.1-1trusty) ...
+Setting up python-cephfs (10.2.1-1trusty) ...
+Setting up python-rbd (10.2.1-1trusty) ...
+Setting up ceph-common (10.2.1-1trusty) ...
+dpkg: warning: ceph-common: conffile '/etc/default/ceph' is not a plain file or symlink (= '/etc/default/ceph')
+Setting system user ceph properties..usermod: no changes
+..done
+Setting up libcryptsetup4 (2:1.6.1-1ubuntu1) ...
+Setting up cryptsetup-bin (2:1.6.1-1ubuntu1) ...
+Setting up python-pkg-resources (3.3-1ubuntu2) ...
+Setting up libjs-jquery (1.7.2+dfsg-2ubuntu1) ...
+Setting up python-werkzeug (0.9.4+dfsg-1.1ubuntu2) ...
+Setting up python-markupsafe (0.18-1build2) ...
+Setting up python-jinja2 (2.7.2-2) ...
+Setting up python-itsdangerous (0.22+dfsg1-1build1) ...
+Setting up python-flask (0.10.1-2build1) ...
+Setting up python-setuptools (3.3-1ubuntu2) ...
+Setting up ceph-deploy (1.5.33) ...
+Setting up ceph-fs-common (10.2.1-1trusty) ...
+Setting up ceph-fuse (10.2.1-1trusty) ...
+Setting up python-blinker (1.3.dfsg1-1ubuntu2) ...
+Setting up python-openssl (0.13-2ubuntu6) ...
+Setting up python-pyinotify (0.9.4-1build1) ...
+Processing triggers for ureadahead (0.100.0-16) ...
+Setting up radosgw (10.2.1-1trusty) ...
+radosgw-all start/running
+Setting up ceph-base (10.2.1-1trusty) ...
+ceph-all start/running
+Setting up ceph-mon (10.2.1-1trusty) ...
+start: Job is already running: ceph-mon-all
+Setting up ceph-osd (10.2.1-1trusty) ...
+start: Job is already running: ceph-osd-all
+Setting up ceph (10.2.1-1trusty) ...
+Setting up ceph-mds (10.2.1-1trusty) ...
+ceph-mds-all start/running
+Processing triggers for libc-bin (2.19-0ubuntu6.7) ...
+Processing triggers for ureadahead (0.100.0-16) ...
+]0;megdc@node1: ~megdc@node1:~$ cd ceph-cluster/
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ ls
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ cd =[K[K[K[Kcat ../.ssh/config n[K
+
+Host node1
+ Hostname node1
+ User megdc
+
+Host node2
+ Hostname node2
+ User megdc
+
+Host master
+  Hostname master
+  User megdc
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ lsblk
+NAME    MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINT
+sda       8:0    0 223.6G  0 disk  
+├─sda1    8:1    0   512M  0 part  
+│ └─md0   9:0    0 511.4M  0 raid1 /boot
+├─sda2    8:2    0    32G  0 part  
+│ └─md1   9:1    0    32G  0 raid1 [SWAP]
+└─sda3    8:3    0   190G  0 part  
+  └─md2   9:2    0 189.9G  0 raid1 /
+sdb       8:16   0 223.6G  0 disk  
+├─sdb1    8:17   0   512M  0 part  
+│ └─md0   9:0    0 511.4M  0 raid1 /boot
+├─sdb2    8:18   0    32G  0 part  
+│ └─md1   9:1    0    32G  0 raid1 [SWAP]
+└─sdb3    8:19   0   190G  0 part  
+  └─md2   9:2    0 189.9G  0 raid1 /
+sdc       8:32   0   5.5T  0 disk  
+└─sdc1    8:33   0   5.5T  0 part  
+sdd       8:48   0   5.5T  0 disk  
+└─sdd1    8:49   0   5.5T  0 part  
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ ceph-deploy disk zap node1:sdc node2:sdd
+[[1mceph_deploy.conf[0m][[1;34mDEBUG[0m ] found configuration file at: /home/megdc/.cephdeploy.conf
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ] Invoked (1.5.33): /usr/bin/ceph-deploy disk zap node1:sdc node2:sdd
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ] ceph-deploy options:
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  username                      : None
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  verbose                       : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  overwrite_conf                : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  subcommand                    : zap
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  quiet                         : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7f284a07e5a8>
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  cluster                       : ceph
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  func                          : <function disk at 0x7f284a4e35f0>
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  ceph_conf                     : None
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  default_release               : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  disk                          : [('node1', '/dev/sdc', None), ('node2', '/dev/sdd', None)]
+[[1mceph_deploy[0m][[1;31mERROR[0m ] ConfigError: Cannot load config: [Errno 2] No such file or directory: 'ceph.conf'; has `ceph-deploy new` been run in this directory?
+
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ ceph-deploy new megamadhi
+usage: ceph-deploy new [-h] [--no-ssh-copykey] [--fsid FSID]
+                       [--cluster-network CLUSTER_NETWORK]
+                       [--public-network PUBLIC_NETWORK]
+                       MON [MON ...]
+ceph-deploy new: error: hostname: megamadhi is not resolvable
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ ceph-deploy new megamadhi[K[K[K[K[K[K[K[K[Knode1
+[[1mceph_deploy.conf[0m][[1;34mDEBUG[0m ] found configuration file at: /home/megdc/.cephdeploy.conf
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ] Invoked (1.5.33): /usr/bin/ceph-deploy new node1
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ] ceph-deploy options:
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  username                      : None
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  func                          : <function new at 0x7fc62db17410>
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  verbose                       : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  overwrite_conf                : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  quiet                         : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7fc62db36ea8>
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  cluster                       : ceph
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  ssh_copykey                   : True
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  mon                           : ['node1']
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  public_network                : None
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  ceph_conf                     : None
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  cluster_network               : None
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  default_release               : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  fsid                          : None
+[[1mceph_deploy.new[0m][[1;34mDEBUG[0m ] Creating new cluster named ceph
+[[1mceph_deploy.new[0m][[1;37mINFO[0m  ] making sure passwordless SSH succeeds
+[[1mnode1[0m][[1;34mDEBUG[0m ] connection detected need for sudo
+[[1mnode1[0m][[1;34mDEBUG[0m ] connected to host: node1 
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect platform information from remote host
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect machine type
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo /sbin/initctl version
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo /bin/ip link show
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo /bin/ip addr show
+[[1mnode1[0m][[1;34mDEBUG[0m ] IP addresses found: ['136.243.49.217']
+[[1mceph_deploy.new[0m][[1;34mDEBUG[0m ] Resolving host node1
+[[1mceph_deploy.new[0m][[1;34mDEBUG[0m ] Monitor node1 at 2a01:4f8:212:11e8::2
+[[1mceph_deploy.new[0m][[1;37mINFO[0m  ] Monitors are IPv6, binding Messenger traffic on IPv6
+[[1mceph_deploy.new[0m][[1;34mDEBUG[0m ] Monitor initial members are ['node1']
+[[1mceph_deploy.new[0m][[1;34mDEBUG[0m ] Monitor addrs are ['[2a01:4f8:212:11e8::2]']
+[[1mceph_deploy.new[0m][[1;34mDEBUG[0m ] Creating a random mon key...
+[[1mceph_deploy.new[0m][[1;34mDEBUG[0m ] Writing monitor keyring to ceph.mon.keyring...
+[[1mceph_deploy.new[0m][[1;34mDEBUG[0m ] Writing initial config to ceph.conf...
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ ceph-deploy mon create-initial
+[[1mceph_deploy.conf[0m][[1;34mDEBUG[0m ] found configuration file at: /home/megdc/.cephdeploy.conf
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ] Invoked (1.5.33): /usr/bin/ceph-deploy mon create-initial
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ] ceph-deploy options:
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  username                      : None
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  verbose                       : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  overwrite_conf                : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  subcommand                    : create-initial
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  quiet                         : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7fd9684dc5a8>
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  cluster                       : ceph
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  func                          : <function mon at 0x7fd9689466e0>
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  ceph_conf                     : None
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  default_release               : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  keyrings                      : None
+[[1mceph_deploy.mon[0m][[1;34mDEBUG[0m ] Deploying mon, cluster ceph hosts node1
+[[1mceph_deploy.mon[0m][[1;34mDEBUG[0m ] detecting platform for host node1 ...
+[[1mnode1[0m][[1;34mDEBUG[0m ] connection detected need for sudo
+[[1mnode1[0m][[1;34mDEBUG[0m ] connected to host: node1 
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect platform information from remote host
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect machine type
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo /sbin/initctl version
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mceph_deploy.mon[0m][[1;37mINFO[0m  ] distro info: Ubuntu 14.04 trusty
+[[1mnode1[0m][[1;34mDEBUG[0m ] determining if provided host has same hostname in remote
+[[1mnode1[0m][[1;34mDEBUG[0m ] get remote short hostname
+[[1mnode1[0m][[1;34mDEBUG[0m ] deploying mon to node1
+[[1mnode1[0m][[1;34mDEBUG[0m ] get remote short hostname
+[[1mnode1[0m][[1;34mDEBUG[0m ] remote hostname: node1
+[[1mnode1[0m][[1;34mDEBUG[0m ] write cluster configuration to /etc/ceph/{cluster}.conf
+[[1mnode1[0m][[1;34mDEBUG[0m ] create the mon path if it does not exist
+[[1mnode1[0m][[1;34mDEBUG[0m ] checking for done path: /var/lib/ceph/mon/ceph-node1/done
+[[1mnode1[0m][[1;34mDEBUG[0m ] done path does not exist: /var/lib/ceph/mon/ceph-node1/done
+[[1mnode1[0m][[1;37mINFO[0m  ] creating keyring file: /var/lib/ceph/tmp/ceph-node1.mon.keyring
+[[1mnode1[0m][[1;34mDEBUG[0m ] create the monitor keyring file
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo ceph-mon --cluster ceph --mkfs -i node1 --keyring /var/lib/ceph/tmp/ceph-node1.mon.keyring --setuser 64045 --setgroup 64045
+[[1mnode1[0m][[1;34mDEBUG[0m ] ceph-mon: mon.noname-a [2a01:4f8:212:11e8::2]:6789/0 is local, renaming to mon.node1
+[[1mnode1[0m][[1;34mDEBUG[0m ] ceph-mon: set fsid to ef86c8f5-3574-43d2-9777-794172954545
+[[1mnode1[0m][[1;34mDEBUG[0m ] ceph-mon: created monfs at /var/lib/ceph/mon/ceph-node1 for mon.node1
+[[1mnode1[0m][[1;37mINFO[0m  ] unlinking keyring file /var/lib/ceph/tmp/ceph-node1.mon.keyring
+[[1mnode1[0m][[1;34mDEBUG[0m ] create a done file to avoid re-doing the mon deployment
+[[1mnode1[0m][[1;34mDEBUG[0m ] create the init path if it does not exist
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo initctl emit ceph-mon cluster=ceph id=node1
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo ceph --cluster=ceph --admin-daemon /var/run/ceph/ceph-mon.node1.asok mon_status
+[[1mnode1[0m][[1;34mDEBUG[0m ] ********************************************************************************
+[[1mnode1[0m][[1;34mDEBUG[0m ] status for monitor: mon.node1
+[[1mnode1[0m][[1;34mDEBUG[0m ] {
+[[1mnode1[0m][[1;34mDEBUG[0m ]   "election_epoch": 3, 
+[[1mnode1[0m][[1;34mDEBUG[0m ]   "extra_probe_peers": [], 
+[[1mnode1[0m][[1;34mDEBUG[0m ]   "monmap": {
+[[1mnode1[0m][[1;34mDEBUG[0m ]     "created": "2016-05-23 10:58:43.982204", 
+[[1mnode1[0m][[1;34mDEBUG[0m ]     "epoch": 1, 
+[[1mnode1[0m][[1;34mDEBUG[0m ]     "fsid": "ef86c8f5-3574-43d2-9777-794172954545", 
+[[1mnode1[0m][[1;34mDEBUG[0m ]     "modified": "2016-05-23 10:58:43.982204", 
+[[1mnode1[0m][[1;34mDEBUG[0m ]     "mons": [
+[[1mnode1[0m][[1;34mDEBUG[0m ]       {
+[[1mnode1[0m][[1;34mDEBUG[0m ]         "addr": "[2a01:4f8:212:11e8::2]:6789/0", 
+[[1mnode1[0m][[1;34mDEBUG[0m ]         "name": "node1", 
+[[1mnode1[0m][[1;34mDEBUG[0m ]         "rank": 0
+[[1mnode1[0m][[1;34mDEBUG[0m ]       }
+[[1mnode1[0m][[1;34mDEBUG[0m ]     ]
+[[1mnode1[0m][[1;34mDEBUG[0m ]   }, 
+[[1mnode1[0m][[1;34mDEBUG[0m ]   "name": "node1", 
+[[1mnode1[0m][[1;34mDEBUG[0m ]   "outside_quorum": [], 
+[[1mnode1[0m][[1;34mDEBUG[0m ]   "quorum": [
+[[1mnode1[0m][[1;34mDEBUG[0m ]     0
+[[1mnode1[0m][[1;34mDEBUG[0m ]   ], 
+[[1mnode1[0m][[1;34mDEBUG[0m ]   "rank": 0, 
+[[1mnode1[0m][[1;34mDEBUG[0m ]   "state": "leader", 
+[[1mnode1[0m][[1;34mDEBUG[0m ]   "sync_provider": []
+[[1mnode1[0m][[1;34mDEBUG[0m ] }
+[[1mnode1[0m][[1;34mDEBUG[0m ] ********************************************************************************
+[[1mnode1[0m][[1;37mINFO[0m  ] monitor: mon.node1 is running
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo ceph --cluster=ceph --admin-daemon /var/run/ceph/ceph-mon.node1.asok mon_status
+[[1mceph_deploy.mon[0m][[1;37mINFO[0m  ] processing monitor mon.node1
+[[1mnode1[0m][[1;34mDEBUG[0m ] connection detected need for sudo
+[[1mnode1[0m][[1;34mDEBUG[0m ] connected to host: node1 
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect platform information from remote host
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect machine type
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo /sbin/initctl version
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo ceph --cluster=ceph --admin-daemon /var/run/ceph/ceph-mon.node1.asok mon_status
+[[1mceph_deploy.mon[0m][[1;37mINFO[0m  ] mon.node1 monitor has reached quorum!
+[[1mceph_deploy.mon[0m][[1;37mINFO[0m  ] all initial monitors are running and have formed quorum
+[[1mceph_deploy.mon[0m][[1;37mINFO[0m  ] Running gatherkeys...
+[[1mceph_deploy.gatherkeys[0m][[1;34mDEBUG[0m ] Checking node1 for /etc/ceph/ceph.client.admin.keyring
+[[1mnode1[0m][[1;34mDEBUG[0m ] connection detected need for sudo
+[[1mnode1[0m][[1;34mDEBUG[0m ] connected to host: node1 
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect platform information from remote host
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect machine type
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo /sbin/initctl version
+[[1mnode1[0m][[1;34mDEBUG[0m ] fetch remote file
+[[1mceph_deploy.gatherkeys[0m][[1;34mDEBUG[0m ] Got ceph.client.admin.keyring key from node1.
+[[1mceph_deploy.gatherkeys[0m][[1;34mDEBUG[0m ] Have ceph.mon.keyring
+[[1mceph_deploy.gatherkeys[0m][[1;34mDEBUG[0m ] Checking node1 for /var/lib/ceph/bootstrap-osd/ceph.keyring
+[[1mnode1[0m][[1;34mDEBUG[0m ] connection detected need for sudo
+[[1mnode1[0m][[1;34mDEBUG[0m ] connected to host: node1 
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect platform information from remote host
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect machine type
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo /sbin/initctl version
+[[1mnode1[0m][[1;34mDEBUG[0m ] fetch remote file
+[[1mceph_deploy.gatherkeys[0m][[1;34mDEBUG[0m ] Got ceph.bootstrap-osd.keyring key from node1.
+[[1mceph_deploy.gatherkeys[0m][[1;34mDEBUG[0m ] Checking node1 for /var/lib/ceph/bootstrap-mds/ceph.keyring
+[[1mnode1[0m][[1;34mDEBUG[0m ] connection detected need for sudo
+[[1mnode1[0m][[1;34mDEBUG[0m ] connected to host: node1 
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect platform information from remote host
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect machine type
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo /sbin/initctl version
+[[1mnode1[0m][[1;34mDEBUG[0m ] fetch remote file
+[[1mceph_deploy.gatherkeys[0m][[1;34mDEBUG[0m ] Got ceph.bootstrap-mds.keyring key from node1.
+[[1mceph_deploy.gatherkeys[0m][[1;34mDEBUG[0m ] Checking node1 for /var/lib/ceph/bootstrap-rgw/ceph.keyring
+[[1mnode1[0m][[1;34mDEBUG[0m ] connection detected need for sudo
+[[1mnode1[0m][[1;34mDEBUG[0m ] connected to host: node1 
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect platform information from remote host
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect machine type
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo /sbin/initctl version
+[[1mnode1[0m][[1;34mDEBUG[0m ] fetch remote file
+[[1mceph_deploy.gatherkeys[0m][[1;34mDEBUG[0m ] Got ceph.bootstrap-rgw.keyring key from node1.
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ cat ceph.conf
+[global]
+fsid = ef86c8f5-3574-43d2-9777-794172954545
+ms_bind_ipv6 = true
+mon_initial_members = node1
+mon_host = [2a01:4f8:212:11e8::2]
+auth_cluster_required = cephx
+auth_service_required = cephx
+auth_client_required = cephx
+
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ echo "osd_pool_default_size = 2" >> ceph.conf
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ echo "osd crush chooseleaf type = 0" >> ceph.conf
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ echo "mon_pg_warn_max_per_osd = 0" >> ceph.conf
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ ceph-deploy disk zap node1:sdc node1:sdd
+[[1mceph_deploy.conf[0m][[1;34mDEBUG[0m ] found configuration file at: /home/megdc/.cephdeploy.conf
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ] Invoked (1.5.33): /usr/bin/ceph-deploy disk zap node1:sdc node1:sdd
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ] ceph-deploy options:
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  username                      : None
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  verbose                       : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  overwrite_conf                : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  subcommand                    : zap
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  quiet                         : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7fa173e495a8>
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  cluster                       : ceph
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  func                          : <function disk at 0x7fa1742ae5f0>
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  ceph_conf                     : None
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  default_release               : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  disk                          : [('node1', '/dev/sdc', None), ('node1', '/dev/sdd', None)]
+[[1mceph_deploy.osd[0m][[1;34mDEBUG[0m ] zapping /dev/sdc on node1
+[[1mnode1[0m][[1;34mDEBUG[0m ] connection detected need for sudo
+[[1mnode1[0m][[1;34mDEBUG[0m ] connected to host: node1 
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect platform information from remote host
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect machine type
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo /sbin/initctl version
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mceph_deploy.osd[0m][[1;37mINFO[0m  ] Distro info: Ubuntu 14.04 trusty
+[[1mnode1[0m][[1;34mDEBUG[0m ] zeroing last few blocks of device
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo /usr/sbin/ceph-disk zap /dev/sdc
+[[1mnode1[0m][[1;33mWARNIN[0m] Caution: invalid backup GPT header, but valid main header; regenerating
+[[1mnode1[0m][[1;33mWARNIN[0m] backup header from main header.
+[[1mnode1[0m][[1;33mWARNIN[0m] 
+[[1mnode1[0m][[1;33mWARNIN[0m] Warning! Main and backup partition tables differ! Use the 'c' and 'e' options
+[[1mnode1[0m][[1;33mWARNIN[0m] on the recovery & transformation menu to examine the two tables.
+[[1mnode1[0m][[1;33mWARNIN[0m] 
+[[1mnode1[0m][[1;33mWARNIN[0m] Warning! One or more CRCs don't match. You should repair the disk!
+[[1mnode1[0m][[1;33mWARNIN[0m] 
+[[1mnode1[0m][[1;34mDEBUG[0m ] ****************************************************************************
+[[1mnode1[0m][[1;34mDEBUG[0m ] Caution: Found protective or hybrid MBR and corrupt GPT. Using GPT, but disk
+[[1mnode1[0m][[1;34mDEBUG[0m ] verification and recovery are STRONGLY recommended.
+[[1mnode1[0m][[1;34mDEBUG[0m ] ****************************************************************************
+[[1mnode1[0m][[1;34mDEBUG[0m ] GPT data structures destroyed! You may now partition the disk using fdisk or
+[[1mnode1[0m][[1;34mDEBUG[0m ] other utilities.
+[[1mnode1[0m][[1;34mDEBUG[0m ] Creating new GPT entries.
+[[1mnode1[0m][[1;34mDEBUG[0m ] The operation has completed successfully.
+[[1mceph_deploy.osd[0m][[1;34mDEBUG[0m ] Calling partprobe on zapped device /dev/sdc
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo /sbin/partprobe /dev/sdc
+[[1mceph_deploy.osd[0m][[1;34mDEBUG[0m ] zapping /dev/sdd on node1
+[[1mnode1[0m][[1;34mDEBUG[0m ] connection detected need for sudo
+[[1mnode1[0m][[1;34mDEBUG[0m ] connected to host: node1 
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect platform information from remote host
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect machine type
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo /sbin/initctl version
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mceph_deploy.osd[0m][[1;37mINFO[0m  ] Distro info: Ubuntu 14.04 trusty
+[[1mnode1[0m][[1;34mDEBUG[0m ] zeroing last few blocks of device
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo /usr/sbin/ceph-disk zap /dev/sdd
+[[1mnode1[0m][[1;33mWARNIN[0m] Caution: invalid backup GPT header, but valid main header; regenerating
+[[1mnode1[0m][[1;33mWARNIN[0m] backup header from main header.
+[[1mnode1[0m][[1;33mWARNIN[0m] 
+[[1mnode1[0m][[1;33mWARNIN[0m] Warning! Main and backup partition tables differ! Use the 'c' and 'e' options
+[[1mnode1[0m][[1;33mWARNIN[0m] on the recovery & transformation menu to examine the two tables.
+[[1mnode1[0m][[1;33mWARNIN[0m] 
+[[1mnode1[0m][[1;33mWARNIN[0m] Warning! One or more CRCs don't match. You should repair the disk!
+[[1mnode1[0m][[1;33mWARNIN[0m] 
+[[1mnode1[0m][[1;34mDEBUG[0m ] ****************************************************************************
+[[1mnode1[0m][[1;34mDEBUG[0m ] Caution: Found protective or hybrid MBR and corrupt GPT. Using GPT, but disk
+[[1mnode1[0m][[1;34mDEBUG[0m ] verification and recovery are STRONGLY recommended.
+[[1mnode1[0m][[1;34mDEBUG[0m ] ****************************************************************************
+[[1mnode1[0m][[1;34mDEBUG[0m ] GPT data structures destroyed! You may now partition the disk using fdisk or
+[[1mnode1[0m][[1;34mDEBUG[0m ] other utilities.
+[[1mnode1[0m][[1;34mDEBUG[0m ] Creating new GPT entries.
+[[1mnode1[0m][[1;34mDEBUG[0m ] The operation has completed successfully.
+[[1mceph_deploy.osd[0m][[1;34mDEBUG[0m ] Calling partprobe on zapped device /dev/sdd
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo /sbin/partprobe /dev/sdd
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ lsblk
+NAME    MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINT
+sda       8:0    0 223.6G  0 disk  
+├─sda1    8:1    0   512M  0 part  
+│ └─md0   9:0    0 511.4M  0 raid1 /boot
+├─sda2    8:2    0    32G  0 part  
+│ └─md1   9:1    0    32G  0 raid1 [SWAP]
+└─sda3    8:3    0   190G  0 part  
+  └─md2   9:2    0 189.9G  0 raid1 /
+sdb       8:16   0 223.6G  0 disk  
+├─sdb1    8:17   0   512M  0 part  
+│ └─md0   9:0    0 511.4M  0 raid1 /boot
+├─sdb2    8:18   0    32G  0 part  
+│ └─md1   9:1    0    32G  0 raid1 [SWAP]
+└─sdb3    8:19   0   190G  0 part  
+  └─md2   9:2    0 189.9G  0 raid1 /
+sdc       8:32   0   5.5T  0 disk  
+sdd       8:48   0   5.5T  0 disk  
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ ceph-deploy osd prepare node1:sdc node1:sdd
+[[1mceph_deploy.conf[0m][[1;34mDEBUG[0m ] found configuration file at: /home/megdc/.cephdeploy.conf
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ] Invoked (1.5.33): /usr/bin/ceph-deploy osd prepare node1:sdc node1:sdd
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ] ceph-deploy options:
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  username                      : None
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  disk                          : [('node1', '/dev/sdc', None), ('node1', '/dev/sdd', None)]
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  dmcrypt                       : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  verbose                       : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  bluestore                     : None
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  overwrite_conf                : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  subcommand                    : prepare
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  dmcrypt_key_dir               : /etc/ceph/dmcrypt-keys
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  quiet                         : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7f80511d5f80>
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  cluster                       : ceph
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  fs_type                       : xfs
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  func                          : <function osd at 0x7f8051637578>
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  ceph_conf                     : None
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  default_release               : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  zap_disk                      : False
+[[1mceph_deploy.osd[0m][[1;34mDEBUG[0m ] Preparing cluster ceph disks node1:/dev/sdc: node1:/dev/sdd:
+[[1mnode1[0m][[1;34mDEBUG[0m ] connection detected need for sudo
+[[1mnode1[0m][[1;34mDEBUG[0m ] connected to host: node1 
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect platform information from remote host
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect machine type
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo /sbin/initctl version
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mceph_deploy.osd[0m][[1;37mINFO[0m  ] Distro info: Ubuntu 14.04 trusty
+[[1mceph_deploy.osd[0m][[1;34mDEBUG[0m ] Deploying osd to node1
+[[1mnode1[0m][[1;34mDEBUG[0m ] write cluster configuration to /etc/ceph/{cluster}.conf
+[[1mceph_deploy.osd[0m][[1;31mERROR[0m ] RuntimeError: config file /etc/ceph/ceph.conf exists with different content; use --overwrite-conf to overwrite
+[[1mnode1[0m][[1;34mDEBUG[0m ] connection detected need for sudo
+[[1mnode1[0m][[1;34mDEBUG[0m ] connected to host: node1 
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect platform information from remote host
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect machine type
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo /sbin/initctl version
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mceph_deploy.osd[0m][[1;37mINFO[0m  ] Distro info: Ubuntu 14.04 trusty
+[[1mceph_deploy.osd[0m][[1;34mDEBUG[0m ] Preparing host node1 disk /dev/sdd journal None activate False
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo /usr/sbin/ceph-disk -v prepare --cluster ceph --fs-type xfs -- /dev/sdd
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /usr/bin/ceph-osd --cluster=ceph --show-config-value=fsid
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /usr/bin/ceph-osd --check-allows-journal -i 0 --cluster ceph
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /usr/bin/ceph-osd --check-wants-journal -i 0 --cluster ceph
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /usr/bin/ceph-osd --check-needs-journal -i 0 --cluster ceph
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdd uuid path is /sys/dev/block/8:48/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] set_type: Will colocate journal with data on /dev/sdd
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /usr/bin/ceph-osd --cluster=ceph --show-config-value=osd_journal_size
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdd uuid path is /sys/dev/block/8:48/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdd uuid path is /sys/dev/block/8:48/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdd uuid path is /sys/dev/block/8:48/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /usr/bin/ceph-conf --cluster=ceph --name=osd. --lookup osd_mkfs_options_xfs
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /usr/bin/ceph-conf --cluster=ceph --name=osd. --lookup osd_fs_mkfs_options_xfs
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /usr/bin/ceph-conf --cluster=ceph --name=osd. --lookup osd_mount_options_xfs
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /usr/bin/ceph-conf --cluster=ceph --name=osd. --lookup osd_fs_mount_options_xfs
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdd uuid path is /sys/dev/block/8:48/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdd uuid path is /sys/dev/block/8:48/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] ptype_tobe_for_name: name = journal
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdd uuid path is /sys/dev/block/8:48/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] create_partition: Creating journal partition num 2 size 5120 on /dev/sdd
+[[1mnode1[0m][[1;33mWARNIN[0m] command_check_call: Running command: /sbin/sgdisk --new=2:0:+5120M --change-name=2:ceph journal --partition-guid=2:600d2cda-e42d-4e97-9d04-9a85853dab98 --typecode=2:45b0969e-9b03-4f30-b4c6-b4b80ceff106 --mbrtogpt -- /dev/sdd
+[[1mnode1[0m][[1;34mDEBUG[0m ] The operation has completed successfully.
+[[1mnode1[0m][[1;33mWARNIN[0m] update_partition: Calling partprobe on created device /dev/sdd
+[[1mnode1[0m][[1;33mWARNIN[0m] command_check_call: Running command: /sbin/udevadm settle --timeout=600
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /sbin/partprobe /dev/sdd
+[[1mnode1[0m][[1;33mWARNIN[0m] command_check_call: Running command: /sbin/udevadm settle --timeout=600
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdd uuid path is /sys/dev/block/8:48/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdd uuid path is /sys/dev/block/8:48/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdd2 uuid path is /sys/dev/block/8:50/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] prepare_device: Journal is GPT partition /dev/disk/by-partuuid/600d2cda-e42d-4e97-9d04-9a85853dab98
+[[1mnode1[0m][[1;33mWARNIN[0m] prepare_device: Journal is GPT partition /dev/disk/by-partuuid/600d2cda-e42d-4e97-9d04-9a85853dab98
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdd uuid path is /sys/dev/block/8:48/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] set_data_partition: Creating osd partition on /dev/sdd
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdd uuid path is /sys/dev/block/8:48/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] ptype_tobe_for_name: name = data
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdd uuid path is /sys/dev/block/8:48/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] create_partition: Creating data partition num 1 size 0 on /dev/sdd
+[[1mnode1[0m][[1;33mWARNIN[0m] command_check_call: Running command: /sbin/sgdisk --largest-new=1 --change-name=1:ceph data --partition-guid=1:69476538-b296-45bb-a19c-0a3b0da12a61 --typecode=1:89c57f98-2fe5-4dc0-89c1-f3ad0ceff2be --mbrtogpt -- /dev/sdd
+[[1mnode1[0m][[1;34mDEBUG[0m ] The operation has completed successfully.
+[[1mnode1[0m][[1;33mWARNIN[0m] update_partition: Calling partprobe on created device /dev/sdd
+[[1mnode1[0m][[1;33mWARNIN[0m] command_check_call: Running command: /sbin/udevadm settle --timeout=600
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /sbin/partprobe /dev/sdd
+[[1mnode1[0m][[1;33mWARNIN[0m] command_check_call: Running command: /sbin/udevadm settle --timeout=600
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdd uuid path is /sys/dev/block/8:48/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdd uuid path is /sys/dev/block/8:48/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdd1 uuid path is /sys/dev/block/8:49/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] populate_data_path_device: Creating xfs fs on /dev/sdd1
+[[1mnode1[0m][[1;33mWARNIN[0m] command_check_call: Running command: /sbin/mkfs -t xfs -f -i size=2048 -- /dev/sdd1
+[[1mnode1[0m][[1;34mDEBUG[0m ] meta-data=/dev/sdd1              isize=2048   agcount=32, agsize=45744365 blks
+[[1mnode1[0m][[1;34mDEBUG[0m ]          =                       sectsz=4096  attr=2, projid32bit=0
+[[1mnode1[0m][[1;34mDEBUG[0m ] data     =                       bsize=4096   blocks=1463819665, imaxpct=5
+[[1mnode1[0m][[1;34mDEBUG[0m ]          =                       sunit=0      swidth=0 blks
+[[1mnode1[0m][[1;34mDEBUG[0m ] naming   =version 2              bsize=4096   ascii-ci=0
+[[1mnode1[0m][[1;34mDEBUG[0m ] log      =internal log           bsize=4096   blocks=521728, version=2
+[[1mnode1[0m][[1;34mDEBUG[0m ]          =                       sectsz=4096  sunit=1 blks, lazy-count=1
+[[1mnode1[0m][[1;34mDEBUG[0m ] realtime =none                   extsz=4096   blocks=0, rtextents=0
+[[1mnode1[0m][[1;33mWARNIN[0m] mount: Mounting /dev/sdd1 on /var/lib/ceph/tmp/mnt.ljFsXz with options noatime,inode64
+[[1mnode1[0m][[1;33mWARNIN[0m] command_check_call: Running command: /bin/mount -t xfs -o noatime,inode64 -- /dev/sdd1 /var/lib/ceph/tmp/mnt.ljFsXz
+[[1mnode1[0m][[1;33mWARNIN[0m] populate_data_path: Preparing osd data dir /var/lib/ceph/tmp/mnt.ljFsXz
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /bin/chown -R ceph:ceph /var/lib/ceph/tmp/mnt.ljFsXz/ceph_fsid.4650.tmp
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /bin/chown -R ceph:ceph /var/lib/ceph/tmp/mnt.ljFsXz/fsid.4650.tmp
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /bin/chown -R ceph:ceph /var/lib/ceph/tmp/mnt.ljFsXz/magic.4650.tmp
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /bin/chown -R ceph:ceph /var/lib/ceph/tmp/mnt.ljFsXz/journal_uuid.4650.tmp
+[[1mnode1[0m][[1;33mWARNIN[0m] adjust_symlink: Creating symlink /var/lib/ceph/tmp/mnt.ljFsXz/journal -> /dev/disk/by-partuuid/600d2cda-e42d-4e97-9d04-9a85853dab98
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /bin/chown -R ceph:ceph /var/lib/ceph/tmp/mnt.ljFsXz
+[[1mnode1[0m][[1;33mWARNIN[0m] unmount: Unmounting /var/lib/ceph/tmp/mnt.ljFsXz
+[[1mnode1[0m][[1;33mWARNIN[0m] command_check_call: Running command: /bin/umount -- /var/lib/ceph/tmp/mnt.ljFsXz
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdd uuid path is /sys/dev/block/8:48/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] command_check_call: Running command: /sbin/sgdisk --typecode=1:4fbd7e29-9d25-41b8-afd0-062c0ceff05d -- /dev/sdd
+[[1mnode1[0m][[1;34mDEBUG[0m ] The operation has completed successfully.
+[[1mnode1[0m][[1;33mWARNIN[0m] update_partition: Calling partprobe on prepared device /dev/sdd
+[[1mnode1[0m][[1;33mWARNIN[0m] command_check_call: Running command: /sbin/udevadm settle --timeout=600
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /sbin/partprobe /dev/sdd
+[[1mnode1[0m][[1;33mWARNIN[0m] command_check_call: Running command: /sbin/udevadm settle --timeout=600
+[[1mnode1[0m][[1;33mWARNIN[0m] command_check_call: Running command: /sbin/udevadm trigger --action=add --sysname-match sdd1
+[[1mnode1[0m][[1;37mINFO[0m  ] checking OSD status...
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo /usr/bin/ceph --cluster=ceph osd stat --format=json
+[[1mceph_deploy.osd[0m][[1;34mDEBUG[0m ] Host node1 is now ready for osd use.
+[[1mceph_deploy[0m][[1;31mERROR[0m ] GenericError: Failed to create 1 OSDs
+
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ ls
+ceph.bootstrap-mds.keyring  ceph.bootstrap-rgw.keyring  ceph.conf             ceph.mon.keyring
+ceph.bootstrap-osd.keyring  ceph.client.admin.keyring   ceph-deploy-ceph.log
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ c[Kcat[K[K[Kcat /etc/ceph/ceph.conf 
+[global]
+fsid = ef86c8f5-3574-43d2-9777-794172954545
+ms_bind_ipv6 = true
+mon_initial_members = node1
+mon_host = [2a01:4f8:212:11e8::2]
+auth_cluster_required = cephx
+auth_service_required = cephx
+auth_client_required = cephx
+
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ lsblk
+NAME    MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINT
+sda       8:0    0 223.6G  0 disk  
+├─sda1    8:1    0   512M  0 part  
+│ └─md0   9:0    0 511.4M  0 raid1 /boot
+├─sda2    8:2    0    32G  0 part  
+│ └─md1   9:1    0    32G  0 raid1 [SWAP]
+└─sda3    8:3    0   190G  0 part  
+  └─md2   9:2    0 189.9G  0 raid1 /
+sdb       8:16   0 223.6G  0 disk  
+├─sdb1    8:17   0   512M  0 part  
+│ └─md0   9:0    0 511.4M  0 raid1 /boot
+├─sdb2    8:18   0    32G  0 part  
+│ └─md1   9:1    0    32G  0 raid1 [SWAP]
+└─sdb3    8:19   0   190G  0 part  
+  └─md2   9:2    0 189.9G  0 raid1 /
+sdc       8:32   0   5.5T  0 disk  
+sdd       8:48   0   5.5T  0 disk  
+├─sdd1    8:49   0   5.5T  0 part  
+└─sdd2    8:50   0     5G  0 part  
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ ceph-deploy osd prepare --overwrite-conf node1:sdc node1:sdd [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Clsblk[Kcat /etc/ceph/ceph.conf ls[Kceph-deploy osd prepare node1:sdc node1:sdd[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Clsblk[Kceph-deploy disk zap node1:sdc node1:sdd
+[[1mceph_deploy.conf[0m][[1;34mDEBUG[0m ] found configuration file at: /home/megdc/.cephdeploy.conf
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ] Invoked (1.5.33): /usr/bin/ceph-deploy disk zap node1:sdc node1:sdd
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ] ceph-deploy options:
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  username                      : None
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  verbose                       : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  overwrite_conf                : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  subcommand                    : zap
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  quiet                         : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7fe2923225a8>
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  cluster                       : ceph
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  func                          : <function disk at 0x7fe2927875f0>
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  ceph_conf                     : None
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  default_release               : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  disk                          : [('node1', '/dev/sdc', None), ('node1', '/dev/sdd', None)]
+[[1mceph_deploy.osd[0m][[1;34mDEBUG[0m ] zapping /dev/sdc on node1
+[[1mnode1[0m][[1;34mDEBUG[0m ] connection detected need for sudo
+[[1mnode1[0m][[1;34mDEBUG[0m ] connected to host: node1 
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect platform information from remote host
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect machine type
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo /sbin/initctl version
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mceph_deploy.osd[0m][[1;37mINFO[0m  ] Distro info: Ubuntu 14.04 trusty
+[[1mnode1[0m][[1;34mDEBUG[0m ] zeroing last few blocks of device
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo /usr/sbin/ceph-disk zap /dev/sdc
+[[1mnode1[0m][[1;33mWARNIN[0m] Caution: invalid backup GPT header, but valid main header; regenerating
+[[1mnode1[0m][[1;33mWARNIN[0m] backup header from main header.
+[[1mnode1[0m][[1;33mWARNIN[0m] 
+[[1mnode1[0m][[1;34mDEBUG[0m ] ****************************************************************************
+[[1mnode1[0m][[1;34mDEBUG[0m ] Caution: Found protective or hybrid MBR and corrupt GPT. Using GPT, but disk
+[[1mnode1[0m][[1;34mDEBUG[0m ] verification and recovery are STRONGLY recommended.
+[[1mnode1[0m][[1;34mDEBUG[0m ] ****************************************************************************
+[[1mnode1[0m][[1;34mDEBUG[0m ] GPT data structures destroyed! You may now partition the disk using fdisk or
+[[1mnode1[0m][[1;34mDEBUG[0m ] other utilities.
+[[1mnode1[0m][[1;34mDEBUG[0m ] Creating new GPT entries.
+[[1mnode1[0m][[1;34mDEBUG[0m ] The operation has completed successfully.
+[[1mceph_deploy.osd[0m][[1;34mDEBUG[0m ] Calling partprobe on zapped device /dev/sdc
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo /sbin/partprobe /dev/sdc
+[[1mceph_deploy.osd[0m][[1;34mDEBUG[0m ] zapping /dev/sdd on node1
+[[1mnode1[0m][[1;34mDEBUG[0m ] connection detected need for sudo
+[[1mnode1[0m][[1;34mDEBUG[0m ] connected to host: node1 
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect platform information from remote host
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect machine type
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo /sbin/initctl version
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mceph_deploy.osd[0m][[1;37mINFO[0m  ] Distro info: Ubuntu 14.04 trusty
+[[1mnode1[0m][[1;34mDEBUG[0m ] zeroing last few blocks of device
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo /usr/sbin/ceph-disk zap /dev/sdd
+[[1mnode1[0m][[1;33mWARNIN[0m] Caution: invalid backup GPT header, but valid main header; regenerating
+[[1mnode1[0m][[1;33mWARNIN[0m] backup header from main header.
+[[1mnode1[0m][[1;33mWARNIN[0m] 
+[[1mnode1[0m][[1;33mWARNIN[0m] Warning! Main and backup partition tables differ! Use the 'c' and 'e' options
+[[1mnode1[0m][[1;33mWARNIN[0m] on the recovery & transformation menu to examine the two tables.
+[[1mnode1[0m][[1;33mWARNIN[0m] 
+[[1mnode1[0m][[1;33mWARNIN[0m] Warning! One or more CRCs don't match. You should repair the disk!
+[[1mnode1[0m][[1;33mWARNIN[0m] 
+[[1mnode1[0m][[1;34mDEBUG[0m ] ****************************************************************************
+[[1mnode1[0m][[1;34mDEBUG[0m ] Caution: Found protective or hybrid MBR and corrupt GPT. Using GPT, but disk
+[[1mnode1[0m][[1;34mDEBUG[0m ] verification and recovery are STRONGLY recommended.
+[[1mnode1[0m][[1;34mDEBUG[0m ] ****************************************************************************
+[[1mnode1[0m][[1;34mDEBUG[0m ] Warning: The kernel is still using the old partition table.
+[[1mnode1[0m][[1;34mDEBUG[0m ] The new table will be used at the next reboot.
+[[1mnode1[0m][[1;34mDEBUG[0m ] GPT data structures destroyed! You may now partition the disk using fdisk or
+[[1mnode1[0m][[1;34mDEBUG[0m ] other utilities.
+[[1mnode1[0m][[1;34mDEBUG[0m ] Creating new GPT entries.
+[[1mnode1[0m][[1;34mDEBUG[0m ] Warning: The kernel is still using the old partition table.
+[[1mnode1[0m][[1;34mDEBUG[0m ] The new table will be used at the next reboot.
+[[1mnode1[0m][[1;34mDEBUG[0m ] The operation has completed successfully.
+^C[[1mceph_deploy[0m][[1;31mERROR[0m ] KeyboardInterrupt
+
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ ls
+ceph.bootstrap-mds.keyring  ceph.bootstrap-rgw.keyring  ceph.conf             ceph.mon.keyring
+ceph.bootstrap-osd.keyring  ceph.client.admin.keyring   ceph-deploy-ceph.log
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ lsblk
+NAME    MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINT
+sda       8:0    0 223.6G  0 disk  
+├─sda1    8:1    0   512M  0 part  
+│ └─md0   9:0    0 511.4M  0 raid1 /boot
+├─sda2    8:2    0    32G  0 part  
+│ └─md1   9:1    0    32G  0 raid1 [SWAP]
+└─sda3    8:3    0   190G  0 part  
+  └─md2   9:2    0 189.9G  0 raid1 /
+sdb       8:16   0 223.6G  0 disk  
+├─sdb1    8:17   0   512M  0 part  
+│ └─md0   9:0    0 511.4M  0 raid1 /boot
+├─sdb2    8:18   0    32G  0 part  
+│ └─md1   9:1    0    32G  0 raid1 [SWAP]
+└─sdb3    8:19   0   190G  0 part  
+  └─md2   9:2    0 189.9G  0 raid1 /
+sdc       8:32   0   5.5T  0 disk  
+sdd       8:48   0   5.5T  0 disk  
+├─sdd1    8:49   0   5.5T  0 part  
+└─sdd2    8:50   0     5G  0 part  
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ lsblk[Kceph-deploy disk zap node1:sdc node1:sdd[C[1Pnode1:sdd[1Pnode1:sdd[1Pnode1:sdd[1Pnode1:sdd[1Pnode1:sdd[1Pnode1:sdd[1Pnode1:sdd[1Pnode1:sdd[1Pnode1:sdd[1Pode1:sdd
+[[1mceph_deploy.conf[0m][[1;34mDEBUG[0m ] found configuration file at: /home/megdc/.cephdeploy.conf
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ] Invoked (1.5.33): /usr/bin/ceph-deploy disk zap node1:sdd
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ] ceph-deploy options:
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  username                      : None
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  verbose                       : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  overwrite_conf                : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  subcommand                    : zap
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  quiet                         : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7f1bbf6395a8>
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  cluster                       : ceph
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  func                          : <function disk at 0x7f1bbfa9e5f0>
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  ceph_conf                     : None
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  default_release               : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  disk                          : [('node1', '/dev/sdd', None)]
+[[1mceph_deploy.osd[0m][[1;34mDEBUG[0m ] zapping /dev/sdd on node1
+[[1mnode1[0m][[1;34mDEBUG[0m ] connection detected need for sudo
+[[1mnode1[0m][[1;34mDEBUG[0m ] connected to host: node1 
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect platform information from remote host
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect machine type
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo /sbin/initctl version
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mceph_deploy.osd[0m][[1;37mINFO[0m  ] Distro info: Ubuntu 14.04 trusty
+[[1mnode1[0m][[1;34mDEBUG[0m ] zeroing last few blocks of device
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo /usr/sbin/ceph-disk zap /dev/sdd
+[[1mnode1[0m][[1;33mWARNIN[0m] Caution: invalid backup GPT header, but valid main header; regenerating
+[[1mnode1[0m][[1;33mWARNIN[0m] backup header from main header.
+[[1mnode1[0m][[1;33mWARNIN[0m] 
+[[1mnode1[0m][[1;34mDEBUG[0m ] ****************************************************************************
+[[1mnode1[0m][[1;34mDEBUG[0m ] Caution: Found protective or hybrid MBR and corrupt GPT. Using GPT, but disk
+[[1mnode1[0m][[1;34mDEBUG[0m ] verification and recovery are STRONGLY recommended.
+[[1mnode1[0m][[1;34mDEBUG[0m ] ****************************************************************************
+[[1mnode1[0m][[1;34mDEBUG[0m ] Warning: The kernel is still using the old partition table.
+[[1mnode1[0m][[1;34mDEBUG[0m ] The new table will be used at the next reboot.
+[[1mnode1[0m][[1;34mDEBUG[0m ] GPT data structures destroyed! You may now partition the disk using fdisk or
+[[1mnode1[0m][[1;34mDEBUG[0m ] other utilities.
+[[1mnode1[0m][[1;34mDEBUG[0m ] Creating new GPT entries.
+[[1mnode1[0m][[1;34mDEBUG[0m ] Warning: The kernel is still using the old partition table.
+[[1mnode1[0m][[1;34mDEBUG[0m ] The new table will be used at the next reboot.
+[[1mnode1[0m][[1;34mDEBUG[0m ] The operation has completed successfully.
+
+
+
+
+
+[[1mnode1[0m][[1;33mWARNIN[0m] No data was received after 300 seconds, disconnecting...
+[[1mceph_deploy.osd[0m][[1;34mDEBUG[0m ] Calling partprobe on zapped device /dev/sdd
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo /sbin/partprobe /dev/sdd
+[[1mnode1[0m][[1;33mWARNIN[0m] Error: Partition(s) 1, 2 on /dev/sdd have been written, but we have been unable to inform the kernel of the change, probably because it/they are in use.  As a result, the old partition(s) will remain in use.  You should reboot now before making further changes.
+[[1mnode1[0m][[1;31mERROR[0m ] RuntimeError: command returned non-zero exit status: 1
+[[1mceph_deploy[0m][[1;31mERROR[0m ] RuntimeError: Failed to execute command: /sbin/partprobe /dev/sdd
+
+Error in sys.exitfunc:
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ 
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ 
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ 
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ 
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ 
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ lsblk
+NAME    MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINT
+sda       8:0    0 223.6G  0 disk  
+├─sda1    8:1    0   512M  0 part  
+│ └─md0   9:0    0 511.4M  0 raid1 /boot
+├─sda2    8:2    0    32G  0 part  
+│ └─md1   9:1    0    32G  0 raid1 [SWAP]
+└─sda3    8:3    0   190G  0 part  
+  └─md2   9:2    0 189.9G  0 raid1 /
+sdb       8:16   0 223.6G  0 disk  
+├─sdb1    8:17   0   512M  0 part  
+│ └─md0   9:0    0 511.4M  0 raid1 /boot
+├─sdb2    8:18   0    32G  0 part  
+│ └─md1   9:1    0    32G  0 raid1 [SWAP]
+└─sdb3    8:19   0   190G  0 part  
+  └─md2   9:2    0 189.9G  0 raid1 /
+sdc       8:32   0   5.5T  0 disk  
+sdd       8:48   0   5.5T  0 disk  
+├─sdd1    8:49   0   5.5T  0 part  
+└─sdd2    8:50   0     5G  0 part  
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ sudo fdisk -l
+
+Disk /dev/sda: 240.1 GB, 240057409536 bytes
+255 heads, 63 sectors/track, 29185 cylinders, total 468862128 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk identifier: 0xe4aae9bb
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sda1            2048     1050624      524288+  fd  Linux raid autodetect
+/dev/sda2         1052672    68161536    33554432+  fd  Linux raid autodetect
+/dev/sda3        68163584   466622464   199229440+  fd  Linux raid autodetect
+
+Disk /dev/sdb: 240.1 GB, 240057409536 bytes
+255 heads, 63 sectors/track, 29185 cylinders, total 468862128 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk identifier: 0xa9dc65b1
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sdb1            2048     1050624      524288+  fd  Linux raid autodetect
+/dev/sdb2         1052672    68161536    33554432+  fd  Linux raid autodetect
+/dev/sdb3        68163584   466622464   199229440+  fd  Linux raid autodetect
+
+WARNING: GPT (GUID Partition Table) detected on '/dev/sdc'! The util fdisk doesn't support GPT. Use GNU Parted.
+
+
+Disk /dev/sdc: 6001.2 GB, 6001175126016 bytes
+256 heads, 63 sectors/track, 726751 cylinders, total 11721045168 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 4096 bytes
+I/O size (minimum/optimal): 4096 bytes / 4096 bytes
+Disk identifier: 0x00000000
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sdc1               1  4294967295  2147483647+  ee  GPT
+Partition 1 does not start on physical sector boundary.
+
+WARNING: GPT (GUID Partition Table) detected on '/dev/sdd'! The util fdisk doesn't support GPT. Use GNU Parted.
+
+
+Disk /dev/sdd: 6001.2 GB, 6001175126016 bytes
+256 heads, 63 sectors/track, 726751 cylinders, total 11721045168 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 4096 bytes
+I/O size (minimum/optimal): 4096 bytes / 4096 bytes
+Disk identifier: 0x00000000
+
+   Device Boot      Start         End      Blocks   Id  System
+/dev/sdd1               1  4294967295  2147483647+  ee  GPT
+Partition 1 does not start on physical sector boundary.
+
+Disk /dev/md2: 203.9 GB, 203876728832 bytes
+2 heads, 4 sectors/track, 49774592 cylinders, total 398196736 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk identifier: 0x00000000
+
+Disk /dev/md2 doesn't contain a valid partition table
+
+Disk /dev/md0: 536 MB, 536281088 bytes
+2 heads, 4 sectors/track, 130928 cylinders, total 1047424 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk identifier: 0x00000000
+
+Disk /dev/md0 doesn't contain a valid partition table
+
+Disk /dev/md1: 34.3 GB, 34326183936 bytes
+2 heads, 4 sectors/track, 8380416 cylinders, total 67043328 sectors
+Units = sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disk identifier: 0x00000000
+
+Disk /dev/md1 doesn't contain a valid partition table
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ cat /etc/fstab
+proc /proc proc defaults 0 0
+/dev/md/0 /boot ext3 defaults 0 0
+/dev/md/1 none swap sw 0 0
+/dev/md/2 / ext4 defaults 0 0
+/dev/sdc1 /storage1 ext4 defaults 0 0
+/dev/sdd1 /storage2 ext4 defaults 0 0
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$  cat /proc/partitions
+major minor  #blocks  name
+
+   1        0      65536 ram0
+   1        1      65536 ram1
+   1        2      65536 ram2
+   1        3      65536 ram3
+   1        4      65536 ram4
+   1        5      65536 ram5
+   1        6      65536 ram6
+   1        7      65536 ram7
+   1        8      65536 ram8
+   1        9      65536 ram9
+   1       10      65536 ram10
+   1       11      65536 ram11
+   1       12      65536 ram12
+   1       13      65536 ram13
+   1       14      65536 ram14
+   1       15      65536 ram15
+   8        0  234431064 sda
+   8        1     524288 sda1
+   8        2   33554432 sda2
+   8        3  199229440 sda3
+   8       16  234431064 sdb
+   8       17     524288 sdb1
+   8       18   33554432 sdb2
+   8       19  199229440 sdb3
+   8       32 5860522584 sdc
+   8       48 5860522584 sdd
+   8       49 5855278663 sdd1
+   8       50    5242880 sdd2
+   9        2  199098368 md2
+   9        0     523712 md0
+   9        1   33521664 md1
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ nano [K[K[K[K[Ksudo blkid
+/dev/sda1: UUID="4f9d7593-dca1-c4b0-50e3-f8386e8af941" UUID_SUB="6593a1e9-c428-333f-0b93-7e07b4441753" LABEL="rescue:0" TYPE="linux_raid_member" 
+/dev/sda2: UUID="98acdb0b-3496-cdfb-c089-bdc4b009941b" UUID_SUB="3382f202-4376-4445-e814-4ada95dc7ad8" LABEL="rescue:1" TYPE="linux_raid_member" 
+/dev/sda3: UUID="c3f2f4af-f155-fb5b-85a9-37336089d036" UUID_SUB="f8a5d4e9-bb86-5d46-b652-5124d34b3fd1" LABEL="rescue:2" TYPE="linux_raid_member" 
+/dev/sdb1: UUID="4f9d7593-dca1-c4b0-50e3-f8386e8af941" UUID_SUB="dff6602c-1f3d-55f2-67b3-8a9f5e81e91f" LABEL="rescue:0" TYPE="linux_raid_member" 
+/dev/sdb2: UUID="98acdb0b-3496-cdfb-c089-bdc4b009941b" UUID_SUB="10c8437b-44de-2780-151e-537db4adf2fd" LABEL="rescue:1" TYPE="linux_raid_member" 
+/dev/sdb3: UUID="c3f2f4af-f155-fb5b-85a9-37336089d036" UUID_SUB="c6d1e62b-a64a-4d63-72a5-b4e70ecd3cb5" LABEL="rescue:2" TYPE="linux_raid_member" 
+/dev/sdd1: UUID="efda3f44-31ef-4282-8780-9c25e62fb5a6" TYPE="xfs" 
+/dev/md2: UUID="c81b0a14-ee5b-47ed-b402-6e873e126d03" TYPE="ext4" 
+/dev/md0: UUID="aa115c94-46d4-4b87-82a3-9bc3b775308a" TYPE="ext3" 
+/dev/md1: UUID="d0015543-f580-4914-9370-b4444f35a3b4" TYPE="swap" 
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ lsbk
+No command 'lsbk' found, did you mean:
+ Command 'lsblk' from package 'util-linux' (main)
+lsbk: command not found
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ lsblk
+NAME    MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINT
+sda       8:0    0 223.6G  0 disk  
+├─sda1    8:1    0   512M  0 part  
+│ └─md0   9:0    0 511.4M  0 raid1 /boot
+├─sda2    8:2    0    32G  0 part  
+│ └─md1   9:1    0    32G  0 raid1 [SWAP]
+└─sda3    8:3    0   190G  0 part  
+  └─md2   9:2    0 189.9G  0 raid1 /
+sdb       8:16   0 223.6G  0 disk  
+├─sdb1    8:17   0   512M  0 part  
+│ └─md0   9:0    0 511.4M  0 raid1 /boot
+├─sdb2    8:18   0    32G  0 part  
+│ └─md1   9:1    0    32G  0 raid1 [SWAP]
+└─sdb3    8:19   0   190G  0 part  
+  └─md2   9:2    0 189.9G  0 raid1 /
+sdc       8:32   0   5.5T  0 disk  
+sdd       8:48   0   5.5T  0 disk  
+├─sdd1    8:49   0   5.5T  0 part  
+└─sdd2    8:50   0     5G  0 part  
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ ls
+ceph.bootstrap-mds.keyring  ceph.bootstrap-rgw.keyring  ceph.conf             ceph.mon.keyring
+ceph.bootstrap-osd.keyring  ceph.client.admin.keyring   ceph-deploy-ceph.log
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ cat ceph.conf 
+[global]
+fsid = ef86c8f5-3574-43d2-9777-794172954545
+ms_bind_ipv6 = true
+mon_initial_members = node1
+mon_host = [2a01:4f8:212:11e8::2]
+auth_cluster_required = cephx
+auth_service_required = cephx
+auth_client_required = cephx
+
+osd_pool_default_size = 2
+osd crush chooseleaf type = 0
+mon_pg_warn_max_per_osd = 0
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ nano /etc/ceph/ceph.con
+[?1049h[1;39r(B[m[4l[?7h[?12l[?25h[?1h=[?1h=[?1h=[39;49m[39;49m(B[m[H[2J(B[0;7m  GNU nano 2.2.6                                File: /etc/ceph/ceph.con                                                                       [37;66H[ New File ][38d^G(B[m Get Help[38;24H(B[0;7m^O(B[m WriteOut[38;47H(B[0;7m^R(B[m Read File[38;70H(B[0;7m^Y(B[m Prev Page[38;93H(B[0;7m^K(B[m Cut Text[38;116H(B[0;7m^C(B[m Cur Pos[39d(B[0;7m^X(B[m Exit[39;24H(B[0;7m^J(B[m Justify[39;47H(B[0;7m^W(B[m Where Is[39;70H(B[0;7m^V(B[m Next Page[39;93H(B[0;7m^U(B[m UnCut Text[39;116H(B[0;7m^T(B[m To Spell[3d[38d[J[39;143H[39;1H[?1049l[?1l>]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ nano /etc/ceph/ceph.conf
+[?1049h[1;39r(B[m[4l[?7h[?12l[?25h[?1h=[?1h=[?1h=[39;49m[39;49m(B[m[H[2J(B[0;7m  GNU nano 2.2.6                                File: /etc/ceph/ceph.conf                                                                      [3;1H(B[m[global][4dfsid = ef86c8f5-3574-43d2-9777-794172954545[5dms_bind_ipv6 = true[6dmon_initial_members = node1[7dmon_host = [2a01:4f8:212:11e8::2][8dauth_cluster_required = cephx[9dauth_service_required = cephx[10dauth_client_required = cephx[37;49H(B[0;7m[ Read 9 lines (Warning: No write permission) ][38d^G(B[m Get Help[38;24H(B[0;7m^O(B[m WriteOut[38;47H(B[0;7m^R(B[m Read File[38;70H(B[0;7m^Y(B[m Prev Page[38;93H(B[0;7m^K(B[m Cut Text[38;116H(B[0;7m^C(B[m Cur Pos[39d(B[0;7m^X(B[m Exit[39;24H(B[0;7m^J(B[m Justify[39;47H(B[0;7m^W(B[m Where Is[39;70H(B[0;7m^V(B[m Next Page[39;93H(B[0;7m^U(B[m UnCut Text[39;116H(B[0;7m^T(B[m To Spell[3d[4d[5d[6d[7d[8d[9d[10d[11d[1;134H(B[0;7mModified[12d(B[mosd_pool_default_size = 2[13dosd crush chooseleaf type = 0[14dmon_pg_warn_max_per_osd = 0[37d[K[14;28H[37d(B[0;7mFile Name to Write: /etc/ceph/ceph.conf                                                                                                        [38;24H(B[m            (B[0;7mM-D(B[m DOS Format         [38;70H (B[0;7mM-A(B[m Append [38;93H             (B[0;7mM-B(B[m Backup File[K[39;2H(B[0;7mC(B[m Cancel[39;24H            (B[0;7mM-M(B[m Mac Format        [39;70H (B[0;7mM-P(B[m Prepend[K[37;40H   [1K (B[0;7m[ Error writing /etc/ceph/ceph.conf: Permission denied ](B[m[K[38;24H(B[0;7m^O(B[m WriteOut            (B[0;7m^R(B[m Read File[38;70H(B[0;7m^Y(B[m Prev Page[38;93H(B[0;7m^K(B[m Cut Text            (B[0;7m^C(B[m Cur Pos[39;2H(B[0;7mX(B[m Exit  [39;24H(B[0;7m^J(B[m Justify             (B[0;7m^W(B[m Where Is[39;70H(B[0;7m^V(B[m Next Page[39;93H(B[0;7m^U(B[m UnCut Text[39;116H(B[0;7m^T(B[m To Spell[14;28H[37d(B[0;7mSave modified buffer (ANSWERING "No" WILL DESTROY CHANGES) ?                                                                                   [38;1H Y(B[m Yes[K[39d(B[0;7m N(B[m No  [39;17H(B[0;7m^C(B[m Cancel[K[37;62H[38d[J[39;143H[39;1H[?1049l[?1l>]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ nano /etc/ceph/ceph.conf[1@s[1@u[1@d[1@o[1@ 
+[?1049h[1;39r(B[m[4l[?7h[?12l[?25h[?1h=[?1h=[?1h=[39;49m[39;49m(B[m[H[2J(B[0;7m  GNU nano 2.2.6                                File: /etc/ceph/ceph.conf                                                                      [3;1H(B[m[global][4dfsid = ef86c8f5-3574-43d2-9777-794172954545[5dms_bind_ipv6 = true[6dmon_initial_members = node1[7dmon_host = [2a01:4f8:212:11e8::2][8dauth_cluster_required = cephx[9dauth_service_required = cephx[10dauth_client_required = cephx[37;64H(B[0;7m[ Read 9 lines ][38d^G(B[m Get Help[38;24H(B[0;7m^O(B[m WriteOut[38;47H(B[0;7m^R(B[m Read File[38;70H(B[0;7m^Y(B[m Prev Page[38;93H(B[0;7m^K(B[m Cut Text[38;116H(B[0;7m^C(B[m Cur Pos[39d(B[0;7m^X(B[m Exit[39;24H(B[0;7m^J(B[m Justify[39;47H(B[0;7m^W(B[m Where Is[39;70H(B[0;7m^V(B[m Next Page[39;93H(B[0;7m^U(B[m UnCut Text[39;116H(B[0;7m^T(B[m To Spell[3d[4d[5d[6d[7d[8d[9d[10d[11d[12d[1;134H(B[0;7mModified[12d(B[mosd_pool_default_size = 2[13dosd crush chooseleaf type = 0[14dmon_pg_warn_max_per_osd = 0[37d[K[14;28H[37d(B[0;7mFile Name to Write: /etc/ceph/ceph.conf                                                                                                        [38;24H(B[m            (B[0;7mM-D(B[m DOS Format         [38;70H (B[0;7mM-A(B[m Append [38;93H             (B[0;7mM-B(B[m Backup File[K[39;2H(B[0;7mC(B[m Cancel[39;24H            (B[0;7mM-M(B[m Mac Format        [39;70H (B[0;7mM-P(B[m Prepend[K[37;40H[1;134H[39;49m(B[0;7m        [37;62H(B[m[1K (B[0;7m[ Wrote 12 lines ](B[m[K[38;24H(B[0;7m^O(B[m WriteOut            (B[0;7m^R(B[m Read File[38;70H(B[0;7m^Y(B[m Prev Page[38;93H(B[0;7m^K(B[m Cut Text            (B[0;7m^C(B[m Cur Pos[39;2H(B[0;7mX(B[m Exit  [39;24H(B[0;7m^J(B[m Justify             (B[0;7m^W(B[m Where Is[39;70H(B[0;7m^V(B[m Next Page[39;93H(B[0;7m^U(B[m UnCut Text[39;116H(B[0;7m^T(B[m To Spell[14;28H[38d[J[39;143H[39;1H[?1049l[?1l>]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ sudo nano /etc/ceph/ceph.conf[5P[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[9Pcat ceph.conf ls[Kblk[1Pksudo blkidcat /etc/fstab[1Psudo fdisk -l[8Plsblkceph-deploy disk zap node1:sdd[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Clsblk[K[Kceph-deploy disk zap node1:sdc node1:sdd[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Clsblk[Kcat /etc/ceph/ceph.conf ls[K[K[Kceph-deploy osd prepare node1:sdc node1:sdd
+[[1mceph_deploy.conf[0m][[1;34mDEBUG[0m ] found configuration file at: /home/megdc/.cephdeploy.conf
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ] Invoked (1.5.33): /usr/bin/ceph-deploy osd prepare node1:sdc node1:sdd
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ] ceph-deploy options:
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  username                      : None
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  disk                          : [('node1', '/dev/sdc', None), ('node1', '/dev/sdd', None)]
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  dmcrypt                       : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  verbose                       : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  bluestore                     : None
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  overwrite_conf                : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  subcommand                    : prepare
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  dmcrypt_key_dir               : /etc/ceph/dmcrypt-keys
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  quiet                         : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7f4479db8f80>
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  cluster                       : ceph
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  fs_type                       : xfs
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  func                          : <function osd at 0x7f447a21a578>
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  ceph_conf                     : None
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  default_release               : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  zap_disk                      : False
+[[1mceph_deploy.osd[0m][[1;34mDEBUG[0m ] Preparing cluster ceph disks node1:/dev/sdc: node1:/dev/sdd:
+[[1mnode1[0m][[1;34mDEBUG[0m ] connection detected need for sudo
+[[1mnode1[0m][[1;34mDEBUG[0m ] connected to host: node1 
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect platform information from remote host
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect machine type
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo /sbin/initctl version
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mceph_deploy.osd[0m][[1;37mINFO[0m  ] Distro info: Ubuntu 14.04 trusty
+[[1mceph_deploy.osd[0m][[1;34mDEBUG[0m ] Deploying osd to node1
+[[1mnode1[0m][[1;34mDEBUG[0m ] write cluster configuration to /etc/ceph/{cluster}.conf
+[[1mceph_deploy.osd[0m][[1;31mERROR[0m ] RuntimeError: config file /etc/ceph/ceph.conf exists with different content; use --overwrite-conf to overwrite
+[[1mnode1[0m][[1;34mDEBUG[0m ] connection detected need for sudo
+[[1mnode1[0m][[1;34mDEBUG[0m ] connected to host: node1 
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect platform information from remote host
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect machine type
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo /sbin/initctl version
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mceph_deploy.osd[0m][[1;37mINFO[0m  ] Distro info: Ubuntu 14.04 trusty
+[[1mceph_deploy.osd[0m][[1;34mDEBUG[0m ] Preparing host node1 disk /dev/sdd journal None activate False
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo /usr/sbin/ceph-disk -v prepare --cluster ceph --fs-type xfs -- /dev/sdd
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /usr/bin/ceph-osd --cluster=ceph --show-config-value=fsid
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /usr/bin/ceph-osd --check-allows-journal -i 0 --cluster ceph
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /usr/bin/ceph-osd --check-wants-journal -i 0 --cluster ceph
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /usr/bin/ceph-osd --check-needs-journal -i 0 --cluster ceph
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdd uuid path is /sys/dev/block/8:48/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] set_type: Will colocate journal with data on /dev/sdd
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /usr/bin/ceph-osd --cluster=ceph --show-config-value=osd_journal_size
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdd uuid path is /sys/dev/block/8:48/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdd uuid path is /sys/dev/block/8:48/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdd uuid path is /sys/dev/block/8:48/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] Traceback (most recent call last):
+[[1mnode1[0m][[1;33mWARNIN[0m]   File "/usr/sbin/ceph-disk", line 9, in <module>
+[[1mnode1[0m][[1;33mWARNIN[0m]     load_entry_point('ceph-disk==1.0.0', 'console_scripts', 'ceph-disk')()
+[[1mnode1[0m][[1;33mWARNIN[0m]   File "/usr/lib/python2.7/dist-packages/ceph_disk/main.py", line 4964, in run
+[[1mnode1[0m][[1;33mWARNIN[0m]     main(sys.argv[1:])
+[[1mnode1[0m][[1;33mWARNIN[0m]   File "/usr/lib/python2.7/dist-packages/ceph_disk/main.py", line 4915, in main
+[[1mnode1[0m][[1;33mWARNIN[0m]     args.func(args)
+[[1mnode1[0m][[1;33mWARNIN[0m]   File "/usr/lib/python2.7/dist-packages/ceph_disk/main.py", line 1774, in main
+[[1mnode1[0m][[1;33mWARNIN[0m]     Prepare.factory(args).prepare()
+[[1mnode1[0m][[1;33mWARNIN[0m]   File "/usr/lib/python2.7/dist-packages/ceph_disk/main.py", line 1762, in prepare
+[[1mnode1[0m][[1;33mWARNIN[0m]     self.prepare_locked()
+[[1mnode1[0m][[1;33mWARNIN[0m]   File "/usr/lib/python2.7/dist-packages/ceph_disk/main.py", line 1794, in prepare_locked
+[[1mnode1[0m][[1;33mWARNIN[0m]     self.data.prepare(self.journal)
+[[1mnode1[0m][[1;33mWARNIN[0m]   File "/usr/lib/python2.7/dist-packages/ceph_disk/main.py", line 2446, in prepare
+[[1mnode1[0m][[1;33mWARNIN[0m]     self.prepare_device(*to_prepare_list)
+[[1mnode1[0m][[1;33mWARNIN[0m]   File "/usr/lib/python2.7/dist-packages/ceph_disk/main.py", line 2620, in prepare_device
+[[1mnode1[0m][[1;33mWARNIN[0m]     super(PrepareFilestoreData, self).prepare_device(*to_prepare_list)
+[[1mnode1[0m][[1;33mWARNIN[0m]   File "/usr/lib/python2.7/dist-packages/ceph_disk/main.py", line 2522, in prepare_device
+[[1mnode1[0m][[1;33mWARNIN[0m]     self.sanity_checks()
+[[1mnode1[0m][[1;33mWARNIN[0m]   File "/usr/lib/python2.7/dist-packages/ceph_disk/main.py", line 2471, in sanity_checks
+[[1mnode1[0m][[1;33mWARNIN[0m]     check_partitions=not self.args.dmcrypt)
+[[1mnode1[0m][[1;33mWARNIN[0m]   File "/usr/lib/python2.7/dist-packages/ceph_disk/main.py", line 806, in verify_not_in_use
+[[1mnode1[0m][[1;33mWARNIN[0m]     raise Error('Device is mounted', partition)
+[[1mnode1[0m][[1;33mWARNIN[0m] ceph_disk.main.Error: Error: Device is mounted: /dev/sdd1
+[[1mnode1[0m][[1;31mERROR[0m ] RuntimeError: command returned non-zero exit status: 1
+[[1mceph_deploy.osd[0m][[1;31mERROR[0m ] Failed to execute command: /usr/sbin/ceph-disk -v prepare --cluster ceph --fs-type xfs -- /dev/sdd
+[[1mceph_deploy[0m][[1;31mERROR[0m ] GenericError: Failed to create 2 OSDs
+
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ 
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ ceph-deploy osd prepare --overwrite-conf node1:sdc node1:sdd
+usage: ceph-deploy [-h] [-v | -q] [--version] [--username USERNAME]
+                   [--overwrite-conf] [--cluster NAME] [--ceph-conf CEPH_CONF]
+                   COMMAND ...
+ceph-deploy: error: unrecognized arguments: --overwrite-conf
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ ceph-deploy osd prepare node1:sdc node1:sdd --overwrite-conf
+usage: ceph-deploy [-h] [-v | -q] [--version] [--username USERNAME]
+                   [--overwrite-conf] [--cluster NAME] [--ceph-conf CEPH_CONF]
+                   COMMAND ...
+ceph-deploy: error: unrecognized arguments: --overwrite-conf
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ ceph-dp[Kl[Keploy -h
+usage: ceph-deploy [-h] [-v | -q] [--version] [--username USERNAME]
+                   [--overwrite-conf] [--cluster NAME] [--ceph-conf CEPH_CONF]
+                   COMMAND ...
+
+Easy Ceph deployment
+
+    -^-
+   /   \
+   |O o|  ceph-deploy v1.5.33
+   ).-.(
+  '/|||\`
+  | '|` |
+    '|`
+
+Full documentation can be found at: http://ceph.com/ceph-deploy/docs
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -v, --verbose         be more verbose
+  -q, --quiet           be less verbose
+  --version             the current installed version of ceph-deploy
+  --username USERNAME   the username to connect to the remote host
+  --overwrite-conf      overwrite an existing conf file on remote host (if
+                        present)
+  --cluster NAME        name of the cluster
+  --ceph-conf CEPH_CONF
+                        use (or reuse) a given ceph.conf file
+
+commands:
+  COMMAND               description
+    new                 Start deploying a new cluster, and write a
+                        CLUSTER.conf and keyring for it.
+    install             Install Ceph packages on remote hosts.
+    rgw                 Ceph RGW daemon management
+    mon                 Ceph MON Daemon management
+    mds                 Ceph MDS daemon management
+    gatherkeys          Gather authentication keys for provisioning new nodes.
+    disk                Manage disks on a remote host.
+    osd                 Prepare a data disk on remote host.
+    admin               Push configuration and client.admin key to a remote
+                        host.
+    repo                Repo definition management
+    config              Copy ceph.conf to/from remote host(s)
+    uninstall           Remove Ceph packages from remote hosts.
+    purge               Remove Ceph packages from remote hosts and purge all
+                        data.
+    purgedata           Purge (delete, destroy, discard, shred) any Ceph data
+                        from /var/lib/ceph
+    calamari            Install and configure Calamari nodes. Assumes that a
+                        repository with Calamari packages is already
+                        configured. Refer to the docs for examples
+                        (http://ceph.com/ceph-deploy/docs/conf.html)
+    forgetkeys          Remove authentication keys from the local directory.
+    pkg                 Manage packages on remote hosts.
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ ceph-deploy --overwrite-conf osd  prepare node1:sdc node1:sdd
+[[1mceph_deploy.conf[0m][[1;34mDEBUG[0m ] found configuration file at: /home/megdc/.cephdeploy.conf
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ] Invoked (1.5.33): /usr/bin/ceph-deploy --overwrite-conf osd prepare node1:sdc node1:sdd
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ] ceph-deploy options:
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  username                      : None
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  disk                          : [('node1', '/dev/sdc', None), ('node1', '/dev/sdd', None)]
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  dmcrypt                       : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  verbose                       : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  bluestore                     : None
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  overwrite_conf                : True
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  subcommand                    : prepare
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  dmcrypt_key_dir               : /etc/ceph/dmcrypt-keys
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  quiet                         : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7f48ca292f80>
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  cluster                       : ceph
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  fs_type                       : xfs
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  func                          : <function osd at 0x7f48ca6f4578>
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  ceph_conf                     : None
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  default_release               : False
+[[1mceph_deploy.cli[0m][[1;37mINFO[0m  ]  zap_disk                      : False
+[[1mceph_deploy.osd[0m][[1;34mDEBUG[0m ] Preparing cluster ceph disks node1:/dev/sdc: node1:/dev/sdd:
+[[1mnode1[0m][[1;34mDEBUG[0m ] connection detected need for sudo
+[[1mnode1[0m][[1;34mDEBUG[0m ] connected to host: node1 
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect platform information from remote host
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect machine type
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo /sbin/initctl version
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mceph_deploy.osd[0m][[1;37mINFO[0m  ] Distro info: Ubuntu 14.04 trusty
+[[1mceph_deploy.osd[0m][[1;34mDEBUG[0m ] Deploying osd to node1
+[[1mnode1[0m][[1;34mDEBUG[0m ] write cluster configuration to /etc/ceph/{cluster}.conf
+[[1mceph_deploy.osd[0m][[1;34mDEBUG[0m ] Preparing host node1 disk /dev/sdc journal None activate False
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo /usr/sbin/ceph-disk -v prepare --cluster ceph --fs-type xfs -- /dev/sdc
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /usr/bin/ceph-osd --cluster=ceph --show-config-value=fsid
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /usr/bin/ceph-osd --check-allows-journal -i 0 --cluster ceph
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /usr/bin/ceph-osd --check-wants-journal -i 0 --cluster ceph
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /usr/bin/ceph-osd --check-needs-journal -i 0 --cluster ceph
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdc uuid path is /sys/dev/block/8:32/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] set_type: Will colocate journal with data on /dev/sdc
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /usr/bin/ceph-osd --cluster=ceph --show-config-value=osd_journal_size
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdc uuid path is /sys/dev/block/8:32/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdc uuid path is /sys/dev/block/8:32/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdc uuid path is /sys/dev/block/8:32/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /usr/bin/ceph-conf --cluster=ceph --name=osd. --lookup osd_mkfs_options_xfs
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /usr/bin/ceph-conf --cluster=ceph --name=osd. --lookup osd_fs_mkfs_options_xfs
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /usr/bin/ceph-conf --cluster=ceph --name=osd. --lookup osd_mount_options_xfs
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /usr/bin/ceph-conf --cluster=ceph --name=osd. --lookup osd_fs_mount_options_xfs
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdc uuid path is /sys/dev/block/8:32/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdc uuid path is /sys/dev/block/8:32/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] ptype_tobe_for_name: name = journal
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdc uuid path is /sys/dev/block/8:32/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] create_partition: Creating journal partition num 2 size 5120 on /dev/sdc
+[[1mnode1[0m][[1;33mWARNIN[0m] command_check_call: Running command: /sbin/sgdisk --new=2:0:+5120M --change-name=2:ceph journal --partition-guid=2:2cb441b2-471d-4340-85d9-07453de706b0 --typecode=2:45b0969e-9b03-4f30-b4c6-b4b80ceff106 --mbrtogpt -- /dev/sdc
+[[1mnode1[0m][[1;34mDEBUG[0m ] The operation has completed successfully.
+[[1mnode1[0m][[1;33mWARNIN[0m] update_partition: Calling partprobe on created device /dev/sdc
+[[1mnode1[0m][[1;33mWARNIN[0m] command_check_call: Running command: /sbin/udevadm settle --timeout=600
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /sbin/partprobe /dev/sdc
+[[1mnode1[0m][[1;33mWARNIN[0m] command_check_call: Running command: /sbin/udevadm settle --timeout=600
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdc uuid path is /sys/dev/block/8:32/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdc uuid path is /sys/dev/block/8:32/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdc2 uuid path is /sys/dev/block/8:34/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] prepare_device: Journal is GPT partition /dev/disk/by-partuuid/2cb441b2-471d-4340-85d9-07453de706b0
+[[1mnode1[0m][[1;33mWARNIN[0m] prepare_device: Journal is GPT partition /dev/disk/by-partuuid/2cb441b2-471d-4340-85d9-07453de706b0
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdc uuid path is /sys/dev/block/8:32/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] set_data_partition: Creating osd partition on /dev/sdc
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdc uuid path is /sys/dev/block/8:32/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] ptype_tobe_for_name: name = data
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdc uuid path is /sys/dev/block/8:32/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] create_partition: Creating data partition num 1 size 0 on /dev/sdc
+[[1mnode1[0m][[1;33mWARNIN[0m] command_check_call: Running command: /sbin/sgdisk --largest-new=1 --change-name=1:ceph data --partition-guid=1:764cb12f-daf7-4cb2-8db0-937863b405ad --typecode=1:89c57f98-2fe5-4dc0-89c1-f3ad0ceff2be --mbrtogpt -- /dev/sdc
+[[1mnode1[0m][[1;34mDEBUG[0m ] The operation has completed successfully.
+[[1mnode1[0m][[1;33mWARNIN[0m] update_partition: Calling partprobe on created device /dev/sdc
+[[1mnode1[0m][[1;33mWARNIN[0m] command_check_call: Running command: /sbin/udevadm settle --timeout=600
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /sbin/partprobe /dev/sdc
+[[1mnode1[0m][[1;33mWARNIN[0m] command_check_call: Running command: /sbin/udevadm settle --timeout=600
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdc uuid path is /sys/dev/block/8:32/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdc uuid path is /sys/dev/block/8:32/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdc1 uuid path is /sys/dev/block/8:33/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] populate_data_path_device: Creating xfs fs on /dev/sdc1
+[[1mnode1[0m][[1;33mWARNIN[0m] command_check_call: Running command: /sbin/mkfs -t xfs -f -i size=2048 -- /dev/sdc1
+[[1mnode1[0m][[1;34mDEBUG[0m ] meta-data=/dev/sdc1              isize=2048   agcount=32, agsize=45744365 blks
+[[1mnode1[0m][[1;34mDEBUG[0m ]          =                       sectsz=4096  attr=2, projid32bit=0
+[[1mnode1[0m][[1;34mDEBUG[0m ] data     =                       bsize=4096   blocks=1463819665, imaxpct=5
+[[1mnode1[0m][[1;34mDEBUG[0m ]          =                       sunit=0      swidth=0 blks
+[[1mnode1[0m][[1;34mDEBUG[0m ] naming   =version 2              bsize=4096   ascii-ci=0
+[[1mnode1[0m][[1;34mDEBUG[0m ] log      =internal log           bsize=4096   blocks=521728, version=2
+[[1mnode1[0m][[1;34mDEBUG[0m ]          =                       sectsz=4096  sunit=1 blks, lazy-count=1
+[[1mnode1[0m][[1;34mDEBUG[0m ] realtime =none                   extsz=4096   blocks=0, rtextents=0
+[[1mnode1[0m][[1;33mWARNIN[0m] mount: Mounting /dev/sdc1 on /var/lib/ceph/tmp/mnt.4ZU1pt with options noatime,inode64
+[[1mnode1[0m][[1;33mWARNIN[0m] command_check_call: Running command: /bin/mount -t xfs -o noatime,inode64 -- /dev/sdc1 /var/lib/ceph/tmp/mnt.4ZU1pt
+[[1mnode1[0m][[1;33mWARNIN[0m] populate_data_path: Preparing osd data dir /var/lib/ceph/tmp/mnt.4ZU1pt
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /bin/chown -R ceph:ceph /var/lib/ceph/tmp/mnt.4ZU1pt/ceph_fsid.10432.tmp
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /bin/chown -R ceph:ceph /var/lib/ceph/tmp/mnt.4ZU1pt/fsid.10432.tmp
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /bin/chown -R ceph:ceph /var/lib/ceph/tmp/mnt.4ZU1pt/magic.10432.tmp
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /bin/chown -R ceph:ceph /var/lib/ceph/tmp/mnt.4ZU1pt/journal_uuid.10432.tmp
+[[1mnode1[0m][[1;33mWARNIN[0m] adjust_symlink: Creating symlink /var/lib/ceph/tmp/mnt.4ZU1pt/journal -> /dev/disk/by-partuuid/2cb441b2-471d-4340-85d9-07453de706b0
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /bin/chown -R ceph:ceph /var/lib/ceph/tmp/mnt.4ZU1pt
+[[1mnode1[0m][[1;33mWARNIN[0m] unmount: Unmounting /var/lib/ceph/tmp/mnt.4ZU1pt
+[[1mnode1[0m][[1;33mWARNIN[0m] command_check_call: Running command: /bin/umount -- /var/lib/ceph/tmp/mnt.4ZU1pt
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdc uuid path is /sys/dev/block/8:32/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] command_check_call: Running command: /sbin/sgdisk --typecode=1:4fbd7e29-9d25-41b8-afd0-062c0ceff05d -- /dev/sdc
+[[1mnode1[0m][[1;34mDEBUG[0m ] The operation has completed successfully.
+[[1mnode1[0m][[1;33mWARNIN[0m] update_partition: Calling partprobe on prepared device /dev/sdc
+[[1mnode1[0m][[1;33mWARNIN[0m] command_check_call: Running command: /sbin/udevadm settle --timeout=600
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /sbin/partprobe /dev/sdc
+[[1mnode1[0m][[1;33mWARNIN[0m] command_check_call: Running command: /sbin/udevadm settle --timeout=600
+[[1mnode1[0m][[1;33mWARNIN[0m] command_check_call: Running command: /sbin/udevadm trigger --action=add --sysname-match sdc1
+[[1mnode1[0m][[1;37mINFO[0m  ] checking OSD status...
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo /usr/bin/ceph --cluster=ceph osd stat --format=json
+[[1mceph_deploy.osd[0m][[1;34mDEBUG[0m ] Host node1 is now ready for osd use.
+[[1mnode1[0m][[1;34mDEBUG[0m ] connection detected need for sudo
+[[1mnode1[0m][[1;34mDEBUG[0m ] connected to host: node1 
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect platform information from remote host
+[[1mnode1[0m][[1;34mDEBUG[0m ] detect machine type
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo /sbin/initctl version
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mceph_deploy.osd[0m][[1;37mINFO[0m  ] Distro info: Ubuntu 14.04 trusty
+[[1mceph_deploy.osd[0m][[1;34mDEBUG[0m ] Preparing host node1 disk /dev/sdd journal None activate False
+[[1mnode1[0m][[1;34mDEBUG[0m ] find the location of an executable
+[[1mnode1[0m][[1;37mINFO[0m  ] Running command: sudo /usr/sbin/ceph-disk -v prepare --cluster ceph --fs-type xfs -- /dev/sdd
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /usr/bin/ceph-osd --cluster=ceph --show-config-value=fsid
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /usr/bin/ceph-osd --check-allows-journal -i 0 --cluster ceph
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /usr/bin/ceph-osd --check-wants-journal -i 0 --cluster ceph
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /usr/bin/ceph-osd --check-needs-journal -i 0 --cluster ceph
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdd uuid path is /sys/dev/block/8:48/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] set_type: Will colocate journal with data on /dev/sdd
+[[1mnode1[0m][[1;33mWARNIN[0m] command: Running command: /usr/bin/ceph-osd --cluster=ceph --show-config-value=osd_journal_size
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdd uuid path is /sys/dev/block/8:48/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdd uuid path is /sys/dev/block/8:48/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] get_dm_uuid: get_dm_uuid /dev/sdd uuid path is /sys/dev/block/8:48/dm/uuid
+[[1mnode1[0m][[1;33mWARNIN[0m] Traceback (most recent call last):
+[[1mnode1[0m][[1;33mWARNIN[0m]   File "/usr/sbin/ceph-disk", line 9, in <module>
+[[1mnode1[0m][[1;33mWARNIN[0m]     load_entry_point('ceph-disk==1.0.0', 'console_scripts', 'ceph-disk')()
+[[1mnode1[0m][[1;33mWARNIN[0m]   File "/usr/lib/python2.7/dist-packages/ceph_disk/main.py", line 4964, in run
+[[1mnode1[0m][[1;33mWARNIN[0m]     main(sys.argv[1:])
+[[1mnode1[0m][[1;33mWARNIN[0m]   File "/usr/lib/python2.7/dist-packages/ceph_disk/main.py", line 4915, in main
+[[1mnode1[0m][[1;33mWARNIN[0m]     args.func(args)
+[[1mnode1[0m][[1;33mWARNIN[0m]   File "/usr/lib/python2.7/dist-packages/ceph_disk/main.py", line 1774, in main
+[[1mnode1[0m][[1;33mWARNIN[0m]     Prepare.factory(args).prepare()
+[[1mnode1[0m][[1;33mWARNIN[0m]   File "/usr/lib/python2.7/dist-packages/ceph_disk/main.py", line 1762, in prepare
+[[1mnode1[0m][[1;33mWARNIN[0m]     self.prepare_locked()
+[[1mnode1[0m][[1;33mWARNIN[0m]   File "/usr/lib/python2.7/dist-packages/ceph_disk/main.py", line 1794, in prepare_locked
+[[1mnode1[0m][[1;33mWARNIN[0m]     self.data.prepare(self.journal)
+[[1mnode1[0m][[1;33mWARNIN[0m]   File "/usr/lib/python2.7/dist-packages/ceph_disk/main.py", line 2446, in prepare
+[[1mnode1[0m][[1;33mWARNIN[0m]     self.prepare_device(*to_prepare_list)
+[[1mnode1[0m][[1;33mWARNIN[0m]   File "/usr/lib/python2.7/dist-packages/ceph_disk/main.py", line 2620, in prepare_device
+[[1mnode1[0m][[1;33mWARNIN[0m]     super(PrepareFilestoreData, self).prepare_device(*to_prepare_list)
+[[1mnode1[0m][[1;33mWARNIN[0m]   File "/usr/lib/python2.7/dist-packages/ceph_disk/main.py", line 2522, in prepare_device
+[[1mnode1[0m][[1;33mWARNIN[0m]     self.sanity_checks()
+[[1mnode1[0m][[1;33mWARNIN[0m]   File "/usr/lib/python2.7/dist-packages/ceph_disk/main.py", line 2471, in sanity_checks
+[[1mnode1[0m][[1;33mWARNIN[0m]     check_partitions=not self.args.dmcrypt)
+[[1mnode1[0m][[1;33mWARNIN[0m]   File "/usr/lib/python2.7/dist-packages/ceph_disk/main.py", line 806, in verify_not_in_use
+[[1mnode1[0m][[1;33mWARNIN[0m]     raise Error('Device is mounted', partition)
+[[1mnode1[0m][[1;33mWARNIN[0m] ceph_disk.main.Error: Error: Device is mounted: /dev/sdd1
+[[1mnode1[0m][[1;31mERROR[0m ] RuntimeError: command returned non-zero exit status: 1
+[[1mceph_deploy.osd[0m][[1;31mERROR[0m ] Failed to execute command: /usr/sbin/ceph-disk -v prepare --cluster ceph --fs-type xfs -- /dev/sdd
+[[1mceph_deploy[0m][[1;31mERROR[0m ] GenericError: Failed to create 1 OSDs
+
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ lsblk
+NAME    MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINT
+sda       8:0    0 223.6G  0 disk  
+├─sda1    8:1    0   512M  0 part  
+│ └─md0   9:0    0 511.4M  0 raid1 /boot
+├─sda2    8:2    0    32G  0 part  
+│ └─md1   9:1    0    32G  0 raid1 [SWAP]
+└─sda3    8:3    0   190G  0 part  
+  └─md2   9:2    0 189.9G  0 raid1 /
+sdb       8:16   0 223.6G  0 disk  
+├─sdb1    8:17   0   512M  0 part  
+│ └─md0   9:0    0 511.4M  0 raid1 /boot
+├─sdb2    8:18   0    32G  0 part  
+│ └─md1   9:1    0    32G  0 raid1 [SWAP]
+└─sdb3    8:19   0   190G  0 part  
+  └─md2   9:2    0 189.9G  0 raid1 /
+sdc       8:32   0   5.5T  0 disk  
+├─sdc1    8:33   0   5.5T  0 part  
+└─sdc2    8:34   0     5G  0 part  
+sdd       8:48   0   5.5T  0 disk  
+├─sdd1    8:49   0   5.5T  0 part  
+└─sdd2    8:50   0     5G  0 part  
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ cat /etc/ceph/ceph.conf 
+[global]
+fsid = ef86c8f5-3574-43d2-9777-794172954545
+ms_bind_ipv6 = true
+mon_initial_members = node1
+mon_host = [2a01:4f8:212:11e8::2]
+auth_cluster_required = cephx
+auth_service_required = cephx
+auth_client_required = cephx
+osd_pool_default_size = 2
+osd_crush_chooseleaf_type = 0
+mon_pg_warn_max_per_osd = 0
+
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ cat cephc[K.conf 
+[global]
+fsid = ef86c8f5-3574-43d2-9777-794172954545
+ms_bind_ipv6 = true
+mon_initial_members = node1
+mon_host = [2a01:4f8:212:11e8::2]
+auth_cluster_required = cephx
+auth_service_required = cephx
+auth_client_required = cephx
+
+osd_pool_default_size = 2
+osd crush chooseleaf type = 0
+mon_pg_warn_max_per_osd = 0
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ /usr/sbin/ceph-disk -v prepare --cluster ceph --fs-type xfs -- /dev/sdd
+Traceback (most recent call last):
+  File "/usr/sbin/ceph-disk", line 9, in <module>
+    load_entry_point('ceph-disk==1.0.0', 'console_scripts', 'ceph-disk')()
+  File "/usr/lib/python2.7/dist-packages/ceph_disk/main.py", line 4964, in run
+    main(sys.argv[1:])
+  File "/usr/lib/python2.7/dist-packages/ceph_disk/main.py", line 4906, in main
+    setup_statedir(args.statedir)
+  File "/usr/lib/python2.7/dist-packages/ceph_disk/main.py", line 4368, in setup_statedir
+    os.mkdir(STATEDIR + "/tmp")
+OSError: [Errno 13] Permission denied: '/var/lib/ceph/tmp'
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ /usr/sbin/ceph-disk -v prepare --cluster ceph --fs-type xfs -- /dev/sdd[1@s[1@i[1P[1@u[1@d[1@o[1@ 
+command: Running command: /usr/bin/ceph-osd --cluster=ceph --show-config-value=fsid
+command: Running command: /usr/bin/ceph-osd --check-allows-journal -i 0 --cluster ceph
+command: Running command: /usr/bin/ceph-osd --check-wants-journal -i 0 --cluster ceph
+command: Running command: /usr/bin/ceph-osd --check-needs-journal -i 0 --cluster ceph
+get_dm_uuid: get_dm_uuid /dev/sdd uuid path is /sys/dev/block/8:48/dm/uuid
+set_type: Will colocate journal with data on /dev/sdd
+command: Running command: /usr/bin/ceph-osd --cluster=ceph --show-config-value=osd_journal_size
+get_dm_uuid: get_dm_uuid /dev/sdd uuid path is /sys/dev/block/8:48/dm/uuid
+get_dm_uuid: get_dm_uuid /dev/sdd uuid path is /sys/dev/block/8:48/dm/uuid
+get_dm_uuid: get_dm_uuid /dev/sdd uuid path is /sys/dev/block/8:48/dm/uuid
+Traceback (most recent call last):
+  File "/usr/sbin/ceph-disk", line 9, in <module>
+    load_entry_point('ceph-disk==1.0.0', 'console_scripts', 'ceph-disk')()
+  File "/usr/lib/python2.7/dist-packages/ceph_disk/main.py", line 4964, in run
+    main(sys.argv[1:])
+  File "/usr/lib/python2.7/dist-packages/ceph_disk/main.py", line 4915, in main
+    args.func(args)
+  File "/usr/lib/python2.7/dist-packages/ceph_disk/main.py", line 1774, in main
+    Prepare.factory(args).prepare()
+  File "/usr/lib/python2.7/dist-packages/ceph_disk/main.py", line 1762, in prepare
+    self.prepare_locked()
+  File "/usr/lib/python2.7/dist-packages/ceph_disk/main.py", line 1794, in prepare_locked
+    self.data.prepare(self.journal)
+  File "/usr/lib/python2.7/dist-packages/ceph_disk/main.py", line 2446, in prepare
+    self.prepare_device(*to_prepare_list)
+  File "/usr/lib/python2.7/dist-packages/ceph_disk/main.py", line 2620, in prepare_device
+    super(PrepareFilestoreData, self).prepare_device(*to_prepare_list)
+  File "/usr/lib/python2.7/dist-packages/ceph_disk/main.py", line 2522, in prepare_device
+    self.sanity_checks()
+  File "/usr/lib/python2.7/dist-packages/ceph_disk/main.py", line 2471, in sanity_checks
+    check_partitions=not self.args.dmcrypt)
+  File "/usr/lib/python2.7/dist-packages/ceph_disk/main.py", line 806, in verify_not_in_use
+    raise Error('Device is mounted', partition)
+ceph_disk.main.Error: Error: Device is mounted: /dev/sdd1
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ blkid
+/dev/sda1: UUID="4f9d7593-dca1-c4b0-50e3-f8386e8af941" UUID_SUB="6593a1e9-c428-333f-0b93-7e07b4441753" LABEL="rescue:0" TYPE="linux_raid_member" 
+/dev/sda2: UUID="98acdb0b-3496-cdfb-c089-bdc4b009941b" UUID_SUB="3382f202-4376-4445-e814-4ada95dc7ad8" LABEL="rescue:1" TYPE="linux_raid_member" 
+/dev/sda3: UUID="c3f2f4af-f155-fb5b-85a9-37336089d036" UUID_SUB="f8a5d4e9-bb86-5d46-b652-5124d34b3fd1" LABEL="rescue:2" TYPE="linux_raid_member" 
+/dev/sdb1: UUID="4f9d7593-dca1-c4b0-50e3-f8386e8af941" UUID_SUB="dff6602c-1f3d-55f2-67b3-8a9f5e81e91f" LABEL="rescue:0" TYPE="linux_raid_member" 
+/dev/sdb2: UUID="98acdb0b-3496-cdfb-c089-bdc4b009941b" UUID_SUB="10c8437b-44de-2780-151e-537db4adf2fd" LABEL="rescue:1" TYPE="linux_raid_member" 
+/dev/sdb3: UUID="c3f2f4af-f155-fb5b-85a9-37336089d036" UUID_SUB="c6d1e62b-a64a-4d63-72a5-b4e70ecd3cb5" LABEL="rescue:2" TYPE="linux_raid_member" 
+/dev/sdd1: UUID="efda3f44-31ef-4282-8780-9c25e62fb5a6" TYPE="xfs" 
+/dev/md2: UUID="c81b0a14-ee5b-47ed-b402-6e873e126d03" TYPE="ext4" 
+/dev/md0: UUID="aa115c94-46d4-4b87-82a3-9bc3b775308a" TYPE="ext3" 
+/dev/md1: UUID="d0015543-f580-4914-9370-b4444f35a3b4" TYPE="swap" 
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ blkidsudo /usr/sbin/ceph-disk -v prepare --cluster ceph --fs-type xfs -- /dev/sdd[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cblkid[K[K[K[K[K[Klsblk
+NAME    MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINT
+sda       8:0    0 223.6G  0 disk  
+├─sda1    8:1    0   512M  0 part  
+│ └─md0   9:0    0 511.4M  0 raid1 /boot
+├─sda2    8:2    0    32G  0 part  
+│ └─md1   9:1    0    32G  0 raid1 [SWAP]
+└─sda3    8:3    0   190G  0 part  
+  └─md2   9:2    0 189.9G  0 raid1 /
+sdb       8:16   0 223.6G  0 disk  
+├─sdb1    8:17   0   512M  0 part  
+│ └─md0   9:0    0 511.4M  0 raid1 /boot
+├─sdb2    8:18   0    32G  0 part  
+│ └─md1   9:1    0    32G  0 raid1 [SWAP]
+└─sdb3    8:19   0   190G  0 part  
+  └─md2   9:2    0 189.9G  0 raid1 /
+sdc       8:32   0   5.5T  0 disk  
+├─sdc1    8:33   0   5.5T  0 part  
+└─sdc2    8:34   0     5G  0 part  
+sdd       8:48   0   5.5T  0 disk  
+├─sdd1    8:49   0   5.5T  0 part  
+└─sdd2    8:50   0     5G  0 part  
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ umount sdd[K[K[K/dev/sdd
+umount: /dev/sdd is not mounted (according to mtab)
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ cat /etc/mtab 
+/dev/md2 / ext4 rw 0 0
+proc /proc proc rw 0 0
+sysfs /sys sysfs rw,noexec,nosuid,nodev 0 0
+none /sys/fs/cgroup tmpfs rw 0 0
+none /sys/fs/fuse/connections fusectl rw 0 0
+none /sys/kernel/debug debugfs rw 0 0
+none /sys/kernel/security securityfs rw 0 0
+udev /dev devtmpfs rw,mode=0755 0 0
+devpts /dev/pts devpts rw,noexec,nosuid,gid=5,mode=0620 0 0
+tmpfs /run tmpfs rw,noexec,nosuid,size=10%,mode=0755 0 0
+none /run/lock tmpfs rw,noexec,nosuid,nodev,size=5242880 0 0
+none /run/shm tmpfs rw,nosuid,nodev 0 0
+none /run/user tmpfs rw,noexec,nosuid,nodev,size=104857600,mode=0755 0 0
+none /sys/fs/pstore pstore rw 0 0
+tracefs /var/lib/ureadahead/debugfs/tracing tracefs rw,relatime 0 0
+/dev/md0 /boot ext3 rw 0 0
+systemd /sys/fs/cgroup/systemd cgroup rw,noexec,nosuid,nodev,none,name=systemd 0 0
+/dev/sdd1 /var/lib/ceph/osd/ceph-0 xfs rw,noatime,inode64 0 0
+/dev/sdc1 /var/lib/ceph/osd/ceph-1 xfs rw,noatime,inode64 0 0
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ umount /var/lib/ceph/osd/ceph-0
+umount: /var/lib/ceph/osd/ceph-0 is not in the fstab (and you are not root)
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ umount /var/lib/ceph/osd/ceph-0[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1@s[C[1@u[1@d[1@o[1@ 
+umount: /var/lib/ceph/osd/ceph-0: device is busy.
+        (In some cases useful info about processes that use
+         the device is found by lsof(8) or fuser(1))
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ sudo umount /var/lib/ceph/osd/ceph-0[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P /var/lib/ceph/osd/ceph-0l /var/lib/ceph/osd/ceph-0s /var/lib/ceph/osd/ceph-0[C /var/lib/ceph/osd/ceph-0- /var/lib/ceph/osd/ceph-0l /var/lib/ceph/osd/ceph-0a /var/lib/ceph/osd/ceph-0
+ls: cannot access /var/lib/ceph/osd/ceph-0: Permission denied
+]0;megdc@node1: ~/ceph-clustermegdc@node1:~/ceph-cluster$ exit
+exit
+
+Script done on Mon 23 May 2016 12:12:14 PM EAT

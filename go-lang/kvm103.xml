@@ -1,0 +1,44 @@
+<domain type='kvm'>
+ <name>kvm103</name>
+ <uuid>107338d9-32ab-4488-bd22-515e159e4f8a</uuid>
+ <memory>2048576</memory>
+ <currentMemory>2048576</currentMemory>
+  <memtune>
+   <hard_limit>1099776</hard_limit>
+  </memtune>
+ <vcpu>1</vcpu>
+<cpu>
+ </cpu>
+  <os>
+   <type machine='pc'>hvm</type>
+   <boot dev='hd'/>
+   <boot dev='cdrom'/>
+  </os>
+ <clock sync='localtime'/>
+  <devices>
+   <emulator>/usr/libexec/qemu-kvm</emulator>
+    <graphics type='vnc' port='5901' passwd='tWQs3JRz' listen='0.0.0.0'/>
+    <disk type='file' device='disk'>
+     <source file='/dev/solus/kvm103_img'/>
+     <target dev='hda' bus='ide'/>
+    </disk>
+    <disk type='file' device='cdrom'>
+     <source file='/home/solusvm/kvm/iso/ubuntu-14.04.4-server-amd64.iso'/>
+     <target dev='hdc'/>
+     <readonly/>
+    </disk>
+    <interface type='bridge'>
+     <source bridge='br0'/>
+     <target dev='kvm103.0'/>
+     <mac address='00:16:3c:b5:f5:a6'/>
+    </interface>
+    <input type='tablet'/>
+    <input type='mouse'/>
+    </devices>
+    <features>
+    <acpi/>
+    <apic/>
+    </features>
+    <on_poweroff>destroy</on_poweroff>
+    <on_reboot>restart</on_reboot>
+    </domain>

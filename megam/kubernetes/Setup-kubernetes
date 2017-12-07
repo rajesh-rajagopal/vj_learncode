@@ -1,0 +1,140 @@
+https://github.com/kubernetes/kubernetes/blob/master/cluster/centos/master/scripts/apiserver.sh
+
+https://devops.profitbricks.com/tutorials/getting-started-with-a-multi-node-kubernetes-cluster-on-ubuntu/
+
+
+/k8s/hyperkube proxy --logtostderr=true --v=4 --hostname-override=192.168.1.25 --master=http://127.0.0.1:8080
+sudo -E ./kubeadm join --token 98da02.4aadf8a7aef5a21c 10.192.0.2:6443 --skip-preflight-checks
+
+kubectl label node rajesh extraRuntime=virtlet
+node "rajesh" labeled
+
+kubectl label node kube-node-1 extraRuntime= --overwrite=true
+
+kubectl get nodes -l extraRuntime=virtlet
+NAME      STATUS    AGE
+rajesh    Ready     56m
+
+
+
+./oc create -f virtlet-ds.yaml
+
+
+./oc get pods -n kube-system -o wide
+NAME                                    READY     STATUS         RESTARTS   AGE       IP             NODE
+etcd-kube-master                        1/1       Running        9          11d       10.192.0.2     kube-master
+image-server-1782580915-sbfrh           1/1       Running        1          2h        10.192.3.5     kube-node-2
+kube-apiserver-kube-master              1/1       Running        9          11d       10.192.0.2     kube-master
+kube-controller-manager-kube-master     1/1       Running        10         1d        10.192.0.2     kube-master
+kube-dns-3946503078-f6lw3               3/3       Running        3          2h        10.192.1.4     kube-master
+kube-proxy-d24qh                        1/1       Running        2          1d        10.192.0.3     kube-node-1
+kube-proxy-pqzq2                        0/1       ErrImagePull   0          58m       192.168.1.25   rajesh
+kube-proxy-rq9zp                        1/1       Running        2          1d        10.192.0.2     kube-master
+kube-proxy-wvfdc                        1/1       Running        2          1d        10.192.0.4     kube-node-2
+kube-scheduler-kube-master              1/1       Running        10         11d       10.192.0.2     kube-master
+kubernetes-dashboard-2396447444-mv74m   1/1       Running        1          2h        10.192.3.6     kube-node-2
+virtlet-ptfzp                           1/1       Running        0          20s       192.168.1.25   rajesh
+
+docker volume inspect kubeadm-dind-kube-master
+[
+    {
+        "Driver": "local",
+        "Labels": {
+            "mirantis.kubeadm_dind_cluster": ""
+        },
+        "Mountpoint": "/var/lib/docker/volumes/kubeadm-dind-kube-master/_data",
+        "Name": "kubeadm-dind-kube-master",
+        "Options": {},
+        "Scope": "local"
+    }
+]
+root@vijaywk:~/code/megam/workspace/go/src/github.com/megamsys/abcd/_output/local/bin/linux/amd64# docker volume inspect kubeadm-dind-kube-node-1
+[
+    {
+        "Driver": "local",
+        "Labels": {
+            "mirantis.kubeadm_dind_cluster": ""
+        },
+        "Mountpoint": "/var/lib/docker/volumes/kubeadm-dind-kube-node-1/_data",
+        "Name": "kubeadm-dind-kube-node-1",
+        "Options": {},
+        "Scope": "local"
+    }
+]
+root@vijaywk:~/code/megam/workspace/go/src/github.com/megamsys/abcd/_output/local/bin/linux/amd64# docker volume inspect kubeadm-dind-kube-node-2
+[
+    {
+        "Driver": "local",
+        "Labels": {
+            "mirantis.kubeadm_dind_cluster": ""
+        },
+        "Mountpoint": "/var/lib/docker/volumes/kubeadm-dind-kube-node-2/_data",
+        "Name": "kubeadm-dind-kube-node-2",
+        "Options": {},
+        "Scope": "local"
+    }
+]
+root@vijaywk:~/code/megam/workspace/go/src/github.com/megamsys/abcd/_output/local/bin/linux/amd64# docker volume inspect virtlet_pkg
+[
+    {
+        "Driver": "local",
+        "Labels": null,
+        "Mountpoint": "/var/lib/docker/volumes/virtlet_pkg/_data",
+        "Name": "virtlet_pkg",
+        "Options": {},
+        "Scope": "local"
+    }
+]
+root@vijaywk:~/code/megam/workspace/go/src/github.com/megamsys/abcd/_output/local/bin/linux/amd64# docker volume inspect virtlet_src
+[
+    {
+        "Driver": "local",
+        "Labels": null,
+        "Mountpoint": "/var/lib/docker/volumes/virtlet_src/_data",
+        "Name": "virtlet_src",
+        "Options": {},
+        "Scope": "local"
+    }
+]
+
+copy binaries 
+remote_project_dir="/go/src/github.com/Mirantis/virtlet"
+
+docker run --rm \
+           -v virtlet_src:/go/src/github.com/Mirantis/virtlet \
+           -v kubeadm-dind-kube-node-1:/dind \
+           --name virtlet-ptfzp \
+           virtlet_build:latest \
+           /bin/sh -c "cp -av _output/* /dind"
+
+'_output/criproxy' -> '/dind/criproxy'
+'_output/flexvolume_driver' -> '/dind/flexvolume_driver'
+'_output/virtlet' -> '/dind/virtlet'
+'_output/vmwrapper' -> '/dind/vmwrapper'
+
+/usr/local/bin/kube-proxy --kubeconfig=/var/lib/kube-proxy/kubeconfig.conf --cluster-cidr=10.244.0.0/16 --cluster-cidr=172.17.0.1/16 --masquerade-all --conntrack-max=0 --conntrack-max-per-core=0
+cat /var/lib/kube-proxy/kubeconfig.conf
+apiVersion: v1
+kind: Config
+clusters:
+- cluster:
+    certificate-authority: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+    server: https://10.192.0.2:6443
+  name: default
+contexts:
+- context:
+    cluster: default
+    namespace: default
+    user: default
+  name: default
+current-context: default
+users:
+- name: default
+  user:
+    tokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+
+
+
+
+
+

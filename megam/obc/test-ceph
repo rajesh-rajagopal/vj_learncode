@@ -1,0 +1,10 @@
+
+
+curl -i -H 'Authorization:Basic api_key:asdf email:ram123@megam.io' -d '{"hosts": [{"ipaddress":"192.168.0.132","hostname":"ceph-cluster","ram":"1900","cpu":"4","username":"root", "password":"", "storage":"ceph", "regions":"chennai", "disks":[{"disk":"sdb", "type":"disk", "point":"", "size":"24G"}], "vnets":["pri-ipv4"]}]}' -X POST http://192.168.0.101:9005/hosts/install
+
+
+curl -i -H 'Authorization:Basic api_key:asdf email:ram123@megam.io' -d '{"hosts": [{"ipaddress":"192.168.0.126","hostname":"ceph-test","ram":"993","cpu":"1","username":"root", "password":"", "storage":"ceph","regions":"chennai", "disks":[{"disk":"sdc","type":"disk","point":"","size":"40G"}], "vnets":["pri-ipv4"]}]}' -X POST http://192.168.0.101:9005/hosts/install
+
+
+
+

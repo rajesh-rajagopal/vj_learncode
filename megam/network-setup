@@ -1,0 +1,6 @@
+https://www.aelius.com/njh/subnet_sheet.html  ## for ip configuration
+
+
+
+sudo ifconfig eth0 hw ether 00:50:56:07:04:c0
+sudo ip route add default via GATEWAY

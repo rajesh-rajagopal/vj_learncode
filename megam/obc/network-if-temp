@@ -1,0 +1,85 @@
+netstat -r | grep default
+
+
+auto lo
+iface lo inet loopback
+
+
+auto one
+iface one inet static
+	address 103.231.90.154
+	netmask 255.255.255.248
+	network 103.231.90.152
+	broadcast 103.231.90.159
+	gateway 103.231.90.153
+	# dns-* options are implemented by the resolvconf package, if installed
+	dns-nameservers 8.8.8.8
+	dns-search intergrid.com.au
+        bridge_ports enp2s0f1
+        bridge_stp off
+        bridge_fd 1
+        bridge_hello 2
+        bridge_maxage 12  
+
+
+auto eth0
+iface eth0 inet static
+    address 94.23.19.228
+    netmask 255.255.255.0
+    network 94.23.19.0
+    broadcast 94.23.19.255
+    gateway 94.23.19.254
+
+
+iface eth0 inet6 static
+    address 2001:41d0:0002:14e4::
+    netmask 64
+    dns-nameservers 2001:41d0:3:163::1
+    post-up /sbin/ip -family inet6 route add 2001:41d0:0002:14ff:ff:ff:ff:ff dev eth0
+    post-up /sbin/ip -family inet6 route add default via 2001:41d0:0002:14ff:ff:ff:ff:ff
+    pre-down /sbin/ip -family inet6 route del default via 2001:41d0:0002:14ff:ff:ff:ff:ff
+    pre-down /sbin/ip -family inet6 route del 2001:41d0:0002:14ff:ff:ff:ff:ff dev eth0
+
+
+
+auto eth0
+iface eth0 inet static
+  address 213.32.56.141
+  network 213.32.56.0
+  netmask 255.255.255.240
+  gateway 213.32.56.142
+  dns-nameservers 8.8.8.8 8.8.4.4
+
+
+source /etc/network/interfaces.d/*.cfg
+
+curl -i -H 'Authorization:Basic api_key:a8f8812ace759ac8012100d246189388a9225615 email:vijay@megam.io' -X GET http://192.168.0.100:9005/subscriptions
+
+
+
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+source /etc/network/interfaces.d/*
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+auto enp4s0f0
+iface enp4s0f0 inet static
+	address 45.35.249.70
+	netmask 255.255.255.224
+	network 45.35.249.64
+	broadcast 45.35.249.95
+	gateway 45.35.249.65
+	# dns-* options are implemented by the resolvconf package, if installed
+	dns-nameservers 8.8.8.8 8.8.4.4
+	dns-search psychz.det.io
+
+
+
+
+
+

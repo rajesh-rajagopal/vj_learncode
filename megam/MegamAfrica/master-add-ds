@@ -1,0 +1,20 @@
+
+<secret ephemeral='no' private='no'>
+  <uuid>c7d446b3-20eb-11e6-9577-305a3a7745e1</uuid>
+  <usage type='ceph'>
+          <name>client.libvirt secret</name>
+  </usage>
+</secret>
+
+
+sudo virsh secret-define secret.xml
+
+
+error: Failed to set attributes from secret.xml
+error: internal error: a secret with UUID 3a0bdd2f-0e00-11e6-a938-14187764b71b already defined for use with client.libvirt secret
+
+
+
+
+
+sudo virsh secret-set-value --secret c7d446b3-20eb-11e6-9577-305a3a7745e1 --base64 $(cat client.libvirt.key)

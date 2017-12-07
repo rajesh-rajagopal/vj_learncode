@@ -1,0 +1,28 @@
+Package: one-context
+Version: 5.4.1-1
+License: Apache 2.0
+Vendor: OpenNebula Systems
+Architecture: all
+Maintainer: OpenNebula Systems <support@opennebula.systems>
+Installed-Size: 61
+Depends: util-linux, bind9-host, cloud-utils, ruby, python, acpid, open-vm-tools, qemu-guest-agent
+Conflicts: cloud-init
+Replaces: cloud-init
+Section: default
+Priority: extra
+Homepage: http://opennebula.org
+Description: 
+ This package prepares a VM image for OpenNebula:
+   * Disables udev net and cd persistent rules
+   * Deletes udev net and cd persistent rules
+   * Unconfigures the network
+   * Adds OpenNebula contextualization scripts to startup
+     * Configure network
+     * Configure dns (from DNS and ETH*_DNS context variables)
+     * Set root authorized keys (from SSH_PUBLIC_KEY and EC2_PUBLIC_KEY)
+   * Add onegate tool (NEEDS RUBY AND JSON GEM TO WORK)
+   * Resize root filesystem
+   * Generate host ssh keys in debian distributions
+ .
+ To get support check the OpenNebula web page:
+   http://OpenNebula.org

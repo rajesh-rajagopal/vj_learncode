@@ -1,0 +1,7 @@
+Build api, controller and kubelet => hack/lib/golang.sh
+
+
+
+oc create serviceaccount rathish
+oc policy add-role-to-user admin system:serviceaccount:test:rathish
+

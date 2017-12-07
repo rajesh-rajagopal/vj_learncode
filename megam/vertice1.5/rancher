@@ -1,0 +1,23 @@
+ORG8296783039362231677 | 2017-01-12 11:58:19.000000+0000 | ASM5976862151476671458 | mvijaykanth@gmail.com | ['COM4961547459155819617'] | ['{"key":"domain","value":"megambox.com"}', '{"key":"keypairoption","value":"1"}', '{"key":"root_password","value":""}', '{"key":"sshkey","value":"vk-007"}', '{"key":"provider","value":"docker"}', '{"key":"cpu","value":"1 Core"}', '{"key":"ram","value":"2 GB"}', '{"key":"hdd","value":"40 GB"}', '{"key":"version","value":""}', '{"key":"region","value":"Germany"}', '{"key":"resource","value":"cloud-s-01"}', '{"key":"storage_hddtype","value":"SSD"}', '{"key":"ipv4private","value":"false"}', '{"key":"ipv4public","value":"true"}', '{"key":"ipv6private","value":"false"}', '{"key":"ipv6public","value":"false"}', '{"key":"bitnami_password","value":"true"}', '{"key":"bitnami_username","value":"true"}', '{"key":"root_username","value":""}', '{"key":"snapshot","value":""}', '{"key":"snap_name","value":""}', '{"key":"quota_id","value":""}', '{"key":"vm_cpu_cost_per_hour","value":"NaN"}', '{"key":"vm_ram_cost_per_hour","value":"NaN"}', '{"key":"vm_disk_cost_per_hour","value":"NaN"}', '{"key":"container_cpu_cost_per_hour","value":"0.01"}', '{"key":"container_memory_cost_per_hour","value":"0.02"}'] | Megam::Assembly | red-darkness-5867 |    null |     null | initialized | initialized | vertice.container.tutum/node
+
+
+ RIP7988932536530907884 | mvijaykanth@gmail.com |     create | AMS7257842556016968959 |    state |     container | 2017-01-12 11:58:19.000000+0000 |     
+
+
+curl -d '{"name":"my-favourate-con.megambox.com","cat_id":"AMS6700218008359850956","cattype":"container","id":"RIP6153586588970290086", "account_id":"mvijaykanth@megam.io","category":"control", "action":"stop"}' 'http://192.168.0.116:4151/put?topic=containers'
+
+AMS7434772838432621321
+
+curl -d '{"name":"my-favourate-con.megambox.com","cat_id":"AMS8711065214061390948","cattype":"container","id":"RIP6153586588970290086", "account_id":"rajthilak@megam.io","category":"control", "action":"stop"}' 'http://192.168.0.116:4151/put?topic=containers'
+
+cartonsid: AMS8711065214061390948
+accountid: rajthilak@megam.io
+
+delete from assembly  where org_id='ORG7804769626270281466' and created_at='2017-01-27T20:37:54.000' and id= 'ASM4939703456829414961';
+
+2017-01-27 15:07:54.000 - 5:30  => 2017-01-27 09:37:54.000000+0000  
+
+2017-01-27T20:37:54.000 - 5:30 => 2017-01-27 15:07:54.000000+0000
+
+
+

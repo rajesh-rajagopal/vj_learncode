@@ -1,0 +1,28 @@
+https://rogierm.42sec.net/2012/11/08/opennebula-with-zfs-datastore/
+
+chsh -s /bin/bash oneadmin
+
+sudo nano /usr/local/etc/pkg/repos/FreeBSD.conf
+
+pkg updagrade
+
+pkg install qemu
+
+
+/var/lib/one/remotes/datastore/zfs/cp 
+
+changed as below
+
+if [ -b $DEV ]   ==>  if [ -c $DEV ]
+
+
+
+"$(ssh 192.168.0.4 bash -s 2>/dev/null <<EOF
+ls
+EOF)"
+
+
+
+https://forum.opennebula.org/search?q=zfs
+https://forum.opennebula.org/t/using-datastores-with-zfs/3075
+https://forum.opennebula.org/t/using-datastores-with-zfs/3075/5

@@ -1,0 +1,71 @@
+curl -d '{"name":"","cat_id":"AMS6763963294875499075","cattype":"torpedo","id":"RIP7563250076475644817","category":"state","action":"stop"}' 'http://localhost:4151/put?topic=vms'
+
+
+curl -d '{"name":"","cat_id":"AMS5053390561498001882","cattype":"torpedo","id":"RIP8012547305955328495","category":"state","action":"stop"}' 'http://192.168.0.101:4151/put?topic=vms'
+
+insert into requests (id, action,cat_id , category, cattype, created_at , name ) values ('RIP6831699066733787107', 'snapremove', 'SPS4998010246805369747', 'snapshot', 'app', '2016-06-04 07:45:26 +0000', 'pantsuits.megambox.com');
+
+
+curl -d '{"name":"","cat_id":"SPS4998010246805369747","cattype":"torpedo","id":"RIP6831699066733787107","category":"snapshot","action":"snapcreate"}' 'http://192.168.0.101:4151/put?topic=vms'
+
+
+create table snapshot (snap_id text, asm_id text, org_id text, account_id text, name text,created_at text,status text, PRIMARY KEY ((snap_id), asm_id, org_id, account_id));
+
+insert into snapshots (snap_id, asm_id, org_id, account_id, name ,created_at ) values ('SPS4998010246805369747','ASM9211301302677939328','ORG7047503512369190358','aa@gmail.com','pantsuits.megambox.com','2016-06-14 17:45:26 +0000');
+
+curl -d '{"name":"floral-tree-1896.atominstance.com","cat_id":"AMS7287128240665777193","accounts_id":"tocietleva@gmail.com","cattype":"torpedo","id":"RIP6163137039465913609","category":"state","action":"destroy"}' 'http://192.168.1.100:4151/put?topic=vms'
+
+
+insert into requests (id, action,cat_id , category, cattype, created_at , name ) values ('RIP5653923141259878520', 'snapcreate', 'SNP5653923141259878000', 'snapshot', 'app', '2016-06-04 07:45:26 +0000', 'pantsuits.megambox.com');
+
+CREATE TABLE assembly (id text, org_id text, account_id text, name text, components list<text>, tosca_type text, policies list<text>, inputs list<text>, outputs list<text>, status text, json_claz text, created_at text, PRIMARY KEY ((org_id), id));
+
+
+
+snap_id 	- string  	        - primary key 
+asm_id 	- string  	                - partition key
+org_id 		- string		- partition key
+account_id 	- string		- partition key
+name 		- string		- unique
+date 		- string		- primary key
+
+
+
+insert into assembly (org_id, id , account_id,components,created_at, inputs  , json_claz , name , outputs , status , tosca_type) values ('ORG7879663326321337888', 'ASM5355764237644862605', 'vijaykanthm28@gmail.com',['COM7623699376101394708'],'2016-06-13 09:53:26 +0000', ['{"key":"domain","value":"megambox.com"}', '{"key":"sshkey","value":"viola1"}', '{"key":"provider","value":"one"}', '{"key":"cpu","value":"1 Core"}', '{"key":"ram","value":"1 GB"}', '{"key":"hdd","value":"24 GB SSD"}', '{"key":"version","value":"14.04"}', '{"key":"lastsuccessstatusupdate","value":"10 Jun 16 15:20 EAT"}', '{"key":"status","value":"running"}'], 'Megam::Assembly', 'pantsuits', ['{"key":"vmid","value":"728"}', '{"key":"vnchost","value":"136.243.49.217"}', '{"key":"vncport","value":"6663"}', '{"key":"publicipv4","value":"138.201.98.17"}'],'running', 'tosca.analytics.hadoop');
+ 
+  
+  
+  
+insert into vertice.assemblies(org_id,id,assemblies,created_at,json_claz,name) values('ORG7879663326321337888','AMS8891748652231651795',['ASM5355764237644862605'],'2016-06-13 08:19:42 +0000','Megam::Assemblies','');
+
+
+http://2.sd.det.io
+
+insert into requests(id, action, cat_id, category, cattype, created_at, name) values ('RIP5710917746343739782', 'stop', 'AMS7254964938233436455', 'control', 'Torpedo', '2016-09-08 14:07:46 +000','');
+
+
+
+ ORG7891443561645476751 | ASM8406992189090930469 | rajeshr@gmail.com |       null | 2016-06-07 10:36:19 +0000 | ['{"key":"domain","value":"megambox.com"}', '{"key":"sshkey","value":"qqqq"}', '{"key":"provider","value":"one"}', '{"key":"cpu","value":"1 Core"}', '{"key":"ram","value":"1 GB"}', '{"key":"hdd","value":"24 GB SSD"}', '{"key":"version","value":"14.04"}', '{"key":"lastsuccessstatusupdate","value":"14 Jun 16 13:01 IST"}', '{"key":"status","value":"destroying"}'] | Megam::Assembly | innovates | ['{"key":"vmid","value":"678"}'] |     null | destroying | tosca.torpedo.ubuntu
+ 
+ 
+ 
+ update assembly set inputs = ['{"key":"domain","value":"megambox.com"}', '{"key":"keypairoption","value":"2"}', '{"key":"sshkey","value":"rr"}', '{"key":"provider","value":"one"}', '{"key":"cpu","value":"2 Cores"}', '{"key":"ram","value":"1 GB"}', '{"key":"hdd","value":"24 GB"}', '{"key":"version","value":"14.0"}', '{"key":"region","value":"chennai"}', '{"key":"resource","value":"c1.micro"}', '{"key":"storagetype","value":"HDD"}', '{"key":"ipv6public","value":"false"}','{"key":"ipv6private","value":"false"}', '{"key":"ipv4private","value":"false"}', '{"key":"lastsuccessstatusupdate","value":"22 Jun 16 17:38 IST"}', '{"key":"status","value":"launching"}'], status = 'launching' where id = 'ASM5355764237644862605' and org_id = 'ORG7879663326321337888' ;
+
+ insert into requests (id, action , cat_id , category , cattype , created_at , name ) values ('RIP6449383516555041291','start','AMS4724795980725157701','control','torpedo','2016-06-22 11:53:15 +0000','');
+ 
+ 
+curl -d '{"name":"","cat_id":"AMS8832217292975199185","cattype":"torpedo","id":"RIP8012547305955328495","category":"state","action":"create"}' 'http://192.168.0.101:4151/put?topic=vms'
+
+curl -d '{"name":"","cat_id":"AMS8832217292975199185","cattype":"torpedo","id":"RIP6122139781481144413","category":"state","action":"create"}' 'http://192.168.0.101:4151/put?topic=containers'
+
+
+
+
+insert into disks (id ,account_id ,asm_id,created_at , disk_id , json_claz ,org_id , size , status) values ('DSK6121297687527873824','first@1.com','ASM8376190176934922658','2016-09-27 06:21:10 +0000','0','Megam::Disks','ORG5201185797872368987','6 GB','running');
+
+
+update assembly set outputs = ['{"key":"vmid","value":"695"}', '{"key":"vnchost","value":"192.168.0.115"}', '{"key":"vncport","value":"6196"}', '{"key":"privateipv4","value":"192.168.0.127"}'] where org_id = 'ORG5167463657818475686' and id = 'ASM8376190176934922658';
+
+
+
+

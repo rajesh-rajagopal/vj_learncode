@@ -1,0 +1,151 @@
+#! /bin/bash
+
+
+
+if [ ! -d "$DIRECTORY" ]; then
+#do if file doesnot exist  you can use -f for files 
+fi
+
+arr=( $(ls ./vijay/*.war) )   #to get name of unknow file by extension
+ echo $arr 
+./vijay/hello.war
+
+
+##################### write array to a file with new line
+testa=( 1 2 3 )
+printf "%s\n" "${testa[@]}" > file.txt
+
+output:
+cat file.txt 
+1
+2
+3
+
+
+dist=`grep PRETTY_NAME /etc/*-release | awk -F '="' '{print $2}'`
+OS=$(echo $dist | awk '{print $1;}')
+
+dist=`grep VERSION_ID /etc/*-release | awk -F '="' '{print $2}'`
+vers=$(echo $dist | awk -F '"' '{print $1;}')
+
+## how to execute string in shell script
+test='pwd'
+eval $test
+
+
+## change user password without interaction
+
+/usr/bin/passwd test <<EOF
+hello
+hello
+EOF
+
+
+# `id -u somename` returns a non-zero exit code when the user does not exist.
+#You can test it quite simply... (&>/dev/null just supresses the normal output/warning)
+
+id -u test &>/dev/null || useradd test 
+
+echo -e "pass\npass" | passwd test
+a="\nhello"
+b="\nhello"
+passwd test $a $b
+
+
+## declare an array variable
+declare -a arr=("element1" "element2" "element3")
+
+## now loop through the above array
+for i in "${arr[@]}"
+do
+   echo "$i"
+   # or do whatever with individual element of the array
+done
+
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"  //to get CWD 
+
+
+SCRIPTPATH=`pwd -P`
+
+
+
+#script.sh to check whether a software installed or not
+#!/bin/sh
+
+for P; do
+    dpkg -s "$P" >/dev/null 2>&1 && {
+        echo "$P is installed."
+    } || {
+        echo "$P is not installed."
+    }
+done
+
+find . -path "**/target/*.war"
+
+./script.sh java tomcat nodejs
+
+
+
+arr=$(find . -path "**/target/*.war")
+
+for i in "${arr[@]}"
+do
+   cp $i /home/megam/tomcat/webapps
+done
+
+#############mysql create db and user
+
+
+Name it something like mysql-db-create.sh
+Make it executable $ sudo chmod 755 mysql-db-create.sh
+Run it sudo ./mysql-db-create.sh dbname dbuser password
+#!/bin/bash
+
+# Functions
+ok() { echo -e '\e[32m'$1'\e[m'; } # Green
+
+EXPECTED_ARGS=3
+E_BADARGS=65
+MYSQL=`which mysql`
+ 
+Q1="CREATE DATABASE IF NOT EXISTS $1;"
+Q2="GRANT ALL ON *.* TO '$2'@'localhost' IDENTIFIED BY '$3';"
+Q3="FLUSH PRIVILEGES;"
+SQL="${Q1}${Q2}${Q3}"
+ 
+if [ $# -ne $EXPECTED_ARGS ]
+then
+  echo "Usage: $0 dbname dbuser dbpass"
+  exit $E_BADARGS
+fi
+ 
+$MYSQL -uroot -p -e "$SQL"
+
+ok "Database $1 and user $2 created with a password $3"
+
+
+
+The read command by default reads whole lines. So the solution is probably to read the whole line and then split it on whitespace with e.g. for:
+
+
+while read line; do
+    for word in $line; do
+        echo "word = '$word'"
+    done
+done
+
+
+
+
+There are multiple remote linux machines, and I need to write a shell script which will execute the same set of commands in each machine. (Including some sudo operations). How can this be done using shell scripting?
+You can do this with ssh, for example:
+
+#!/bin/bash
+USERNAME=someUser
+HOSTS="host1 host2 host3"
+SCRIPT="pwd; ls"
+for HOSTNAME in ${HOSTS} ; do
+    ssh -l ${USERNAME} ${HOSTNAME} "${SCRIPT}"
+done
+

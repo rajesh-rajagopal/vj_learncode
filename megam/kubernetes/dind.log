@@ -1,0 +1,250 @@
+./dind-cluster-v1.6.sh
+
+WARNING: No swap limit support
+WARNING: No swap limit support
+* Making sure DIND image is up to date 
+v1.6: Pulling from mirantis/kubeadm-dind-cluster
+952132ac251a: Pull complete 
+82659f8f1b76: Pull complete 
+c19118ca682d: Pull complete 
+8296858250fe: Pull complete 
+24e0251a0e2c: Pull complete 
+2545d638d973: Pull complete 
+e0b45d7ea196: Pull complete 
+8d7d40f3e602: Pull complete 
+216f5a138844: Pull complete 
+c71de27d6b60: Pull complete 
+b56df390c9c0: Pull complete 
+d231137e8a17: Pull complete 
+d6e4d714ea30: Pull complete 
+b8a900df90b4: Pull complete 
+5735ac51da0c: Pull complete 
+43d6632a9bf0: Pull complete 
+7659ff962cff: Pull complete 
+4ff2d2be7c17: Pull complete 
+2ab0f6e60c82: Pull complete 
+94c14a5894fe: Pull complete 
+1a72111103a5: Pull complete 
+0ad0dc1953ae: Pull complete 
+899c4a13cacb: Pull complete 
+1691399c4306: Pull complete 
+Digest: sha256:451c82dfa9be159ee005d8ebdd938d75e1ac69f8c6c608a9bc28cf8321583c09
+Status: Downloaded newer image for mirantis/kubeadm-dind-cluster:v1.6
+--2017-06-02 15:31:43--  https://storage.googleapis.com/kubernetes-release/release/v1.6.1/bin/linux/amd64/kubectl
+Resolving storage.googleapis.com (storage.googleapis.com)... 216.58.197.48, 2404:6800:4007:807::2010
+Connecting to storage.googleapis.com (storage.googleapis.com)|216.58.197.48|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 70704507 (67M) [application/octet-stream]
+Saving to: ‘/home/rajesh/.kubeadm-dind-cluster/kubectl-v1.6.1’
+
+/home/rajesh/.kubeadm-dind-cluster/ 100%[==================================================================>]  67.43M  2.02MB/s    in 33s     
+
+2017-06-02 15:32:17 (2.03 MB/s) - ‘/home/rajesh/.kubeadm-dind-cluster/kubectl-v1.6.1’ saved [70704507/70704507]
+
+/home/rajesh/.kubeadm-dind-cluster/kubectl-v1.6.1: OK
+* Starting DIND container: kube-master
+* Running kubeadm: init --pod-network-cidr=10.244.0.0/16 --skip-preflight-checks
+Initializing machine ID from random generator.
+Synchronizing state of docker.service with SysV init with /lib/systemd/systemd-sysv-install...
+Executing /lib/systemd/systemd-sysv-install enable docker
+Loaded image: gcr.io/google_containers/pause-amd64:3.0
+Loaded image: gcr.io/google_containers/etcd-amd64:2.2.5
+Loaded image: mirantis/hypokube:base
+Loaded image: gcr.io/google_containers/kube-discovery-amd64:1.0
+Loaded image: gcr.io/google_containers/kubedns-amd64:1.7
+Loaded image: gcr.io/google_containers/exechealthz-amd64:1.1
+Loaded image: gcr.io/google_containers/kube-dnsmasq-amd64:1.3
+
+real	0m9.602s
+user	0m0.444s
+sys	0m0.360s
+Sending build context to Docker daemon 190.8 MB
+Step 1 : FROM mirantis/hypokube:base
+ ---> aa6973c9c795
+Step 2 : COPY hyperkube /hyperkube
+ ---> 08b449184f4d
+Removing intermediate container 08c16b757833
+Successfully built 08b449184f4d
+Created symlink from /etc/systemd/system/multi-user.target.wants/kubelet.service to /lib/systemd/system/kubelet.service.
+[kubeadm] WARNING: kubeadm is in beta, please do not use it for production clusters.
+[init] Using Kubernetes version: v1.6.4
+[init] Using Authorization mode: RBAC
+[preflight] Skipping pre-flight checks
+[certificates] Generated CA certificate and key.
+[certificates] Generated API server certificate and key.
+[certificates] API Server serving cert is signed for DNS names [kube-master kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local] and IPs [10.96.0.1 10.192.0.2]
+[certificates] Generated API server kubelet client certificate and key.
+[certificates] Generated service account token signing key and public key.
+[certificates] Generated front-proxy CA certificate and key.
+[certificates] Generated front-proxy client certificate and key.
+[certificates] Valid certificates and keys now exist in "/etc/kubernetes/pki"
+[kubeconfig] Wrote KubeConfig file to disk: "/etc/kubernetes/admin.conf"
+[kubeconfig] Wrote KubeConfig file to disk: "/etc/kubernetes/kubelet.conf"
+[kubeconfig] Wrote KubeConfig file to disk: "/etc/kubernetes/controller-manager.conf"
+[kubeconfig] Wrote KubeConfig file to disk: "/etc/kubernetes/scheduler.conf"
+[apiclient] Created API client, waiting for the control plane to become ready
+[apiclient] All control plane components are healthy after 46.266803 seconds
+[apiclient] Waiting for at least one node to register
+[apiclient] First node has registered after 8.534756 seconds
+[token] Using token: 98da02.4aadf8a7aef5a21c
+[apiconfig] Created RBAC rules
+[addons] Created essential addon: kube-proxy
+[addons] Created essential addon: kube-dns
+
+Your Kubernetes master has initialized successfully!
+
+To start using your cluster, you need to run (as a regular user):
+
+  sudo cp /etc/kubernetes/admin.conf $HOME/
+  sudo chown $(id -u):$(id -g) $HOME/admin.conf
+  export KUBECONFIG=$HOME/admin.conf
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  http://kubernetes.io/docs/admin/addons/
+
+You can now join any number of machines by running the following on each node
+as root:
+
+  kubeadm join --token 98da02.4aadf8a7aef5a21c 10.192.0.2:6443
+
+
+real	0m59.245s
+user	0m3.164s
+sys	0m0.116s
+Warning: kubectl apply should be used on resource created by either kubectl create --save-config or kubectl apply
+daemonset "kube-proxy" configured
+No resources found
+* Setting cluster config 
+Cluster "dind" set.
+Context "dind" set.
+Switched to context "dind".
+* Deploying k8s dashboard 
+deployment "kubernetes-dashboard" created
+service "kubernetes-dashboard" created
+clusterrolebinding "add-on-cluster-admin" created
+* Starting node container: 1
+* Starting DIND container: kube-node-1
+* Node container started: 1
+* Starting node container: 2
+* Starting DIND container: kube-node-2
+* Node container started: 2
+* Joining node: 1
+* Running kubeadm: join --skip-preflight-checks --token 98da02.4aadf8a7aef5a21c 10.192.0.2:6443
+* Joining node: 2
+* Running kubeadm: join --skip-preflight-checks --token 98da02.4aadf8a7aef5a21c 10.192.0.2:6443
+Initializing machine ID from random generator.
+Initializing machine ID from random generator.
+Synchronizing state of docker.service with SysV init with /lib/systemd/systemd-sysv-install...
+Executing /lib/systemd/systemd-sysv-install enable docker
+Synchronizing state of docker.service with SysV init with /lib/systemd/systemd-sysv-install...
+Executing /lib/systemd/systemd-sysv-install enable docker
+Loaded image: gcr.io/google_containers/pause-amd64:3.0
+Loaded image: gcr.io/google_containers/etcd-amd64:2.2.5
+Loaded image: mirantis/hypokube:base
+Loaded image: gcr.io/google_containers/kube-discovery-amd64:1.0
+Loaded image: gcr.io/google_containers/kubedns-amd64:1.7
+Loaded image: gcr.io/google_containers/exechealthz-amd64:1.1
+Loaded image: gcr.io/google_containers/kube-dnsmasq-amd64:1.3
+
+real	0m26.679s
+user	0m0.596s
+sys	0m0.332s
+Sending build context to Docker daemon 190.8 MB
+Step 1 : FROM mirantis/hypokube:base
+ ---> aa6973c9c795
+Step 2 : COPY hyperkube /hyperkube
+Loaded image: gcr.io/google_containers/pause-amd64:3.0
+Loaded image: gcr.io/google_containers/etcd-amd64:2.2.5
+Loaded image: mirantis/hypokube:base
+Loaded image: gcr.io/google_containers/kube-discovery-amd64:1.0
+Loaded image: gcr.io/google_containers/kubedns-amd64:1.7
+Loaded image: gcr.io/google_containers/exechealthz-amd64:1.1
+Loaded image: gcr.io/google_containers/kube-dnsmasq-amd64:1.3
+
+real	0m28.931s
+user	0m0.592s
+sys	0m0.348s
+Sending build context to Docker daemon 190.8 MB
+Step 1 : FROM mirantis/hypokube:base
+ ---> aa6973c9c795
+Step 2 : COPY hyperkube /hyperkube
+ ---> dffa1deacfcf
+Removing intermediate container 81e8407c7079
+Successfully built dffa1deacfcf
+Created symlink from /etc/systemd/system/multi-user.target.wants/kubelet.service to /lib/systemd/system/kubelet.service.
+[kubeadm] WARNING: kubeadm is in beta, please do not use it for production clusters.
+[preflight] Skipping pre-flight checks
+[discovery] Trying to connect to API Server "10.192.0.2:6443"
+[discovery] Created cluster-info discovery client, requesting info from "https://10.192.0.2:6443"
+[discovery] Cluster info signature and contents are valid, will use API Server "https://10.192.0.2:6443"
+[discovery] Successfully established connection with API Server "10.192.0.2:6443"
+[bootstrap] Detected server version: v1.6.2
+[bootstrap] The server supports the Certificates API (certificates.k8s.io/v1beta1)
+[csr] Created API client to obtain unique certificate for this node, generating keys and certificate signing request
+ ---> 30acb993c727
+[csr] Received signed certificate from the API server, generating KubeConfig...
+[kubeconfig] Wrote KubeConfig file to disk: "/etc/kubernetes/kubelet.conf"
+
+Node join complete:
+* Certificate signing request sent to master and response
+  received.
+* Kubelet informed of new secure connection details.
+
+Run 'kubectl get nodes' on the master to see this machine join.
+
+real	0m8.419s
+user	0m0.204s
+sys	0m0.028s
+* Node joined: 2
+Removing intermediate container 78125dbd7f06
+Successfully built 30acb993c727
+Created symlink from /etc/systemd/system/multi-user.target.wants/kubelet.service to /lib/systemd/system/kubelet.service.
+[kubeadm] WARNING: kubeadm is in beta, please do not use it for production clusters.
+[preflight] Skipping pre-flight checks
+[discovery] Trying to connect to API Server "10.192.0.2:6443"
+[discovery] Created cluster-info discovery client, requesting info from "https://10.192.0.2:6443"
+[discovery] Cluster info signature and contents are valid, will use API Server "https://10.192.0.2:6443"
+[discovery] Successfully established connection with API Server "10.192.0.2:6443"
+[bootstrap] Detected server version: v1.6.2
+[bootstrap] The server supports the Certificates API (certificates.k8s.io/v1beta1)
+[csr] Created API client to obtain unique certificate for this node, generating keys and certificate signing request
+[csr] Received signed certificate from the API server, generating KubeConfig...
+[kubeconfig] Wrote KubeConfig file to disk: "/etc/kubernetes/kubelet.conf"
+
+Node join complete:
+* Certificate signing request sent to master and response
+  received.
+* Kubelet informed of new secure connection details.
+
+Run 'kubectl get nodes' on the master to see this machine join.
+
+real	0m5.374s
+user	0m0.196s
+sys	0m0.012s
+* Node joined: 1
+* Patching kube-dns deployment to make it start faster 
+Warning: kubectl apply should be used on resource created by either kubectl create --save-config or kubectl apply
+deployment "kube-dns" configured
+* Taking snapshot of the cluster 
+deployment "kube-dns" scaled
+deployment "kubernetes-dashboard" scaled
+pod "kube-proxy-59b3d" deleted
+pod "kube-proxy-wldpd" deleted
+NAME                         READY     STATUS        RESTARTS   AGE
+etcd-kube-master             1/1       Running       0          18s
+kube-apiserver-kube-master   1/1       Running       0          1m
+kube-dns-3913472980-dm0s2    0/3       Terminating   0          1m
+kube-scheduler-kube-master   1/1       Running       0          1m
+* Waiting for kube-proxy and the nodes 
+..................[done]
+* Bringing up kube-dns and kubernetes-dashboard 
+deployment "kube-dns" scaled
+deployment "kubernetes-dashboard" scaled
+...............................[done]
+NAME          STATUS    AGE       VERSION
+kube-master   Ready     3m        v1.6.2
+kube-node-1   Ready     1m        v1.6.2
+kube-node-2   Ready     2m        v1.6.2
+* Access dashboard at: http://localhost:8080/ui
+

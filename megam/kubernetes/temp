@@ -1,0 +1,124 @@
+
+INSERT INTO marketplaces (id, flavor, provided_by, cattype, catorder, status, image, url, envs, options, inputs, outputs, acl_policies, plans, json_claz, created_at, updated_at) values
+    ('MKT000001',, , , '1',
+     'active', ', '', [],[],[],[],[],
+    ,
+'Megam::MarketPlace', toTimestamp(now()), toTimestamp(now()));
+
+
+
+flavor        'Ubuntu'
+provided_by   'vertice'
+cattype       'TORPEDO'
+catorder      '1'
+image 	      'ubuntu.png'
+url  	      'http://www.ubuntu.com/server'
+inputs        '{"key":"os", "value":"ubuntu"}'
+envs  -------  service 
+options
+inputs
+outputs   
+
+plans:   ['{"key":"14.04","value":"Ubuntu is a Debian-based Linux operating system. Trusty Tahr is the Ubuntu codename for version 14.04 LTS of the Ubuntu Linux-based operating system."}',
+      '{"key":"16.04", "value":"Ubuntu is a Debian-based Linux operating system. Xenial Xerus is the Ubuntu codename for version 16.04 LTS of the Ubuntu Linux-based operating system."}']
+
+
+
+INSERT INTO marketplaces (id, flavor, provided_by, cattype, catorder, status, image, url, envs, options, inputs, outputs, acl_policies, plans, json_claz, created_at, updated_at) values
+    ('MKT000011', 'PostgreSQL', 'vertice', 'SERVICE', '3',
+     'active', 'postgres.png', 'https://postgresql.org', ,[],['{"key":"os", "value":"centos"}'],[],[],
+     ,
+'Megam::MarketPlace', toTimestamp(now()), toTimestamp(now()));
+
+an
+flavor        'PostgreSQL'
+provided_by   'vertice'
+cattype       'SERVICE'
+catorder      '3'
+image 	      'postgres.png'
+url  	      'https://postgresql.org'
+inputs        '{"key":"os", "value":"ubuntu"}'
+
+envs  -------  service ['{"key":"port.tcp", "value":"5432"}',
+               secrets ---  '{"key":"username", "value": "postgres"}',  '{"key":"password", "value":"megam"}']
+options
+inputs
+outputs   
+
+plans:   ['{"key":"9.5", "value": "PostgreSQL is an open source relational database management system ( DBMS ) developed by a worldwide team of volunteers."}']
+
+
+
+
+
+INSERT INTO marketplaces (id, flavor, provided_by, cattype, catorder, status, image, url, envs, options, inputs, outputs, acl_policies, plans, json_claz, created_at, updated_at) values
+        ('MKT000016', 'Zarafa', 'vertice', 'COLLABORATION', '6',
+        'active', 'zarafa.png', 'https://www.zarafa.com/', , ['{"key":"oneclick", "value":"true"}','{"key":"username", "value":"megam"}',
+        '{"key":"password", "value":"megam"}'],['{"key":"os", "value":"ubuntu"}'],[],[],
+        ['{"key":"7.2", "value": "Zarafa gives you the tools that help boost your day-to-day communication. File sharing, web meetings and business apps like email and calendar are integrated in one suite."}'],
+'Megam::MarketPlace', toTimestamp(now()), toTimestamp(now()));
+
+
+
+flavor        'Zarafa'
+provided_by   'vertice'
+cattype       'COLLABORATION'
+catorder      '6'
+image 	      'zarafa.png'
+url  	      'https://www.zarafa.com/'
+inputs        '{"key":"os", "value":"ubuntu"}'
+envs  -------  service ['{"key":"port.http", "value":"80"}', '{"key":"url.suffix", "value":"/webaccess"}']
+options
+inputs
+outputs   
+
+plans:   ['{"key":"7.2", "value": "Zarafa gives you the tools that help boost your day-to-day communication. File sharing, web meetings and business apps like email and calendar are integrated in one suite."}']
+
+$ oc get templates 
+
+NAME                DESCRIPTION                                                                        PARAMETERS    OBJECTS
+opennebula-master   OpenNebula front-end that executes OpenNebula services. For more information...    6 (all set)   2
+ubuntu              Ubuntu is a Debian-based Linux operating system. Xenial Xerus is the Ubuntu c...   0 (all set)   1
+
+$ oc get secrets -n kube-system
+
+NAME                       TYPE                                  DATA      AGE
+builder-dockercfg-g433n    kubernetes.io/dockercfg               1         1d
+deployer-token-h7386       kubernetes.io/service-account-token   4         1d
+ssh-vijay                  Opaque                                2         7h
+
+ 
+remove megam_api and include kubeclient in the Gemfile of 2.0 code.
+
+First List all Marketplaces from Template resources
+ Get Templates using Kubeclient get_templates json and convert it to megam objects (marketplace collection json)
+
+	Get flavor,provided_by,cattype, url  and decriptions from annotations
+            envs from services 
+            Plans from Parameter VERSION and its value and descrtion 
+            Each Kind will be stored as key and value json in inputs field for example key is DeploymentConfig values will be json string 
+  
+ From Megam objects to Template 
+   from template annotations from the fields flavor,provided_by,cattype, url, images 
+   form Objecst Based on values of envs and inputs 
+     envs build as service 
+     
+List Secrets
+
+   List secrets GET using bellow request.
+
+   client = Kubeclient::Client.new('http://localhost:8080/apis/batch', 'v1')
+
+    secrets = client.get_secrets
+
+   ApiDispatcher send parsed Megam ruby object.
+
+   show ssh private and public keys list
+
+
+
+
+
+
+
+

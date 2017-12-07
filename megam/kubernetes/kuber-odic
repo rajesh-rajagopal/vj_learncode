@@ -1,0 +1,212 @@
+https://github.com/kubernetes/community/blob/master/contributors/devel/api-conventions.md
+https://github.com/kubernetes/community/blob/master/contributors/devel/api_changes.md
+
+https://github.com/kubernetes/community/blob/master/contributors/devel/adding-an-APIGroup.md
+
+
+http://guoshimin.github.io/2016/06/10/kubernetes-1.3-oidc.html
+
+https://developers.google.com/identity/protocols/OpenIDConnect
+
+--oidc-client-id=<client-id>
+--oidc-issuer-url=https://accounts.google.com
+
+    - --oidc-issuer-url=https://keycloak_domain/auth/realms/demo
+    - --oidc-client-id=kubernetes
+    - --oidc-ca-file=/path/to/ca.pem
+    - --oidc-username-claim=email
+./kube-apiserver --cert-dir $MEGAM_HOME/kube --etcd-servers http://127.0.0.1:2380  --service-cluster-ip-range 10.0.0.0/24 -v=9 --oidc-client-id=628140904636-3ip0dbqo5dif5dqgaanmjakuodpruie8.apps.googleusercontent.com  --oidc-issuer-url=https://accounts.google.com 
+
+
+
+https://developers.google.com/adwords/api/docs/guides/authentication#installed
+
+mvijaykanth@megam.io
+
+create project and oauth credentials 
+
+{"installed":{"client_id":"628140904636-3ip0dbqo5dif5dqgaanmjakuodpruie8.apps.googleusercontent.com","project_id":"oauth-162306","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://accounts.google.com/o/oauth2/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":"bq47WYKJlf96kWDch_zXfSN-","redirect_uris":["urn:ietf:wg:oauth:2.0:oob","http://localhost"]}}
+
+
+https://accounts.google.com/o/oauth2/auth?redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=code&client_id=628140904636-3ip0dbqo5dif5dqgaanmjakuodpruie8.apps.googleusercontent.com&scope=openid+email+profile&approval_prompt=force&access_type=offline
+
+got the code:  4/ilWtrzHGhbVAoyH9Z5CENmTDNaAzKJku-lwFAOk69gg
+
+curl -XPOST -v https://www.googleapis.com/oauth2/v3/token \
+  --data-urlencode code=4/ilWtrzHGhbVAoyH9Z5CENmTDNaAzKJku-lwFAOk69gg \
+  --data-urlencode redirect_uri=urn:ietf:wg:oauth:2.0:oob \
+  --data-urlencode client_id=628140904636-3ip0dbqo5dif5dqgaanmjakuodpruie8.apps.googleusercontent.com \
+  --data-urlencode client_secret=bq47WYKJlf96kWDch_zXfSN- \
+  --data-urlencode grant_type=authorization_code
+
+ya29.GlscBGZAG4DjDXWMonEuD0-HEo-3iGm3DpIcHX74lMd-UBD-npqTJaySBhQzO70Yg6xpibIER0wFwHm-x7FGzQtgZ2ZiSVOaAAJAKPM_TA1Y7IbNqzZ2hIToTe43
+
+{
+ "access_token": "ya29.GltIBCklptljjipHW691hlH1mmoN5UBDSPOrQcPq1E-NnIegdLq4qL9-Wg1sMPkwl_0Q_c1n4urNJl5YjgonvgXoU7ic2M_Jh6QhrjMGdtQ7tOxNyYIfj2m9xi_T",
+ "token_type": "Bearer",
+ "expires_in": 3600,
+ "refresh_token": "1/3wsoQUa1_iqHyPhY7497uriMqY8ehvP9Ur5WFvS3JF8",
+ "id_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6ImNlMzNhZGM3YzBmNjNkMTk0MGZmOGY0NzFkYmQ3NTZlYjZmYjNmZTQifQ.eyJhenAiOiI2MjgxNDA5MDQ2MzYtM2lwMGRicW81ZGlmNWRxZ2Fhbm1qYWt1b2RwcnVpZTguYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI2MjgxNDA5MDQ2MzYtM2lwMGRicW81ZGlmNWRxZ2Fhbm1qYWt1b2RwcnVpZTguYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDg2MjczNDg4NTc4NDAyNjk4NTAiLCJoZCI6Im1lZ2FtLmlvIiwiZW1haWwiOiJtdmlqYXlrYW50aEBtZWdhbS5pbyIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdF9oYXNoIjoidS1SSmx6b0haX1NLQXBUNDVjQ0ZwZyIsImlzcyI6ImFjY291bnRzLmdvb2dsZS5jb20iLCJpYXQiOjE0OTQ1OTcwMjMsImV4cCI6MTQ5NDYwMDYyM30.ItPXO45vr_GCGBkXN5eIHyQKRAULX7RTNmUii8P2x1FmIJ01_PF0VecrbP7pbKLqLUhJZ5BDWUJ7wtncCxNyIYCJyg0IPyjV6JCRHez4PbAUnz_fUfbkaPsidwltSAu-KxuvMUyPBo2rE69jpNu3mioHjlyHa7pmcerkPgG5Lk0ruS-ikWOIqAHPQDct6sQFKWAaM0Q_9Cdz_LTgSp-2TlJqL4GpV-ULVk9zq8t6o2EAfVEszTFTSLeWPeD66d7KYfmH-RLiaQeGLLyJvXUXpahmfVvDIcaFuOJ3E2PSHL-Mr_dd6yPt2p5_dKZRfjt2NPGZ5nYtLqpjHuvdTRD0BQ"
+}
+
+
+
+https://accounts.google.com/.well-known/openid-configuration
+
+--oidc-issuer-url	
+
+URL of the provider which allows the API server to discover public signing keys. Only URLs which use the https:// scheme are accepted. This is typically the provider’s discovery URL without a path, for example “https://accounts.google.com” or “https://login.salesforce.com”. This URL should point to the level below .well-known/openid-configuration	
+
+If the discovery URL is https://accounts.google.com/.well-known/openid-configuration the value should be https://accounts.google.com	Yes
+
+
+--oidc-client-id	A client id that all tokens must be issued for.	kubernetes	Yes
+
+
+--oidc-username-claim	JWT claim to use as the user name. By default sub, which is expected to be a unique identifier of the end user. Admins can choose other claims, such as email or name, depending on their provider. However, claims other than email will be prefixed with the issuer URL to prevent naming clashes with other plugins.	sub	No
+
+--oidc-groups-claim	JWT claim to use as the user’s group. If the claim is present it must be an array of strings.	groups	No
+
+--oidc-ca-file	The path to the certificate for the CA that signed your identity provider’s web certificate. Defaults to the host’s root CAs.	
+/etc/kubernetes/ssl/kc-ca.pem	No
+
+kube-apiserver --cert-dir $MEGAM_HOME/kube --etcd-servers http://127.0.0.1:2380  --service-cluster-ip-range 10.0.0.0/24 -v=9 --etcd-servers=127.0.0.1:2379
+
+
+kube-apiserver --cert-dir $MEGAM_HOME/kube --etcd-servers http://127.0.0.1:2380  --service-cluster-ip-range 10.0.0.0/24 -v=9 --etcd-servers=127.0.0.1:2379 --oidc-client-id=628140904636-3ip0dbqo5dif5dqgaanmjakuodpruie8.apps.googleusercontent.com  --oidc-issuer-url=https://accounts.google.com --oidc-groups-claim=email
+
+
+
+curl -k -H 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IjZiZjVlYTM1MWJiMzJjNmZlNjE5ZWM5YTBmOGU4MDMyOWJjZGFkNTEifQ.eyJhenAiOiI2MjgxNDA5MDQ2MzYtM2lwMGRicW81ZGlmNWRxZ2Fhbm1qYWt1b2RwcnVpZTguYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI2MjgxNDA5MDQ2MzYtM2lwMGRicW81ZGlmNWRxZ2Fhbm1qYWt1b2RwcnVpZTguYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDMyMDc5MTM4NzMzNjc2NzY2NTYiLCJoZCI6Im1lZ2FtLmlvIiwiZW1haWwiOiJyYWp0aGlsYWtAbWVnYW0uaW8iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYXRfaGFzaCI6Ikp5TE9qZDdTOGxBSHI1OGh5Rm04NmciLCJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiaWF0IjoxNDkwNjk4MTI5LCJleHAiOjE0OTA3MDE3Mjl9.AevM__yMZlAZduXpRQZKWbG0EmBSHR8p5timqHbXg8w5M8vOYcAOVYNHgl5rtZGndcQ1XgIh0M0Xcru55R7lB3Q1iNX0WoX2e7QNK_Y53IulL9o2tZ5oJ9RtQbAXJfsAElYXdtb85WvAnRbAbKxtxfFAs1scM01vLZRaE64xe3VuvhTtsgUHnXNv2ljkyMigqVdJA25nzJbXQ4flM98Ma0gmCSWhUMgb5AwoWDnA5AZJ6Q1Pi_Vn1zsuC1bcM1CqFnGem6nOtta3-eNIsUH4FlUUW1g3TUqHNd4ZZ10SLAKq0QA135XEPn7Vk0fw1RfY5sqvUczoFoQhvPSiAaItwA' https://localhost:6443/api/v1/secrets?resourceVersion=0
+
+
+ya29.GlsWBNHbJ3IwAttqYyszTX5bSCBT0iKuV5GB6FhJSPeMChpGJEAiirN3ps2C_C99_e39wJCMNnmOB8F-QJwWA3h0Bd9Z-lXfkiQ-6cxQe7Y7lxSymeQBnF3JZ32T
+
+
+-v=9 \ for full length log 
+
+_output/bin/kube-apiserver --cert-dir $MEGAM_HOME/kube \
+--etcd-servers http://127.0.0.1:2380 \
+--service-cluster-ip-range 10.0.0.0/24 \
+--etcd-servers=127.0.0.1:2379 \
+--bind-address=192.168.1.100 \
+--insecure-bind-address=192.168.1.100 \
+--oidc-client-id=628140904636-3ip0dbqo5dif5dqgaanmjakuodpruie8.apps.googleusercontent.com  \
+--oidc-issuer-url=https://accounts.google.com \
+--oidc-groups-claim=email \
+--anonymous-auth true
+
+_output/bin/kube-apiserver --cert-dir $MEGAM_HOME/kube \
+--etcd-servers http://127.0.0.1:2380 \
+--service-cluster-ip-range 10.0.0.0/24 \
+--etcd-servers=127.0.0.1:2379 \
+--oidc-client-id=628140904636-3ip0dbqo5dif5dqgaanmjakuodpruie8.apps.googleusercontent.com  \
+--oidc-issuer-url=https://accounts.google.com \
+--oidc-groups-claim=email \
+--anonymous-auth true
+
+
+curl -H "Content-Type: application/json" -X GET http://192.168.1.100:8080/api/v1/namespaces/default/pods
+
+{
+  "kind": "PodList",
+  "apiVersion": "v1",
+  "metadata": {
+    "selfLink": "/api/v1/namespaces/default/pods",
+    "resourceVersion": "121"
+  },
+  "items": []
+}
+
+
+**Important Security-related changes before upgrading
+You MUST set --anonymous-auth=false flag on your kube-apiserver unless you are a developer testing this feature and understand it. If you do not, you risk allowing unauthorized users to access your apiserver.
+You MUST set --anonymous-auth=false flag on your federation apiserver unless you are a developer testing this feature and understand it. If you do not, you risk allowing unauthorized users to access your federation apiserver.
+You do not need to adjust this flag on Kubelet: there was no authorization for the Kubelet APIs in 1.4.
+
+_output/bin/kube-apiserver --cert-dir $MEGAM_HOME/kube \
+--insecure-bind-address=0.0.0.0 \
+--insecure-port=8080 \
+--etcd-servers=http://127.0.0.1:2379 \
+--service-cluster-ip-range=10.0.0.0/16 \
+--bind-address=192.168.1.100 \
+--allow-privileged=false \
+--oidc-client-id=628140904636-3ip0dbqo5dif5dqgaanmjakuodpruie8.apps.googleusercontent.com  \
+--oidc-issuer-url=https://accounts.google.com \
+--oidc-groups-claim=email \
+--admission-control="NamespaceLifecycle,NamespaceExists,LimitRanger,ResourceQuota" 
+
+
+curl -X GET http://192.168.0.100:8080/api/v1/namespaces/default/services/
+
+
+curl -d '{}' -X POST http://localhost:8080/apis/settings.k8s.io/v1alpha1
+
+curl -H "Content-Type: application/json" -XPOST -d '{"apiVersion":"v1","kind":"Node","metadata":{"name": "10.240.79.160",    "labels": {"name": "my-first-k8s-node4"} }}' "http://localhost:8080/api/v1/nodes"
+
+http://kamalmarhubi.com/blog/2015/09/06/kubernetes-from-the-ground-up-the-api-server/
+https://thenewstack.io/taking-kubernetes-api-spin/
+
+
+
+curl --stderr /dev/null --request POST http://192.168.1.100:8080/api/v1/namespaces/default/pods \
+--data @nginx.json | jq 'del(.spec.containers, .spec.volumes)' 
+'{ "kind": "Pod", "apiVersion": "v1", "metadata": {"name": "nginx", "namespace": "default", "selfLink": "/api/v1/namespaces/default/pods/nginx", "uid": "28aa5a55-5194-11e5-b364-68f7288bdc45", "resourceVersion": "1365", "creationTimestamp": "2015-09-02T17:00:48Z" }, "spec": {"restartPolicy": "Always","dnsPolicy": "ClusterFirst","nodeName": "awesome-node"},"status": {"phase": "Pending"}}'
+
+
+curl --stderr /dev/null --request POST http://192.168.1.100:8080/api/v1/namespaces/default/pods \
+--data '{ "kind": "Pod", "apiVersion": "v1", "metadata": {"name": "nginx", "namespace": "default", "selfLink": "/api/v1/namespaces/default/pods/nginx", "uid": "28aa5a55-5194-11e5-b364-68f7288bdc45", "resourceVersion": "1365", "creationTimestamp": "2015-09-02T17:00:48Z" }, "spec": {"restartPolicy": "Always","dnsPolicy": "ClusterFirst","nodeName": "awesome-node"},"status": {"phase": "Pending"}}'
+
+curl --stderr /dev/null --request POST http://localhost:8080/api/v1/namespaces/default/pods \
+'{"kind":"Pod","apiVersion":"v1","metadata":{"name":"busybox-sleep2","namespace":"default","selfLink":"/api/v1/namespaces/default/pods/busybox-sleep","uid":"f90b776a-1dee-11e7-8de8-54ab3a8328d4","resourceVersion":"969","creationTimestamp":"2017-04-10T13:09:47Z"},"spec":{"volumes":[{"name":"default-token-sn0f6","secret":{"secretName":"default-token-sn0f6","defaultMode":420}}],"containers":[{"name":"busybox","image":"busybox","args":["sleep","1000000"],"resources":{},"volumeMounts":[{"name":"default-token-sn0f6","readOnly":true,"mountPath":"/var/run/secrets/kubernetes.io/serviceaccount"}],"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","imagePullPolicy":"Always"}],"restartPolicy":"Always","terminationGracePeriodSeconds":30,"dnsPolicy":"ClusterFirst","serviceAccountName":"default","serviceAccount":"default","securityContext":{},"schedulerName":"default-scheduler","tolerations":[{"key":"node.alpha.kubernetes.io/notReady","operator":"Exists","effect":"NoExecute","tolerationSeconds":300},{"key":"node.alpha.kubernetes.io/unreachable","operator":"Exists","effect":"NoExecute","tolerationSeconds":300}]},"status":{"phase":"Pending","qosClass":"BestEffort"}}'
+
+
+./oadm policy add-cluster-role-to-user cluster-admin vijaykanth --config=./openshift.local.config/master/admin.kubeconfig
+
+
+./openshift start --write-config=./openshift.local.config
+
+edit with openshift.local.config/master/master-config.yaml
+oauthConfig:
+  alwaysShowProviderSelection: false
+  assetPublicURL: https://console.megam.io:8443/console/
+  grantConfig:
+    method: auto
+    serviceAccountMethod: prompt
+  identityProviders:
+  - challenge: false
+    login: true
+    mappingMethod: claim
+    name: google
+    provider:
+      apiVersion: v1
+      kind: GoogleIdentityProvider
+      clientID: 628140904636-3ip0dbqo5dif5dqgaanmjakuodpruie8.apps.googleusercontent.com 
+      clientSecret: bq47WYKJlf96kWDch_zXfSN- 
+      hostedDomain: "" 
+
+
+./openshift start --master-config=openshift.local.config/master/master-config.yaml --node-config=openshift.local.config/node-vijaywk/node-config.yaml
+
+
+
+./bin/oc create -f <(echo '
+{
+  "kind": "OAuthClient",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "628140904636-3ip0dbqo5dif5dqgaanmjakuodpruie8.apps.googleusercontent.com" 
+  },
+  "secret": "bq47WYKJlf96kWDch_zXfSN-", 
+  "redirectURIs": [
+    "urn:ietf:wg:oauth:2.0:oob" 
+  ]
+}')
+
+oauthclient "628140904636-3ip0dbqo5dif5dqgaanmjakuodpruie8.apps.googleusercontent.com" created
+
+
+./bin/oc login --token='eyJhbGciOiJSUzI1NiIsImtpZCI6ImNlMzNhZGM3YzBmNjNkMTk0MGZmOGY0NzFkYmQ3NTZlYjZmYjNmZTQifQ.eyJhenAiOiI2MjgxNDA5MDQ2MzYtM2lwMGRicW81ZGlmNWRxZ2Fhbm1qYWt1b2RwcnVpZTguYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI2MjgxNDA5MDQ2MzYtM2lwMGRicW81ZGlmNWRxZ2Fhbm1qYWt1b2RwcnVpZTguYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDg2MjczNDg4NTc4NDAyNjk4NTAiLCJoZCI6Im1lZ2FtLmlvIiwiZW1haWwiOiJtdmlqYXlrYW50aEBtZWdhbS5pbyIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdF9oYXNoIjoiRDhDVkR2VnJNWGdNeno3SG9BVDZhUSIsImlzcyI6ImFjY291bnRzLmdvb2dsZS5jb20iLCJpYXQiOjE0OTQ1OTM5NzAsImV4cCI6MTQ5NDU5NzU3MH0.XHhmSo05WW1ubf1JP8oaVKZjcpJTdZX8EcAXD4cKgVaKLShNSN99ezv1RkYZdDirO8HlWLs4pDr7y4WrL0WFT9ijxCp7b-ixTdS_T77ETbBjlSumLfE-Dde7J-aDLjbdWZNM0oLXbxj_KUcFjGruOOcqKFNPAuoSfR6txllFC6lxSzi_BL-DhRmEhz-LWyQTvB6lxB7YjjsrFZhbDP5jFZRaIinU7Xk1Q7iDyAtzkproAQqJI_ujUuQaoLIj1cLn3JU4jmwnxZF3JVfRKRB93DE2tkJyTgXg3PyZ5Yjh9v33CrcooVzPL1q-kb5Y-Uucre6sSqa4Er8DyBDWSBpWMA'
+
+
+

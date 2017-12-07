@@ -1,0 +1,15 @@
+root@slave /usr/lib/one # grep -RnisI "snap_create" ./*
+/usr/lib/one/mads/one_vmm_exec.rb:917:                    :action     => :tm_snap_create_live,
+
+
+
+/usr/lib/one/mads/one_vmm_exec.rb
+
+ virsh connect qemu:///system
+
+https://help.ubuntu.com/community/KVM/Virsh
+https://help.ubuntu.com/community/KVM/Managing
+
+
+
+

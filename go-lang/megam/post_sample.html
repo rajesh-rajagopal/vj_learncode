@@ -1,0 +1,287 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Amazon S3 POST Sample</title>
+
+    <!-- See http://pajhome.org.uk/crypt/md5 -->
+    <!-- <script src="http://pajhome.org.uk/crypt/md5/sha1.js"></script> -->
+    <script src="sha1.js"></script>
+    <!-- http://www.webtoolkit.info/javascript-base64.html -->
+    <!-- <script src="http://www.webtoolkit.info/javascript-base64.html?webtoolkit.base64.js"></script> -->
+    <script src="webtoolkit.base64.js"></script>
+
+    <script type="text/javascript">  
+function ensureScriptsLoaded() {
+  try {
+    var signature = b64_hmac_sha1("Amazon S3", "POST Sample");
+  } catch (e) {
+    alert( "Please check the source and make sure you are importing the SHA1 Javascript library." );
+    return false;
+  }
+  try {
+    Base64.encode("Amazon S3");
+  } catch ( e ) {
+    alert( "Please check the source and make sure you are importing the Base64 Javascript library." );
+    return false;
+  }
+  return true;
+}
+
+function addField(name, value) {
+  var table = document.getElementById('table');
+  var html = "<td>" + name + "</td>"+
+             "<td><input type='text' name='"+name+"' value='" + value + "'></td>";
+  var tr = document.createElement("tr");
+  tr.setAttribute("id", "field-"+name);
+  var tdName = document.createElement("td");
+  tdName.setAttribute("align", "right");
+  var labelName = name
+  if ( name == 'policy' || name == 'AWSAccessKeyId' || name == 'signature' ) {
+     labelName += ' (usually hidden)';
+  }
+  tdName.innerHTML = labelName + ":";
+  tr.appendChild(tdName);
+  var tdValue = document.createElement("td");
+  var input = document.createElement("input");
+  input.setAttribute("id","id"+name);
+  input.setAttribute("type","text");
+  input.setAttribute("name",name);
+  input.setAttribute("value",value);
+  tdValue.appendChild(input);
+  var rm = document.createElement("a");
+  rm.innerHTML="remove";
+  rm.setAttribute("href","javascript:removeField(\""+labelName+"\")");
+  tdValue.appendChild(rm);
+  tr.appendChild(tdValue);
+  table.appendChild(tr);
+}
+
+function addFieldButton() {
+  var name = document.getElementById("x-newfield").value;
+  var value = document.getElementById("x-newvalue").value;
+  addField(name, value);
+}
+
+function removeField(name) {
+  name += ":";
+  var table = document.getElementById('table');
+  var tr = table.firstChild;
+  while (tr) {
+    if (tr.nodeType == 1) {
+      if (name == tr.firstChild.innerHTML)
+      {
+        table.removeChild(tr);
+        return;
+      }
+    }
+    tr = tr.nextSibling;
+  }  
+}
+
+function addPolicy() {
+  if ( ! ensureScriptsLoaded() ) return;
+
+  removeField( "AWSAccessKeyId (usually hidden)" );
+  var awsid = document.getElementById("awsid").value;
+  var awskey = document.getElementById("awskey").value;
+  addField("AWSAccessKeyId", awsid);
+
+  removeField( "policy (usually hidden)" );
+  var policyText = document.getElementById("policy").value;
+  var policyBase64 = Base64.encode(policyText);
+  addField("policy", policyBase64);
+
+  removeField( "signature (usually hidden)" );
+  var signature = b64_hmac_sha1(awskey, policyBase64);
+  addField("signature", signature);
+}
+
+function setUrl() {
+  var newurl = document.getElementById("base-url").value;
+  var form = document.getElementById("postform");
+  form.action = newurl;
+}
+
+function getExtension(fileFieldId) {
+  var fileField = document.getElementById(fileFieldId).value;
+  if (fileField.indexOf('\\') > -1) {
+    fileField = fileField.substring(fileField.lastIndexOf('\\') + 1, fileField.length);
+  }
+  if (fileField.indexOf('/') > -1) {
+    fileField = fileField.substring(fileField.lastIndexOf('/') + 1, fileField.length);
+  }
+
+  var extension;
+  if (fileField.indexOf('.') > -1) {
+    extension = fileField.substring(fileField.lastIndexOf('.') + 1, fileField.length);
+  } else {
+    extension = "";
+  }
+  return extension;
+}
+
+function populateContentType(fileFieldId) {
+   var extension = getExtension(fileFieldId);
+   var contentType = "application/octet-stream";
+   if ( extension == "txt" ) {
+     contentType= "text/plain";
+   } else if ( extension == "htm" || extension == "html" ) {
+     contentType= "text/html";
+   } else if ( extension == "jpg" || extension == "jpeg" ) {
+     contentType = "image/jpeg";
+   } else if ( extension == "gif" ) {
+     contentType = "image/gif";
+   } else if ( extension == "png" ) {
+     contentType = "image/png";
+   }
+
+   var textfield = document.getElementById("idcontent-type");
+   if ( textfield ) {
+     textfield.value = contentType;
+   }
+}
+</script>
+
+<style type="text/css">
+body { text-decoration: none; font-family: sans-serif; font-size: 12pt; font-weight: medium; }
+input { width: 50ex; }
+.userinteraction { border: 1px solid #009; background: #fff; padding: 5px }
+</style>
+</head>
+<body style="background: rgb(176, 176, 255) none repeat scroll 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">
+<h1>Amazon S3 Browser-Based Uploads</h1>
+<p>Here is an example of the browser-based uploads feature.  The <a href="http://docs.amazonwebservices.com/AmazonS3/2006-03-01/">documentation</a> describes the feature in more detail.</p>
+<p>This example will walk you through the form generation, will show you an example form that you can try, and lastly give you the HTML to reproduce this form on your own web site.</p>
+
+<hr />
+<h2>Preliminaries</h2>
+<p>Before we get started, you need to:</p>
+<ul>
+<li> Sign-up for Amazon S3.  If you haven't yet done this, do so <a href="http://s3.amazonaws.com">here</a>. </li>
+<li> Created a Bucket.  To create a bucket, use one of the many tools that exist for <a href="http://developer.amazonwebservices.com/connect/kbcategory.jspa?categoryID=47">Amazon S3</a>. </li>
+</ul>
+
+<hr />
+<h2>Specifying Policy and Form Elements</h2>
+<h3>Credentials</h3>
+<p>Please plunk in your credentials here.  You can grab them by visiting <a href="http://www.amazon.com/gp/browse.html?node=16427261">here</a>, hovering over &ldquo;Your Web Services Account&rdquo; and select &ldquo;AWS Access Identifiers&rdquo;.</p>
+<p><b>Note</b>: Your secret key is not actually transported over the wire; we are just using it for signing the document.</p>
+
+<table>
+  <tbody>
+  <tr>
+    <td>AWS ID</td>
+    <td><input class="wide" id="awsid" value="" type="text"></td>
+  </tr>
+  <tr>
+    <td>AWS Key</td>
+    <td><input class="wide" id="awskey" value="" type="text"></td>
+  </tr>
+  </tbody>
+</table>
+
+<h3>Set the Bucket</h3>
+<p>Uploaded content is uploaded into a bucket; the bucket is specified via the URL in the Form field&rsquo;s action attribute.  All current mechanisms of specifying a bucket are supported.</p>
+<p><b>Note</b>: Buckets cannot be created via POST; it is only intended for browser-based uploads.</p>
+<p>Post URL: <input id="base-url" value="http://s3.amazonaws.com/<bucketname>" type="text"> <button onclick="setUrl()">Set URL</button> </p>
+
+<h3>Policy Document</h3>
+<p>The Policy Document describes the conditions under which the Signer allows an Anonymous user to impersonate them.  Please refer to the <a href="http://docs.amazonwebservices.com/AmazonS3/2006-03-01/">documentation</a> for what is permitted here.</p>
+<p>After you are done editing, please click on the &ldquo;Add Policy&rdquo; button.</p>
+<p><textarea id="policy" cols="80" rows="12">{
+  "expiration": "2009-01-01T12:00:00.000Z",
+  "conditions": [
+    {"bucket": "<bucketname>" },
+    {"acl": "public-read" },
+    ["eq", "$key", "testfile.txt"],
+    ["starts-with", "$Content-Type", "text/"],
+  ]
+}
+</textarea></p>
+<p><input value="Add Policy" onclick="addPolicy()" type="button" /></p>
+
+<h3>Form Fields</h3>
+<p>Please refer to the <a href="http://docs.amazonwebservices.com/AmazonS3/2006-03-01/">documentation</a> for form fields we accept and how we interpret them.</p>
+<p><b>Note:</b> All form fields should be mentioned in the Policy document except for fields that are prefixed with <tt>x-ignore-</tt>.</p>
+<table>
+  <tbody>
+    <tr>
+      <td>Name:</td>
+      <td><input id="x-newfield" value=""></td>
+      <td>Value:</td>
+      <td><input id="x-newvalue" value=""></td>
+      <td> <button onclick="addFieldButton()">Add Field</button></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+<h2>Sample Form Based on the Above Fields</h2>
+<p>Based on the data you've entered above, here's a list of all the form elements and a very basic (and not so pretty) UI:</p>
+<div class="userinteraction">
+<form id="postform" action="http://s3.amazonaws.com/<bucketname>/" method="post" enctype="multipart/form-data">
+<table width="100%">
+  <col width="10%"><col width="90%">
+  <tbody id="table">
+  </tbody>
+</table>
+<script>
+   addField("key", "testfile.txt");
+   addField("acl", "public-read");
+   addField("content-type", "text/plain");
+</script>
+
+<p>File: <input name="file" type="file" id="file"> <button onclick="populateContentType('file'); return false;">Fill-In Content-Type</button></p>
+<input name="submit" value="Upload" type="submit" >
+</form>
+</div>
+
+<hr />
+<h2>HTML Code for the Above</h2>
+<script>
+function generateHtmlForm() {
+  var html = '<html>\n<head>\n<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />\n</head>\n<body>\n';
+  var htmlform = document.getElementById( 'htmlform' );
+
+  var post = document.getElementById("postform");
+  html += '<form action="';
+  html += post.action;
+  html += '" method="';
+  html += post.method;
+  html += '" enctype="';
+  html += post.enctype;
+  html += '">\n';
+
+  var table = document.getElementById('table');
+  var tr = table.firstChild;
+  while (tr) {
+    if ( tr.nodeType == 1) {
+      var input = tr.firstChild.nextSibling.firstChild;
+      html += '<input type="';
+      var name = input.getAttribute( 'name' );
+      if ( name == 'AWSAccessKeyId' || name == 'policy' || name == 'signature' ) {
+        html += "hidden";
+      } else {
+        html += input.getAttribute( 'type' );
+      }
+      html += '" name="';
+      html += name;
+      html += '" value="';
+      html += input.value;
+      html += '" />\n';
+    }
+    tr = tr.nextSibling;
+  } 
+
+  html += '<input name="file" type="file" />\n';
+  html += '<input name="submit" value="Upload" type="submit" />\n';
+  html += '</form>\n</body>\n</html>';
+  htmlform.value = html;
+}
+</script>
+<p><button onclick="generateHtmlForm()">Generate HTML</button></p>
+<p><textarea id="htmlform" cols="80" rows="12">
+</textarea></p>
+</body>
+</html>

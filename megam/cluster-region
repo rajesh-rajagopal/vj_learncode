@@ -1,0 +1,14 @@
+curl -d '{"name":"","cat_id":"AMS8891748652231651005","cattype":"torpedo","id":"RIP6468657607076432679","category":"state","action":"create"}' 'http://localhost:4151/put?topic=vms'
+
+insert into requests (id, action,cat_id , category, cattype, created_at , name ) values ('RIP6468657607076432679', 'create', 'AMS8891748652231651795', 'state', 'torpedos', '2016-06-04 07:45:26 +0000', 'pantsuits.megambox.com');
+
+
+
+1.Ability to launch in a region '{"key":"region","value":"sydney"}',
+2.Ability to attach private network '{"key":"privnetwork","value":"true"}
+3.Ability to attach ipv6 '{"key":"ipv6","value":"false"}',
+4.Ability to launch in HDD or SSD storage '{"key":"storagetype","value":"HDD"}',
+
+
+
+

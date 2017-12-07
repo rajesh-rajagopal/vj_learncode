@@ -1,0 +1,61 @@
+apt-get update
+sudo apt-add-repository -y ppa:openjdk-r/ppa
+sudo: apt-add-repository: command not found
+
+
+(while i tried to add repos for java i had above error so i install below packages )
+
+apt-get install software-properties-common
+apt-get update
+
+sudo apt-get -y install openjdk-8-jdk
+
+
+sudo apt-add-repository "deb [arch=amd64] https://get.megam.io/repo/1.5/ubuntu/14.04/stable trusty stable"
+
+
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 9B46B611
+
+sudo apt-get update
+
+
+Err https://get.megam.io trusty/testing amd64 Packages
+  server certificate verification failed. CAfile: /etc/ssl/certs/ca-certificates.crt CRLfile: none
+Ign https://get.megam.io trusty/testing Translation-en_US
+Ign https://get.megam.io trusty/testing Translation-en
+W: Failed to fetch https://get.megam.io/repo/1.5/ubuntu/14.04/testing/dists/trusty/testing/binary-amd64/Packages  server certificate verification failed. CAfile: /etc/ssl/certs/ca-certificates.crt CRLfile: none
+
+E: Some index files failed to download. They have been ignored, or old ones used instead.
+
+
+
+
+deb [arch=amd64] https://get.megam.io/repo/1.5/ubuntu/14.04/testing trusty testing
+# deb-src [arch=amd64] https://get.megam.io/repo/1.5/ubuntu/14.04/stable trusty stable
+
+
+
+apt-get install vertice verticensqd
+
+root@MEGAMMASTER:/var/lib/megam# apt-get install verticenilavu
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+Some packages could not be installed. This may mean that you have
+requested an impossible situation or if you are using the unstable
+distribution that some required packages have not yet been created
+or been moved out of Incoming.
+The following information may help to resolve the situation:
+
+The following packages have unmet dependencies:
+ verticenilavu : Depends: ruby2.3.1 but it is not installable
+                 Depends: ruby2.3.1-dev but it is not installable
+
+
+sudo apt-add-repository ppa:brightbox/ruby-ng
+sudo apt-get update
+
+sudo apt-get install ruby2.3 ruby2.3-dev
+
+
+

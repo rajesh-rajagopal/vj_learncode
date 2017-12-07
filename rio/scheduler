@@ -1,0 +1,14 @@
+
+
+_outputs/rioos-scheduler --v=3 --rioconfig $MEGAM_HOME/kubernetes/scheduler.kubeconfig
+
+_outputs/rioos-scheduler --v=3  --aran-server=https://192.168.1.8:6443
+
+ 
+sudo -E ./_outputs/rioos-controller-manager --vmodule= --service-account-private-key-file=/tmp/kube-serviceaccount.key --root-ca-file=/var/run/kubernetes/server-ca.crt --cluster-signing-cert-file=/var/run/kubernetes/server-ca.crt --cluster-signing-key-file=/var/run/kubernetes/server-ca.key --enable-hostpath-provisioner=false --pvclaimbinder-sync-period=15s --feature-gates=AllAlpha=false --cloud-provider= --cloud-config= --kubeconfig /var/run/kubernetes/controller.kubeconfig --use-service-account-credentials --master=https://192.168.1.8:6443 --leader-elect=false
+
+
+sudo -E ./rioos-executor --cloud-config= --beediconfig /var/run/kubernetes/controller.kubeconfig --api-server=https://192.168.1.8:6443 --leader-elect=false
+
+~/rioos-scheduler --v=3  --api-server=http://localhost:9636
+

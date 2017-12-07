@@ -1,0 +1,90 @@
+### Common ApiDispatcher Process
+
+i.   For request to KubeApi convert Megam json to Kubernets json structure.
+
+ii.  To receive response from KubeApi convert response json to Megam ruby object.
+
+      for example templates array of json to Marketlpace Collections
+
+iii. In every convert of Kubernets json structure should set a mandatory parameters
+
+        ```  "apiVersion":"v1",
+             "kind":"Secret",
+    	       "metadata":{}
+        ```
+There is an globle version decider on nilavu controller.
+
+	that version decider will picks prefix of api url that group (oapi or api) and version (v1 or v2beta)
+
+  ex: -  /oapi/v1/ or /oapi/v2beta/ or /api/v1/
+
+## Usecase for Deployment
+
+#### Usecase 1: Create Template(Marketplace) items
+
+Admin have to get his templates from [here](https://github.com/megamsys/abcd/tree/master/marketplaces/)
+
+Admin have to create templates using command **oc create tamplate -f ubuntu_template.yaml**
+
+that created template will be shown to all users marketplaces
+
+
+#### Usecase 2: List Marketplaces
+
+User when clicks marketplaces make api GET request - https://0.0.0.0:8443/oapi/v1/templates
+
+As per ApiDispatcher process ii we will get marketplace collection to list Marketplaces items.
+
+#### Usecase 3: Create SSH
+
+User selects SSH page and list all existing ssh keys if exist.
+
+Creates Generate ssh public and private keys and send data parameter to megam_api dispatcher
+
+ApiDispatcher have to ensure the data with values of ssh-privatekey and ssh-publickey
+
+  ```  {
+    "apiVersion":"v1",
+    "data":{
+        "ssh-privatekey":"LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb2dJQkFBS0NBUUVBMVZ0S0lw....",
+        "ssh-publickey":"c3NoLXJzYSBBQUFBQjNOemFDMXljMkVBQUFBREFRQ....",
+    },
+    "kind":"Secret",
+    "metadata":{
+        "name":"ssh",
+        "namespace":"test",
+    },
+  }
+  ```
+
+#### Usecase 4: Upload SSH
+
+User clicks upload on sshkeys page
+
+Upload public and private keys into data parameter to megam_api dispatcher
+
+ApiDispatcher have to ensure the data with values of ssh-privatekey and ssh-publickey
+
+#### Usecase 5: List Secrets
+
+List secrets GET using bellow request.
+
+ApiDispatcher send parsed Megam ruby object.
+
+Show ssh keys
+
+#### Usecase 7: Launcher Step 2
+
+List Templates as per usecase3 marketplace list will shows
+
+User will select a marketplace items
+
+Set node selectors based on user virtualization option like container or virtual machine
+  extraRuntime=virtlet or extraRuntime=kubelet
+
+#### Usecase 8: Launcher Step 3
+
+If ssh secrets exist list secrets as per usecase6 else create secret as per usecase4
+
+User will select number of replicas if they need.
+

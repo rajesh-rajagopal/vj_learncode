@@ -1,0 +1,715 @@
+
+failed to run Kubelet: failed to create kubelet: misconfiguration: kubelet cgroup driver: "systemd" is different from docker cgroup driver: "cgroupfs"
+
+systemctl cat docker
+
+nano /lib/systemd/system/docker.service
+
+
+ExecStart=/usr/bin/dockerd -H tcp://127.0.0.1:2375 -H fd:// --exec-opt native.cgroupdriver=systemd
+
+
+
+
+
+dind::kubeadm "${container_id}" init --pod-network-cidr=10.244.0.0/16 --skip-preflight-checks "$@"
+dind::kubeadm "${container_id}" join --skip-preflight-checks "$@"
+
+docker exec "${container_id}" wrapkubeadm "$@"
+
+kubectl label node rajesh extraRuntime=virtlet
+
+https://raw.githubusercontent.com/Mirantis/virtlet/master/deploy/virtlet-ds.yaml
+
+./oc create -f virtlet_ds.yaml 
+
+
+serviceaccount "virtlet" created
+
+
+Error from server (Invalid): error when creating "virtlet_ds.yaml": DaemonSet.extensions "virtlet" is invalid: spec.template.spec.dnsPolicy: Unsupported value: "ClusterFirstWithHostNet": supported values: ClusterFirst, Default
+[unable to recognize "virtlet_ds.yaml": no matches for rbac.authorization.k8s.io/, Kind=ClusterRoleBinding, unable to recognize "virtlet_ds.yaml": no matches for rbac.authorization.k8s.io/, Kind=ClusterRole]
+vijay@vijaywk:~$ ./oc get nodes -l extraRuntime=virtlet
+
+rename spec.template.spec.dnsPolicy: ClusterFirstWithHostNet to  ClusterFirst
+./oc create -f virtlet_ds.yaml 
+
+daemonset "virtlet" created
+
+[unable to recognize "virtlet_ds.yaml": no matches for rbac.authorization.k8s.io/, Kind=ClusterRoleBinding, unable to recognize "virtlet_ds.yaml": no matches for rbac.authorization.k8s.io/, Kind=ClusterRole]
+
+openshit log 
+
+0601 10:29:56.371218    6106 event.go:217] Event(api.ObjectReference{Kind:"DaemonSet", Namespace:"kube-system", Name:"virtlet", UID:"f6cab09d-4686-11e7-8927-54ee75013d4a", APIVersion:"extensions", ResourceVersion:"9880", FieldPath:""}): type: 'Warning' reason: 'FailedCreate' Error creating: pods "virtlet-" is forbidden: unable to validate against any security context constraint: [spec.securityContext.hostNetwork: Invalid value: true: Host network is not allowed to be used spec.securityContext.hostPID: Invalid value: true: Host PID is not allowed to be used spec.containers[0].securityContext.privileged: Invalid value: true: Privileged containers are not allowed spec.containers[0].securityContext.volumes[0]: Invalid value: "hostPath": hostPath volumes are not allowed to be used spec.containers[0].securityContext.volumes[1]: Invalid value: "hostPath": hostPath volumes are not allowed to be used spec.containers[0].securityContext.volumes[2]: Invalid value: "hostPath": hostPath volumes are not allowed to be used spec.containers
+                            .
+                            .
+[0].securityContext.volumes[15]: Invalid value: "hostPath": hostPath volumes are not allowed to be used spec.containers[0].securityContext.hostNetwork: Invalid value: true: Host network is not allowed to be used spec.containers[0].securityContext.hostPID: Invalid value: true: Host PID is not allowed to be used]
+
+remove securityContext
+
+
+
+I0601 10:41:38.960269    6106 event.go:217] Event(api.ObjectReference{Kind:"DaemonSet", Namespace:"kube-system", Name:"virtlet", UID:"c5d6eeb8-4688-11e7-8927-54ee75013d4a", APIVersion:"extensions", ResourceVersion:"10076", FieldPath:""}): type: 'Warning' reason: 'FailedCreate' Error creating: pods "virtlet-" is forbidden: unable to validate against any security context constraint: [spec.securityContext.hostNetwork: Invalid value: true: Host network is not allowed to be used spec.securityContext.hostPID: Invalid value: true: Host PID is not allowed to be used spec.containers[0].securityContext.volumes[0]: Invalid value: "hostPath": hostPath volumes are not allowed to be used spec.containers[0].securityContext.volumes[1]: Invalid value: "hostPath": hostPath volumes are not allowed to be used spec.containers[0].securityContext.volumes[2]: Invalid value: "hostPath": hostPath volumes are not allowed to be used spec.containers[0].securityContext.volumes[3]: Invalid value: "hostPath": hostPath volumes are not allowed to be used spec.containers[0].securityContext.volumes[4]: Invalid value: "hostPath": hostPath volumes are not allowed to be used spec.containers[0].securityContext.volumes[5]: Invalid value: "hostPath": hostPath volumes are not allowed to be used spec.containers[0].securityContext.volumes[6]: Invalid value: "hostPath": hostPath volumes are not allowed to be used spec.containers[0].securityContext.volumes[7]: Invalid value: "hostPath": hostPath volumes are not allowed to be used spec.containers[0].securityContext.volumes[8]: Invalid value: "hostPath": hostPath volumes are not allowed to be used spec.containers[0].securityContext.volumes[9]: Invalid value: "hostPath": hostPath volumes are not allowed to be used spec.containers[0].securityContext.volumes[10]: Invalid value: "hostPath": hostPath volumes are not allowed to be used spec.containers[0].securityContext.volumes[11]: Invalid value: "hostPath": hostPath volumes are not allowed to be used spec.containers[0].securityContext.volumes[12]: Invalid value: "hostPath": hostPath volumes are not allowed to be used spec.containers[0].securityContext.volumes[13]: Invalid value: "hostPath": hostPath volumes are not allowed to be used spec.containers[0].securityContext.volumes[14]: Invalid value: "hostPath": hostPath volumes are not allowed to be used spec.containers[0].securityContext.volumes[15]: Invalid value: "hostPath": hostPath volumes are not allowed to be used spec.containers[0].securityContext.hostNetwork: Invalid value: true: Host network is not allowed to be used spec.containers[0].securityContext.hostPID: Invalid value: true: Host PID is not allowed to be used]
+
+./oc describe scc restricted
+./oc describe scc restricted
+Name:						restricted
+Priority:					<none>
+Access:						
+  Users:					<none>
+  Groups:					system:authenticated
+Settings:					
+  Allow Privileged:				false
+  Default Add Capabilities:			<none>
+  Required Drop Capabilities:			KILL,MKNOD,SYS_CHROOT,SETUID,SETGID
+  Allowed Capabilities:				<none>
+  Allowed Seccomp Profiles:			<none>
+  Allowed Volume Types:				configMap,downwardAPI,emptyDir,persistentVolumeClaim,secret
+  Allow Host Network:				false
+  Allow Host Ports:				false
+  Allow Host PID:				false
+  Allow Host IPC:				false
+  Read Only Root Filesystem:			false
+  Run As User Strategy: MustRunAsRange		
+    UID:					<none>
+    UID Range Min:				<none>
+    UID Range Max:				<none>
+  SELinux Context Strategy: MustRunAs		
+    User:					<none>
+    Role:					<none>
+    Type:					<none>
+    Level:					<none>
+  FSGroup Strategy: MustRunAs			
+    Ranges:					<none>
+  Supplemental Groups Strategy: RunAsAny	
+    Ranges:					<none>
+./oc edit scc restricted
+
+allowHostDirVolumePlugin: true
+allowHostIPC: false
+allowHostNetwork: true
+allowHostPID: true
+allowHostPorts: false
+allowPrivilegedContainer: true
+
+https://docs.openshift.org/latest/admin_guide/manage_scc.html#use-the-hostpath-volume-plugin
+
+./oc login 
+./oc edit scc restricted
+
+allowHostDirVolumePlugin: true
+
+
+
+E0601 11:15:22.386991   10199 daemoncontroller.go:507] unable to create pods: pods "virtlet-" is forbidden: unable to validate against any security context constraint: [spec.securityContext.hostNetwork: Invalid value: true: Host network is not allowed to be used spec.securityContext.hostPID: Invalid value: true: Host PID is not allowed to be used spec.containers[0].securityContext.hostNetwork: Invalid value: true: Host network is not allowed to be used spec.containers[0].securityContext.hostPID: Invalid value: true: Host PID is not allowed to be used]
+E0601 11:15:22.387150   10199 daemoncontroller.go:229] kube-system/virtlet failed with : [unable to create pods: pods "virtlet-" is forbidden: unable to validate against any security context constraint: [spec.securityContext.hostNetwork: Invalid value: true: Host network is not allowed to be used spec.securityContext.hostPID: Invalid value: true: Host PID is not allowed to be used spec.containers[0].securityContext.hostNetwork: Invalid value: true: Host network is not allowed to be used spec.containers[0].securityContext.hostPID: Invalid value: true: Host PID is not allowed to be used], unable to create pods: pods "virtlet-" is forbidden: unable to validate against any security context constraint: [spec.securityContext.hostNetwork: Invalid value: true: Host network is not allowed to be used spec.securityContext.hostPID: Invalid value: true: Host PID is not allowed to be used spec.containers[0].securityContext.hostNetwork: Invalid value: true: Host network is not allowed to be used spec.containers[0].securityContext.hostPID: Invalid value: true: Host PID is not allowed to be used]]
+
+./oc edit scc restricted
+
+  AllowHostNetwork:	true
+  AllowHostPID:	true			
+
+E0601 11:54:19.605032   10199 daemoncontroller.go:507] unable to create pods: pods "virtlet-" is forbidden: unable to validate against any security context constraint: [spec.containers[0].securityContext.privileged: Invalid value: true: Privileged containers are not allowed]
+E0601 11:54:19.605062   10199 daemoncontroller.go:229] kube-system/virtlet failed with : [unable to create pods: pods "virtlet-" is forbidden: unable to validate against any security context constraint: [spec.containers[0].securityContext.privileged: Invalid value: true: Privileged containers are not allowed], unable to create pods: pods "virtlet-" is forbidden: unable to validate against any security context constraint: [spec.containers[0].securityContext.privileged: Invalid value: true: Privileged containers are not allowed]]
+I0601 11:54:19.605100   10199 event.go:217] Event(api.ObjectReference{Kind:"DaemonSet", Namespace:"kube-system", Name:"virtlet", UID:"eb8a4ce4-4692-11e7-98f7-54ee75013d4a", APIVersion:"extensions", ResourceVersion:"11091", FieldPath:""}): type: 'Warning' reason: 'FailedCreate' Error creating: pods "virtlet-" is forbidden: unable to validate against any security context constraint: [spec.containers[0].securityContext.privileged: Invalid value: true: Privileged containers are not allowed]
+2017-06-01 11:54:24.391600 W | etcdserver: apply entries took too long [108.765866ms for 1 entries]
+2017-06-01 11:54:24.391630 W | etcdserver: avoid queries with large range/delete range!
+
+allowPrivilegedContainer: true
+
+
+
+./oc delete daemonset -R -n kube-system virtlet
+
+
+./oc delete pods virtlet-kv4xf -n kube-system
+./oc delete ds virtlet  -n kube-system	
+
+
+RunAsAny
+
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+allowHostDirVolumePlugin: true
+allowHostIPC: true
+allowHostNetwork: true
+allowHostPID: true
+allowHostPorts: true
+allowPrivilegedContainer: true
+allowedCapabilities: null
+apiVersion: v1
+defaultAddCapabilities: null
+fsGroup:
+  type: MustRunAs
+groups:
+- system:authenticated
+kind: SecurityContextConstraints
+metadata:
+  annotations:
+    kubernetes.io/description: restricted denies access to all host features and requires
+      pods to be run with a UID, and SELinux context that are allocated to the namespace.  This
+      is the most restrictive SCC and it is used by default for authenticated users.
+  creationTimestamp: 2017-06-01T07:15:51Z
+  name: restricted
+  resourceVersion: "552"
+  selfLink: /api/v1/securitycontextconstraintsrestricted
+  uid: 24f2ad71-469a-11e7-aad8-54ee75013d4a
+priority: null
+readOnlyRootFilesystem: false
+requiredDropCapabilities:
+- KILL
+- MKNOD
+- SYS_CHROOT
+- SETUID
+- SETGID
+runAsUser:
+  type: RunAsAny
+seLinuxContext:
+  type: RunAsAny
+supplementalGroups:
+  type: RunAsAny
+volumes:
+- configMap
+- downwardAPI
+- emptyDir
+- hostPath
+- persistentVolumeClaim
+- secret
+
+
+
+vijay@vijaywk:~$ ./oc logs virtlet-j6p19 -n kube-system
+INFO: /dev/kvm exists
+KVM acceleration can be used
+chown: changing ownership of '/etc/libvirt/libvirtd.conf': Operation not permitted
+
+./oadm policy add-scc-to-user anyuid -z default 
+./oadm policy add-scc-to-user anyuid -z kube-system
+./oadm policy add-scc-to-user nonroot -z default
+
+
+oadm policy add-scc-to-user anyuid system:serviceaccount:kube-system:virtlet
+
+oc policy add-role-to-user cluster-admin system:serviceaccount:kube-system:virtlet
+
+
+oc adm policy add-scc-to-user anyuid -z virtlet
+
+
+
+./oc delete pod virtlet-z5sh9 -n kube-system
+pod "virtlet-z5sh9" deleted
+
+
+./oc logs virtlet-zlq0n -n kube-system
+INFO: /dev/kvm exists
+KVM acceleration can be used
+/usr/sbin/libvirtd: error while loading shared libraries: libvirt-admin.so.0: cannot open shared object file: Permission denied
+
+
+lrwxrwxrwx 1 root root      25 Feb  9 09:35 libvirt-admin.so.0 -> libvirt-admin.so.0.1003.1
+-rw-r--r-- 1 root root   30680 Feb  9 09:35 libvirt-admin.so.0.1003.1
+lrwxrwxrwx 1 root root      23 Feb  9 09:35 libvirt-lxc.so.0 -> libvirt-lxc.so.0.1003.1
+-rw-r--r-- 1 root root   10168 Feb  9 09:35 libvirt-lxc.so.0.1003.1
+lrwxrwxrwx 1 root root      24 Feb  9 09:35 libvirt-qemu.so.0 -> libvirt-qemu.so.0.1003.1
+-rw-r--r-- 1 root root   14264 Feb  9 09:35 libvirt-qemu.so.0.1003.1
+lrwxrwxrwx 1 root root      19 Feb  9 09:35 libvirt.so.0 -> libvirt.so.0.1003.1
+-rw-r--r-- 1 root root 3689792 Feb  9 09:35 libvirt.so.0.1003.1
+
+vijay@vijaywk:/usr/lib/x86_64-linux-gnu$ sudo chmod 755 libvirt.so.0.1003.1 
+vijay@vijaywk:/usr/lib/x86_64-linux-gnu$ sudo chmod 755 libvirt-qemu.so.0.1003.1 
+vijay@vijaywk:/usr/lib/x86_64-linux-gnu$ sudo chmod 755 libvirt-lxc.so.0.1003.1 
+vijay@vijaywk:/usr/lib/x86_64-linux-gnu$ sudo chmod 755 libvirt-admin.so.0.1003.1 
+
+
+./oc logs virtlet-zlq0n -n kube-system
+INFO: /dev/kvm exists
+KVM acceleration can be used
+/usr/sbin/libvirtd: error while loading shared libraries: libvirt-admin.so.0: cannot open shared object file: Permission denied
+
+
+https://support.plesk.com/hc/en-us/articles/213909965-How-to-disable-AppArmor-
+
+AppArmor is a security tool that uses name-based mandatory access controls to restrict or confine the system access of “at risk” applications. AppArmor is not supported by Plesk 12.x. Sometimes AppArmor can interfere with Plesk installation or functionality.
+
+AppArmor can be disabled or removed as follows:
+
+    Disable AppArmor using the following commands:
+
+    # service apparmor stop
+    # service apparmor teardown
+    # update-rc.d -f apparmor remove
+
+    Then, restart the server.
+
+    Remove the apparmor package with your package manager:
+
+    # apt-get remove apparmor
+
+Do not purge apparmor if you think you might want to re-enable AppArmor at a later date.
+
+./oc logs virtlet-zlq0n -n kube-system
+INFO: /dev/kvm exists
+KVM acceleration can be used
+/usr/sbin/libvirtd: error while loading shared libraries: libvirt-admin.so.0: cannot open shared object file: Permission denied
+
+
+
+
+package to be installed 
+
+apt-get install 
+
+autoconf automake libglib2.0-dev libvirt-dev libguestfs-dev libguestfs0-dbg libguestfs-tools genisoimage p7zip-full iptables ebtables dhcpcd5 tcpdump iproute2 openssl qemu-kvm qemu-system-x86 libvirt-bin python-libvirt netbase iputils-ping mercurial
+
+docker pull mirantis/virtlet
+docker save mirantis/virtlet:latest > virtlet.tar.gz
+mkdir virtlet
+tar xf -C ./virtlet virtlet.tar.gz
+cd ./virtlet 
+mkdir scripts
+mkdir /dind
+tar xf 7e0a9d2a7381edca21b39a050f83eb85d4b3086b06db19bf43b283b45c21da06/layer.tar   -C ./ 
+tar xf 33f0379af3e04c482c0b2a5e556eb2ac93452bbb2b9c2690bbe6395e67b3d6cd/layer.tar   -C ./
+tar xf ad402b27ed058cfeb3510bb4412ef1f604cab70c9b0fb29e8d49c0f541489199/layer.tar   -C ./
+tar xf ae69239836f6a600077e61890d0fae10b76ae5e019b49ffb5063eab13836c9af/layer.tar   -C ./
+tar xf d97297875d4663419b0d455d4f19570607e4c7bf22847b7ea57a48c8325c6a53/layer.tar   -C ./
+tar xf 26a441f3ddd74052d18e3334f93509bf10b3dc1b2c2a0f69a652b0828520b891/layer.tar   -C ./scripts
+
+cp criproxy /dind/
+cp ./usr/local/bin/virtlet /dind/
+cp flexvolume_driver /dind/
+cp -r ./opt/cni /opt/
+cp -r vmwrapper /dind/
+chmod +x ./scripts/*
+./scripts/cleanup.py 
+./scripts/prepare-node.sh 
+./scripts/start.sh
+
+/opt/criproxy/bin/criproxy -alsologtostderr -v 20 -install >> /hostlog/criproxy-bootstrap.log 2>&1
+
+
+https://wiki.libvirt.org/page/TLSCreateCACert
+
+cat certificate_authority_template.info 
+ cn = megam.io
+ ca
+ cert_signing_key
+ expiration_days = 700
+
+apt install gnutls-bin
+
+umask 277 && certtool --generate-privkey > certificate_authority_key.pem
+
+ls -la certificate_authority_key.pem
+
+certtool --generate-self-signed \
+            --template certificate_authority_template.info \
+            --load-privkey certificate_authority_key.pem \
+            --outfile certificate_authority_certificate.pem
+
+ls -la certificate_authority_certificate.pem
+
+mkdir /etc/pki/CA
+cp certificate_authority_certificate.pem /etc/pki/CA/cacert.pem
+chmod 444 /etc/pki/CA/cacert.pem
+
+https://wiki.libvirt.org/page/TLSCreateServerCerts
+
+
+cat rajesh_server_template.info
+ organization = megam.io
+ cn = rajesh
+ tls_www_server
+ encryption_key
+ signing_key
+
+umask 277 && certtool --generate-privkey > rajesh_server_key.pem
+
+certtool --generate-certificate \
+            --template rajesh_server_template.info \
+            --load-privkey rajesh_server_key.pem \
+            --load-ca-certificate certificate_authority_certificate.pem \
+            --load-ca-privkey certificate_authority_key.pem \
+            --outfile rajesh_server_certificate.pem
+
+ls -la rajesh_server*
+
+mkdir -p /etc/pki/libvirt/private
+
+chmod 755 /etc/pki/libvirt
+
+chmod 750 /etc/pki/libvirt/private
+
+mv rajesh_server_certificate.pem /etc/pki/libvirt/servercert.pem
+mv rajesh_server_key.pem /etc/pki/libvirt/private/serverkey.pem 
+
+chgrp qemu /etc/pki/libvirt \
+              /etc/pki/libvirt/servercert.pem \
+              /etc/pki/libvirt/private \
+              /etc/pki/libvirt/private/serverkey.pem
+
+sudo chmod 440 /etc/pki/libvirt/servercert.pem \
+             /etc/pki/libvirt/private/serverkey.pem
+
+
+
+change /etc/libvirt/libvirtd.conf 
+
+listen_tcp = 1
+auth_tcp = "none"
+ca_file = ""
+log_level = 3
+log_outputs = "x:stderr"
+listen_addr = "0.0.0.0"
+
+change /etc/libvirt/qemu.conf
+stdio_handler = "file"
+user = "root"
+group = "root"
+# we need to do network management stuff in vmwrapper
+clear_emulator_capabilities = 0
+
+cgroup_device_acl = [
+         "/dev/null", "/dev/full", "/dev/zero",
+         "/dev/random", "/dev/urandom",
+         "/dev/ptmx", "/dev/kvm", "/dev/kqemu",
+         "/dev/rtc", "/dev/hpet", "/dev/net/tun",
+     ]
+
+/opt/criproxy/bin/criproxy -alsologtostderr -v 20 -install >> /hostlog/criproxy-bootstrap.log 2>&1
+virsh -c qemu+tcp://localhost/system
+
+/usr/local/bin/virtlet -v=2 -logtostderr=true -libvirt-uri=qemu+tcp://localhost/system -image-download-protocol=https
+
+
+nano /etc/systemd/system/libvirtd.service 
+/usr/sbin/libvirtd --listen 
+saslpasswd -a libvirt megam
+Password: team4megam
+
+ls -la /etc/libvirt/passwd.db
+-rw-r----- 1 root root 12288 Jun  8 10:41 /etc/libvirt/passwd.db
+
+/usr/local/bin/virtlet -v=2 -logtostderr=true -libvirt-uri=qemu+tcp://localhost/system -image-download-protocol=https 
+
+I0608 11:13:01.176358    2270 storage_pool.go:93] Creating storage pool (name: default, path: /var/lib/libvirt/images)
+E0608 11:13:01.202247    2270 virtlet.go:58] Initializing server failed: open /var/data/virtlet/virtlet.db: no such file or directory
+
+mkdir -p /var/data/virtlet/
+
+./oc create -f cirros-vm.yaml 
+Error from server (Forbidden): error when creating "cirros-vm.yaml": pods "cirros-vm" is forbidden: unable to validate against any security context constraint: [spec.containers[0].securityContext.volumes[0]: Invalid value: "flexVolume": flexVolume volumes are not allowed to be used]
+root@rajesh:~/kube-1.6# ./oc edit scc restricted
+
+add 
+volume:
+- flexVolume
+
+securitycontextconstraints "restricted" edited
+root@rajesh:~/kube-1.6# ./oc create -f cirros-vm.yaml 
+pod "cirros-vm" created
+
+
+
+
+kubectl describe ds kube-proxy -n kube-system
+Name:		kube-proxy
+Image(s):	mirantis/hypokube:final
+Selector:	k8s-app=kube-proxy
+Node-Selector:	<none>
+Labels:		k8s-app=kube-proxy
+Desired Number of Nodes Scheduled: 4
+Current Number of Nodes Scheduled: 4
+Number of Nodes Misscheduled: 0
+Pods Status:	4 Running / 0 Waiting / 0 Succeeded / 0 Failed
+No events.
+
+
+docker exec -it b517d347c411 /bin/bash
+
+ ps -ef | grep proxy
+root         1     0  0 04:46 ?        00:00:16 /usr/local/bin/kube-proxy --kubeconfig=/var/lib/kube-proxy/kubeconfig.conf --cluster-cidr=10.244.0.0/16 --cluster-cidr=172.17.0.1/16 --masquerade-all --conntrack-max=0 --conntrack-max-per-core=0
+root      2506  2486  0 06:49 ?        00:00:00 grep proxy
+root@rajesh:~# cat /var/lib/kube-proxy/kubeconfig.conf 
+apiVersion: v1
+kind: Config
+clusters:
+- cluster:
+    certificate-authority: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+    server: https://10.192.0.2:6443
+  name: default
+contexts:
+- context:
+    cluster: default
+    namespace: default
+    user: default
+  name: default
+current-context: default
+users:
+- name: default
+  user:
+    tokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+
+
+
+
+
+docker inspect b517d347c411
+
+[
+    {
+        "Id": "b517d347c4119f2d4db3d81dba0c082d0cfd4f236dca1f7af52f3079cd2e6079",
+        "Created": "2017-06-19T04:46:31.552025004Z",
+        "Path": "/usr/local/bin/kube-proxy",
+        "Args": [
+            "--kubeconfig=/var/lib/kube-proxy/kubeconfig.conf",
+            "--cluster-cidr=10.244.0.0/16",
+            "--cluster-cidr=172.17.0.1/16",
+            "--masquerade-all",
+            "--conntrack-max=0",
+            "--conntrack-max-per-core=0"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 25271,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2017-06-19T04:46:31.978847049Z",
+            "FinishedAt": "0001-01-01T00:00:00Z"
+        },
+        "Image": "sha256:30acb993c7271f1ea445436396321b04d3731401d1cee91ae5812ebf281e357f",
+        "ResolvConfPath": "/var/lib/docker/containers/23937dc68182f70a2a49daaa5806d45cc1d6d0411d4fd4455241d5d837f4c50c/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/23937dc68182f70a2a49daaa5806d45cc1d6d0411d4fd4455241d5d837f4c50c/hostname",
+        "HostsPath": "/var/lib/docker/containers/23937dc68182f70a2a49daaa5806d45cc1d6d0411d4fd4455241d5d837f4c50c/hosts",
+        "LogPath": "/var/lib/docker/containers/b517d347c4119f2d4db3d81dba0c082d0cfd4f236dca1f7af52f3079cd2e6079/b517d347c4119f2d4db3d81dba0c082d0cfd4f236dca1f7af52f3079cd2e6079-json.log",
+        "Name": "/k8s_kube-proxy_kube-proxy-c60c3_kube-system_3a8c04af-502d-11e7-9ecb-02420ac00002_2",
+        "RestartCount": 0,
+        "Driver": "aufs",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "unconfined",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": [
+                "/var/lib/kubelet/pods/3a8c04af-502d-11e7-9ecb-02420ac00002/volumes/kubernetes.io~configmap/kube-proxy:/var/lib/kube-proxy",
+                "/k8s/hyperkube:/hyperkube",
+                "/var/lib/kubelet/pods/3a8c04af-502d-11e7-9ecb-02420ac00002/volumes/kubernetes.io~secret/kube-proxy-token-xlrjh:/var/run/secrets/kubernetes.io/serviceaccount:ro",
+                "/var/lib/kubelet/pods/3a8c04af-502d-11e7-9ecb-02420ac00002/containers/kube-proxy/46ed936d:/dev/termination-log"
+            ],
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+            "NetworkMode": "container:23937dc68182f70a2a49daaa5806d45cc1d6d0411d4fd4455241d5d837f4c50c",
+            "PortBindings": null,
+            "RestartPolicy": {
+                "Name": "",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "CapAdd": null,
+            "CapDrop": null,
+            "Dns": null,
+            "DnsOptions": null,
+            "DnsSearch": null,
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "container:23937dc68182f70a2a49daaa5806d45cc1d6d0411d4fd4455241d5d837f4c50c",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 1000,
+            "PidMode": "",
+            "Privileged": true,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": [
+                "seccomp=unconfined",
+                "label=disable"
+            ],
+            "UTSMode": "host",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "ConsoleSize": [
+                0,
+                0
+            ],
+            "Isolation": "",
+            "CpuShares": 2,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "/kubepods/besteffort/pod3a8c04af-502d-11e7-9ecb-02420ac00002",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": null,
+            "BlkioDeviceReadBps": null,
+            "BlkioDeviceWriteBps": null,
+            "BlkioDeviceReadIOps": null,
+            "BlkioDeviceWriteIOps": null,
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DeviceCgroupRules": null,
+            "DiskQuota": 0,
+            "KernelMemory": 0,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": -1,
+            "OomKillDisable": false,
+            "PidsLimit": 0,
+            "Ulimits": null,
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0
+        },
+        "GraphDriver": {
+            "Data": null,
+            "Name": "aufs"
+        },
+        "Mounts": [
+            {
+                "Type": "bind",
+                "Source": "/var/lib/kubelet/pods/3a8c04af-502d-11e7-9ecb-02420ac00002/volumes/kubernetes.io~configmap/kube-proxy",
+                "Destination": "/var/lib/kube-proxy",
+                "Mode": "",
+                "RW": true,
+                "Propagation": ""
+            },
+            {
+                "Type": "bind",
+                "Source": "/k8s/hyperkube",
+                "Destination": "/hyperkube",
+                "Mode": "",
+                "RW": true,
+                "Propagation": ""
+            },
+            {
+                "Type": "bind",
+                "Source": "/var/lib/kubelet/pods/3a8c04af-502d-11e7-9ecb-02420ac00002/volumes/kubernetes.io~secret/kube-proxy-token-xlrjh",
+                "Destination": "/var/run/secrets/kubernetes.io/serviceaccount",
+                "Mode": "ro",
+                "RW": false,
+                "Propagation": ""
+            },
+            {
+                "Type": "bind",
+                "Source": "/var/lib/kubelet/pods/3a8c04af-502d-11e7-9ecb-02420ac00002/containers/kube-proxy/46ed936d",
+                "Destination": "/dev/termination-log",
+                "Mode": "",
+                "RW": true,
+                "Propagation": ""
+            }
+        ],
+        "Config": {
+            "Hostname": "rajesh",
+            "Domainname": "",
+            "User": "0",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "KUBE_DNS_PORT_53_UDP=udp://10.96.0.10:53",
+                "KUBE_DNS_PORT_53_TCP_PORT=53",
+                "KUBERNETES_SERVICE_HOST=10.96.0.1",
+                "KUBERNETES_DASHBOARD_PORT_80_TCP_PORT=80",
+                "KUBERNETES_PORT=tcp://10.96.0.1:443",
+                "KUBE_DNS_PORT_53_TCP_PROTO=tcp",
+                "KUBERNETES_DASHBOARD_PORT_80_TCP=tcp://10.98.181.123:80",
+                "KUBERNETES_PORT_443_TCP_ADDR=10.96.0.1",
+                "KUBE_DNS_PORT_53_UDP_PORT=53",
+                "KUBE_DNS_PORT_53_UDP_ADDR=10.96.0.10",
+                "KUBE_DNS_PORT_53_TCP_ADDR=10.96.0.10",
+                "KUBERNETES_SERVICE_PORT=443",
+                "KUBE_DNS_PORT=udp://10.96.0.10:53",
+                "KUBE_DNS_PORT_53_UDP_PROTO=udp",
+                "KUBERNETES_DASHBOARD_PORT_80_TCP_PROTO=tcp",
+                "KUBERNETES_PORT_443_TCP_PROTO=tcp",
+                "KUBERNETES_PORT_443_TCP=tcp://10.96.0.1:443",
+                "KUBE_DNS_SERVICE_PORT_DNS=53",
+                "KUBE_DNS_SERVICE_PORT_DNS_TCP=53",
+                "KUBE_DNS_PORT_53_TCP=tcp://10.96.0.10:53",
+                "KUBERNETES_DASHBOARD_PORT=tcp://10.98.181.123:80",
+                "KUBERNETES_DASHBOARD_PORT_80_TCP_ADDR=10.98.181.123",
+                "KUBE_DNS_SERVICE_HOST=10.96.0.10",
+                "KUBERNETES_DASHBOARD_SERVICE_HOST=10.98.181.123",
+                "KUBERNETES_PORT_443_TCP_PORT=443",
+                "KUBE_DNS_SERVICE_PORT=53",
+                "KUBERNETES_DASHBOARD_SERVICE_PORT=80",
+                "KUBERNETES_SERVICE_PORT_HTTPS=443",
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Cmd": null,
+            "Image": "sha256:30acb993c7271f1ea445436396321b04d3731401d1cee91ae5812ebf281e357f",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": [
+                "/usr/local/bin/kube-proxy",
+                "--kubeconfig=/var/lib/kube-proxy/kubeconfig.conf",
+                "--cluster-cidr=10.244.0.0/16",
+                "--cluster-cidr=172.17.0.1/16",
+                "--masquerade-all",
+                "--conntrack-max=0",
+                "--conntrack-max-per-core=0"
+            ],
+            "OnBuild": null,
+            "Labels": {
+                "annotation.io.kubernetes.container.hash": "36e6cd9c",
+                "annotation.io.kubernetes.container.restartCount": "2",
+                "annotation.io.kubernetes.container.terminationMessagePath": "/dev/termination-log",
+                "annotation.io.kubernetes.container.terminationMessagePolicy": "File",
+                "annotation.io.kubernetes.pod.terminationGracePeriod": "30",
+                "io.kubernetes.container.logpath": "/var/log/pods/3a8c04af-502d-11e7-9ecb-02420ac00002/kube-proxy_2.log",
+                "io.kubernetes.container.name": "kube-proxy",
+                "io.kubernetes.docker.type": "container",
+                "io.kubernetes.pod.name": "kube-proxy-c60c3",
+                "io.kubernetes.pod.namespace": "kube-system",
+                "io.kubernetes.pod.uid": "3a8c04af-502d-11e7-9ecb-02420ac00002",
+                "io.kubernetes.sandbox.id": "23937dc68182f70a2a49daaa5806d45cc1d6d0411d4fd4455241d5d837f4c50c"
+            }
+        },
+        "NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "",
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "Ports": {},
+            "SandboxKey": "",
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "",
+            "Gateway": "",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "",
+            "IPPrefixLen": 0,
+            "IPv6Gateway": "",
+            "MacAddress": "",
+            "Networks": {}
+        }
+    }
+]
+rajesh@rajesh:~/kube-1.6
+
+
+./vmssh.sh cirros@cirros-vm.com
+
+cd /var/lib/kubelet/pods/21124429-5648-11e7-a440-02420ac00002/volumes/virtlet~flexvolume_driver/nocloud

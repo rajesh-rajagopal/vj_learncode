@@ -1,0 +1,96 @@
+--------------java install---------------------------------------------
+  sudo apt-add-repository -y ppa:openjdk-r/ppa
+   sudo apt-get -y update
+    sudo apt-get -y install openjdk-8-jdk
+    java -version
+====================cassendra repository===========================
+    echo "deb http://debian.datastax.com/community stable main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
+   curl -L https://debian.datastax.com/debian/repo_key | sudo apt-key add -
+   apt-get update
+===========install===============================================
+    sudo apt-get install dsc21=2.1.9-1 cassandra=2.1.9
+    sudo apt-get install cassandra-tools=2.1.9
+==================stop/start cassandra=============
+    sudo service cassandra stop
+    sudo rm -rf /var/lib/cassandra/data/system/*
+    sudo service cassandra start
+
+
+Cassandra Install Ubuntu_14.04
+===============================
+
+sudo add-apt-repository ppa:openjdk-r/ppa
+sudo apt-get install openjdk-8-jdk-headless
+sudo echo "deb http://debian.datastax.com/datastax-ddc 3.7 main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
+sudo curl -L https://debian.datastax.com/debian/repo_key | sudo apt-key add -
+sudo apt-get update
+sudo apt-get install datastax-ddc
+
+
+
+Cassandra Install Ubuntu_16.04 
+
+>/etc/apt/sources.list.d/cassandra.sources.list
+echo "deb http://www.apache.org/dist/cassandra/debian 37x main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
+echo "deb http://debian.datastax.com/datastax-ddc 3.7 main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
+gpg --keyserver pgp.mit.edu --recv-keys F758CE318D77295D
+gpg --export --armor F758CE318D77295D | sudo apt-key add -
+gpg --keyserver pgp.mit.edu --recv-keys 2B5C1B00
+gpg --export --armor 2B5C1B00 | sudo apt-key add -
+gpg --keyserver pgp.mit.edu --recv-keys 0353B12C
+gpg --export --armor 0353B12C | sudo apt-key add -
+sudo apt-get update
+sudo apt-get install cassandra
+
+
+
+rpc_address: 192.168.0.135
+listen_address: 192.168.0.135
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------
+deb http://http.debian.net/debian jessie-backports main
+sudo apt-get update
+sudo apt-get install openjdk-8-jre-headless
+sudo apt-get install openjdk-8-jdk
+sudo /usr/sbin/update-java-alternatives -s java-1.8.0-openjdk-amd64
+--------------cd /etc/cassandra-en
+--------------list packages
+dpkg --get-selections | grep "jdk"
+CREATE TABLE accounts( id text,  name text, phone text, email text,  api_key text, password text, states text, approval text, suspend text, registration_ip_address text, dates text, PRIMARY KEY (email));
+
+
+
+======================cassendra ubuntu 16.04================================
+cassandra Install
+echo "deb http://www.apache.org/dist/cassandra/debian 37x main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
+deb http://www.apache.org/dist/cassandra/debian 37x main
+deb http://debian.datastax.com/datastax-ddc 3.7 main
+ 2. gpg --keyserver pgp.mit.edu --recv-keys F758CE318D77295D
+ 3. gpg --export --armor F758CE318D77295D | sudo apt-key add -
+ 4. gpg --keyserver pgp.mit.edu --recv-keys 2B5C1B00
+ 5. gpg --export --armor 2B5C1B00 | sudo apt-key add -
+ 6. gpg --keyserver pgp.mit.edu --recv-keys 0353B12C
+ 7. gpg --export --armor 0353B12C | sudo apt-key add -
+ 8. sudo apt-get update
+ 9. sudo apt-get install cassandra
+cqlsh  ==errorr===================
+Connection error: ('Unable to connect to any servers', {'127.0.0.1': TypeError('ref() does not take keyword arguments',)})
+============================================================================================
+------------------------solution---------------------
+sudo apt-get install python3-cassandra
+export CQLSH_NO_BUNDLED=TRUE  //bashrc
+apt-get install python-pip
+pip install cassandra-driver

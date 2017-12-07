@@ -1,0 +1,13 @@
+export MEGAM_HOME=~/code/megam/directory
+export NODE_HOME=~/software/node
+
+export GOPATH=~/.go
+export GOROOT=~/software/go
+export PATH="$PATH:$HOME/.rvm/bin:$HOME/bin:$HOME/.rvm/scripts/rvm:$GOROOT/bin:$NODE_HOME/bin:$GOPATH/bin" # Add RVM to PATH for scripting
+
+[[ -s "/home/alrin/.rvm/scripts/rvm" ]] && source "/home/alrin/.rvm/scripts/rvm"
+
+export go=~/code/megam/workspace/go/src/github.com/megamsys
+export wk=~/code/megam/workspace
+export GOPATH=$GOPATH:~/code/megam/workspace/go
+

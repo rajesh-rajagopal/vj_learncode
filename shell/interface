@@ -1,0 +1,19 @@
+auto lo
+iface lo inet loopback
+
+
+auto one
+iface one inet static
+	address 103.231.90.154
+	netmask 255.255.255.248
+	network 103.231.90.152
+	broadcast 103.231.90.159
+	gateway 103.231.90.153
+	# dns-* options are implemented by the resolvconf package, if installed
+	dns-nameservers 8.8.8.8
+	dns-search intergrid.com.au
+        bridge_ports enp2s0f1
+        bridge_stp off
+        bridge_fd 1
+        bridge_hello 2
+        bridge_maxage 12  

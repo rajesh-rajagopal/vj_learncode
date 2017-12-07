@@ -1,0 +1,8 @@
+kind: ServiceAccount
+metadata:
+  name: kube-proxy
+  namespace: kube-system
+secrets:
+- name: kube-proxy-token-psl6s
+
+

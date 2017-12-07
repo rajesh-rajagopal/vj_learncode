@@ -1,0 +1,40 @@
+Setup Letsencrypt 
+
+sudo nano /etc/nginx/nginx.conf
+comment daemon off;
+
+sudo sv stop nginx
+sudo service nginx start
+
+sudo -E ./letsencrypt --install vnc.dedicatserver.ro 188.240.231.84:8001
+
+rm -r /usr/bin/acme.sh
+
+./letsencrypt --install log.dedicatserver.ro 188.240.231.84:7999
+
+rm -r /usr/bin/acme.sh
+
+./letsencrypt --install cloud.dedicatserver.ro 188.240.231.84:81
+
+./letsencrypt --install vnc.dedicatserver.ro 188.240.231.85:8001
+
+rm -r /usr/bin/acme.sh
+
+./letsencrypt --install log.dedicatserver.ro 188.240.231.85:7999
+
+rm -r /usr/bin/acme.sh
+
+sudo -E ./letsencrypt --install cloud.dedicatserver.ro 188.240.231.85:81
+
+sudo cp default /etc/nginx/sites-available/
+sudo cp log.dedicatserver.ro /etc/nginx/sites-available/
+sudo cp vnc.dedicatserver.ro /etc/nginx/sites-available/
+
+sudo ln -s /etc/nginx/sites-available/log.dedicatserver.ro /etc/nginx/sites-enabled/log.dedicatserver.ro
+sudo ln -s /etc/nginx/sites-available/vnc.dedicatserver.ro /etc/nginx/sites-enabled/vnc.dedicatserver.ro
+sudo nano /etc/nginx/nginx.conf
+uncomment daemon off;
+
+sudo service nginx stop
+sudo sv start nginx
+

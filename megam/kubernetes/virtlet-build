@@ -1,0 +1,13 @@
+or we can build using source/go/src/github.com/Mirantis/virtlet
+mkdir -p ./_output ./contrib/images/libvirt/_output
+
+go get -u -d -t -insecure ./...
+go build -o ./_output/virtlet ./cmd/virtlet
+
+go build -o ./_output/vmwrapper ./cmd/vmwrapper
+go build -o ./_output/criproxy ./cmd/criproxy
+go build -o ./_output/flexvolume_driver ./cmd/flexvolume_driver
+curl -L https://github.com/containernetworking/cni/releases/download/v0.3.0/cni-v0.3.0.tgz | tar zxC /opt/cni/bin
+
+
+

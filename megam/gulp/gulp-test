@@ -1,0 +1,14 @@
+update assembly set inputs = ['{"key":"domain","value":"megambox.com"}', '{"key":"keypairoption","value":"1"}', '{"key":"root_password","value":"d2VsY29tZQ=="}', '{"key":"sshkey","value":"44"}', '{"key":"provider","value":"one"}', '{"key":"cpu","value":"2 Cores"}', '{"key":"ram","value":"2 GB"}', '{"key":"hdd","value":"36 GB"}', '{"key":"version","value":"7.1"}', '{"key":"region","value":"chennai"}', '{"key":"resource","value":"c1.medium"}', '{"key":"storage_hddtype","value":"HDD"}', '{"key":"ipv4private","value":"true"}', '{"key":"ipv4public","value":"false"}', '{"key":"ipv6private","value":"false"}', '{"key":"ipv6public","value":"false"}', '{"key":"bitnami_password","value":""}', '{"key":"bitnami_username","value":""}', '{"key":"lastsuccessstatusupdate","value":"14 Oct 16 02:11 EDT"}', '{"key":"status","value":"initialized"}'], status = 'launched',state = 'initialized' where org_id = 'ORG7553871024780435513' and id = 'ASM6797943524640599781';
+
+
+
+go get 
+    name = "small-sound-7208.megambox.com"
+    account_id = "ranjithar1992@gmail.com"
+    assembly_id = "ASM4687013380005827885"
+    assemblies_id = "AMS7645072340601397644"
+
+{"json_claz":"Megam::Request","id":"ASM4977602011331483992","account_id":"ranjithar1992@gmail.com","cat_id":"ASM4977602011331483992","name":"snowy-dream-7876.megambox.com","cattype":"app","action":"stop","category":"control","created_at":null}
+
+curl -d '{"json_claz":"Megam::Request","id":"ASM4687013380005827885","account_id":"ranjithar1992@gmail.com","cat_id":"ASM4687013380005827885","name":"snowy-dream-7876.megambox.com","cattype":"app","action":"stop","category":"control"}' 'http://192.168.1.100:4151/put?topic=small-sound-7208.megambox.com'
+

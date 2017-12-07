@@ -1,0 +1,33 @@
+
+
+#Defaul serializer for all (json)
+  --kube-api-content-type=application/json 
+
+#Controller 
+
+./_outputs/rioos-controller-manager --api-server=http://192.168.2.100:9636 --v=4 --leader-elect=false
+
+
+
+#Scheduler 
+
+# insecure 
+./_outputs/rioos-scheduler --v=4  --api-server=http://192.168.1.100:9636 --leader-elect=false
+
+# secure 
+./_outputs/rioos-scheduler --v=4  --api-server=https://192.168.1.100:6443
+
+
+
+#Nodelet 
+
+./_outputs/rioos-nodelet --v=4  --api-servers=http://192.168.1.100:9636 
+
+
+
+
+#Gulpd 
+
+_outputs/rioos-gulpd --master=http://localhost:9636 --leader-elect=false --kubeconfig $RIO_HOME/controller.conf
+
+824384696950464512 

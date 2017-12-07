@@ -1,0 +1,15 @@
+#!/bin/bash
+Disk=( sda )
+for i in ${Disk[@]}
+do
+echo "sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/$i" > delpart
+for (( totalPartitions=$(grep -c $i[0-9] /proc/partitions); totalPartitions>0; totalPartitions-- ))
+do
+	echo "d" >> delpart
+	echo $totalPartitions >> delpart
+done
+echo 'w' >> delpart
+echo 'EOF' >> delpart
+chmod +x delpart
+echo "disk $i zap unsuccessful" | ./delpart 
+done

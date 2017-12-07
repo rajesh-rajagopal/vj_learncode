@@ -1,0 +1,17 @@
+ceph-deploy osd prepare node2:/storage3/osd node2:/storage4/osd --fs-type ext4
+
+scp /home/megdc/ceph-cluster/ceph.bootstrap-osd.keyring megdc@node2:/home/megdc/ceph.keyring
+scp /etc/ceph/*libvirt.keyring megdc@node2:/home/megdc/
+scp ./*.keyring megdc@node2:/home/megdc/
+ssh node2 'sudo mv *.keyring /etc/ceph/'
+
+/usr/bin/ceph --cluster ceph --name client.bootstrap-osd --keyring /var/lib/ceph/bootstrap-osd/ceph.keyring auth add osd.2 -i /storage3/osd/keyring osd allow * mon allow profile osd
+
+
+
+echo deb https://download.ceph.com/debian-jewel/ $(lsb_release -sc) main | tee /etc/apt/sources.list.d/ceph.list
+
+wget -q -O- 'https://download.ceph.com/keys/release.asc' | sudo apt-key add -
+
+
+/var/cache/apt/archives/ceph-common_10.2.1-1trusty_amd64.deb

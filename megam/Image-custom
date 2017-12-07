@@ -1,0 +1,112 @@
+------------------vm modify changes---
+yum install libguestfs-tools
+
+
+----download base images-------
+wget http://cloud.centos.org/centos/7/images/CentOS-7-x86_64-GenericCloud-1503.qcow2
+
+----------------onecontext----------------------
+wget https://github.com/OpenNebula/addon-context-linux/releases/download/v4.14.4/one-context_4.14.4.rpm
+
+
+mkdir packages
+cp one-context_4.14.4.rpm
+cp one-context_4.14.4.rpm packages
+
+-------------------create cDROM genisoimage---------
+    genisoimage -o packages.iso -R -J -V PACKAGES packages/
+
+----------------------copy the original image---------------
+qemu-img create -f qcow2 -b CentOS-7-x86_64-GenericCloud-1503.qcow2 centos.qcow2
+-------------script.sh-------------------
+mount LABEL=PACKAGES /mnt
+
+# Install opennebula context package
+rpm -Uvh /mnt/one-context*rpm
+
+
+# Remove cloud-init and NetworkManager
+yum remove -y NetworkManager cloud-init
+
+# Install growpart and upgrade util-linux, used for filesystem resizing
+yum install -y epel-release --nogpgcheck
+yum install -y cloud-utils-growpart --nogpgcheck
+yum upgrade -y util-linux --nogpgcheck
+
+# Install ruby for onegate tool
+yum install -y ruby
+
+yum install -y httpd
+
+
+
+
+-----------nosuch virt-customize: error: libguestfs error: could not connect to libvirt (URI 
+= qemu:///system): Failed to connect socket to 
+'/var/run/libvirt/libvirt-sock': No such file or directory [code=38 
+domain=7]---------------------
+
+export LIBGUESTFS_ATTACH_METHOD=appliance
+
+visit :http://forums.fedoraforum.org/archive/index.php/t-292135.html
+
+---------------------------------------------------------------run new image--------------------
+virt-customize -v -x --attach packages.iso --format qcow2 -a centos.qcow2 --run script.sh --root-password password:centos
+
+------------------final image----------
+qemu-img convert -f qcow2 -O qcow2 -o compat=0.10 centos.qcow2 centos-final.qcow2
+
+
+qemu-img convert -f qcow2 -O vmdk centosimage.qcow2 centosimage-final.vmdk
+    
+
+---------------install sftp in centos---------
+yum install openssh-clients
+Convert a XEN guest to KVM guest on Fedora 18 [Archive]  - FedoraForum.org
+[Archive] Convert a XEN guest to KVM guest on Fedora 18 Using Fedora
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ceph_user="megam"
+
+ceph_password="megam"
+
+ceph_group="megam"
+
+user_home="/home/megam"
+   if ! getent group $ceph_group > /dev/null 2>&1; then
+
+       groupadd --system $ceph_group
+
+   fi
+   if ! getent passwd $ceph_user > /dev/null 2>&1; then
+
+   useradd -d $user_home -m -g $ceph_group $ceph_user -s /bin/bash
+
+       #Set password
+
+        echo -e "$ceph_password\n$ceph_password\n" |  passwd $ceph_user
+
+   else
+
+       user_home=`getent passwd $ceph_user | cut -f6 -d:`
+
+       # Renable user (give him a shell)
+
+       usermod --shell /bin/bash $ceph_user
+
+       # Make sure MEGAMHOME exists, might have been removed on previous purge
+
+       mkdir -p $user_home
+fi

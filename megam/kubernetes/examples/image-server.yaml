@@ -1,0 +1,100 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+  creationTimestamp: 2017-05-24T10:07:46Z
+  generation: 1
+  labels:
+    role: image-server
+  name: image-server
+  namespace: kube-system
+  resourceVersion: "21792"
+  selfLink: /apis/extensions/v1beta1/namespaces/kube-system/deployments/image-server
+  uid: d6072a28-4068-11e7-b2b3-02420ac00002
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role: image-server
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        pod.alpha.kubernetes.io/init-containers: '[{"name":"dl-image","image":"alpine:3.5","command":["/bin/sh","-c","apk
+          update \u0026\u0026 apk add ca-certificates wget \u0026\u0026 wget -O /images/cirros
+          https://download.cirros-cloud.net/0.3.5/cirros-0.3.5-x86_64-disk.img \u0026\u0026
+          touch /images/ready"],"resources":{},"volumeMounts":[{"name":"images","mountPath":"/images"}],"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","imagePullPolicy":"IfNotPresent"}]'
+        pod.beta.kubernetes.io/init-containers: '[{"name":"dl-image","image":"alpine:3.5","command":["/bin/sh","-c","apk
+          update \u0026\u0026 apk add ca-certificates wget \u0026\u0026 wget -O /images/cirros
+          https://download.cirros-cloud.net/0.3.5/cirros-0.3.5-x86_64-disk.img \u0026\u0026
+          touch /images/ready"],"resources":{},"volumeMounts":[{"name":"images","mountPath":"/images"}],"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","imagePullPolicy":"IfNotPresent"}]'
+      creationTimestamp: null
+      labels:
+        role: image-server
+    spec:
+      containers:
+      - image: nginx
+        imagePullPolicy: Always
+        name: web
+        ports:
+        - containerPort: 80
+          name: web
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /ready
+            port: 80
+            scheme: HTTP
+          initialDelaySeconds: 2
+          periodSeconds: 2
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /usr/share/nginx/html
+          name: images
+      dnsPolicy: ClusterFirst
+      initContainers:
+      - command:
+        - /bin/sh
+        - -c
+        - apk update && apk add ca-certificates wget && wget -O /images/cirros https://download.cirros-cloud.net/0.3.5/cirros-0.3.5-x86_64-disk.img
+          && touch /images/ready
+        image: alpine:3.5
+        imagePullPolicy: IfNotPresent
+        name: dl-image
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /images
+          name: images
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - emptyDir: {}
+        name: images
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: 2017-05-24T10:07:47Z
+    lastUpdateTime: 2017-05-24T10:07:47Z
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1
+

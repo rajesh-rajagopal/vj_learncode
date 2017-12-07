@@ -1,0 +1,18 @@
+sudo stop/start ceph-all
+
+sudo start ceph-osd-all
+sudo start ceph-mon-all
+sudo start ceph-mds-all
+
+
+rbd ls one
+
+rbd export --pool=one one-34 	centos_7.1.img
+
+rbd rm one/one-94-953-0
+
+
+ceph osd tree
+
+
+

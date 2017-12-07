@@ -1,0 +1,91 @@
+
+     
+
+
+
+error_common := "Oops something went wrong on"
+
+	case LAUNCHING 			"Your machine is initializing.."
+	case BALANCECHECK     		"Verifying credit balance.."
+	case INSUFFICIENT_FUND     	"Insuffient funds on you wallet to launch machine .."
+case VMBOOTING             "Created machine by the hypervisor, watch the console for boot ..."
+	case LAUNCHED     		"Machine was initialized on cloud.."
+	case QUOTAUPDATING     		"Machine is updating into quota.."
+	case QUOTAUPDATED     		"Machine is updated into quota.."
+	case VNCHOSTUPDATING     	"Enabling vnc console access.."
+	case VNCHOSTUPDATED     	"Enabled, you can access your machine console.."
+case BOOTSTRAPPING           
+case BOOTSTRAPPED            
+case STATEUPPING             "Submitting request to initiate creation of DNS record"  
+case STATEUPPED             "Submission accepted to create DNS record... " 
+	case RUNNING     		"Your machine is running.."
+	case APPDEPLOYING     		"Your application  is deploying.."
+	case APPDEPLOYED     		"Your application  is deployed.."
+	case STARTING     		"Your machine is  starting.."
+	case STARTED     		"Your machine was started.."
+	case STOPPING     		"Stopping process initializing on .."
+	case STOPPED     		"Your machine was stopped.."
+	case UPGRADED     		"Your machine was was upgraded.."
+case DESTROYING             "Your machine is getting removed."
+case NUKED     			"Your machine was removed.."
+case SNAPSHOTTING             "Snapshot in progress."
+case SNAPSHOTTED             "Snapshot created.."
+case DISKATTACHING:
+ return "Attaching a volume to your machine"
+case DISKATTACHED:
+ return "Attached a volume storage to your machine"
+case DISKDETACHING:
+ return "Removing a volume storage from your machine"
+case DISKDETACHED:
+ return "Removed a volume storage from your machine"
+
+case COOKBOOKDOWNLOADING         "Downloading infrastructure automation instructions."
+case COOKBOOKDOWNLOADED          "Downloaded infrastructure automation instructions.."
+	case COOKBOOKFAILURE     	error_common 
+case CHEFCONFIGSETUPSTARTING     "Preparing configuration parameters."
+case CHEFCONFIGSETUPSTARTED      "Prepared configuration paramter for the install.."
+	case CLONING     		"Cloning your git repository .."
+	case CLONED     		"Cloned your git repository .."
+case DNSNETWORKCREATING         "Creating DNS CNAME entry.."
+case DNSNETWORKCREATED          "Created  DNS CNAME entry."
+case DNSNETWORKSKIPPED          "Skipped DNS CNAME."
+case AUTHKEYSUPDATING           "Configuring, ssh with access credentials.."
+case AUTHKEYSUPDATED            "Configured, ssh with access credentials.."
+case AUTHKEYSFAILURE            error_common
+case INSTANCEIPSUPDATING        "Updating public and private ips"
+case INSTANCEIPSUPDATED         "Updated public and private ips"
+case WAITUNTILL             "[20 seconds] machine is deploying.."
+case PENDING                "Selecting the node to deploy"
+case HOLD                   "Scheduling for deployment"
+case ACTIVE + ".lcm_init"   "Internally initialzing the machine for deployment."
+case ACTIVE + ".boot"       "Waiting for the hypervisor to create the machine"
+case ACTIVE + ".prolog"     "Transferring the disk images the host in which the machine will be running"
+	case ERROR    			error_common + ".."
+	case PREERROR     		error_common + ".."
+
+hold	The owner has held the VM and it will not be scheduled until it is released. It can be, however, deployed manually.
+init	Internal initialization state, not visible for the end users
+prolog	The system is transferring the VM files (disk images and the recovery file) to the host in which the virtual machine will be running.
+boot	OpenNebula is waiting for the hypervisor to create the VM
+
+
+	case CONTAINERERROR     	error_common + ".."
+	case CONTAINERNETWORKSUCCESS    "Private and public ips are updated on your container" 
+	case CONTAINERNETWORKFAILURE    error_common + "Updating private and public ips on .."
+	case CONTAINERLAUNCHING     	"Your  container is initializing.."
+	case CONTAINERBOOTSTRAPPING     "Container was bootstrapping.."
+	case CONTAINERBOOTSTRAPPED     	"Container was bootstrapped.."
+	case CONTAINERLAUNCHED     	"Container  was initialized on cloud.."
+	case CONTAINEREXISTS     	"Container was exists.."
+	case CONTAINERDELETE     	"Container was deleted.."
+	case CONTAINERSTARTING     	"Starting process initializing on .."
+	case CONTAINERSTARTED           "Container was started.."
+	case CONTAINERSTOPPING     	"Stopping process initializing on .."
+	case CONTAINERSTOPPED     	"Container was stopped.."
+	case CONTAINERRESTARTING    	"Restarting process initializing on .."
+	case CONTAINERRESTARTED     	"Container was restarted.."
+	case CONTAINERUPGRADED     	"Container was upgraded.."
+	case CONTAINERRUNNING     	"Container was running.."
+
+
+

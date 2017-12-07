@@ -1,0 +1,151 @@
+Server Side Copy
+The server-side copy feature provides a mechanism for the NFS client to perform a file copy on the server without the data being transmitted back and forth over the network. Without this feature, an NFS client copies data from one location to another by reading the data from the server over the network, and then writing the data back over the network to the server. Using this server-side copy operation, the client is able to instruct the server to copy the data locally without the data being sent back and forth over the network unnecessarily.
+The main usecase is for virtual machine migration between servers operating over NFS. Another use is for copying large files from one directory on a server to a different directory on the same server.
+The application calling the copyfile() system call is in charge of opening and closing file descriptors before and after the copy call. If a file can't be opened, it can't be copied.
+
+Linux
+
+The Linux Kernel CIFS client includes support for issuing SMB2 FSCTL_SRV_COPYCHUNK_WRITE server-side copy requests. This feature can currently only be utilised by issuing a special CIFS_IOC_COPYCHUNK_FILE ioctl, as done by cloner in the xfstests Git repository. Attempts to plumb Copy-Chunk server-side copy support into the `cp --reflink ` code path were rejected.
+
+
+https://www.ietf.org/mail-archive/web/nfsv4/current/pdfC79htWlqFH.pdf
+
+
+NFS server-side copy offload is a set of operations
+that allow:
+– Copying a file on a single NFS server
+– Copying a file between two NFS servers.
+ Server-side copy is a possible feature for NFSv4.2
+
+	step1. read from nfs server to client 
+        step2. write to nfs client to server 
+
+
+Copying with NFSv2/v3/v4[.1]
+ The NFS client reads and writes the file over the
+network.
+ Wastes client and network resources
+
+
+Copying with Server-side Offload
+ The NFS client instructs the server to perform
+the copy.
+ Saves client and network resources.
+
+ step1. read from nfs server and write to nfs server 
+
+
+gabriel@cloud4:~$ nfsstat -c
+Client rpc stats:
+calls      retrans    authrefrsh
+37708096   25         37709059
+
+Client nfs v3:
+null         getattr      setattr      lookup       access       readlink     
+0         0% 6804832  18% 986       0% 4714      0% 1188132   3% 42        0% 
+read         write        create       mkdir        symlink      mknod        
+21454966 56% 4855878  12% 1203      0% 385       0% 0         0% 0         0% 
+remove       rmdir        rename       link         readdir      readdirplus  
+1262      0% 394       0% 66        0% 0         0% 0         0% 2773      0% 
+fsstat       fsinfo       pathconf     commit       
+3292346   8% 4         0% 2         0% 100270    0% 
+
+gabriel@cloud4:~$ nfsstat -m
+/mnt/S18TB6HDD/virtual from 10.0.0.5:/mnt/S18TB6HDD/virtual
+ Flags:	rw,relatime,vers=3,rsize=65536,wsize=65536,namlen=255,hard,proto=tcp,timeo=600,retrans=2,sec=sys,mountaddr=10.0.0.5,mountvers=3,mountport=927,mountproto=udp,local_lock=none,addr=10.0.0.5
+
+sudo mount -t nfs4 10.0.0.5:/mnt/S18TB6HDD/virtual /mnt/S18TB6HDD/virtual
+
+
+
+188.240.231.83
+Retrieving speedtest.net configuration...
+Testing from Moldtelecom (188.240.231.83)...
+Retrieving speedtest.net server list...
+Selecting best server based on ping...
+Hosted by Nu-Ip.Ro (Ramnicu Valcea) [111.20 km]: 399.459 ms
+Testing download speed................................................................................
+Download: 21.56 Mbit/s
+Testing upload speed....................................................................................................
+Upload: 9.00 Mbit/s
+
+188.240.231.84
+Retrieving speedtest.net configuration...
+Testing from Moldtelecom (188.240.231.84)...
+Retrieving speedtest.net server list...
+Selecting best server based on ping...
+Hosted by Teletrans (Pitesti) [127.11 km]: 50.632 ms
+Testing download speed................................................................................
+Download: 91.87 Mbit/s
+Testing upload speed....................................................................................................
+Upload: 82.91 Mbit/s
+
+Retrieving speedtest.net configuration...
+Testing from Moldtelecom (188.240.231.84)...
+Retrieving speedtest.net server list...
+Selecting best server based on ping...
+Hosted by Teletrans (Pitesti) [127.11 km]: 566.756 ms
+Testing download speed................................................................................
+Download: 11.75 Mbit/s
+Testing upload speed...................................................................................................
+.Upload: 12.32 Mbit/s
+
+cp /var/lib/one/datastores/100/ae681cb8e366454d77006b78d4556ae1 /var/lib/one/datastores/0/1000/
+cp 188.240.231.12:/mnt/S18TB6HDD/virtual/100/ae681cb8e366454d77006b78d4556ae1 188.240.231.12:/mnt/S18TB6HDD/virtual/0/1000/
+
+188.240.231.85
+Retrieving speedtest.net configuration...
+
+Testing from Moldtelecom (188.240.231.85)...
+Retrieving speedtest.net server list...
+Selecting best server based on ping...
+Hosted by Teletrans (Pitesti) [127.11 km]: 33.55 ms
+Testing download speed................................................................................
+Download: 640.96 Mbit/s
+Testing upload speed....................................................................................................
+Upload: 157.12 Mbit/s
+
+188.240.231.86
+
+Retrieving speedtest.net configuration...
+Testing from Moldtelecom (188.240.231.86)...
+Retrieving speedtest.net server list...
+Selecting best server based on ping...
+Hosted by Teletrans (Pitesti) [127.11 km]: 60.899 ms
+Testing download speed................................................................................
+Download: 681.59 Mbit/s
+Testing upload speed....................................................................................................
+Upload: 90.41 Mbit/s
+
+ln -s /mnt/S18TB6HDD/virtual datastores
+
+sudo mount -t nfs4 10.0.0.5:/mnt/S18TB6HDD/virtual /mnt/S18TB6HDD/virtual -o rsize=65536,wsize=65536
+
+nfsstat -m
+
+/mnt/S18TB6HDD/virtual from 10.0.0.5:/mnt/S18TB6HDD/virtual
+ Flags:	rw,relatime,vers=4.0,rsize=65536,wsize=65536,namlen=255,hard,proto=tcp,port=0,timeo=600,retrans=2,sec=sys,clientaddr=10.0.0.13,local_lock=none,addr=10.0.0.5
+
+cat /proc/mounts
+
+sudo ifconfig eno1 mtu 9000 up
+sudo ifconfig eno2 mtu 9000 up
+
+
+
+
+Thu May 18 14:05:00 2017 [Z0][VM][I]: New LCM state is BOOT
+Thu May 18 14:05:00 2017 [Z0][VMM][I]: Generating deployment file: /var/lib/one/vms/308/deployment.0
+Thu May 18 14:23:29 2017 [Z0][VMM][I]: Command execution fail: /var/lib/one/remotes/tm/ssh/context /var/lib/one/vms/308/context.sh /detio/init.sh 10.0.0.12:/var/lib/one//datastores/0/308/disk.1 308 0
+Thu May 18 14:23:29 2017 [Z0][VMM][I]: context: Generating context block device at 10.0.0.12:/var/lib/one//datastores/0/308/disk.1
+Thu May 18 14:23:29 2017 [Z0][VMM][E]: context: Command "scp /var/lib/one/datastores/.isofiles/308/308.iso 10.0.0.12:/var/lib/one//datastores/0/308/disk.1" failed: packet_write_wait: Connection to 10.0.0.12 port 22: Broken pipe
+Thu May 18 14:23:29 2017 [Z0][VMM][I]: lost connection
+Thu May 18 14:23:29 2017 [Z0][VMM][E]: Error copying context ISO to 10.0.0.12:/var/lib/one//datastores/0/308/disk.1
+Thu May 18 14:23:29 2017 [Z0][VMM][I]: ExitCode: 255
+Thu May 18 14:23:29 2017 [Z0][VMM][I]: Failed to execute transfer manager driver operation: tm_context.
+Thu May 18 14:23:29 2017 [Z0][VMM][E]: Error deploying virtual machine: Error copying context ISO to 10.0.0.12:/var/lib/one//datastores/0/308/disk.1
+Thu May 18 14:23:29 2017 [Z0][VM][I]: New LCM state is BOOT_FAILURE
+
+
+
+

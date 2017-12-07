@@ -1,0 +1,103 @@
+nfsstat -c
+Client rpc stats:
+calls      retrans    authrefrsh
+67979509   165        67980067
+
+Client nfs v3:
+null         getattr      setattr      lookup       access       readlink     
+0         0% 28694287 42% 353       0% 3508      0% 4945598   7% 10        0% 
+read         write        create       mkdir        symlink      mknod        
+12765845 18% 12922136 19% 249       0% 76        0% 0         0% 0         0% 
+remove       rmdir        rename       link         readdir      readdirplus  
+232       0% 70        0% 6         0% 0         0% 1         0% 2830      0% 
+fsstat       fsinfo       pathconf     commit       
+8480320  12% 6         0% 3         0% 163975    0% 
+
+
+   umount /mnt/S18TB6HDD/virtual
+umount.nfs: /mnt/S18TB6HDD/virtual: device is busy
+  lsof | grep '/mnt/S18TB6HDD/virtual'
+
+   mount.nfs4 188.240.231.12:/mnt/S18TB6HDD/virtual /mnt/S18TB6HDD/virtual
+mount.nfs4: Protocol not supported
+
+https://www.cyberciti.biz/faq/nfs4-server-debian-ubuntu-linux/
+
+
+sudo mount -t nfs4 188.240.231.12:/mnt/S18TB6HDD/virtual /mnt/S18TB6HDD/virtual
+
+cat /etc/fstab 
+# /etc/fstab: static file system information.
+#
+# Use 'blkid' to print the universally unique identifier for a
+# device; this may be used with UUID= as a more robust way to name devices
+# that works even if disks are added and removed. See fstab(5).
+#
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+# / was on /dev/sdb2 during installation
+UUID=9b621473-ee64-4979-a78e-f307dad60df9 /               ext4    errors=remount-ro 0       1
+# /boot/efi was on /dev/sdb1 during installation
+UUID=E723-F0F1  /boot/efi       vfat    umask=0077      0       1
+# /cloud1 was on /dev/sdb3 during installation
+UUID=acdd662d-2896-4b73-95e4-f45498faacb5 /cloud1         ext4    defaults        0       2
+188.240.231.12:/mnt/S18TB6HDD/virtual /mnt/S18TB6HDD/virtual nfs defaults 0 0
+
+https://help.ubuntu.com/community/NFSv4Howto
+
+https://www.ietf.org/mail-archive/web/nfsv4/current/pdfC79htWlqFH.pdf
+
+sudo mount -t nfs4 -o proto=tcp,port=2049 188.240.231.12:/mnt/S18TB6HDD/virtual /mnt/S18TB6HDD/virtual
+mount.nfs4: Protocol not supported
+
+showmount 188.240.231.12 -e
+Export list for 188.240.231.12:
+/mnt/S18TB6HDD/virtual 94.176.2.6,92.114.32.170,92.114.32.200,86.104.211.99,89.39.89.66,188.240.231.86,188.240.231.85,188.240.231.84,188.240.231.83
+
+root@cloud1:/var/lib/one# rpcinfo -p 188.240.231.12 | egrep "service|nfs"
+   program vers proto   port  service
+    100003    2   udp   2049  nfs
+    100003    3   udp   2049  nfs
+    100003    2   tcp   2049  nfs
+    100003    3   tcp   2049  nfs
+
+
+mount -vvv -t nfs -o nfsvers=4,sec=none 188.240.231.12:/mnt/S18TB6HDD/virtual /mnt/S18TB6HDD/virtual
+
+mount -t nfs -o vers=4 188.240.231.12:/mnt/S18TB6HDD/virtual /mnt/S18TB6HDD/virtual
+
+https://forums.freenas.org/index.php?threads/how-can-i-activate-nfs4.14412/
+
+188.240.231.12:/mnt/S18TB6HDD/virtual on /mnt/S18TB6HDD/virtual type nfs4 (rw,relatime,vers=4.2,rsize=131072,wsize=131072,namlen=255,hard,proto=tcp,port=2049,timeo=600,retrans=2,sec=sys,clientaddr=188.240.231.83,local_lock=none,addr=188.240.231.12)
+
+sudo mount /mnt/S18TB6HDD/virtual
+mount: /etc/fstab: parse error: ignore entry at line 16.
+mount: can't find /mnt/S18TB6HDD/virtual in /etc/fstab
+
+
+188.240.231.12:/mnt/S18TB6HDD/virtual /mnt/S18TB6HDD/virtual nfs4 rw,relatime,vers=4.2,rsize=131072,wsize=131072,namlen=255,hard,proto=tcp,por$
+
+sudo mount /mnt/S18TB6HDD/virtual
+mount.nfs4: Protocol not supported
+
+
+https://forums.freenas.org/index.php?threads/how-can-i-activate-nfs4.14412/
+
+[oneadmin@storage] /% cat /etc/defaults/rc.conf | grep "nfsv4_server_enable"
+nfsv4_server_enable="NO"	# Enable support for NFSv4
+[oneadmin@storage] /% cat /etc/defaults/rc.conf | grep nfsuserd_enable
+nfsuserd_enable="NO"		# NFSv4 user/group name mapping daemon
+[oneadmin@storage] /% 
+
+#############################################################
+First we will try connect all network interfaces with bridge - 13/03/2017
+
+#############################################################
+
+sudo ifconfig eno1 mtu 9000 up
+sudo ifconfig eno2 mtu 9000 up
+
+sudo ifconfig eno1 mtu 1500 up
+sudo ifconfig eno2 mtu 1500 up
+
+
+

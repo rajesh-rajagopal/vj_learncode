@@ -1,0 +1,27 @@
+
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+You might want to run 'apt-get -f install' to correct these:
+The following packages have unmet dependencies:
+ postgresql : Depends: postgresql-9.5 but it is not going to be installed
+ verticegateway : Depends: verticecommon but it is not going to be installed
+E: Unmet dependencies. Try 'apt-get -f install' with no packages (or specify a solution).
+
+To remove unwanted package force install dependencies
+
+/var/lib/dpkg/status 
+^w verticegateway (search your package)
+
+remove that section
+
+
+  libmircommon5 libpango1.0-0 libpangox-1.0-0 linux-headers-4.4.0-75 linux-headers-4.4.0-75-generic linux-headers-4.4.0-78
+  linux-headers-4.4.0-78-generic linux-headers-4.4.0-79 linux-headers-4.4.0-79-generic linux-headers-4.4.0-81 linux-headers-4.4.0-81-generic
+  linux-headers-4.4.0-83 linux-headers-4.4.0-83-generic linux-headers-4.4.0-87 linux-headers-4.4.0-87-generic linux-headers-4.4.0-89
+  linux-headers-4.4.0-89-generic linux-headers-4.4.0-91 linux-headers-4.4.0-91-generic linux-image-4.4.0-75-generic
+  linux-image-4.4.0-78-generic linux-image-4.4.0-79-generic linux-image-4.4.0-81-generic linux-image-4.4.0-83-generic
+  linux-image-4.4.0-87-generic linux-image-4.4.0-89-generic linux-image-4.4.0-91-generic linux-image-extra-4.4.0-75-generic
+  linux-image-extra-4.4.0-78-generic linux-image-extra-4.4.0-79-generic linux-image-extra-4.4.0-81-generic linux-image-extra-4.4.0-83-generic
+  linux-image-extra-4.4.0-87-generic linux-image-extra-4.4.0-89-generic linux-image-extra-4.4.0-91-generic snap-confine ubuntu-core-launcher
+

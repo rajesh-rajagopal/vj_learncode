@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+tmpcount=`find . -name *.*~ 2>&1 | wc -l`
+if [ $tmpcount -gt 0 ]; then
+    echo $tmpcount
+    echo "Some files are temporary files, please run 'find . -type f -name "*.*~" -exec rm -f {} \;' to delete them before committing"
+    exit 1
+fi
+
+printcount=`grep --exclude-dir={config,.git,bin,log,spec,tmp,.hooks,*.md} -rnw './' -e "fmt.Println" | wc -l`
+if [ $printcount -gt 1 ]; then
+   echo $printcount
+  echo "Some files have puts, please run 'grep --exclude-dir={config,.hooks,log,bin,spec,tmp,public,.git,vertice} -rnw './' -e "fmt.Println"'"
+  exit 1
+fi
+fmt=`go fmt ./...`
+echo $fmt
+fmtcount=`git ls-files | grep '.go$' | xargs gofmt -l 2>&1 | wc -l`
+if [ $fmtcount -gt 0 ]; then
+    echo $fmtcount
+    echo "Some files aren't formatted, please run 'go fmt ./...' to format your source code before committing"
+    exit 1
+fi
+
+# Due to the way composites work, vet will fail for some of our tests so we ignore it
+vetcount=`go  vet ./... 2>&1  | wc -l`
+if [ $vetcount -gt 0 ]; then
+      echo $vetcount
+    echo "Some files aren't passing vet heuristics, please run 'go vet ./...' to see the errors it flags and correct your source code before committing"
+    exit 1
+fi
+exit 0
+
+

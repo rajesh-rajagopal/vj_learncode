@@ -1,0 +1,63 @@
+insert into rawimages( account_id, created_at, id, inputs, json_claz, name, org_id, outputs, repos, status, updated_at) values ('mvijaykanth@megam.io', '2017-03-06 12:15:33.000', 'RAW9058037720298113796', ['{"key":"region","value":"Chennai"}','{"key":"provider","value":"one"}'],'Megam::Rawimage','my-fist-iso','ORG4719970189952734356', [], '{"source":"images","url":"aa","properties":[]}', 'inprogress', '2017-03-06 12:15:33.000');
+
+
+delete from rawimages where account_id='hello@virtengine.com' and created_at='2017-02-28 06:45:33.000' and id='RAW9058037720298113796';
+
+update rawimages set repos='{"source":"images","url":"aa","properties":[]}' where account_id='vino@gmail.co' and created_at = '2017-02-28 09:28:38.000' and id='RAW5309653640173297515';
+
+update rawimages set repos='{"source":"iso","public_url":"http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/current/images/netboot/mini.iso","properties":[]}' where account_id='mvijaykanth@megam.io' and created_at = '2017-03-06 12:15:33.000' and id='RAW9058037720298113796';
+
+curl -d '{"id":"RIP6669853291014354444","cat_id":"RAW9058037720298113796","account_id":"mvijaykanth@megam.io","category":"marketplaces.rawimages","action":"rawimage.iso.create"}' 'http://192.168.0.100:4151/put?topic=marketplaces'
+
+
+############################NETWORK ATTACH/DETACH############################################
+
+update assembly set policies = ['{"name":"NetworkAttachPolicy", "ptype":"Network", "resources":[], "rules":[{"key":"private_ipv4","value":"2"},{"key":"public_ipv4","value":"2"}], "properties":[],  "status":"initializing", "created_at":"2017-03-02T10:41:21.000", "updated_at":"2017-03-02T10:41:21.000"}'] where org_id='ORG5052052878095755147' and created_at = '2017-03-02 11:14:13.000' and id='ASM7049532522160752978';
+
+
+ | ['{"name":"NetworkAttachPolicy","ptype":"Network","resources":[],"rules":[{"key":"private_ipv4","value":"2"},{"key":"public_ipv4","value":"2"}],"properties":[],"status":"initializing","created_at":null,"updated_at":null}'] 
+
+curl -d '{"name":"nameless-star-7519.megambox.com","cat_id":"AMS5743558505324982598","cattype":"torpedo", "id":"RIP8629448527522007017","account_id":"vijaykanthm28@gmail.com", "category":"operations","action":"assembly.network.update"}' 'http://192.168.0.100:4151/put?topic=vms'
+
+
+update assembly set policies=['{"name":"NetworkAttachPolicy","ptype":"Network","resources":[],"rules":[{"key":"private_ipv4","value":"2"}],"properties":[],"status":"initializing","created_at":"2017-03-06T12:58:38.000","updated_at":"2017-03-06T12:58:38.000"}'] where org_id='ORG6839014412275241263' and created_at ='2017-03-06 12:28:38.000' and id='ASM9119532988690390699' ;
+
+curl -d '{"name":"nameless-star-7519.megambox.com","cat_id":"AMS7943190774414370244","cattype":"torpedo", "id":"RIP8629448527522007017","account_id":"vijaykanthm28@gmail.com", "category":"operations","action":"assembly.network.update"}' 'http://192.168.0.100:4151/put?topic=vms'
+
+
+update assembly set policies=['{"name":"NetworkDetachPolicy","ptype":"Network","resources":[],"rules":[{"key":"private_ipv4","value":"192.168.0.144"}],"properties":[],"status":"initializing","created_at":"2017-03-06T12:58:38.000","updated_at":"2017-03-06T12:58:38.000"}'] where org_id='ORG6839014412275241263' and created_at ='2017-03-06 12:28:38.000' and id='ASM9119532988690390699' ;
+
+############################MARKETPLACES############################################
+
+New create Marketplaces (flavor, provided_by, id  ,acl_policies,catorder,cattype,created_at , envs ,image ,inputs , json_claz ,options, outputs ,plans ,status ,updated_at, url)
+
+insert into marketplaces(flavor, provided_by, id  ,acl_policies,catorder,cattype,created_at , envs ,image ,inputs , json_claz ,options, outputs ,plans ,status ,updated_at, url) values('Other.Test','vertice','MKT5743558505324982000',[],'7','OTHERS','2017-03-06T12:58:38.000',[], 'test_other.png', ['{"key":"region","value":"Chennai"}', '{"key":"provider","value":"one"}','{"key":"image_name","value":"my-first-image"}', '{"key":"raw_image_id","value":"RAW9058037720298113796"}', '{"key":"cpu","value":"1 Core"}', '{"key":"ram","value":"2 GB"}', '{"key":"hdd","value":"10 GB"}','{"key":"storage_hddtype","value":"HDD"}'], 'Megam::MarketPlace',[],[],[],'inprogress', '2017-03-06T12:58:38.000','https://console.megam.io/marketplaces');
+
+curl -d '{"name":"","cat_id":"MKT8118141950955525590","cattype":"marketplaces","id":"RIP9163394459951767447","account_id":"vino.v@megam.io","category":"localsite.marketplaces","action":"marketplaces.initialize"}' 'http://192.168.1.100:4151/put?topic=marketplaces'
+
+curl -d '{"name":"","cat_id":"MKT8508566065456668971","cattype":"marketplaces","id":"RIP9163394459951767447","account_id":"vino.v@megam.io","category":"localsite.marketplaces","action":"marketplaces.iso.finished"}' 'http://192.168.1.100:4151/put?topic=marketplaces'
+
+MKT6783864205743411711
+
+RAW8137160207863015758
+
+delete from rawimages where account_id='testadmin@astimp.ro' and created_at='2017-04-20 12:35:16.00000' and id='RAW8137160207863015758';
+
+update rawimages set outputs= ['{"key":"raw_image_id","value":"41"}'] where account_id='testadmin@astimp.ro' and created_at='2017-04-20 15:35:16.00000' and id='RAW8137160207863015758';
+
+update rawimages set name='freebsd_11.0_iso' where account_id='testadmin@astimp.ro' and created_at='2017-04-20 15:35:16.00000' and id='RAW8137160207863015758';
+
+update marketplaces set inputs =['{"key":"raw_image_id","value":"RAW8137160207863015758"}', '{"key":"region","value":"Romania_low_cpu"}', '{"key":"ram","value":"2 GB"}', '{"key":"cpu","value":"2 Core"}', '{"key":"hdd","value":"5 GB"}'] where  flavor='freebsd ver 11' and provided_by='vertice' and id = 'MKT6783864205743411711';
+
+
+curl -d '{"name":"","cat_id":"MKT6783864205743411711", "cattype":"marketplaces","id":"RIP9163394459951767447", "account_id":"testadmin@astimp.ro", "category":"localsite.marketplaces","action":"marketplaces.initialize"}' 'http://188.240.231.84:4151/put?topic=marketplaces'
+
+update assembly set policies=['{"name":"NetworkAttachPolicy","ptype":"Network","resources":[],"rules":[{"key":"public_ipv4","value":"2"}],"properties":[{"key":"public_ipv4","value":"185.88.29.238"}],"status":"initializing","created_at":"2017-03-06T12:58:38.000","updated_at":"2017-03-06T12:58:38.000"}'] where org_id='ORG6973292217723133152' and created_at ='2017-05-08 11:04:14.000' and id='ASM8584576034402930128' ;
+
+backup_stored_path: /var/lib/one/datastores/101/asdf2351
+
+ | 000+0000 | 
+
+curl -d '{"action":  "running", "category":  "done", "id":  "RIP12345", "account_id":  "mvijaykanth@megam.io", "cat_id":  "AMS7068846142280477980"}' 'http://192.168.2.100:4151/put?topic=vms'
+
+

@@ -1,0 +1,45 @@
+
+Review Nodelet 
+nodeletConfig flags 
+review Nodelet configuration 
+Nodelet struct parameters 
+record all commands options 
+
+dockerLegacyService  - removed 
+
+NewVirt don't pass hostIP 
+VM/docker on/off   - 
+
+containerGC, imageGC, statusManager, podManager 
+
+nlet.pleg.Health ?
+probeManager
+bridgePluginMgr
+
+ExperimentalCheckNodeCapabilitiesBeforeMount use if needed
+
+runOnce - 
+ListenAndServe &
+
+ListenAndServeReadOnly - remove it 
+
+
+RootDirectory - "/var/lib/rioos/nodelet" to setup filesystem directories.
+context parameter ("/var/lib/rioos/context") - already added MachineContextDirectory
+OSInterface  -  it is used for os operations like Chmod mkdirall Remove symbolic link 
+Document all default options  - https://docs.google.com/document/d/1MbBBx6X_H7S0qZUV_8WhCSEV7FNWfzQcZthu8Rsm3XY/edit#heading=h.tnstgdmg97su
+
+doubts -- 
+
+GetValidatedSources  - HostNetwork, hostPID, hostIPC - AllowPrivileged 
+
+OOMAdjuster ? The oom-score-adj value for nodelet process. Values must be within the range [-1000, 1000] (default -999)   - write process id file /proc/self/oom_score_adj "0"
+--bootstrap-rioconfig -- used for create rioconfig,cert,pem files based on specified rioconfig file 
+--allow-privileged    -- If true, allow containers to request privileged mode. (HostNetwork, hostPID, hostIPC) namespace privilidge 
+    --host-ipc-sources, --host-pid-sources --host-network-sources -    Comma-separated list of sources from which the Nodelet allows pods to use the host ipc/pid/network namespace.
+--make-iptables-util-chains - If true, nodelet will ensure iptables utility rules are present on host.
+    iptables-masquerade-bit (default 14), --iptables-drop-bit (default 15)
+
+
+
+

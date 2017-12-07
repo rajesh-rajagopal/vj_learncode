@@ -1,0 +1,41 @@
+#!/bin/sh
+
+# Swarm Setup 
+curl -fsSL https://get.docker.com/ | sh
+
+docker run --rm swarm create
+
+	# Digest: sha256:e20f9cf2b432451f99100acceac562a2b6620aad1301f8679e8ff8afe0360bef
+	# Status: Downloaded newer image for swarm:latest
+	# 915e747e894dd3e95413b8365b297dc4   //  this is your unique cluster id
+
+sudo usermod -aG docker vijay
+
+docker run -t -p 2375:2375 -t swarm manage -H :2375 --addr <private/public>:2375 token://915e747e894dd3e95413b8365b297dc4
+
+eg:- docker run -t -p 2375:2375 -t swarm manage -H :2375 --addr 185.88.29.253:2375 token://915e747e894dd3e95413b8365b297dc4
+
+
+## Docker  Node setup 
+
+curl -fsSL https://get.docker.com/ | sh
+
+  	#start the docker deaemon with defult subnet for docker0 bridge
+
+sudo docker daemon -D -H tcp://<private/public nodeip>:2375 --bip <subnet>/24 --default-gateway <ip>
+
+eg:- sudo docker daemon -D -H tcp://185.88.29.254:2375
+
+
+## Join Nodet to Swarm (run in swarm server)
+
+docker run -d swarm join --advertise=185.88.29.254:2375 token://915e747e894dd3e95413b8365b297dc4
+
+764a32b05437540de01034c6e748d2797c7cb6fb2e3c9d42041d6511578b4c6d
+
+#to add custom values to container 
+ docker -H tcp://192.168.0.132:2375 run -l "vendor=welcome" -d tutum/hello-world
+
+docker -H tcp://185.88.29.254:2375 run -l "account_id=welcome@megam.io" -l "assembly_id=ASM123" -l "assemblies_id=AMS321" -d tutum/hello-world
+docker -H tcp://185.88.29.254:2375 run -l "account_id=vijay@megam.io" -l "assembly_id=ASM1234" -l "assemblies_id=AMS3214" -d tutum/hello-world
+

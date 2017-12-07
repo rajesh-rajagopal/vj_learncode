@@ -1,0 +1,98 @@
+ssh megdc@23.92.216.134  - https://get.megam.io
+password : team4megam
+
+Pashpharse password get.megam.io
+
+Password: irumbu#4Oru
+
+trusty - ~/stable
+xenial - ~/ubuntu_16.04
+
+#!/bin/bash
+# Read Password
+echo -n Password: 
+read -s password
+echo
+# Run Command
+echo $password
+
+source ~/.bashrc
+cd ~/gitpackager/vertice
+sudo rake clean;
+rake trusty;
+rake centos7;
+rake xenial;
+sudo cp build/xenial/vertice_1.5.2-1_amd64.deb ~/repo/1.5.2/ubuntu/16.04/stable/stable-ubuntu/
+sudo cp build/trusty/vertice_1.5.2-1_amd64.deb ~/repo/1.5.2/ubuntu/14.04/stable/stable-ubuntu/
+sudo cp build/centos7/vertice-1.5.2-1.x86_64.rpm ~/centos_1.5.2
+
+
+cd ~/gitpackager/verticegateway
+sudo rake clean;
+rake xenial;
+rake centos7;
+sudo cp build/xenial/usr/share/megam/verticegateway/target/verticegateway_1.5.6_all.deb ~/repo/1.5.2/ubuntu/16.04/stable/stable-ubuntu/
+sudo cp build/xenial/usr/share/megam/verticegateway/target/verticegateway_1.5.6_all.deb ~/repo/1.5.2/ubuntu/14.04/stable/stable-ubuntu/
+sudo cp build/centos7/verticegateway-1.5.2-1.x86_64.rpm ~/centos_1.5.2
+
+sudo cp build/xenial/usr/share/megam/verticegateway/target/verticegateway_1.5.6_all.deb ~/repo/1.5.2/ubuntu/16.04/testing/testing-ubuntu/
+sudo cp build/xenial/usr/share/megam/verticegateway/target/verticegateway_1.5.6_all.deb ~/repo/1.5.2/ubuntu/14.04/testing/testing-ubuntu/
+sudo cp build/centos7/verticegateway-1.5.2-1.x86_64.rpm ~/centos_1.5.2
+
+
+cd ~/gitpackager/verticenilavu/
+rake clean;
+rake trusty;
+rake xenial;
+rake centos7
+sudo cp build/trusty/verticenilavu_1.5.2-1_amd64.deb ~/repo/1.5.2/ubuntu/14.04/stable/stable-ubuntu/
+sudo cp build/xenial/verticenilavu_1.5.2-1_amd64.deb ~/repo/1.5.2/ubuntu/16.04/stable/stable-ubuntu/
+sudo cp build/centos7/verticenilavu-1.5.2-1.x86_64.rpm ~/centos_1.5.2
+
+#space will prevent your password store in history
+ git clone https://vijaykanthm28:asdf@gitlab.com/megamsys/nilavu.git
+
+
+cd ~/repo/1.5.2/ubuntu/14.04/stable/stable-ubuntu/  
+cd ~/repo/1.5.2/ubuntu/16.04/stable/stable-ubuntu/
+cd ~/repo/centos_1.5.2
+
+sudo -s
+~/reprepro.sh --root /home/megdc --version 1.5.2 --distro ubuntu --distroversion 14.04 --distroname trusty --release testing
+irumbu#4Oru
+~/reprepro.sh --root /home/megdc --version 1.5.2 --distro ubuntu --distroversion 16.04 --distroname xenial --release testing
+
+~/reprepro_cent.sh version=1.5.2 distro=centos release=testing
+
+
+./update.sh --update vertice --update verticegateway --update verticenilavu
+
+cd ~/gitpackager/verticevnc/
+rake clean;
+rake trusty;
+rake xenial;
+rake centos7
+
+sudo cp build/trusty/verticevnc_1.5.2-1_amd64.deb ~/repo/1.5.2/ubuntu/14.04/stable/stable-ubuntu/
+sudo cp build/xenial/verticevnc_1.5.2-1_amd64.deb ~/repo/1.5.2/ubuntu/16.04/stable/stable-ubuntu/
+sudo cp build/centos7/verticevnc-1.5.2-1.x86_64.rpm ~/centos_1.5.2
+
+
+
+
+sudo -s
+~/reprepro.sh --root /home/megdc --version 1.5.2 --distro ubuntu --distroversion 14.04 --distroname trusty --release stable
+irumbu#4Oru
+~/reprepro.sh --root /home/megdc --version 1.5.2 --distro ubuntu --distroversion 16.04 --distroname xenial --release stable
+
+~/reprepro_cent.sh version=1.5.2 distro=centos release=stable
+
+
+
+sudo apt-get update 
+sudo apt-get remove verticegateway -y
+sudo apt-get purge verticegateway -y
+sudo apt-get install verticegateway -y
+sudo systemctl daemon-reload
+sudo systemctl start verticegateway
+

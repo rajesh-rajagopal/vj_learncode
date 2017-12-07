@@ -1,0 +1,82 @@
+
+//Create container
+
+curl -u "B82650A88E19ACDA7FF4:Etj4UWdn9YYzQzHRLK1RnhFV6s2Nz9UMQVsKX999" -X POST -H 'Content-Type: application/json' -d '{"description": "myMegamConts",	"name": "tutum/hello-wolrd", "startOnCreate": true}' 'http://185.88.29.244:8080/v1/containers'
+
+//Console
+
+curl -u "B82650A88E19ACDA7FF4:Etj4UWdn9YYzQzHRLK1RnhFV6s2Nz9UMQVsKX999" -X POST 'http://185.88.29.244:8080/v1/containers/7403e3a39884ef73c56a7b152ce20c22298ee3b255157d76fe80ae3804a84656?action=console'
+
+
+//Logs
+curl -u "B82650A88E19ACDA7FF4:Etj4UWdn9YYzQzHRLK1RnhFV6s2Nz9UMQVsKX999" -X POST -H 'Content-Type: application/json' \
+-d '{"follow": true, "lines": 100}' 'http://185.88.29.244:8080/v1/containers/a4464ca22ec39312a3d2e3a2a802075646d3c5f397a1e07bb664ead961d9082a?actions=logs'
+
+
+curl -v -u "B82650A88E19ACDA7FF4:Etj4UWdn9YYzQzHRLK1RnhFV6s2Nz9UMQVsKX999" -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"description": "myMegamConts", "name": "tutum/hello-wolrd", "startOnCreate": true}' 'http://185.88.29.244:8080/v2-beta/containers'
+
+a4464ca22ec39312a3d2e3a2a802075646d3c5f397a1e07bb664ead961d9082a
+
+curl -X DELETE 'http://185.88.29.244:8080/v1/containers/a4464ca22ec39312a3d2e3a2a802075646d3c5f397a1e07bb664ead961d9082a'
+
+
+curl -u "B82650A88E19ACDA7FF4:Etj4UWdn9YYzQzHRLK1RnhFV6s2Nz9UMQVsKX999" \
+-X DELETE \
+-H 'Accept: application/json' \
+'http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i14'
+
+curl -u "${CATTLE_ACCESS_KEY}:${CATTLE_SECRET_KEY}" \
+-X POST \
+-H 'Accept: application/json' \
+-H 'Content-Type: application/json' \
+-d '{"remove":true, "timeout":0}' \
+'http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i10/?action=stop'
+
+
+curl -u "B82650A88E19ACDA7FF4:Etj4UWdn9YYzQzHRLK1RnhFV6s2Nz9UMQVsKX999" \
+-X POST \
+-H 'Accept: application/json' \
+-H 'Content-Type: application/json' \
+-d '{"expose":[], "instanceTriggeredStop":"stop", "networkIds":[], "ports":[], "startOnCreate":true, "command":[], "publishAllPorts":false, "privileged":false, "capAdd":[], "capDrop":[], "dns":[], "dnsSearch":[], "stdinOpen":false, "tty":false, "entryPoint":[], "restartPolicy":null, "devices":[], "healthCheck":null, "securityOpt":[], "logConfig":null, "extraHosts":[], "readOnly":false, "build":null, "dnsOpt":[], "groupAdd":[], "ulimits":[], "netAlias":[], "healthCmd":[], "networkMode":"managed", "dataVolumes":[], "dataVolumesFrom":[]}' \
+'http://185.88.29.244:8080/v2-beta/projects/1a5/containers'
+
+
+
+curl -u "B82650A88E19ACDA7FF4:Etj4UWdn9YYzQzHRLK1RnhFV6s2Nz9UMQVsKX999" \
+-X POST \
+-H 'Accept: application/json' \
+-H 'Content-Type: application/json' \
+-d '{"count":1, "description":"Testing", "imageUuid":"tutum/hello-world", "name":"MySecondCont", "startOnCreate":true}' \
+'http://185.88.29.244:8080/v2-beta/projects/1a5/containers'
+
+
+
+curl -u "B82650A88E19ACDA7FF4:Etj4UWdn9YYzQzHRLK1RnhFV6s2Nz9UMQVsKX999" \
+-X POST \
+-H 'Accept: application/json' \
+-H 'Content-Type: application/json' \
+-d '{"count":1, "description":"Testing", "expose":[], "imageUuid":"docker:tutum/hello-world", "name":"MyThirdCont"}' \
+'http://185.88.29.244:8080/v2-beta/projects/1a5/containers'
+
+
+
+{"id":"1i17","type":"container","links":{"self":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17","account":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/account","credentials":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/credentials","healthcheckInstanceHostMaps":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/healthcheckinstancehostmaps","hosts":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/hosts","instanceLabels":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/instancelabels","instanceLinks":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/instancelinks","instances":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/instances","mounts":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/mounts","ports":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/ports","serviceEvents":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/serviceevents", "serviceExposeMaps":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/serviceexposemaps","serviceLogs":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/servicelogs","services":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/services","targetInstanceLinks":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/targetinstancelinks","volumes":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/volumes","stats":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/stats","containerStats":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/containerstats"},"actions":{"start":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/?action=start","error":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/?action=error","remove":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/?action=remove","stop":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/?action=stop"},"baseType":"instance","name":"MyThirdCont","state":"creating","accountId":"1a5","blkioDeviceOptions":null,"blkioWeight":null,"build":null,"capAdd":null,"capDrop":null,"cgroupParent":null,"command":null,"cpuCount":null,"cpuPercent":null,"cpuPeriod":null,"cpuQuota":null,"cpuSet":null,"cpuSetMems":null,"cpuShares":null,"createIndex":null,"created":"2017-01-11T08:06:03Z","createdTS":1484121963000,"dataVolumeMounts":null,"dataVolumes":null,"dataVolumesFrom":null,"deploymentUnitUuid":null,"description":"Testing","devices":null,"diskQuota":null,"dns":null,"dnsOpt":null,"dnsSearch":null,"domainName":null,"entryPoint":null,"environment":null,"expose":[],"externalId":null,"extraHosts":null,"firstRunning":null,"groupAdd":null,"healthCheck":null,"healthCmd":null,"healthInterval":null,"healthRetries":null,"healthState":null,"healthTimeout":null,"hostId":null,"hostname":null,"imageUuid":"docker:tutum/hello-world","instanceTriggeredStop":"stop","ioMaximumBandwidth":null,"ioMaximumIOps":null,"ip":null,"ip6":null,"ipcMode":null,"isolation":null,"kernelMemory":null,"kind":"container","labels":null,"logConfig":null,"lxcConf":null,"memory":null,"memoryReservation":null,"memorySwap":null,"memorySwappiness":null,"milliCpuReservation":null,"mounts":null,"nativeContainer":false,"netAlias":null,"networkContainerId":null,"networkMode":"managed","oomKillDisable":null,"oomScoreAdj":null,"pidMode":null,"pidsLimit":null,"ports":null,"primaryIpAddress":null,"primaryNetworkId":null,"privileged":false,"publishAllPorts":false,"readOnly":false,"registryCredentialId":null,"removed":null,"requestedHostId":null,"restartPolicy":null,"securityOpt":null,"serviceIds":null,"shmSize":null,"startCount":0,"startOnCreate":true,"stdinOpen":false,"stopSignal":null,"storageOpt":null,"sysctls":null,"system":false,"tmpfs":null,"transitioning":"yes","transitioningMessage":"In Progress","transitioningProgress":null,"tty":false,"ulimits":null,"user":null,"usernsMode":null,"uts":null,"uuid":"2f5466fd-1bfe-472b-9681-f3f735be8d90","version":"0","volumeDriver":null,"workingDir":null}
+
+
+
+curl http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17
+
+{"id":"1i17","type":"container","links":{"self":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17","account":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/account","credentials":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/credentials","healthcheckInstanceHostMaps":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/healthcheckinstancehostmaps","hosts":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/hosts","instanceLabels":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/instancelabels","instanceLinks":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/instancelinks","instances":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/instances","mounts":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/mounts","ports":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/ports","serviceEvents":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/serviceevents","serviceExposeMaps":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/serviceexposemaps","serviceLogs":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/servicelogs","services":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/services","targetInstanceLinks":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/targetinstancelinks","volumes":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/volumes","stats":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/stats","containerStats":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/containerstats"},"actions":{"restart":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/?action=restart","update":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/?action=update","stop":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/?action=stop","migrate":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/?action=migrate","logs":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/?action=logs","execute":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/?action=execute","proxy":"http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i17/?action=proxy"},"baseType":"instance","name":"MyThirdCont","state":"running","accountId":"1a5","blkioDeviceOptions":null,"blkioWeight":null,"build":null,"capAdd":null,"capDrop":null,"cgroupParent":null,"command":null,"cpuCount":null,"cpuPercent":null,"cpuPeriod":null,"cpuQuota":null,"cpuSet":null,"cpuSetMems":null,"cpuShares":null,"createIndex":null,"created":"2017-01-11T08:06:03Z","createdTS":1484121963000,"dataVolumeMounts":{},"dataVolumes":[],"dataVolumesFrom":null,"deploymentUnitUuid":null,"description":"Testing","devices":null,"diskQuota":null,"dns":["169.254.169.250"],"dnsOpt":null,"dnsSearch":["rancher.internal"],"domainName":null,"entryPoint":null,"environment":null,"expose":[],"externalId":"3c53f7cf418c2279de700893bdd1c53eca6e0f56dd0f991185384ca00e8fbd5a","extraHosts":null,"firstRunning":"2017-01-11T08:06:15Z","firstRunningTS":1484121975000,"groupAdd":null,"healthCheck":null,"healthCmd":null,"healthInterval":null,"healthRetries":null,"healthState":null,"healthTimeout":null,"hostId":"1h1","hostname":null,"imageUuid":"docker:tutum/hello-world","instanceTriggeredStop":"stop","ioMaximumBandwidth":null,"ioMaximumIOps":null,"ip":null,"ip6":null,"ipcMode":null,"isolation":null,"kernelMemory":null,"kind":"container","labels":{"io.rancher.container.ip":"10.42.141.163/16","io.rancher.container.uuid":"2f5466fd-1bfe-472b-9681-f3f735be8d90","io.rancher.cni.network":"ipsec","io.rancher.container.name":"MyThirdCont","io.rancher.cni.wait":"true"},"logConfig":null,"lxcConf":null,"memory":null,"memoryReservation":null,"memorySwap":null,"memorySwappiness":null,"milliCpuReservation":null,"mounts":null,"nativeContainer":false,"netAlias":null,"networkContainerId":null,"networkMode":"managed","oomKillDisable":null,"oomScoreAdj":null,"pidMode":null,"pidsLimit":null,"ports":null,"primaryIpAddress":"10.42.141.163","primaryNetworkId":"1n5","privileged":false,"publishAllPorts":false,"readOnly":false,"registryCredentialId":null,"removed":null,"requestedHostId":null,"restartPolicy":null,"securityOpt":null,"serviceIds":null,"shmSize":null,"startCount":1,"startOnCreate":true,"stdinOpen":false,"stopSignal":null,"storageOpt":null,"sysctls":null,"system":false,"tmpfs":null,"transitioning":"no","transitioningMessage":null,"transitioningProgress":null,"tty":false,"ulimits":null,"user":null,"usernsMode":null,"uts":null,"uuid":"2f5466fd-1bfe-472b-9681-f3f735be8d90","version":"0","volumeDriver":null,"workingDir":null}
+
+curl -u "B82650A88E19ACDA7FF4:Etj4UWdn9YYzQzHRLK1RnhFV6s2Nz9UMQVsKX999" \
+-X DELETE \
+-H 'Accept: application/json' \
+'http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i12'
+
+curl -u "B82650A88E19ACDA7FF4:Etj4UWdn9YYzQzHRLK1RnhFV6s2Nz9UMQVsKX999" -X POST \
+-H 'Accept: application/json' \
+-H 'Content-Type: application/json' \
+-d '{"follow":true, "lines":100}' \
+'http://185.88.29.244:8080/v2-beta/projects/1a5/containers/1i31/?action=logs'
+
+

@@ -1,0 +1,292 @@
+#! /bin/bash 
+
+Ubuntu is a Debian type linux system 
+
+########## basic linux commands
+
+s=/the/path/foo.txt
+echo ${s##*/}
+s=${s##*/}
+echo ${s%.txt}
+echo ${s%.*}
+
+URL='http://login:password@example.com/one/more/dir/file.exe?a=sth&b=sth'
+URL_NOPRO=${URL:7}
+URL_REL=${URL_NOPRO#*/}
+echo "/${URL_REL%%\?*}"
+
+url="http://www.foo.bar/file.txt" 
+s=${url##*/}
+echo ${s%.*}
+
+url2="test.tar.gz"
+extension=`echo $url2 | awk -F'[.]' '{print $(NF-1)"."$NF}'`
+echo $extension 
+tar.gz
+extension=`echo $url2 | awk -F'[.]' '{print $NF}'`
+echo $extension 
+gz
+
+curl -s  https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python -  #speed test command
+
+sudo kvm -net nic,model=?
+qemu: Supported NIC models: ne2k_pci,i82551,i82557b,i82559er,rtl8139,e1000,pcnet,virtio   #find supportable nics 
+
+ls -1 /usr/bin/ | wc -l   #Counting Files in the Current Directory
+
+sed -n -e '/age is : 10/{x;p;d;}' -e x Foo.txt   # find previous line of particular pattern string  http://unix.stackexchange.com/questions/206886/print-previous-line-after-a-pattern-match-using-sed
+
+ifconfig br0 down
+brctl delbr br0
+
+netstat -i                      #Show a Table Of All Network Interfaces Using netstat Command
+
+mkdir dir-name	 	 	#  make directory 
+  mkdir -p /dir1/dir2/dir3 	# make sequence of directories
+ls -la				# list files and dir with size and created at 
+cd 				# change current working dir
+date    			# view system current date time
+
+echo $Var " hello world  "	# to print var and strings
+ echo "file contents " >/path/filename  # write a new file or overwire into a file
+ echo "file contensts" >>/path/filename # writing into an existing file
+
+cat >/filepath <<'EOF'
+//  > to write new file
+//  >> to appand with existing file
+EOF
+
+cat filepath   //to view file content
+
+rm -f /usr/bin/gem					# removemove file[-f]  -r both file and dir  empty rm is file 
+
+ln -s /usr/bin/ruby2.0 /usr/bin/ruby            	# make link -s symbolic links instead of hard links.
+
+mv  src-path destn-path					# rename file/dir and move file to another location
+
+cp -r src-path destn-path
+
+
+FILENAME=./one.db
+$(stat -c%s "$FILENAME")   /find file size
+
+grep -RnisI "Cannot" ./*    Cannot parse image SIZE    # search a string inside files * all files in current and subdirectories
+
+dist=`grep PRETTY_NAME /etc/*-release | awk -F '="' '{print $2}'`
+os=$(echo $dist | awk '{print $1;}')					# to get os name to a variable  
+
+mac=`ethtool -P eth0 | awk -F 'Permanent address:' '{print $2}'`
+
+ip link set eth0 address 02:00:00:25:dc:f7
+
+truncate -s 0 /var/log/* &> /dev/null   			# to empty all files in a directory 
+
+chmod 0755 /filepath                        #change file mode  executable,writable or read only 755 -executabe 777 - all permissions
+
+chown  user:user   -R /path/*               #change owner of files/dir [sudoer]
+
+grep -vE '^($|#)' /etc/libvirt/libvirtd.conf   //to view only uncommented lines
+
+############# ubuntu and debian inbuild and package handling
+
+#To format The partition as FAT32 use
+#Be careful that if you enter the wrong device name, you might also accidentally format your hard disk!
+
+mkdosfs -F 32 -I /dev/sdb
+
+lsblk | egrep "TYPE|disk"                        # filter with two or more strings 
+lsblk | egrep "TYPE|disk|part"  
+
+
+nmap -sP 192.168.1.*                     # to get all active IPs in current network
+
+Nmap scan report for 192.168.1.1
+Host is up (0.0044s latency).
+   .
+   .
+Nmap scan report for 192.168.1.25
+Host is up (0.00014s latency).
+Nmap done: 256 IP addresses (10 hosts up) scanned in 4.00 seconds
+
+modprobe nfsd          # manually start module drivers 
+
+ifconfig | grep -B1 "inet addr:94.23.19.228" | awk '$1!="inet" && $1!="--" {print $1}' //get network interface name from ip 
+
+mount -o loop -t iso9660 filename.iso /path/to/test_folder   //extract or mount iso file 
+
+gzip -d file.gz   or  gunzip file.gz
+
+unzip file.zip -d destination_folder
+
+ #to find out top 10 largest file/directories:
+du -a /var | sort -n -r | head -n 10	#in var directory  maximum size dir in Kbytes
+du -hsx * | sort -rh | head -10         #10 maximum size  in MB or GB 
+du -hsx * | sort -rh | tail -10        # 10 minimum size file or dir   
+
+#find maximum sized files
+
+sed -i '14,18 s/^/#/' bla.conf      //comment lines 14 - 18
+sed -i '14,18 s/^##*//' bla.conf    //uncomment lines 14 - 18
+
+#sed replace url
+sed -i 's/^[ \t]*:one_xmlrpc:.*/:one_xmlrpc: http:\/\/192.168.0.129:2633\/RPC2/' /etc/one/sunstone-server.conf  
+sed -i 's/^[ \t]*nsqd = \["localhost:4150"\].*/    nsqd = \["192.168.0.101:4150"\]/' vertice.conf
+
+gateway_url=`echo $GATEWAY | sed -e "s/\//\\\\\\\\\//g"`
+sed -i 's/^[ \t]*http_api.*/http_api = '"${gateway_url}"'/g'  $NILAVU_CONF
+
+ls -l --block-size=M   # list file with size as MB
+
+ifconfig       # to see network configurations
+
+
+sudo echo 3 > /proc/sys/vm/drop_caches                           	//cache memory clean
+
+apt-get -y update 	& apt-get -y install package-names 		# update & install package -y yes for yes or no questions	
+
+
+dpkg -s package name & dpkg --get-selections		# status of installed package &&	# list all installed packages
+
+dpkg --configure -a                             # to resolve dpkg errors
+
+apt-key adv --keyserver keyserver.ubuntu.com --recv [KEY]   # add key for install a new packages
+
+echo 'deb [arch=amd64] http://get.megam.io/0.9/ubuntu/14.04/ trusty testing' >>/etc/apt/sources.list  # new package source list files for update
+/etc/apt/sources.list.d/package-src-filename.list  # in this dir we can write a separate file to update new packages 
+
+
+lsof -i -P | grep "3000"          	# check port is running or not in local system
+
+ps -ef                                  # list all current running processes
+UID        PID  PPID  C STIME TTY          TIME CMD
+root         1     0  0 09:14 ?        00:00:02 /sbin/init splash
+root         2     0  0 09:14 ?        00:00:00 [kthreadd]
+
+
+ps -ef | grep cadvisor 			# Check running packages by name 
+
+kill -9 [processid]			#kill the file using process id
+
+lsb_release -a [-c -d -r]  or cat /etc/os-rease	# to check os version type  
+
+sudo -H -u oneadmin bash -c "one restart"       # run bash command as particular user 
+
+lshw -c network
+
+
+stat --format '%a' <secret.xml>   # to get value for the file mode  
+
+arr=( $(ls ./vijay/*.war) )      ##to get name of unknow file by extension
+ 
+
+echo "vijay  ALL=(ALL:ALL) ALL" >/etc/sudoers    # set sudoer permission to existing user
+
+
+wget -P /var/lib/megam https://link-path/0.92.tar.gz   #download files from public access links and store to location
+
+tar -zcvpf abc.tar.gz ./file-or-dir-path/              #to create a tar.gz file
+
+tar xf /var/lib/megam/0.92.tar.gz -C /var/lib/megam/chef-repo --strip-components 1;  #untar tar files to specific location [-xvf to view files]
+
+sudo find . -type f -name "*.*~"
+
+cut -d: -f1 /etc/passwd    # list all users in ubuntu
+cut -f1 /etc/passwd      
+
+getent group  # to show all the groups, just leave your search query off of the command:
+
+## copy /tmp/abc.txt to /tmp/abc.txt (target path)
+
+##   username and password of 10.1.1.2 is "username" and "password"
+
+
+# install sshpass (ubuntu)
+
+sudo apt-get install sshpass
+
+sshpass -p "password" scp /tmp/abc.txt username@10.1.1.2:/tmp/abc.txt
+
+#using Private_key
+
+scp -i path/to/private_key path/to/local/file remoteUserId@remoteHost:/path/to/remote/folder
+
+
+cat /etc/resolvconf/resolv.conf.d/head  #edit enable dns like google.com default 8.8.8.8
+ 
+journalctl -u <service-name> -b / -f  ## view particular service log
+
+journalctl -u nginx.service -u php-fpm.service --since "2015-01-10 17:15:00"
+
+http://www.systutorials.com/39549/changing-linux-users-password-in-one-command-line/
+
+
+whiptail --checklist "Please select your packages to build " 10 60 5 vertice vertice on nilavu verticenilavu off\
+  gateway verticegateway off vnc verticevnc off  all ["vertice","verticegateway","verticenilavu","verticevnc","verticegulpd"] off
+
+# print color text and highlighted text
+for i in {30..47}; do
+echo -e "\033[0;${i}m I am watching you access my system \033[0m   - ${i}"
+done
+
+
+for (( c=30; c<=47; c++ ))
+do  
+echo -e "\033[0;${c}m Welcome to you access my system \033[0m"
+done
+
+date | awk '{print $2}'
+
+days=("Sun" "Mon" "Tue" "Wed" "Thu" "Fri" "Sat")
+echo $days
+
+# day of year
+doy=$(date +%j)
+
+
+
+# to change ubuntu default boot name 
+
+/usr/share/plymouth/themes/ubuntu-text
+cat ubuntu-text.plymouth
+[Plymouth Theme]
+Name=Ubuntu Text
+Description=Text mode theme based on ubuntu-logo theme
+ModuleName=ubuntu-text
+
+[ubuntu-text]
+title=<your desire title>
+black=0x2c001e
+white=0xffffff
+brown=0xff4012
+blue=0x988592
+
+# to find binary runs from 
+which brctl
+/sbin/brctl
+
+
+# to change LCD screen brightness  https://askubuntu.com/questions/149054/how-to-change-lcd-brightness-from-command-line-or-via-script
+
+Open your terminal and type this
+
+xrandr -q | grep " connected"
+it will gives you the output as LVDS1 connected 1680x1050+0+0 (normal left inverted right x axis y axis) 331mm x 207mm
+
+There LVDS1 Stands for your display .
+
+so now you have to do as
+
+xrandr --output LVDS1 --brightness 0.5
+there 0.5 stands for brightness and it ranges from 0.0 to 1.0 . 0.0 -> Full black .so you have to choose the required value of brightness .
+
+Example (in my system)
+	$ xrandr -q | grep " connected"
+	   eDP connected primary 1366x768+0+0 (normal left inverted right x axis y axis) 344mm x 193mm
+
+	$ xrandr --output eDP --brightness 0.5
+
+
+
+# to run boot up commands 
+/etc/rc-local
+

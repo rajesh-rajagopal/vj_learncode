@@ -1,0 +1,7 @@
+assembly_id="123456789"
+
+** Welcome to writer **
+** New appender **
+my name 
+is
+vijay

@@ -1,0 +1,1137 @@
+[2016-05-20 16:29:18,837][ceph_deploy.conf][DEBUG ] found configuration file at: /home/megdc/.cephdeploy.conf
+[2016-05-20 16:29:18,838][ceph_deploy.cli][INFO  ] Invoked (1.5.33): /usr/bin/ceph-deploy osd prepare --fs-type ext4 node1:/storage1/osd node1:/storage2/osd
+[2016-05-20 16:29:18,838][ceph_deploy.cli][INFO  ] ceph-deploy options:
+[2016-05-20 16:29:18,838][ceph_deploy.cli][INFO  ]  username                      : None
+[2016-05-20 16:29:18,838][ceph_deploy.cli][INFO  ]  disk                          : [('node1', '/storage1/osd', None), ('node1', '/storage2/osd', None)]
+[2016-05-20 16:29:18,838][ceph_deploy.cli][INFO  ]  dmcrypt                       : False
+[2016-05-20 16:29:18,838][ceph_deploy.cli][INFO  ]  verbose                       : False
+[2016-05-20 16:29:18,838][ceph_deploy.cli][INFO  ]  bluestore                     : None
+[2016-05-20 16:29:18,838][ceph_deploy.cli][INFO  ]  overwrite_conf                : False
+[2016-05-20 16:29:18,838][ceph_deploy.cli][INFO  ]  subcommand                    : prepare
+[2016-05-20 16:29:18,838][ceph_deploy.cli][INFO  ]  dmcrypt_key_dir               : /etc/ceph/dmcrypt-keys
+[2016-05-20 16:29:18,839][ceph_deploy.cli][INFO  ]  quiet                         : False
+[2016-05-20 16:29:18,839][ceph_deploy.cli][INFO  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7f964d3f1f80>
+[2016-05-20 16:29:18,839][ceph_deploy.cli][INFO  ]  cluster                       : ceph
+[2016-05-20 16:29:18,839][ceph_deploy.cli][INFO  ]  fs_type                       : ext4
+[2016-05-20 16:29:18,839][ceph_deploy.cli][INFO  ]  func                          : <function osd at 0x7f964d853578>
+[2016-05-20 16:29:18,839][ceph_deploy.cli][INFO  ]  ceph_conf                     : None
+[2016-05-20 16:29:18,839][ceph_deploy.cli][INFO  ]  default_release               : False
+[2016-05-20 16:29:18,839][ceph_deploy.cli][INFO  ]  zap_disk                      : False
+[2016-05-20 16:29:18,839][ceph_deploy][ERROR ] ConfigError: Cannot load config: [Errno 2] No such file or directory: 'ceph.conf'; has `ceph-deploy new` been run in this directory?
+
+[2016-05-23 09:35:16,435][ceph_deploy.conf][DEBUG ] found configuration file at: /root/.cephdeploy.conf
+[2016-05-23 09:35:16,436][ceph_deploy.cli][INFO  ] Invoked (1.5.33): /usr/bin/ceph-deploy uninstall node1
+[2016-05-23 09:35:16,436][ceph_deploy.cli][INFO  ] ceph-deploy options:
+[2016-05-23 09:35:16,436][ceph_deploy.cli][INFO  ]  username                      : None
+[2016-05-23 09:35:16,436][ceph_deploy.cli][INFO  ]  verbose                       : False
+[2016-05-23 09:35:16,436][ceph_deploy.cli][INFO  ]  overwrite_conf                : False
+[2016-05-23 09:35:16,437][ceph_deploy.cli][INFO  ]  quiet                         : False
+[2016-05-23 09:35:16,437][ceph_deploy.cli][INFO  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7fa88072a050>
+[2016-05-23 09:35:16,437][ceph_deploy.cli][INFO  ]  cluster                       : ceph
+[2016-05-23 09:35:16,437][ceph_deploy.cli][INFO  ]  host                          : ['node1']
+[2016-05-23 09:35:16,437][ceph_deploy.cli][INFO  ]  func                          : <function uninstall at 0x7fa880fb9140>
+[2016-05-23 09:35:16,437][ceph_deploy.cli][INFO  ]  ceph_conf                     : None
+[2016-05-23 09:35:16,437][ceph_deploy.cli][INFO  ]  default_release               : False
+[2016-05-23 09:35:16,438][ceph_deploy.install][INFO  ] note that some dependencies *will not* be removed because they can cause issues with qemu-kvm
+[2016-05-23 09:35:16,438][ceph_deploy.install][INFO  ] like: librbd1 and librados2
+[2016-05-23 09:35:16,438][ceph_deploy.install][DEBUG ] Uninstalling on cluster ceph hosts node1
+[2016-05-23 09:35:16,438][ceph_deploy.install][DEBUG ] Detecting platform for host node1 ...
+[2016-05-23 09:35:16,503][node1][DEBUG ] connected to host: node1 
+[2016-05-23 09:35:16,504][node1][DEBUG ] detect platform information from remote host
+[2016-05-23 09:35:16,530][node1][DEBUG ] detect machine type
+[2016-05-23 09:35:16,534][node1][DEBUG ] find the location of an executable
+[2016-05-23 09:35:16,537][node1][INFO  ] Running command: /sbin/initctl version
+[2016-05-23 09:35:16,558][ceph_deploy.install][INFO  ] Distro info: Ubuntu 14.04 trusty
+[2016-05-23 09:35:16,559][node1][INFO  ] Uninstalling Ceph on node1
+[2016-05-23 09:35:16,560][node1][INFO  ] Running command: env DEBIAN_FRONTEND=noninteractive DEBIAN_PRIORITY=critical apt-get --assume-yes -q -f --force-yes remove ceph ceph-mds ceph-common ceph-fs-common radosgw
+[2016-05-23 09:35:16,597][node1][DEBUG ] Reading package lists...
+[2016-05-23 09:35:16,862][node1][DEBUG ] Building dependency tree...
+[2016-05-23 09:35:16,862][node1][DEBUG ] Reading state information...
+[2016-05-23 09:35:16,976][node1][DEBUG ] The following packages were automatically installed and are no longer required:
+[2016-05-23 09:35:16,976][node1][DEBUG ]   ceph-fuse cryptsetup-bin libbabeltrace-ctf1 libbabeltrace1
+[2016-05-23 09:35:16,977][node1][DEBUG ]   libboost-program-options1.54.0 libboost-regex1.54.0 libcephfs1
+[2016-05-23 09:35:16,977][node1][DEBUG ]   libcryptsetup4 libfcgi0ldbl libgoogle-perftools4 libjs-jquery libleveldb1
+[2016-05-23 09:35:16,977][node1][DEBUG ]   libradosstriper1 librgw2 libsnappy1 libtcmalloc-minimal4 libunwind8
+[2016-05-23 09:35:16,977][node1][DEBUG ]   python-blinker python-cephfs python-flask python-itsdangerous python-jinja2
+[2016-05-23 09:35:16,977][node1][DEBUG ]   python-markupsafe python-openssl python-pyinotify python-rados python-rbd
+[2016-05-23 09:35:16,977][node1][DEBUG ]   python-werkzeug
+[2016-05-23 09:35:16,977][node1][DEBUG ] Use 'apt-get autoremove' to remove them.
+[2016-05-23 09:35:16,977][node1][DEBUG ] The following packages will be REMOVED:
+[2016-05-23 09:35:16,978][node1][DEBUG ]   ceph ceph-base ceph-common ceph-fs-common ceph-mds ceph-mon ceph-osd radosgw
+[2016-05-23 09:35:17,091][node1][DEBUG ] 0 upgraded, 0 newly installed, 8 to remove and 0 not upgraded.
+[2016-05-23 09:35:17,092][node1][DEBUG ] After this operation, 450 MB disk space will be freed.
+[2016-05-23 09:35:17,092][node1][DEBUG ] (Reading database ... 42893 files and directories currently installed.)
+[2016-05-23 09:35:17,092][node1][DEBUG ] Removing ceph-mds (10.2.1-1trusty) ...
+[2016-05-23 09:35:17,095][node1][DEBUG ] ceph-mds-all stop/waiting
+[2016-05-23 09:35:17,209][node1][DEBUG ] Removing ceph (10.2.1-1trusty) ...
+[2016-05-23 09:35:17,210][node1][DEBUG ] Removing ceph-osd (10.2.1-1trusty) ...
+[2016-05-23 09:35:19,328][node1][DEBUG ] ceph-osd-all stop/waiting
+[2016-05-23 09:35:19,492][node1][DEBUG ] Removing ceph-mon (10.2.1-1trusty) ...
+[2016-05-23 09:35:19,492][node1][DEBUG ] ceph-mon-all stop/waiting
+[2016-05-23 09:35:19,656][node1][DEBUG ] Removing ceph-base (10.2.1-1trusty) ...
+[2016-05-23 09:35:19,656][node1][DEBUG ] ceph-all stop/waiting
+[2016-05-23 09:35:19,870][node1][DEBUG ] Removing radosgw (10.2.1-1trusty) ...
+[2016-05-23 09:35:19,871][node1][WARNING] stop: Unknown instance: 
+[2016-05-23 09:35:19,934][node1][DEBUG ] Removing ceph-common (10.2.1-1trusty) ...
+[2016-05-23 09:35:20,048][node1][DEBUG ] Removing ceph-fs-common (10.2.1-1trusty) ...
+[2016-05-23 09:35:20,049][node1][DEBUG ] Processing triggers for man-db (2.6.7.1-1ubuntu1) ...
+[2016-05-23 09:35:28,109][ceph_deploy.conf][DEBUG ] found configuration file at: /root/.cephdeploy.conf
+[2016-05-23 09:35:28,109][ceph_deploy.cli][INFO  ] Invoked (1.5.33): /usr/bin/ceph-deploy purgedata node1
+[2016-05-23 09:35:28,110][ceph_deploy.cli][INFO  ] ceph-deploy options:
+[2016-05-23 09:35:28,110][ceph_deploy.cli][INFO  ]  username                      : None
+[2016-05-23 09:35:28,110][ceph_deploy.cli][INFO  ]  verbose                       : False
+[2016-05-23 09:35:28,110][ceph_deploy.cli][INFO  ]  overwrite_conf                : False
+[2016-05-23 09:35:28,110][ceph_deploy.cli][INFO  ]  quiet                         : False
+[2016-05-23 09:35:28,110][ceph_deploy.cli][INFO  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7f81fe856cb0>
+[2016-05-23 09:35:28,110][ceph_deploy.cli][INFO  ]  cluster                       : ceph
+[2016-05-23 09:35:28,110][ceph_deploy.cli][INFO  ]  host                          : ['node1']
+[2016-05-23 09:35:28,110][ceph_deploy.cli][INFO  ]  func                          : <function purgedata at 0x7f81ff161230>
+[2016-05-23 09:35:28,110][ceph_deploy.cli][INFO  ]  ceph_conf                     : None
+[2016-05-23 09:35:28,111][ceph_deploy.cli][INFO  ]  default_release               : False
+[2016-05-23 09:35:28,111][ceph_deploy.install][DEBUG ] Purging data from cluster ceph hosts node1
+[2016-05-23 09:35:28,173][node1][DEBUG ] connected to host: node1 
+[2016-05-23 09:35:28,173][node1][DEBUG ] detect platform information from remote host
+[2016-05-23 09:35:28,200][node1][DEBUG ] detect machine type
+[2016-05-23 09:35:28,203][node1][DEBUG ] find the location of an executable
+[2016-05-23 09:35:28,206][node1][INFO  ] Running command: /sbin/initctl version
+[2016-05-23 09:35:28,228][node1][DEBUG ] find the location of an executable
+[2016-05-23 09:35:28,271][node1][DEBUG ] connected to host: node1 
+[2016-05-23 09:35:28,272][node1][DEBUG ] detect platform information from remote host
+[2016-05-23 09:35:28,298][node1][DEBUG ] detect machine type
+[2016-05-23 09:35:28,302][node1][DEBUG ] find the location of an executable
+[2016-05-23 09:35:28,304][node1][INFO  ] Running command: /sbin/initctl version
+[2016-05-23 09:35:28,322][ceph_deploy.install][INFO  ] Distro info: Ubuntu 14.04 trusty
+[2016-05-23 09:35:28,323][node1][INFO  ] purging data on node1
+[2016-05-23 09:35:28,324][node1][INFO  ] Running command: rm -rf --one-file-system -- /var/lib/ceph
+[2016-05-23 09:35:28,336][node1][INFO  ] Running command: rm -rf --one-file-system -- /etc/ceph/
+[2016-05-23 09:35:39,414][ceph_deploy.conf][DEBUG ] found configuration file at: /root/.cephdeploy.conf
+[2016-05-23 09:35:39,414][ceph_deploy.cli][INFO  ] Invoked (1.5.33): /usr/bin/ceph-deploy purge node1
+[2016-05-23 09:35:39,414][ceph_deploy.cli][INFO  ] ceph-deploy options:
+[2016-05-23 09:35:39,415][ceph_deploy.cli][INFO  ]  username                      : None
+[2016-05-23 09:35:39,415][ceph_deploy.cli][INFO  ]  verbose                       : False
+[2016-05-23 09:35:39,415][ceph_deploy.cli][INFO  ]  overwrite_conf                : False
+[2016-05-23 09:35:39,415][ceph_deploy.cli][INFO  ]  quiet                         : False
+[2016-05-23 09:35:39,415][ceph_deploy.cli][INFO  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7f7f60c06638>
+[2016-05-23 09:35:39,415][ceph_deploy.cli][INFO  ]  cluster                       : ceph
+[2016-05-23 09:35:39,415][ceph_deploy.cli][INFO  ]  host                          : ['node1']
+[2016-05-23 09:35:39,415][ceph_deploy.cli][INFO  ]  func                          : <function purge at 0x7f7f615111b8>
+[2016-05-23 09:35:39,415][ceph_deploy.cli][INFO  ]  ceph_conf                     : None
+[2016-05-23 09:35:39,415][ceph_deploy.cli][INFO  ]  default_release               : False
+[2016-05-23 09:35:39,415][ceph_deploy.install][INFO  ] note that some dependencies *will not* be removed because they can cause issues with qemu-kvm
+[2016-05-23 09:35:39,416][ceph_deploy.install][INFO  ] like: librbd1 and librados2
+[2016-05-23 09:35:39,416][ceph_deploy.install][DEBUG ] Purging on cluster ceph hosts node1
+[2016-05-23 09:35:39,416][ceph_deploy.install][DEBUG ] Detecting platform for host node1 ...
+[2016-05-23 09:35:39,479][node1][DEBUG ] connected to host: node1 
+[2016-05-23 09:35:39,480][node1][DEBUG ] detect platform information from remote host
+[2016-05-23 09:35:39,505][node1][DEBUG ] detect machine type
+[2016-05-23 09:35:39,509][node1][DEBUG ] find the location of an executable
+[2016-05-23 09:35:39,512][node1][INFO  ] Running command: /sbin/initctl version
+[2016-05-23 09:35:39,533][ceph_deploy.install][INFO  ] Distro info: Ubuntu 14.04 trusty
+[2016-05-23 09:35:39,533][node1][INFO  ] Purging Ceph on node1
+[2016-05-23 09:35:39,535][node1][INFO  ] Running command: env DEBIAN_FRONTEND=noninteractive DEBIAN_PRIORITY=critical apt-get --assume-yes -q -f --force-yes remove --purge ceph ceph-mds ceph-common ceph-fs-common radosgw
+[2016-05-23 09:35:39,573][node1][DEBUG ] Reading package lists...
+[2016-05-23 09:35:39,837][node1][DEBUG ] Building dependency tree...
+[2016-05-23 09:35:39,837][node1][DEBUG ] Reading state information...
+[2016-05-23 09:35:39,951][node1][DEBUG ] Package 'ceph' is not installed, so not removed
+[2016-05-23 09:35:39,952][node1][DEBUG ] Package 'ceph-fs-common' is not installed, so not removed
+[2016-05-23 09:35:39,952][node1][DEBUG ] The following packages were automatically installed and are no longer required:
+[2016-05-23 09:35:39,952][node1][DEBUG ]   ceph-fuse cryptsetup-bin libbabeltrace-ctf1 libbabeltrace1
+[2016-05-23 09:35:39,952][node1][DEBUG ]   libboost-program-options1.54.0 libboost-regex1.54.0 libcephfs1
+[2016-05-23 09:35:39,952][node1][DEBUG ]   libcryptsetup4 libfcgi0ldbl libgoogle-perftools4 libjs-jquery libleveldb1
+[2016-05-23 09:35:39,952][node1][DEBUG ]   libradosstriper1 librgw2 libsnappy1 libtcmalloc-minimal4 libunwind8
+[2016-05-23 09:35:39,953][node1][DEBUG ]   python-blinker python-cephfs python-flask python-itsdangerous python-jinja2
+[2016-05-23 09:35:39,953][node1][DEBUG ]   python-markupsafe python-openssl python-pyinotify python-rados python-rbd
+[2016-05-23 09:35:39,953][node1][DEBUG ]   python-werkzeug
+[2016-05-23 09:35:39,953][node1][DEBUG ] Use 'apt-get autoremove' to remove them.
+[2016-05-23 09:35:39,985][node1][DEBUG ] The following packages will be REMOVED:
+[2016-05-23 09:35:39,985][node1][DEBUG ]   ceph-common* ceph-mds* radosgw*
+[2016-05-23 09:35:40,099][node1][DEBUG ] 0 upgraded, 0 newly installed, 3 to remove and 0 not upgraded.
+[2016-05-23 09:35:40,099][node1][DEBUG ] After this operation, 0 B of additional disk space will be used.
+[2016-05-23 09:35:40,131][node1][DEBUG ] (Reading database ... 42650 files and directories currently installed.)
+[2016-05-23 09:35:40,131][node1][DEBUG ] Removing ceph-common (10.2.1-1trusty) ...
+[2016-05-23 09:35:40,131][node1][DEBUG ] Purging configuration files for ceph-common (10.2.1-1trusty) ...
+[2016-05-23 09:35:40,131][node1][WARNING] dpkg: warning: ceph-common: conffile '/etc/default/ceph' is not a plain file or symlink (= '/etc/default/ceph')
+[2016-05-23 09:35:40,132][node1][DEBUG ] Removing ceph-mds (10.2.1-1trusty) ...
+[2016-05-23 09:35:40,133][node1][DEBUG ] Purging configuration files for ceph-mds (10.2.1-1trusty) ...
+[2016-05-23 09:35:40,148][node1][DEBUG ] Removing radosgw (10.2.1-1trusty) ...
+[2016-05-23 09:35:40,149][node1][DEBUG ] Purging configuration files for radosgw (10.2.1-1trusty) ...
+[2016-05-23 09:47:43,775][ceph_deploy.conf][DEBUG ] found configuration file at: /root/.cephdeploy.conf
+[2016-05-23 09:47:43,775][ceph_deploy.cli][INFO  ] Invoked (1.5.33): /usr/bin/ceph-deploy uninstall node1
+[2016-05-23 09:47:43,776][ceph_deploy.cli][INFO  ] ceph-deploy options:
+[2016-05-23 09:47:43,776][ceph_deploy.cli][INFO  ]  username                      : None
+[2016-05-23 09:47:43,776][ceph_deploy.cli][INFO  ]  verbose                       : False
+[2016-05-23 09:47:43,776][ceph_deploy.cli][INFO  ]  overwrite_conf                : False
+[2016-05-23 09:47:43,776][ceph_deploy.cli][INFO  ]  quiet                         : False
+[2016-05-23 09:47:43,776][ceph_deploy.cli][INFO  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7f43083ea050>
+[2016-05-23 09:47:43,776][ceph_deploy.cli][INFO  ]  cluster                       : ceph
+[2016-05-23 09:47:43,776][ceph_deploy.cli][INFO  ]  host                          : ['node1']
+[2016-05-23 09:47:43,776][ceph_deploy.cli][INFO  ]  func                          : <function uninstall at 0x7f4308c79140>
+[2016-05-23 09:47:43,777][ceph_deploy.cli][INFO  ]  ceph_conf                     : None
+[2016-05-23 09:47:43,777][ceph_deploy.cli][INFO  ]  default_release               : False
+[2016-05-23 09:47:43,777][ceph_deploy.install][INFO  ] note that some dependencies *will not* be removed because they can cause issues with qemu-kvm
+[2016-05-23 09:47:43,777][ceph_deploy.install][INFO  ] like: librbd1 and librados2
+[2016-05-23 09:47:43,777][ceph_deploy.install][DEBUG ] Uninstalling on cluster ceph hosts node1
+[2016-05-23 09:47:43,777][ceph_deploy.install][DEBUG ] Detecting platform for host node1 ...
+[2016-05-23 09:47:43,840][node1][DEBUG ] connected to host: node1 
+[2016-05-23 09:47:43,840][node1][DEBUG ] detect platform information from remote host
+[2016-05-23 09:47:43,864][node1][DEBUG ] detect machine type
+[2016-05-23 09:47:43,868][node1][DEBUG ] find the location of an executable
+[2016-05-23 09:47:43,871][node1][INFO  ] Running command: /sbin/initctl version
+[2016-05-23 09:47:43,892][ceph_deploy.install][INFO  ] Distro info: Ubuntu 14.04 trusty
+[2016-05-23 09:47:43,892][node1][INFO  ] Uninstalling Ceph on node1
+[2016-05-23 09:47:43,894][node1][INFO  ] Running command: env DEBIAN_FRONTEND=noninteractive DEBIAN_PRIORITY=critical apt-get --assume-yes -q -f --force-yes remove ceph ceph-mds ceph-common ceph-fs-common radosgw
+[2016-05-23 09:47:43,931][node1][DEBUG ] Reading package lists...
+[2016-05-23 09:47:44,196][node1][DEBUG ] Building dependency tree...
+[2016-05-23 09:47:44,196][node1][DEBUG ] Reading state information...
+[2016-05-23 09:47:44,310][node1][DEBUG ] The following packages were automatically installed and are no longer required:
+[2016-05-23 09:47:44,310][node1][DEBUG ]   ceph-fuse cryptsetup-bin libbabeltrace-ctf1 libbabeltrace1
+[2016-05-23 09:47:44,310][node1][DEBUG ]   libboost-program-options1.54.0 libboost-regex1.54.0 libcephfs1
+[2016-05-23 09:47:44,311][node1][DEBUG ]   libcryptsetup4 libfcgi0ldbl libgoogle-perftools4 libjs-jquery libleveldb1
+[2016-05-23 09:47:44,311][node1][DEBUG ]   libradosstriper1 librgw2 libsnappy1 libtcmalloc-minimal4 libunwind8
+[2016-05-23 09:47:44,311][node1][DEBUG ]   python-blinker python-cephfs python-flask python-itsdangerous python-jinja2
+[2016-05-23 09:47:44,311][node1][DEBUG ]   python-markupsafe python-openssl python-pyinotify python-rados python-rbd
+[2016-05-23 09:47:44,311][node1][DEBUG ]   python-werkzeug
+[2016-05-23 09:47:44,311][node1][DEBUG ] Use 'apt-get autoremove' to remove them.
+[2016-05-23 09:47:44,311][node1][DEBUG ] The following packages will be REMOVED:
+[2016-05-23 09:47:44,312][node1][DEBUG ]   ceph ceph-base ceph-common ceph-fs-common ceph-mds ceph-mon ceph-osd radosgw
+[2016-05-23 09:47:44,426][node1][DEBUG ] 0 upgraded, 0 newly installed, 8 to remove and 0 not upgraded.
+[2016-05-23 09:47:44,426][node1][DEBUG ] After this operation, 450 MB disk space will be freed.
+[2016-05-23 09:47:44,433][node1][DEBUG ] (Reading database ... 42893 files and directories currently installed.)
+[2016-05-23 09:47:44,434][node1][DEBUG ] Removing ceph-mds (10.2.1-1trusty) ...
+[2016-05-23 09:47:44,441][node1][DEBUG ] ceph-mds-all stop/waiting
+[2016-05-23 09:47:44,555][node1][DEBUG ] Removing ceph (10.2.1-1trusty) ...
+[2016-05-23 09:47:44,555][node1][DEBUG ] Removing ceph-osd (10.2.1-1trusty) ...
+[2016-05-23 09:47:46,724][node1][DEBUG ] ceph-osd-all stop/waiting
+[2016-05-23 09:47:46,888][node1][DEBUG ] Removing ceph-mon (10.2.1-1trusty) ...
+[2016-05-23 09:47:46,904][node1][DEBUG ] ceph-mon-all stop/waiting
+[2016-05-23 09:47:47,068][node1][DEBUG ] Removing ceph-base (10.2.1-1trusty) ...
+[2016-05-23 09:47:47,068][node1][DEBUG ] ceph-all stop/waiting
+[2016-05-23 09:47:47,332][node1][DEBUG ] Removing radosgw (10.2.1-1trusty) ...
+[2016-05-23 09:47:47,333][node1][WARNING] stop: Unknown instance: 
+[2016-05-23 09:47:47,364][node1][DEBUG ] Removing ceph-common (10.2.1-1trusty) ...
+[2016-05-23 09:47:47,478][node1][DEBUG ] Removing ceph-fs-common (10.2.1-1trusty) ...
+[2016-05-23 09:47:47,479][node1][DEBUG ] Processing triggers for man-db (2.6.7.1-1ubuntu1) ...
+[2016-05-23 09:47:55,522][ceph_deploy.conf][DEBUG ] found configuration file at: /root/.cephdeploy.conf
+[2016-05-23 09:47:55,523][ceph_deploy.cli][INFO  ] Invoked (1.5.33): /usr/bin/ceph-deploy purgedata node1
+[2016-05-23 09:47:55,523][ceph_deploy.cli][INFO  ] ceph-deploy options:
+[2016-05-23 09:47:55,523][ceph_deploy.cli][INFO  ]  username                      : None
+[2016-05-23 09:47:55,523][ceph_deploy.cli][INFO  ]  verbose                       : False
+[2016-05-23 09:47:55,523][ceph_deploy.cli][INFO  ]  overwrite_conf                : False
+[2016-05-23 09:47:55,523][ceph_deploy.cli][INFO  ]  quiet                         : False
+[2016-05-23 09:47:55,523][ceph_deploy.cli][INFO  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7f563450bcb0>
+[2016-05-23 09:47:55,524][ceph_deploy.cli][INFO  ]  cluster                       : ceph
+[2016-05-23 09:47:55,524][ceph_deploy.cli][INFO  ]  host                          : ['node1']
+[2016-05-23 09:47:55,524][ceph_deploy.cli][INFO  ]  func                          : <function purgedata at 0x7f5634e16230>
+[2016-05-23 09:47:55,524][ceph_deploy.cli][INFO  ]  ceph_conf                     : None
+[2016-05-23 09:47:55,524][ceph_deploy.cli][INFO  ]  default_release               : False
+[2016-05-23 09:47:55,524][ceph_deploy.install][DEBUG ] Purging data from cluster ceph hosts node1
+[2016-05-23 09:47:55,587][node1][DEBUG ] connected to host: node1 
+[2016-05-23 09:47:55,588][node1][DEBUG ] detect platform information from remote host
+[2016-05-23 09:47:55,614][node1][DEBUG ] detect machine type
+[2016-05-23 09:47:55,618][node1][DEBUG ] find the location of an executable
+[2016-05-23 09:47:55,620][node1][INFO  ] Running command: /sbin/initctl version
+[2016-05-23 09:47:55,639][node1][DEBUG ] find the location of an executable
+[2016-05-23 09:47:55,684][node1][DEBUG ] connected to host: node1 
+[2016-05-23 09:47:55,685][node1][DEBUG ] detect platform information from remote host
+[2016-05-23 09:47:55,705][node1][DEBUG ] detect machine type
+[2016-05-23 09:47:55,709][node1][DEBUG ] find the location of an executable
+[2016-05-23 09:47:55,711][node1][INFO  ] Running command: /sbin/initctl version
+[2016-05-23 09:47:55,729][ceph_deploy.install][INFO  ] Distro info: Ubuntu 14.04 trusty
+[2016-05-23 09:47:55,729][node1][INFO  ] purging data on node1
+[2016-05-23 09:47:55,730][node1][INFO  ] Running command: rm -rf --one-file-system -- /var/lib/ceph
+[2016-05-23 09:47:55,741][node1][INFO  ] Running command: rm -rf --one-file-system -- /etc/ceph/
+[2016-05-23 09:48:03,961][ceph_deploy.conf][DEBUG ] found configuration file at: /root/.cephdeploy.conf
+[2016-05-23 09:48:03,961][ceph_deploy.cli][INFO  ] Invoked (1.5.33): /usr/bin/ceph-deploy purge node1
+[2016-05-23 09:48:03,961][ceph_deploy.cli][INFO  ] ceph-deploy options:
+[2016-05-23 09:48:03,961][ceph_deploy.cli][INFO  ]  username                      : None
+[2016-05-23 09:48:03,961][ceph_deploy.cli][INFO  ]  verbose                       : False
+[2016-05-23 09:48:03,961][ceph_deploy.cli][INFO  ]  overwrite_conf                : False
+[2016-05-23 09:48:03,961][ceph_deploy.cli][INFO  ]  quiet                         : False
+[2016-05-23 09:48:03,962][ceph_deploy.cli][INFO  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7f3a8b8b3638>
+[2016-05-23 09:48:03,962][ceph_deploy.cli][INFO  ]  cluster                       : ceph
+[2016-05-23 09:48:03,962][ceph_deploy.cli][INFO  ]  host                          : ['node1']
+[2016-05-23 09:48:03,962][ceph_deploy.cli][INFO  ]  func                          : <function purge at 0x7f3a8c1be1b8>
+[2016-05-23 09:48:03,962][ceph_deploy.cli][INFO  ]  ceph_conf                     : None
+[2016-05-23 09:48:03,962][ceph_deploy.cli][INFO  ]  default_release               : False
+[2016-05-23 09:48:03,962][ceph_deploy.install][INFO  ] note that some dependencies *will not* be removed because they can cause issues with qemu-kvm
+[2016-05-23 09:48:03,962][ceph_deploy.install][INFO  ] like: librbd1 and librados2
+[2016-05-23 09:48:03,962][ceph_deploy.install][DEBUG ] Purging on cluster ceph hosts node1
+[2016-05-23 09:48:03,962][ceph_deploy.install][DEBUG ] Detecting platform for host node1 ...
+[2016-05-23 09:48:04,025][node1][DEBUG ] connected to host: node1 
+[2016-05-23 09:48:04,025][node1][DEBUG ] detect platform information from remote host
+[2016-05-23 09:48:04,052][node1][DEBUG ] detect machine type
+[2016-05-23 09:48:04,056][node1][DEBUG ] find the location of an executable
+[2016-05-23 09:48:04,058][node1][INFO  ] Running command: /sbin/initctl version
+[2016-05-23 09:48:04,079][ceph_deploy.install][INFO  ] Distro info: Ubuntu 14.04 trusty
+[2016-05-23 09:48:04,080][node1][INFO  ] Purging Ceph on node1
+[2016-05-23 09:48:04,081][node1][INFO  ] Running command: env DEBIAN_FRONTEND=noninteractive DEBIAN_PRIORITY=critical apt-get --assume-yes -q -f --force-yes remove --purge ceph ceph-mds ceph-common ceph-fs-common radosgw
+[2016-05-23 09:48:04,118][node1][DEBUG ] Reading package lists...
+[2016-05-23 09:48:04,383][node1][DEBUG ] Building dependency tree...
+[2016-05-23 09:48:04,383][node1][DEBUG ] Reading state information...
+[2016-05-23 09:48:04,447][node1][DEBUG ] Package 'ceph' is not installed, so not removed
+[2016-05-23 09:48:04,448][node1][DEBUG ] Package 'ceph-fs-common' is not installed, so not removed
+[2016-05-23 09:48:04,448][node1][DEBUG ] The following packages were automatically installed and are no longer required:
+[2016-05-23 09:48:04,449][node1][DEBUG ]   ceph-fuse cryptsetup-bin libbabeltrace-ctf1 libbabeltrace1
+[2016-05-23 09:48:04,449][node1][DEBUG ]   libboost-program-options1.54.0 libboost-regex1.54.0 libcephfs1
+[2016-05-23 09:48:04,449][node1][DEBUG ]   libcryptsetup4 libfcgi0ldbl libgoogle-perftools4 libjs-jquery libleveldb1
+[2016-05-23 09:48:04,449][node1][DEBUG ]   libradosstriper1 librgw2 libsnappy1 libtcmalloc-minimal4 libunwind8
+[2016-05-23 09:48:04,449][node1][DEBUG ]   python-blinker python-cephfs python-flask python-itsdangerous python-jinja2
+[2016-05-23 09:48:04,449][node1][DEBUG ]   python-markupsafe python-openssl python-pyinotify python-rados python-rbd
+[2016-05-23 09:48:04,450][node1][DEBUG ]   python-werkzeug
+[2016-05-23 09:48:04,450][node1][DEBUG ] Use 'apt-get autoremove' to remove them.
+[2016-05-23 09:48:04,513][node1][DEBUG ] The following packages will be REMOVED:
+[2016-05-23 09:48:04,514][node1][DEBUG ]   ceph-common* ceph-mds* radosgw*
+[2016-05-23 09:48:04,678][node1][DEBUG ] 0 upgraded, 0 newly installed, 3 to remove and 0 not upgraded.
+[2016-05-23 09:48:04,678][node1][DEBUG ] After this operation, 0 B of additional disk space will be used.
+[2016-05-23 09:48:04,710][node1][DEBUG ] (Reading database ... 42650 files and directories currently installed.)
+[2016-05-23 09:48:04,710][node1][DEBUG ] Removing ceph-common (10.2.1-1trusty) ...
+[2016-05-23 09:48:04,710][node1][DEBUG ] Purging configuration files for ceph-common (10.2.1-1trusty) ...
+[2016-05-23 09:48:04,710][node1][WARNING] dpkg: warning: ceph-common: conffile '/etc/default/ceph' is not a plain file or symlink (= '/etc/default/ceph')
+[2016-05-23 09:48:04,712][node1][DEBUG ] Removing ceph-mds (10.2.1-1trusty) ...
+[2016-05-23 09:48:04,712][node1][DEBUG ] Purging configuration files for ceph-mds (10.2.1-1trusty) ...
+[2016-05-23 09:48:04,728][node1][DEBUG ] Removing radosgw (10.2.1-1trusty) ...
+[2016-05-23 09:48:04,728][node1][DEBUG ] Purging configuration files for radosgw (10.2.1-1trusty) ...
+[2016-05-23 10:00:50,641][ceph_deploy.conf][DEBUG ] found configuration file at: /root/.cephdeploy.conf
+[2016-05-23 10:00:50,641][ceph_deploy.cli][INFO  ] Invoked (1.5.33): /usr/bin/ceph-deploy uninstall node1
+[2016-05-23 10:00:50,641][ceph_deploy.cli][INFO  ] ceph-deploy options:
+[2016-05-23 10:00:50,641][ceph_deploy.cli][INFO  ]  username                      : None
+[2016-05-23 10:00:50,642][ceph_deploy.cli][INFO  ]  verbose                       : False
+[2016-05-23 10:00:50,642][ceph_deploy.cli][INFO  ]  overwrite_conf                : False
+[2016-05-23 10:00:50,642][ceph_deploy.cli][INFO  ]  quiet                         : False
+[2016-05-23 10:00:50,642][ceph_deploy.cli][INFO  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7fbe77c16050>
+[2016-05-23 10:00:50,642][ceph_deploy.cli][INFO  ]  cluster                       : ceph
+[2016-05-23 10:00:50,642][ceph_deploy.cli][INFO  ]  host                          : ['node1']
+[2016-05-23 10:00:50,642][ceph_deploy.cli][INFO  ]  func                          : <function uninstall at 0x7fbe784a5140>
+[2016-05-23 10:00:50,642][ceph_deploy.cli][INFO  ]  ceph_conf                     : None
+[2016-05-23 10:00:50,642][ceph_deploy.cli][INFO  ]  default_release               : False
+[2016-05-23 10:00:50,643][ceph_deploy.install][INFO  ] note that some dependencies *will not* be removed because they can cause issues with qemu-kvm
+[2016-05-23 10:00:50,643][ceph_deploy.install][INFO  ] like: librbd1 and librados2
+[2016-05-23 10:00:50,643][ceph_deploy.install][DEBUG ] Uninstalling on cluster ceph hosts node1
+[2016-05-23 10:00:50,643][ceph_deploy.install][DEBUG ] Detecting platform for host node1 ...
+[2016-05-23 10:00:50,704][node1][DEBUG ] connected to host: node1 
+[2016-05-23 10:00:50,705][node1][DEBUG ] detect platform information from remote host
+[2016-05-23 10:00:50,729][node1][DEBUG ] detect machine type
+[2016-05-23 10:00:50,733][node1][DEBUG ] find the location of an executable
+[2016-05-23 10:00:50,736][node1][INFO  ] Running command: /sbin/initctl version
+[2016-05-23 10:00:50,755][ceph_deploy.install][INFO  ] Distro info: Ubuntu 14.04 trusty
+[2016-05-23 10:00:50,755][node1][INFO  ] Uninstalling Ceph on node1
+[2016-05-23 10:00:50,756][node1][INFO  ] Running command: env DEBIAN_FRONTEND=noninteractive DEBIAN_PRIORITY=critical apt-get --assume-yes -q -f --force-yes remove ceph ceph-mds ceph-common ceph-fs-common radosgw
+[2016-05-23 10:00:50,792][node1][DEBUG ] Reading package lists...
+[2016-05-23 10:00:51,056][node1][DEBUG ] Building dependency tree...
+[2016-05-23 10:00:51,056][node1][DEBUG ] Reading state information...
+[2016-05-23 10:00:51,170][node1][DEBUG ] The following packages were automatically installed and are no longer required:
+[2016-05-23 10:00:51,171][node1][DEBUG ]   ceph-fuse cryptsetup-bin libbabeltrace-ctf1 libbabeltrace1
+[2016-05-23 10:00:51,171][node1][DEBUG ]   libboost-program-options1.54.0 libboost-regex1.54.0 libcephfs1
+[2016-05-23 10:00:51,171][node1][DEBUG ]   libcryptsetup4 libfcgi0ldbl libgoogle-perftools4 libjs-jquery libleveldb1
+[2016-05-23 10:00:51,171][node1][DEBUG ]   libradosstriper1 librgw2 libsnappy1 libtcmalloc-minimal4 libunwind8
+[2016-05-23 10:00:51,171][node1][DEBUG ]   python-blinker python-cephfs python-flask python-itsdangerous python-jinja2
+[2016-05-23 10:00:51,172][node1][DEBUG ]   python-markupsafe python-openssl python-pyinotify python-rados python-rbd
+[2016-05-23 10:00:51,172][node1][DEBUG ]   python-werkzeug
+[2016-05-23 10:00:51,172][node1][DEBUG ] Use 'apt-get autoremove' to remove them.
+[2016-05-23 10:00:51,172][node1][DEBUG ] The following packages will be REMOVED:
+[2016-05-23 10:00:51,172][node1][DEBUG ]   ceph ceph-base ceph-common ceph-fs-common ceph-mds ceph-mon ceph-osd radosgw
+[2016-05-23 10:00:51,286][node1][DEBUG ] 0 upgraded, 0 newly installed, 8 to remove and 0 not upgraded.
+[2016-05-23 10:00:51,286][node1][DEBUG ] After this operation, 450 MB disk space will be freed.
+[2016-05-23 10:00:51,350][node1][DEBUG ] (Reading database ... 42893 files and directories currently installed.)
+[2016-05-23 10:00:51,351][node1][DEBUG ] Removing ceph-mds (10.2.1-1trusty) ...
+[2016-05-23 10:00:51,351][node1][DEBUG ] ceph-mds-all stop/waiting
+[2016-05-23 10:00:51,415][node1][DEBUG ] Removing ceph (10.2.1-1trusty) ...
+[2016-05-23 10:00:51,430][node1][DEBUG ] Removing ceph-osd (10.2.1-1trusty) ...
+[2016-05-23 10:00:51,431][node1][DEBUG ] ceph-osd-all stop/waiting
+[2016-05-23 10:00:51,595][node1][DEBUG ] Removing ceph-mon (10.2.1-1trusty) ...
+[2016-05-23 10:00:51,603][node1][DEBUG ] ceph-mon-all stop/waiting
+[2016-05-23 10:00:51,767][node1][DEBUG ] Removing ceph-base (10.2.1-1trusty) ...
+[2016-05-23 10:00:51,767][node1][DEBUG ] ceph-all stop/waiting
+[2016-05-23 10:00:52,031][node1][DEBUG ] Removing radosgw (10.2.1-1trusty) ...
+[2016-05-23 10:00:52,032][node1][WARNING] stop: Unknown instance: 
+[2016-05-23 10:00:52,047][node1][DEBUG ] Removing ceph-common (10.2.1-1trusty) ...
+[2016-05-23 10:00:52,161][node1][DEBUG ] Removing ceph-fs-common (10.2.1-1trusty) ...
+[2016-05-23 10:00:52,161][node1][DEBUG ] Processing triggers for man-db (2.6.7.1-1ubuntu1) ...
+[2016-05-23 10:00:58,309][ceph_deploy.conf][DEBUG ] found configuration file at: /root/.cephdeploy.conf
+[2016-05-23 10:00:58,310][ceph_deploy.cli][INFO  ] Invoked (1.5.33): /usr/bin/ceph-deploy purgedata node1
+[2016-05-23 10:00:58,310][ceph_deploy.cli][INFO  ] ceph-deploy options:
+[2016-05-23 10:00:58,310][ceph_deploy.cli][INFO  ]  username                      : None
+[2016-05-23 10:00:58,310][ceph_deploy.cli][INFO  ]  verbose                       : False
+[2016-05-23 10:00:58,310][ceph_deploy.cli][INFO  ]  overwrite_conf                : False
+[2016-05-23 10:00:58,310][ceph_deploy.cli][INFO  ]  quiet                         : False
+[2016-05-23 10:00:58,310][ceph_deploy.cli][INFO  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7f80080efcb0>
+[2016-05-23 10:00:58,311][ceph_deploy.cli][INFO  ]  cluster                       : ceph
+[2016-05-23 10:00:58,311][ceph_deploy.cli][INFO  ]  host                          : ['node1']
+[2016-05-23 10:00:58,311][ceph_deploy.cli][INFO  ]  func                          : <function purgedata at 0x7f80089fa230>
+[2016-05-23 10:00:58,311][ceph_deploy.cli][INFO  ]  ceph_conf                     : None
+[2016-05-23 10:00:58,311][ceph_deploy.cli][INFO  ]  default_release               : False
+[2016-05-23 10:00:58,311][ceph_deploy.install][DEBUG ] Purging data from cluster ceph hosts node1
+[2016-05-23 10:00:58,373][node1][DEBUG ] connected to host: node1 
+[2016-05-23 10:00:58,373][node1][DEBUG ] detect platform information from remote host
+[2016-05-23 10:00:58,398][node1][DEBUG ] detect machine type
+[2016-05-23 10:00:58,402][node1][DEBUG ] find the location of an executable
+[2016-05-23 10:00:58,405][node1][INFO  ] Running command: /sbin/initctl version
+[2016-05-23 10:00:58,425][node1][DEBUG ] find the location of an executable
+[2016-05-23 10:00:58,475][node1][DEBUG ] connected to host: node1 
+[2016-05-23 10:00:58,476][node1][DEBUG ] detect platform information from remote host
+[2016-05-23 10:00:58,501][node1][DEBUG ] detect machine type
+[2016-05-23 10:00:58,506][node1][DEBUG ] find the location of an executable
+[2016-05-23 10:00:58,508][node1][INFO  ] Running command: /sbin/initctl version
+[2016-05-23 10:00:58,526][ceph_deploy.install][INFO  ] Distro info: Ubuntu 14.04 trusty
+[2016-05-23 10:00:58,526][node1][INFO  ] purging data on node1
+[2016-05-23 10:00:58,528][node1][INFO  ] Running command: rm -rf --one-file-system -- /var/lib/ceph
+[2016-05-23 10:00:58,539][node1][INFO  ] Running command: rm -rf --one-file-system -- /etc/ceph/
+[2016-05-23 10:01:06,804][ceph_deploy.conf][DEBUG ] found configuration file at: /root/.cephdeploy.conf
+[2016-05-23 10:01:06,805][ceph_deploy.cli][INFO  ] Invoked (1.5.33): /usr/bin/ceph-deploy purge node1
+[2016-05-23 10:01:06,805][ceph_deploy.cli][INFO  ] ceph-deploy options:
+[2016-05-23 10:01:06,805][ceph_deploy.cli][INFO  ]  username                      : None
+[2016-05-23 10:01:06,805][ceph_deploy.cli][INFO  ]  verbose                       : False
+[2016-05-23 10:01:06,805][ceph_deploy.cli][INFO  ]  overwrite_conf                : False
+[2016-05-23 10:01:06,805][ceph_deploy.cli][INFO  ]  quiet                         : False
+[2016-05-23 10:01:06,805][ceph_deploy.cli][INFO  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7fb29ebd2638>
+[2016-05-23 10:01:06,806][ceph_deploy.cli][INFO  ]  cluster                       : ceph
+[2016-05-23 10:01:06,806][ceph_deploy.cli][INFO  ]  host                          : ['node1']
+[2016-05-23 10:01:06,806][ceph_deploy.cli][INFO  ]  func                          : <function purge at 0x7fb29f4dd1b8>
+[2016-05-23 10:01:06,806][ceph_deploy.cli][INFO  ]  ceph_conf                     : None
+[2016-05-23 10:01:06,806][ceph_deploy.cli][INFO  ]  default_release               : False
+[2016-05-23 10:01:06,806][ceph_deploy.install][INFO  ] note that some dependencies *will not* be removed because they can cause issues with qemu-kvm
+[2016-05-23 10:01:06,806][ceph_deploy.install][INFO  ] like: librbd1 and librados2
+[2016-05-23 10:01:06,806][ceph_deploy.install][DEBUG ] Purging on cluster ceph hosts node1
+[2016-05-23 10:01:06,806][ceph_deploy.install][DEBUG ] Detecting platform for host node1 ...
+[2016-05-23 10:01:06,870][node1][DEBUG ] connected to host: node1 
+[2016-05-23 10:01:06,871][node1][DEBUG ] detect platform information from remote host
+[2016-05-23 10:01:06,898][node1][DEBUG ] detect machine type
+[2016-05-23 10:01:06,902][node1][DEBUG ] find the location of an executable
+[2016-05-23 10:01:06,904][node1][INFO  ] Running command: /sbin/initctl version
+[2016-05-23 10:01:06,926][ceph_deploy.install][INFO  ] Distro info: Ubuntu 14.04 trusty
+[2016-05-23 10:01:06,926][node1][INFO  ] Purging Ceph on node1
+[2016-05-23 10:01:06,928][node1][INFO  ] Running command: env DEBIAN_FRONTEND=noninteractive DEBIAN_PRIORITY=critical apt-get --assume-yes -q -f --force-yes remove --purge ceph ceph-mds ceph-common ceph-fs-common radosgw
+[2016-05-23 10:01:06,965][node1][DEBUG ] Reading package lists...
+[2016-05-23 10:01:07,229][node1][DEBUG ] Building dependency tree...
+[2016-05-23 10:01:07,230][node1][DEBUG ] Reading state information...
+[2016-05-23 10:01:07,344][node1][DEBUG ] Package 'ceph' is not installed, so not removed
+[2016-05-23 10:01:07,344][node1][DEBUG ] Package 'ceph-fs-common' is not installed, so not removed
+[2016-05-23 10:01:07,344][node1][DEBUG ] The following packages were automatically installed and are no longer required:
+[2016-05-23 10:01:07,344][node1][DEBUG ]   ceph-fuse cryptsetup-bin libbabeltrace-ctf1 libbabeltrace1
+[2016-05-23 10:01:07,344][node1][DEBUG ]   libboost-program-options1.54.0 libboost-regex1.54.0 libcephfs1
+[2016-05-23 10:01:07,344][node1][DEBUG ]   libcryptsetup4 libfcgi0ldbl libgoogle-perftools4 libjs-jquery libleveldb1
+[2016-05-23 10:01:07,345][node1][DEBUG ]   libradosstriper1 librgw2 libsnappy1 libtcmalloc-minimal4 libunwind8
+[2016-05-23 10:01:07,345][node1][DEBUG ]   python-blinker python-cephfs python-flask python-itsdangerous python-jinja2
+[2016-05-23 10:01:07,345][node1][DEBUG ]   python-markupsafe python-openssl python-pyinotify python-rados python-rbd
+[2016-05-23 10:01:07,345][node1][DEBUG ]   python-werkzeug
+[2016-05-23 10:01:07,345][node1][DEBUG ] Use 'apt-get autoremove' to remove them.
+[2016-05-23 10:01:07,346][node1][DEBUG ] The following packages will be REMOVED:
+[2016-05-23 10:01:07,347][node1][DEBUG ]   ceph-common* ceph-mds* radosgw*
+[2016-05-23 10:01:07,511][node1][DEBUG ] 0 upgraded, 0 newly installed, 3 to remove and 0 not upgraded.
+[2016-05-23 10:01:07,511][node1][DEBUG ] After this operation, 0 B of additional disk space will be used.
+[2016-05-23 10:01:07,527][node1][DEBUG ] (Reading database ... 42649 files and directories currently installed.)
+[2016-05-23 10:01:07,527][node1][DEBUG ] Removing ceph-common (10.2.1-1trusty) ...
+[2016-05-23 10:01:07,527][node1][DEBUG ] Purging configuration files for ceph-common (10.2.1-1trusty) ...
+[2016-05-23 10:01:07,527][node1][WARNING] dpkg: warning: ceph-common: conffile '/etc/default/ceph' is not a plain file or symlink (= '/etc/default/ceph')
+[2016-05-23 10:01:07,543][node1][DEBUG ] Removing ceph-mds (10.2.1-1trusty) ...
+[2016-05-23 10:01:07,543][node1][DEBUG ] Purging configuration files for ceph-mds (10.2.1-1trusty) ...
+[2016-05-23 10:01:07,551][node1][DEBUG ] Removing radosgw (10.2.1-1trusty) ...
+[2016-05-23 10:01:07,551][node1][DEBUG ] Purging configuration files for radosgw (10.2.1-1trusty) ...
+[2016-05-23 15:15:41,315][ceph_deploy.conf][DEBUG ] found configuration file at: /home/megdc/.cephdeploy.conf
+[2016-05-23 15:15:41,315][ceph_deploy.cli][INFO  ] Invoked (1.5.33): /usr/bin/ceph-deploy install node2 master
+[2016-05-23 15:15:41,315][ceph_deploy.cli][INFO  ] ceph-deploy options:
+[2016-05-23 15:15:41,315][ceph_deploy.cli][INFO  ]  verbose                       : False
+[2016-05-23 15:15:41,315][ceph_deploy.cli][INFO  ]  testing                       : None
+[2016-05-23 15:15:41,315][ceph_deploy.cli][INFO  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7f53e15e72d8>
+[2016-05-23 15:15:41,316][ceph_deploy.cli][INFO  ]  cluster                       : ceph
+[2016-05-23 15:15:41,316][ceph_deploy.cli][INFO  ]  dev_commit                    : None
+[2016-05-23 15:15:41,316][ceph_deploy.cli][INFO  ]  install_mds                   : False
+[2016-05-23 15:15:41,316][ceph_deploy.cli][INFO  ]  stable                        : None
+[2016-05-23 15:15:41,316][ceph_deploy.cli][INFO  ]  default_release               : False
+[2016-05-23 15:15:41,316][ceph_deploy.cli][INFO  ]  username                      : None
+[2016-05-23 15:15:41,316][ceph_deploy.cli][INFO  ]  adjust_repos                  : True
+[2016-05-23 15:15:41,316][ceph_deploy.cli][INFO  ]  func                          : <function install at 0x7f53e1ea9e60>
+[2016-05-23 15:15:41,316][ceph_deploy.cli][INFO  ]  install_all                   : False
+[2016-05-23 15:15:41,316][ceph_deploy.cli][INFO  ]  repo                          : False
+[2016-05-23 15:15:41,316][ceph_deploy.cli][INFO  ]  host                          : ['node2', 'master']
+[2016-05-23 15:15:41,317][ceph_deploy.cli][INFO  ]  install_rgw                   : False
+[2016-05-23 15:15:41,317][ceph_deploy.cli][INFO  ]  install_tests                 : False
+[2016-05-23 15:15:41,317][ceph_deploy.cli][INFO  ]  repo_url                      : None
+[2016-05-23 15:15:41,317][ceph_deploy.cli][INFO  ]  ceph_conf                     : None
+[2016-05-23 15:15:41,317][ceph_deploy.cli][INFO  ]  install_osd                   : False
+[2016-05-23 15:15:41,317][ceph_deploy.cli][INFO  ]  version_kind                  : stable
+[2016-05-23 15:15:41,317][ceph_deploy.cli][INFO  ]  install_common                : False
+[2016-05-23 15:15:41,317][ceph_deploy.cli][INFO  ]  overwrite_conf                : False
+[2016-05-23 15:15:41,317][ceph_deploy.cli][INFO  ]  quiet                         : False
+[2016-05-23 15:15:41,317][ceph_deploy.cli][INFO  ]  dev                           : master
+[2016-05-23 15:15:41,317][ceph_deploy.cli][INFO  ]  local_mirror                  : None
+[2016-05-23 15:15:41,317][ceph_deploy.cli][INFO  ]  release                       : None
+[2016-05-23 15:15:41,318][ceph_deploy.cli][INFO  ]  install_mon                   : False
+[2016-05-23 15:15:41,318][ceph_deploy.cli][INFO  ]  gpg_url                       : None
+[2016-05-23 15:15:41,318][ceph_deploy.install][DEBUG ] Installing stable version jewel on cluster ceph hosts node2 master
+[2016-05-23 15:15:41,318][ceph_deploy.install][DEBUG ] Detecting platform for host node2 ...
+[2016-05-23 15:15:41,552][node2][DEBUG ] connection detected need for sudo
+[2016-05-23 15:15:41,764][node2][DEBUG ] connected to host: node2 
+[2016-05-23 15:15:41,765][node2][DEBUG ] detect platform information from remote host
+[2016-05-23 15:15:41,789][node2][DEBUG ] detect machine type
+[2016-05-23 15:15:41,794][node2][DEBUG ] find the location of an executable
+[2016-05-23 15:15:41,798][node2][INFO  ] Running command: sudo /sbin/initctl version
+[2016-05-23 15:15:41,819][ceph_deploy.install][INFO  ] Distro info: Ubuntu 14.04 trusty
+[2016-05-23 15:15:41,819][node2][INFO  ] installing Ceph on node2
+[2016-05-23 15:15:41,822][node2][INFO  ] Running command: sudo env DEBIAN_FRONTEND=noninteractive DEBIAN_PRIORITY=critical apt-get --assume-yes -q --no-install-recommends install ca-certificates apt-transport-https
+[2016-05-23 15:15:41,859][node2][DEBUG ] Reading package lists...
+[2016-05-23 15:15:42,123][node2][DEBUG ] Building dependency tree...
+[2016-05-23 15:15:42,123][node2][DEBUG ] Reading state information...
+[2016-05-23 15:15:42,288][node2][DEBUG ] apt-transport-https is already the newest version.
+[2016-05-23 15:15:42,288][node2][DEBUG ] ca-certificates is already the newest version.
+[2016-05-23 15:15:42,288][node2][DEBUG ] 0 upgraded, 0 newly installed, 0 to remove and 40 not upgraded.
+[2016-05-23 15:15:42,291][node2][INFO  ] Running command: sudo wget -O release.asc https://download.ceph.com/keys/release.asc
+[2016-05-23 15:15:42,311][node2][WARNING] --2016-05-23 15:15:42--  https://download.ceph.com/keys/release.asc
+[2016-05-23 15:15:42,626][node2][WARNING] Resolving download.ceph.com (download.ceph.com)... 2607:f298:6050:51f3:f816:3eff:fe71:9135, 173.236.253.173
+[2016-05-23 15:15:42,740][node2][WARNING] Connecting to download.ceph.com (download.ceph.com)|2607:f298:6050:51f3:f816:3eff:fe71:9135|:443... connected.
+[2016-05-23 15:15:43,105][node2][WARNING] HTTP request sent, awaiting response... 200 OK
+[2016-05-23 15:15:43,106][node2][WARNING] Length: 1645 (1.6K) [application/octet-stream]
+[2016-05-23 15:15:43,106][node2][WARNING] Saving to: ‘release.asc’
+[2016-05-23 15:15:43,106][node2][WARNING] 
+[2016-05-23 15:15:43,106][node2][WARNING]      0K .                                                     100%  432M=0s
+[2016-05-23 15:15:43,106][node2][WARNING] 
+[2016-05-23 15:15:43,106][node2][WARNING] 2016-05-23 15:15:43 (432 MB/s) - ‘release.asc’ saved [1645/1645]
+[2016-05-23 15:15:43,107][node2][WARNING] 
+[2016-05-23 15:15:43,109][node2][INFO  ] Running command: sudo apt-key add release.asc
+[2016-05-23 15:15:43,228][node2][DEBUG ] OK
+[2016-05-23 15:15:43,230][node2][DEBUG ] add deb repo to /etc/apt/sources.list.d/
+[2016-05-23 15:15:43,233][node2][INFO  ] Running command: sudo env DEBIAN_FRONTEND=noninteractive DEBIAN_PRIORITY=critical apt-get --assume-yes -q update
+[2016-05-23 15:15:43,302][node2][DEBUG ] Ign http://mirror.hetzner.de trusty InRelease
+[2016-05-23 15:15:43,303][node2][DEBUG ] Get:1 http://mirror.hetzner.de trusty-backports InRelease [65.9 kB]
+[2016-05-23 15:15:43,303][node2][DEBUG ] Get:2 http://mirror.hetzner.de trusty-updates InRelease [65.9 kB]
+[2016-05-23 15:15:43,304][node2][DEBUG ] Get:3 http://mirror.hetzner.de trusty-security InRelease [65.9 kB]
+[2016-05-23 15:15:43,319][node2][DEBUG ] Hit http://mirror.hetzner.de trusty Release.gpg
+[2016-05-23 15:15:43,319][node2][DEBUG ] Hit http://mirror.hetzner.de trusty Release
+[2016-05-23 15:15:43,327][node2][DEBUG ] Ign http://de.archive.ubuntu.com trusty InRelease
+[2016-05-23 15:15:43,327][node2][DEBUG ] Hit http://security.ubuntu.com trusty-security InRelease
+[2016-05-23 15:15:43,343][node2][DEBUG ] Hit http://mirror.hetzner.de trusty-backports/main amd64 Packages
+[2016-05-23 15:15:43,343][node2][DEBUG ] Hit http://mirror.hetzner.de trusty-backports/restricted amd64 Packages
+[2016-05-23 15:15:43,343][node2][DEBUG ] Hit http://mirror.hetzner.de trusty-backports/universe amd64 Packages
+[2016-05-23 15:15:43,344][node2][DEBUG ] Get:4 http://de.archive.ubuntu.com trusty-updates InRelease [65.9 kB]
+[2016-05-23 15:15:43,375][node2][DEBUG ] Hit http://mirror.hetzner.de trusty-backports/multiverse amd64 Packages
+[2016-05-23 15:15:43,376][node2][DEBUG ] Hit http://mirror.hetzner.de trusty-backports/main i386 Packages
+[2016-05-23 15:15:43,376][node2][DEBUG ] Hit http://mirror.hetzner.de trusty-backports/restricted i386 Packages
+[2016-05-23 15:15:43,376][node2][DEBUG ] Hit http://mirror.hetzner.de trusty-backports/universe i386 Packages
+[2016-05-23 15:15:43,376][node2][DEBUG ] Hit http://mirror.hetzner.de trusty-backports/multiverse i386 Packages
+[2016-05-23 15:15:43,408][node2][DEBUG ] Hit http://de.archive.ubuntu.com trusty-backports InRelease
+[2016-05-23 15:15:43,408][node2][DEBUG ] Hit http://security.ubuntu.com trusty-security/main Sources
+[2016-05-23 15:15:43,416][node2][DEBUG ] Hit http://de.archive.ubuntu.com trusty Release.gpg
+[2016-05-23 15:15:43,423][node2][DEBUG ] Hit http://security.ubuntu.com trusty-security/restricted Sources
+[2016-05-23 15:15:43,439][node2][DEBUG ] Get:5 http://de.archive.ubuntu.com trusty-updates/main Sources [275 kB]
+[2016-05-23 15:15:43,439][node2][DEBUG ] Get:6 http://mirror.hetzner.de trusty-updates/main amd64 Packages [964 kB]
+[2016-05-23 15:15:43,443][node2][DEBUG ] Hit http://security.ubuntu.com trusty-security/universe Sources
+[2016-05-23 15:15:43,475][node2][DEBUG ] Hit http://security.ubuntu.com trusty-security/multiverse Sources
+[2016-05-23 15:15:43,483][node2][DEBUG ] Hit http://security.ubuntu.com trusty-security/main amd64 Packages
+[2016-05-23 15:15:43,490][node2][DEBUG ] Get:7 http://de.archive.ubuntu.com trusty-updates/restricted Sources [5,352 B]
+[2016-05-23 15:15:43,506][node2][DEBUG ] Hit http://security.ubuntu.com trusty-security/restricted amd64 Packages
+[2016-05-23 15:15:43,506][node2][DEBUG ] Get:8 http://de.archive.ubuntu.com trusty-updates/universe Sources [154 kB]
+[2016-05-23 15:15:43,522][node2][DEBUG ] Hit http://security.ubuntu.com trusty-security/universe amd64 Packages
+[2016-05-23 15:15:43,530][node2][DEBUG ] Get:9 http://de.archive.ubuntu.com trusty-updates/multiverse Sources [5,939 B]
+[2016-05-23 15:15:43,545][node2][DEBUG ] Hit http://mirror.hetzner.de trusty-updates/restricted amd64 Packages
+[2016-05-23 15:15:43,546][node2][DEBUG ] Get:10 http://mirror.hetzner.de trusty-updates/universe amd64 Packages [464 kB]
+[2016-05-23 15:15:43,546][node2][DEBUG ] Hit http://security.ubuntu.com trusty-security/multiverse amd64 Packages
+[2016-05-23 15:15:43,546][node2][DEBUG ] Get:11 http://de.archive.ubuntu.com trusty-updates/main amd64 Packages [768 kB]
+[2016-05-23 15:15:43,562][node2][DEBUG ] Hit http://security.ubuntu.com trusty-security/main i386 Packages
+[2016-05-23 15:15:43,594][node2][DEBUG ] Hit http://security.ubuntu.com trusty-security/restricted i386 Packages
+[2016-05-23 15:15:43,594][node2][DEBUG ] Ign http://downloads.opennebula.org stable InRelease
+[2016-05-23 15:15:43,594][node2][DEBUG ] Hit http://mirror.hetzner.de trusty-updates/multiverse amd64 Packages
+[2016-05-23 15:15:43,594][node2][DEBUG ] Get:12 http://mirror.hetzner.de trusty-updates/main i386 Packages [925 kB]
+[2016-05-23 15:15:43,602][node2][DEBUG ] Get:13 http://de.archive.ubuntu.com trusty-updates/restricted amd64 Packages [15.9 kB]
+[2016-05-23 15:15:43,602][node2][DEBUG ] Hit http://security.ubuntu.com trusty-security/universe i386 Packages
+[2016-05-23 15:15:43,634][node2][DEBUG ] Get:14 http://de.archive.ubuntu.com trusty-updates/universe amd64 Packages [360 kB]
+[2016-05-23 15:15:43,634][node2][DEBUG ] Hit http://security.ubuntu.com trusty-security/multiverse i386 Packages
+[2016-05-23 15:15:43,650][node2][DEBUG ] Get:15 http://de.archive.ubuntu.com trusty-updates/multiverse amd64 Packages [13.2 kB]
+[2016-05-23 15:15:43,682][node2][DEBUG ] Hit http://get.megam.io trusty InRelease
+[2016-05-23 15:15:43,682][node2][DEBUG ] Get:16 http://de.archive.ubuntu.com trusty-updates/main i386 Packages [737 kB]
+[2016-05-23 15:15:43,714][node2][DEBUG ] Get:17 http://de.archive.ubuntu.com trusty-updates/restricted i386 Packages [15.6 kB]
+[2016-05-23 15:15:43,730][node2][DEBUG ] Get:18 http://de.archive.ubuntu.com trusty-updates/universe i386 Packages [360 kB]
+[2016-05-23 15:15:43,762][node2][DEBUG ] Get:19 http://de.archive.ubuntu.com trusty-updates/multiverse i386 Packages [13.6 kB]
+[2016-05-23 15:15:43,777][node2][DEBUG ] Hit http://de.archive.ubuntu.com trusty Release
+[2016-05-23 15:15:43,793][node2][DEBUG ] Hit http://de.archive.ubuntu.com trusty-backports/main Sources
+[2016-05-23 15:15:43,857][node2][DEBUG ] Hit http://get.megam.io trusty/testing amd64 Packages
+[2016-05-23 15:15:43,865][node2][DEBUG ] Hit http://de.archive.ubuntu.com trusty-backports/restricted Sources
+[2016-05-23 15:15:43,881][node2][DEBUG ] Hit http://downloads.opennebula.org stable Release.gpg
+[2016-05-23 15:15:43,882][node2][DEBUG ] Hit http://de.archive.ubuntu.com trusty-backports/universe Sources
+[2016-05-23 15:15:43,914][node2][DEBUG ] Hit http://de.archive.ubuntu.com trusty-backports/multiverse Sources
+[2016-05-23 15:15:43,918][node2][DEBUG ] Hit http://de.archive.ubuntu.com trusty-backports/main amd64 Packages
+[2016-05-23 15:15:43,950][node2][DEBUG ] Hit http://de.archive.ubuntu.com trusty-backports/restricted amd64 Packages
+[2016-05-23 15:15:43,950][node2][DEBUG ] Hit http://mirror.hetzner.de trusty-updates/restricted i386 Packages
+[2016-05-23 15:15:43,953][node2][DEBUG ] Hit http://de.archive.ubuntu.com trusty-backports/universe amd64 Packages
+[2016-05-23 15:15:43,985][node2][DEBUG ] Hit http://de.archive.ubuntu.com trusty-backports/multiverse amd64 Packages
+[2016-05-23 15:15:43,985][node2][DEBUG ] Get:20 http://mirror.hetzner.de trusty-updates/universe i386 Packages [466 kB]
+[2016-05-23 15:15:43,989][node2][DEBUG ] Hit http://de.archive.ubuntu.com trusty-backports/main i386 Packages
+[2016-05-23 15:15:44,021][node2][DEBUG ] Hit http://de.archive.ubuntu.com trusty-backports/restricted i386 Packages
+[2016-05-23 15:15:44,024][node2][DEBUG ] Hit http://de.archive.ubuntu.com trusty-backports/universe i386 Packages
+[2016-05-23 15:15:44,040][node2][DEBUG ] Hit http://mirror.hetzner.de trusty-updates/multiverse i386 Packages
+[2016-05-23 15:15:44,040][node2][DEBUG ] Hit http://mirror.hetzner.de trusty-security/main amd64 Packages
+[2016-05-23 15:15:44,041][node2][DEBUG ] Hit http://mirror.hetzner.de trusty-security/restricted amd64 Packages
+[2016-05-23 15:15:44,041][node2][DEBUG ] Hit http://mirror.hetzner.de trusty-security/universe amd64 Packages
+[2016-05-23 15:15:44,042][node2][DEBUG ] Hit http://mirror.hetzner.de trusty-security/multiverse amd64 Packages
+[2016-05-23 15:15:44,042][node2][DEBUG ] Hit http://de.archive.ubuntu.com trusty-backports/multiverse i386 Packages
+[2016-05-23 15:15:44,042][node2][DEBUG ] Hit http://mirror.hetzner.de trusty-security/main i386 Packages
+[2016-05-23 15:15:44,042][node2][DEBUG ] Hit http://mirror.hetzner.de trusty-security/restricted i386 Packages
+[2016-05-23 15:15:44,043][node2][DEBUG ] Hit http://mirror.hetzner.de trusty-security/universe i386 Packages
+[2016-05-23 15:15:44,044][node2][DEBUG ] Hit http://mirror.hetzner.de trusty-security/multiverse i386 Packages
+[2016-05-23 15:15:44,044][node2][DEBUG ] Hit http://mirror.hetzner.de trusty/main amd64 Packages
+[2016-05-23 15:15:44,046][node2][DEBUG ] Hit http://mirror.hetzner.de trusty/restricted amd64 Packages
+[2016-05-23 15:15:44,046][node2][DEBUG ] Hit http://mirror.hetzner.de trusty/universe amd64 Packages
+[2016-05-23 15:15:44,046][node2][DEBUG ] Hit http://mirror.hetzner.de trusty/multiverse amd64 Packages
+[2016-05-23 15:15:44,047][node2][DEBUG ] Hit http://mirror.hetzner.de trusty/main i386 Packages
+[2016-05-23 15:15:44,048][node2][DEBUG ] Hit http://mirror.hetzner.de trusty/restricted i386 Packages
+[2016-05-23 15:15:44,048][node2][DEBUG ] Hit http://mirror.hetzner.de trusty/universe i386 Packages
+[2016-05-23 15:15:44,049][node2][DEBUG ] Hit http://mirror.hetzner.de trusty/multiverse i386 Packages
+[2016-05-23 15:15:44,065][node2][DEBUG ] Hit http://de.archive.ubuntu.com trusty/main Sources
+[2016-05-23 15:15:44,080][node2][DEBUG ] Hit http://de.archive.ubuntu.com trusty/restricted Sources
+[2016-05-23 15:15:44,096][node2][DEBUG ] Hit http://de.archive.ubuntu.com trusty/universe Sources
+[2016-05-23 15:15:44,112][node2][DEBUG ] Hit http://de.archive.ubuntu.com trusty/multiverse Sources
+[2016-05-23 15:15:44,144][node2][DEBUG ] Hit http://de.archive.ubuntu.com trusty/main amd64 Packages
+[2016-05-23 15:15:44,148][node2][DEBUG ] Hit http://de.archive.ubuntu.com trusty/restricted amd64 Packages
+[2016-05-23 15:15:44,180][node2][DEBUG ] Hit http://de.archive.ubuntu.com trusty/universe amd64 Packages
+[2016-05-23 15:15:44,180][node2][DEBUG ] Hit https://download.ceph.com trusty InRelease
+[2016-05-23 15:15:44,180][node2][DEBUG ] Hit http://downloads.opennebula.org stable Release
+[2016-05-23 15:15:44,244][node2][DEBUG ] Hit http://de.archive.ubuntu.com trusty/multiverse amd64 Packages
+[2016-05-23 15:15:44,260][node2][DEBUG ] Hit http://de.archive.ubuntu.com trusty/main i386 Packages
+[2016-05-23 15:15:44,275][node2][DEBUG ] Hit http://de.archive.ubuntu.com trusty/restricted i386 Packages
+[2016-05-23 15:15:44,291][node2][DEBUG ] Hit https://download.ceph.com trusty/main amd64 Packages
+[2016-05-23 15:15:44,291][node2][DEBUG ] Hit http://de.archive.ubuntu.com trusty/universe i386 Packages
+[2016-05-23 15:15:44,307][node2][DEBUG ] Hit http://de.archive.ubuntu.com trusty/multiverse i386 Packages
+[2016-05-23 15:15:44,421][node2][DEBUG ] Hit https://download.ceph.com trusty/main i386 Packages
+[2016-05-23 15:15:44,536][node2][DEBUG ] Hit http://downloads.opennebula.org stable/opennebula amd64 Packages
+[2016-05-23 15:15:44,800][node2][DEBUG ] Hit http://downloads.opennebula.org stable/opennebula i386 Packages
+[2016-05-23 15:15:46,719][node2][DEBUG ] Fetched 5,807 kB in 3s (1,712 kB/s)
+[2016-05-23 15:15:48,588][node2][DEBUG ] Reading package lists...
+[2016-05-23 15:15:48,590][node2][INFO  ] Running command: sudo env DEBIAN_FRONTEND=noninteractive DEBIAN_PRIORITY=critical apt-get --assume-yes -q --no-install-recommends install -o Dpkg::Options::=--force-confnew ceph ceph-mds radosgw
+[2016-05-23 15:15:48,627][node2][DEBUG ] Reading package lists...
+[2016-05-23 15:15:48,892][node2][DEBUG ] Building dependency tree...
+[2016-05-23 15:15:48,892][node2][DEBUG ] Reading state information...
+[2016-05-23 15:15:49,006][node2][DEBUG ] The following extra packages will be installed:
+[2016-05-23 15:15:49,006][node2][DEBUG ]   ceph-base ceph-common ceph-mon ceph-osd cryptsetup-bin libbabeltrace-ctf1
+[2016-05-23 15:15:49,007][node2][DEBUG ]   libbabeltrace1 libboost-program-options1.54.0 libboost-regex1.54.0
+[2016-05-23 15:15:49,007][node2][DEBUG ]   libcephfs1 libcryptsetup4 libfcgi0ldbl libgoogle-perftools4 libjs-jquery
+[2016-05-23 15:15:49,007][node2][DEBUG ]   libleveldb1 libradosstriper1 librgw2 libsnappy1 libtcmalloc-minimal4
+[2016-05-23 15:15:49,007][node2][DEBUG ]   libunwind8 python-cephfs python-flask python-itsdangerous python-rados
+[2016-05-23 15:15:49,007][node2][DEBUG ]   python-rbd python-werkzeug
+[2016-05-23 15:15:49,007][node2][DEBUG ] Suggested packages:
+[2016-05-23 15:15:49,008][node2][DEBUG ]   javascript-common python-flask-doc ipython python-genshi python-lxml
+[2016-05-23 15:15:49,008][node2][DEBUG ]   python-greenlet python-redis python-pylibmc python-memcache
+[2016-05-23 15:15:49,008][node2][DEBUG ]   python-werkzeug-doc
+[2016-05-23 15:15:49,008][node2][DEBUG ] Recommended packages:
+[2016-05-23 15:15:49,008][node2][DEBUG ]   ceph-fs-common ceph-fuse python-blinker python-openssl python-pyinotify
+[2016-05-23 15:15:49,008][node2][DEBUG ] The following NEW packages will be installed:
+[2016-05-23 15:15:49,009][node2][DEBUG ]   ceph ceph-base ceph-common ceph-mds ceph-mon ceph-osd cryptsetup-bin
+[2016-05-23 15:15:49,009][node2][DEBUG ]   libbabeltrace-ctf1 libbabeltrace1 libboost-program-options1.54.0
+[2016-05-23 15:15:49,009][node2][DEBUG ]   libboost-regex1.54.0 libcephfs1 libcryptsetup4 libfcgi0ldbl
+[2016-05-23 15:15:49,009][node2][DEBUG ]   libgoogle-perftools4 libjs-jquery libleveldb1 libradosstriper1 librgw2
+[2016-05-23 15:15:49,009][node2][DEBUG ]   libsnappy1 libtcmalloc-minimal4 libunwind8 python-cephfs python-flask
+[2016-05-23 15:15:49,009][node2][DEBUG ]   python-itsdangerous python-rados python-rbd python-werkzeug radosgw
+[2016-05-23 15:15:49,324][node2][DEBUG ] 0 upgraded, 29 newly installed, 0 to remove and 40 not upgraded.
+[2016-05-23 15:15:49,324][node2][DEBUG ] Need to get 0 B/102 MB of archives.
+[2016-05-23 15:15:49,324][node2][DEBUG ] After this operation, 490 MB of additional disk space will be used.
+[2016-05-23 15:15:49,332][node2][DEBUG ] Selecting previously unselected package libboost-program-options1.54.0:amd64.
+[2016-05-23 15:15:49,348][node2][DEBUG ] (Reading database ... 36474 files and directories currently installed.)
+[2016-05-23 15:15:49,349][node2][DEBUG ] Preparing to unpack .../libboost-program-options1.54.0_1.54.0-4ubuntu3.1_amd64.deb ...
+[2016-05-23 15:15:49,349][node2][DEBUG ] Unpacking libboost-program-options1.54.0:amd64 (1.54.0-4ubuntu3.1) ...
+[2016-05-23 15:15:49,413][node2][DEBUG ] Selecting previously unselected package libboost-regex1.54.0:amd64.
+[2016-05-23 15:15:49,414][node2][DEBUG ] Preparing to unpack .../libboost-regex1.54.0_1.54.0-4ubuntu3.1_amd64.deb ...
+[2016-05-23 15:15:49,414][node2][DEBUG ] Unpacking libboost-regex1.54.0:amd64 (1.54.0-4ubuntu3.1) ...
+[2016-05-23 15:15:49,478][node2][DEBUG ] Selecting previously unselected package libsnappy1.
+[2016-05-23 15:15:49,478][node2][DEBUG ] Preparing to unpack .../libsnappy1_1.1.0-1ubuntu1_amd64.deb ...
+[2016-05-23 15:15:49,478][node2][DEBUG ] Unpacking libsnappy1 (1.1.0-1ubuntu1) ...
+[2016-05-23 15:15:49,481][node2][DEBUG ] Selecting previously unselected package libleveldb1:amd64.
+[2016-05-23 15:15:49,485][node2][DEBUG ] Preparing to unpack .../libleveldb1_1.15.0-2_amd64.deb ...
+[2016-05-23 15:15:49,485][node2][DEBUG ] Unpacking libleveldb1:amd64 (1.15.0-2) ...
+[2016-05-23 15:15:49,517][node2][DEBUG ] Selecting previously unselected package libunwind8.
+[2016-05-23 15:15:49,521][node2][DEBUG ] Preparing to unpack .../libunwind8_1.1-2.2ubuntu3_amd64.deb ...
+[2016-05-23 15:15:49,521][node2][DEBUG ] Unpacking libunwind8 (1.1-2.2ubuntu3) ...
+[2016-05-23 15:15:49,553][node2][DEBUG ] Selecting previously unselected package libbabeltrace1:amd64.
+[2016-05-23 15:15:49,553][node2][DEBUG ] Preparing to unpack .../libbabeltrace1_1.2.1-2_amd64.deb ...
+[2016-05-23 15:15:49,553][node2][DEBUG ] Unpacking libbabeltrace1:amd64 (1.2.1-2) ...
+[2016-05-23 15:15:49,585][node2][DEBUG ] Selecting previously unselected package libbabeltrace-ctf1:amd64.
+[2016-05-23 15:15:49,585][node2][DEBUG ] Preparing to unpack .../libbabeltrace-ctf1_1.2.1-2_amd64.deb ...
+[2016-05-23 15:15:49,586][node2][DEBUG ] Unpacking libbabeltrace-ctf1:amd64 (1.2.1-2) ...
+[2016-05-23 15:15:49,617][node2][DEBUG ] Selecting previously unselected package libtcmalloc-minimal4.
+[2016-05-23 15:15:49,618][node2][DEBUG ] Preparing to unpack .../libtcmalloc-minimal4_2.1-2ubuntu1.1_amd64.deb ...
+[2016-05-23 15:15:49,618][node2][DEBUG ] Unpacking libtcmalloc-minimal4 (2.1-2ubuntu1.1) ...
+[2016-05-23 15:15:49,682][node2][DEBUG ] Selecting previously unselected package libgoogle-perftools4.
+[2016-05-23 15:15:49,682][node2][DEBUG ] Preparing to unpack .../libgoogle-perftools4_2.1-2ubuntu1.1_amd64.deb ...
+[2016-05-23 15:15:49,682][node2][DEBUG ] Unpacking libgoogle-perftools4 (2.1-2ubuntu1.1) ...
+[2016-05-23 15:15:49,714][node2][DEBUG ] Selecting previously unselected package libradosstriper1.
+[2016-05-23 15:15:49,718][node2][DEBUG ] Preparing to unpack .../libradosstriper1_10.2.1-1trusty_amd64.deb ...
+[2016-05-23 15:15:49,718][node2][DEBUG ] Unpacking libradosstriper1 (10.2.1-1trusty) ...
+[2016-05-23 15:15:49,982][node2][DEBUG ] Selecting previously unselected package libfcgi0ldbl.
+[2016-05-23 15:15:49,986][node2][DEBUG ] Preparing to unpack .../libfcgi0ldbl_2.4.0-8.1ubuntu5_amd64.deb ...
+[2016-05-23 15:15:49,986][node2][DEBUG ] Unpacking libfcgi0ldbl (2.4.0-8.1ubuntu5) ...
+[2016-05-23 15:15:50,050][node2][DEBUG ] Selecting previously unselected package librgw2.
+[2016-05-23 15:15:50,050][node2][DEBUG ] Preparing to unpack .../librgw2_10.2.1-1trusty_amd64.deb ...
+[2016-05-23 15:15:50,051][node2][DEBUG ] Unpacking librgw2 (10.2.1-1trusty) ...
+[2016-05-23 15:15:50,315][node2][DEBUG ] Selecting previously unselected package python-rados.
+[2016-05-23 15:15:50,315][node2][DEBUG ] Preparing to unpack .../python-rados_10.2.1-1trusty_amd64.deb ...
+[2016-05-23 15:15:50,315][node2][DEBUG ] Unpacking python-rados (10.2.1-1trusty) ...
+[2016-05-23 15:15:50,430][node2][DEBUG ] Selecting previously unselected package libcephfs1.
+[2016-05-23 15:15:50,430][node2][DEBUG ] Preparing to unpack .../libcephfs1_10.2.1-1trusty_amd64.deb ...
+[2016-05-23 15:15:50,430][node2][DEBUG ] Unpacking libcephfs1 (10.2.1-1trusty) ...
+[2016-05-23 15:15:50,644][node2][DEBUG ] Selecting previously unselected package python-cephfs.
+[2016-05-23 15:15:50,644][node2][DEBUG ] Preparing to unpack .../python-cephfs_10.2.1-1trusty_amd64.deb ...
+[2016-05-23 15:15:50,645][node2][DEBUG ] Unpacking python-cephfs (10.2.1-1trusty) ...
+[2016-05-23 15:15:50,709][node2][DEBUG ] Selecting previously unselected package python-rbd.
+[2016-05-23 15:15:50,709][node2][DEBUG ] Preparing to unpack .../python-rbd_10.2.1-1trusty_amd64.deb ...
+[2016-05-23 15:15:50,709][node2][DEBUG ] Unpacking python-rbd (10.2.1-1trusty) ...
+[2016-05-23 15:15:50,773][node2][DEBUG ] Selecting previously unselected package ceph-common.
+[2016-05-23 15:15:50,773][node2][DEBUG ] Preparing to unpack .../ceph-common_10.2.1-1trusty_amd64.deb ...
+[2016-05-23 15:15:50,773][node2][DEBUG ] Unpacking ceph-common (10.2.1-1trusty) ...
+[2016-05-23 15:15:51,690][node2][DEBUG ] Selecting previously unselected package libcryptsetup4.
+[2016-05-23 15:15:51,691][node2][DEBUG ] Preparing to unpack .../libcryptsetup4_2%3a1.6.1-1ubuntu1_amd64.deb ...
+[2016-05-23 15:15:51,692][node2][DEBUG ] Unpacking libcryptsetup4 (2:1.6.1-1ubuntu1) ...
+[2016-05-23 15:15:51,724][node2][DEBUG ] Selecting previously unselected package cryptsetup-bin.
+[2016-05-23 15:15:51,724][node2][DEBUG ] Preparing to unpack .../cryptsetup-bin_2%3a1.6.1-1ubuntu1_amd64.deb ...
+[2016-05-23 15:15:51,725][node2][DEBUG ] Unpacking cryptsetup-bin (2:1.6.1-1ubuntu1) ...
+[2016-05-23 15:15:51,740][node2][DEBUG ] Selecting previously unselected package ceph-base.
+[2016-05-23 15:15:51,741][node2][DEBUG ] Preparing to unpack .../ceph-base_10.2.1-1trusty_amd64.deb ...
+[2016-05-23 15:15:51,741][node2][DEBUG ] Unpacking ceph-base (10.2.1-1trusty) ...
+[2016-05-23 15:15:57,068][node2][DEBUG ] Selecting previously unselected package libjs-jquery.
+[2016-05-23 15:15:57,068][node2][DEBUG ] Preparing to unpack .../libjs-jquery_1.7.2+dfsg-2ubuntu1_all.deb ...
+[2016-05-23 15:15:57,068][node2][DEBUG ] Unpacking libjs-jquery (1.7.2+dfsg-2ubuntu1) ...
+[2016-05-23 15:15:57,084][node2][DEBUG ] Selecting previously unselected package python-werkzeug.
+[2016-05-23 15:15:57,085][node2][DEBUG ] Preparing to unpack .../python-werkzeug_0.9.4+dfsg-1.1ubuntu2_all.deb ...
+[2016-05-23 15:15:57,087][node2][DEBUG ] Unpacking python-werkzeug (0.9.4+dfsg-1.1ubuntu2) ...
+[2016-05-23 15:15:57,151][node2][DEBUG ] Selecting previously unselected package python-itsdangerous.
+[2016-05-23 15:15:57,151][node2][DEBUG ] Preparing to unpack .../python-itsdangerous_0.22+dfsg1-1build1_all.deb ...
+[2016-05-23 15:15:57,151][node2][DEBUG ] Unpacking python-itsdangerous (0.22+dfsg1-1build1) ...
+[2016-05-23 15:15:57,167][node2][DEBUG ] Selecting previously unselected package python-flask.
+[2016-05-23 15:15:57,168][node2][DEBUG ] Preparing to unpack .../python-flask_0.10.1-2build1_all.deb ...
+[2016-05-23 15:15:57,169][node2][DEBUG ] Unpacking python-flask (0.10.1-2build1) ...
+[2016-05-23 15:15:57,200][node2][DEBUG ] Selecting previously unselected package ceph-mon.
+[2016-05-23 15:15:57,202][node2][DEBUG ] Preparing to unpack .../ceph-mon_10.2.1-1trusty_amd64.deb ...
+[2016-05-23 15:15:57,202][node2][DEBUG ] Unpacking ceph-mon (10.2.1-1trusty) ...
+[2016-05-23 15:15:57,567][node2][DEBUG ] Selecting previously unselected package ceph-osd.
+[2016-05-23 15:15:57,567][node2][DEBUG ] Preparing to unpack .../ceph-osd_10.2.1-1trusty_amd64.deb ...
+[2016-05-23 15:15:57,567][node2][DEBUG ] Unpacking ceph-osd (10.2.1-1trusty) ...
+[2016-05-23 15:15:58,433][node2][DEBUG ] Selecting previously unselected package ceph.
+[2016-05-23 15:15:58,433][node2][DEBUG ] Preparing to unpack .../ceph_10.2.1-1trusty_amd64.deb ...
+[2016-05-23 15:15:58,434][node2][DEBUG ] Unpacking ceph (10.2.1-1trusty) ...
+[2016-05-23 15:15:58,449][node2][DEBUG ] Selecting previously unselected package ceph-mds.
+[2016-05-23 15:15:58,450][node2][DEBUG ] Preparing to unpack .../ceph-mds_10.2.1-1trusty_amd64.deb ...
+[2016-05-23 15:15:58,450][node2][DEBUG ] Unpacking ceph-mds (10.2.1-1trusty) ...
+[2016-05-23 15:15:58,714][node2][DEBUG ] Selecting previously unselected package radosgw.
+[2016-05-23 15:15:58,714][node2][DEBUG ] Preparing to unpack .../radosgw_10.2.1-1trusty_amd64.deb ...
+[2016-05-23 15:15:58,714][node2][DEBUG ] Unpacking radosgw (10.2.1-1trusty) ...
+[2016-05-23 15:15:58,778][node2][DEBUG ] Processing triggers for man-db (2.6.7.1-1ubuntu1) ...
+[2016-05-23 15:15:58,993][node2][DEBUG ] Processing triggers for ureadahead (0.100.0-16) ...
+[2016-05-23 15:15:58,993][node2][DEBUG ] ureadahead will be reprofiled on next reboot
+[2016-05-23 15:15:59,025][node2][DEBUG ] Setting up libboost-program-options1.54.0:amd64 (1.54.0-4ubuntu3.1) ...
+[2016-05-23 15:15:59,025][node2][DEBUG ] Setting up libboost-regex1.54.0:amd64 (1.54.0-4ubuntu3.1) ...
+[2016-05-23 15:15:59,029][node2][DEBUG ] Setting up libsnappy1 (1.1.0-1ubuntu1) ...
+[2016-05-23 15:15:59,036][node2][DEBUG ] Setting up libleveldb1:amd64 (1.15.0-2) ...
+[2016-05-23 15:15:59,044][node2][DEBUG ] Setting up libunwind8 (1.1-2.2ubuntu3) ...
+[2016-05-23 15:15:59,052][node2][DEBUG ] Setting up libbabeltrace1:amd64 (1.2.1-2) ...
+[2016-05-23 15:15:59,059][node2][DEBUG ] Setting up libbabeltrace-ctf1:amd64 (1.2.1-2) ...
+[2016-05-23 15:15:59,067][node2][DEBUG ] Setting up libtcmalloc-minimal4 (2.1-2ubuntu1.1) ...
+[2016-05-23 15:15:59,075][node2][DEBUG ] Setting up libgoogle-perftools4 (2.1-2ubuntu1.1) ...
+[2016-05-23 15:15:59,082][node2][DEBUG ] Setting up libradosstriper1 (10.2.1-1trusty) ...
+[2016-05-23 15:15:59,090][node2][DEBUG ] Setting up libfcgi0ldbl (2.4.0-8.1ubuntu5) ...
+[2016-05-23 15:15:59,098][node2][DEBUG ] Setting up librgw2 (10.2.1-1trusty) ...
+[2016-05-23 15:15:59,105][node2][DEBUG ] Setting up python-rados (10.2.1-1trusty) ...
+[2016-05-23 15:15:59,106][node2][DEBUG ] Setting up libcephfs1 (10.2.1-1trusty) ...
+[2016-05-23 15:15:59,113][node2][DEBUG ] Setting up python-cephfs (10.2.1-1trusty) ...
+[2016-05-23 15:15:59,177][node2][DEBUG ] Setting up python-rbd (10.2.1-1trusty) ...
+[2016-05-23 15:15:59,177][node2][DEBUG ] Setting up ceph-common (10.2.1-1trusty) ...
+[2016-05-23 15:15:59,209][node2][DEBUG ] Setting system user ceph properties....done
+[2016-05-23 15:15:59,210][node2][WARNING] usermod: no changes
+[2016-05-23 15:15:59,324][node2][DEBUG ] Setting up libcryptsetup4 (2:1.6.1-1ubuntu1) ...
+[2016-05-23 15:15:59,324][node2][DEBUG ] Setting up cryptsetup-bin (2:1.6.1-1ubuntu1) ...
+[2016-05-23 15:15:59,324][node2][DEBUG ] Setting up libjs-jquery (1.7.2+dfsg-2ubuntu1) ...
+[2016-05-23 15:15:59,324][node2][DEBUG ] Setting up python-werkzeug (0.9.4+dfsg-1.1ubuntu2) ...
+[2016-05-23 15:15:59,589][node2][DEBUG ] Setting up python-itsdangerous (0.22+dfsg1-1build1) ...
+[2016-05-23 15:15:59,703][node2][DEBUG ] Setting up python-flask (0.10.1-2build1) ...
+[2016-05-23 15:15:59,817][node2][DEBUG ] Processing triggers for ureadahead (0.100.0-16) ...
+[2016-05-23 15:15:59,817][node2][DEBUG ] Setting up radosgw (10.2.1-1trusty) ...
+[2016-05-23 15:15:59,825][node2][DEBUG ] radosgw-all start/running
+[2016-05-23 15:15:59,833][node2][DEBUG ] Setting up ceph-base (10.2.1-1trusty) ...
+[2016-05-23 15:15:59,997][node2][DEBUG ] ceph-all start/running
+[2016-05-23 15:16:00,111][node2][DEBUG ] Setting up ceph-mon (10.2.1-1trusty) ...
+[2016-05-23 15:16:00,111][node2][WARNING] start: Job is already running: ceph-mon-all
+[2016-05-23 15:16:00,225][node2][DEBUG ] Setting up ceph-osd (10.2.1-1trusty) ...
+[2016-05-23 15:16:00,226][node2][WARNING] start: Job is already running: ceph-osd-all
+[2016-05-23 15:16:00,390][node2][DEBUG ] Setting up ceph (10.2.1-1trusty) ...
+[2016-05-23 15:16:00,390][node2][DEBUG ] Setting up ceph-mds (10.2.1-1trusty) ...
+[2016-05-23 15:16:00,390][node2][DEBUG ] ceph-mds-all start/running
+[2016-05-23 15:16:00,390][node2][DEBUG ] Processing triggers for libc-bin (2.19-0ubuntu6.7) ...
+[2016-05-23 15:16:00,391][node2][DEBUG ] Processing triggers for ureadahead (0.100.0-16) ...
+[2016-05-23 15:16:00,657][node2][INFO  ] Running command: sudo ceph --version
+[2016-05-23 15:16:00,776][node2][DEBUG ] ceph version 10.2.1 (3a66dd4f30852819c1bdaa8ec23c795d4ad77269)
+[2016-05-23 15:16:00,776][ceph_deploy.install][DEBUG ] Detecting platform for host master ...
+[2016-05-23 15:16:01,007][master][DEBUG ] connection detected need for sudo
+[2016-05-23 15:16:01,234][master][DEBUG ] connected to host: master 
+[2016-05-23 15:16:01,235][master][DEBUG ] detect platform information from remote host
+[2016-05-23 15:16:01,257][master][DEBUG ] detect machine type
+[2016-05-23 15:16:01,266][master][DEBUG ] find the location of an executable
+[2016-05-23 15:16:01,275][master][INFO  ] Running command: sudo /sbin/initctl version
+[2016-05-23 15:16:01,292][ceph_deploy.install][INFO  ] Distro info: Ubuntu 14.04 trusty
+[2016-05-23 15:16:01,293][master][INFO  ] installing Ceph on master
+[2016-05-23 15:16:01,297][master][INFO  ] Running command: sudo env DEBIAN_FRONTEND=noninteractive DEBIAN_PRIORITY=critical apt-get --assume-yes -q --no-install-recommends install ca-certificates apt-transport-https
+[2016-05-23 15:16:01,334][master][DEBUG ] Reading package lists...
+[2016-05-23 15:16:01,599][master][DEBUG ] Building dependency tree...
+[2016-05-23 15:16:01,599][master][DEBUG ] Reading state information...
+[2016-05-23 15:16:01,814][master][DEBUG ] apt-transport-https is already the newest version.
+[2016-05-23 15:16:01,814][master][DEBUG ] ca-certificates is already the newest version.
+[2016-05-23 15:16:01,814][master][DEBUG ] 0 upgraded, 0 newly installed, 0 to remove and 38 not upgraded.
+[2016-05-23 15:16:01,819][master][INFO  ] Running command: sudo wget -O release.asc https://download.ceph.com/keys/release.asc
+[2016-05-23 15:16:01,839][master][WARNING] --2016-05-23 15:16:01--  https://download.ceph.com/keys/release.asc
+[2016-05-23 15:16:02,204][master][WARNING] Resolving download.ceph.com (download.ceph.com)... 2607:f298:6050:51f3:f816:3eff:fe71:9135, 173.236.253.173
+[2016-05-23 15:16:02,318][master][WARNING] Connecting to download.ceph.com (download.ceph.com)|2607:f298:6050:51f3:f816:3eff:fe71:9135|:443... connected.
+[2016-05-23 15:16:02,733][master][WARNING] HTTP request sent, awaiting response... 200 OK
+[2016-05-23 15:16:02,733][master][WARNING] Length: 1645 (1.6K) [application/octet-stream]
+[2016-05-23 15:16:02,733][master][WARNING] Saving to: ‘release.asc’
+[2016-05-23 15:16:02,733][master][WARNING] 
+[2016-05-23 15:16:02,734][master][WARNING]      0K .                                                     100%  235M=0s
+[2016-05-23 15:16:02,734][master][WARNING] 
+[2016-05-23 15:16:02,734][master][WARNING] 2016-05-23 15:16:02 (235 MB/s) - ‘release.asc’ saved [1645/1645]
+[2016-05-23 15:16:02,734][master][WARNING] 
+[2016-05-23 15:16:02,739][master][INFO  ] Running command: sudo apt-key add release.asc
+[2016-05-23 15:16:02,858][master][DEBUG ] OK
+[2016-05-23 15:16:02,863][master][DEBUG ] add deb repo to /etc/apt/sources.list.d/
+[2016-05-23 15:16:02,871][master][INFO  ] Running command: sudo env DEBIAN_FRONTEND=noninteractive DEBIAN_PRIORITY=critical apt-get --assume-yes -q update
+[2016-05-23 15:16:02,991][master][DEBUG ] Ign http://mirror.hetzner.de trusty InRelease
+[2016-05-23 15:16:02,991][master][DEBUG ] Get:1 http://mirror.hetzner.de trusty-backports InRelease [65.9 kB]
+[2016-05-23 15:16:02,991][master][DEBUG ] Get:2 http://mirror.hetzner.de trusty-updates InRelease [65.9 kB]
+[2016-05-23 15:16:02,991][master][DEBUG ] Ign http://de.archive.ubuntu.com trusty InRelease
+[2016-05-23 15:16:02,991][master][DEBUG ] Get:3 http://mirror.hetzner.de trusty-security InRelease [65.9 kB]
+[2016-05-23 15:16:02,992][master][DEBUG ] Hit http://security.ubuntu.com trusty-security InRelease
+[2016-05-23 15:16:02,992][master][DEBUG ] Hit http://ppa.launchpad.net trusty InRelease
+[2016-05-23 15:16:02,992][master][DEBUG ] Get:4 http://de.archive.ubuntu.com trusty-updates InRelease [65.9 kB]
+[2016-05-23 15:16:02,992][master][DEBUG ] Hit http://mirror.hetzner.de trusty Release.gpg
+[2016-05-23 15:16:02,995][master][DEBUG ] Hit http://ppa.launchpad.net trusty InRelease
+[2016-05-23 15:16:03,027][master][DEBUG ] Hit http://mirror.hetzner.de trusty Release
+[2016-05-23 15:16:03,027][master][DEBUG ] Hit http://mirror.hetzner.de trusty-backports/main amd64 Packages
+[2016-05-23 15:16:03,028][master][DEBUG ] Hit http://security.ubuntu.com trusty-security/main Sources
+[2016-05-23 15:16:03,031][master][DEBUG ] Hit http://ppa.launchpad.net trusty/main amd64 Packages
+[2016-05-23 15:16:03,035][master][DEBUG ] Hit http://de.archive.ubuntu.com trusty-backports InRelease
+[2016-05-23 15:16:03,050][master][DEBUG ] Hit http://security.ubuntu.com trusty-security/restricted Sources
+[2016-05-23 15:16:03,050][master][DEBUG ] Hit http://de.archive.ubuntu.com trusty Release.gpg
+[2016-05-23 15:16:03,054][master][DEBUG ] Hit http://ppa.launchpad.net trusty/main i386 Packages
+[2016-05-23 15:16:03,070][master][DEBUG ] Hit http://de.archive.ubuntu.com trusty Release
+[2016-05-23 15:16:03,070][master][DEBUG ] Hit http://security.ubuntu.com trusty-security/universe Sources
+[2016-05-23 15:16:03,071][master][DEBUG ] Hit http://ppa.launchpad.net trusty/main amd64 Packages
+[2016-05-23 15:16:03,087][master][DEBUG ] Get:5 http://de.archive.ubuntu.com trusty-updates/main Sources [275 kB]
+[2016-05-23 15:16:03,087][master][DEBUG ] Hit http://security.ubuntu.com trusty-security/multiverse Sources
+[2016-05-23 15:16:03,091][master][DEBUG ] Hit http://ppa.launchpad.net trusty/main i386 Packages
+[2016-05-23 15:16:03,091][master][DEBUG ] Hit http://mirror.hetzner.de trusty-backports/restricted amd64 Packages
+[2016-05-23 15:16:03,094][master][DEBUG ] Hit http://mirror.hetzner.de trusty-backports/universe amd64 Packages
+[2016-05-23 15:16:03,096][master][DEBUG ] Hit http://mirror.hetzner.de trusty-backports/multiverse amd64 Packages
+[2016-05-23 15:16:03,099][master][DEBUG ] Hit http://mirror.hetzner.de trusty-backports/main i386 Packages
+[2016-05-23 15:16:03,103][master][DEBUG ] Hit http://mirror.hetzner.de trusty-backports/restricted i386 Packages
+[2016-05-23 15:16:03,103][master][DEBUG ] Hit http://security.ubuntu.com trusty-security/main amd64 Packages
+[2016-05-23 15:16:03,106][master][DEBUG ] Hit http://mirror.hetzner.de trusty-backports/universe i386 Packages
+[2016-05-23 15:16:03,110][master][DEBUG ] Hit http://mirror.hetzner.de trusty-backports/multiverse i386 Packages
+[2016-05-23 15:16:03,126][master][DEBUG ] Hit http://security.ubuntu.com trusty-security/restricted amd64 Packages
+[2016-05-23 15:16:03,129][master][DEBUG ] Get:6 http://de.archive.ubuntu.com trusty-updates/restricted Sources [5,352 B]
+[2016-05-23 15:16:03,145][master][DEBUG ] Hit http://security.ubuntu.com trusty-security/universe amd64 Packages
+[2016-05-23 15:16:03,145][master][DEBUG ] Get:7 http://de.archive.ubuntu.com trusty-updates/universe Sources [154 kB]
+[2016-05-23 15:16:03,161][master][DEBUG ] Hit http://security.ubuntu.com trusty-security/multiverse amd64 Packages
+[2016-05-23 15:16:03,164][master][DEBUG ] Get:8 http://de.archive.ubuntu.com trusty-updates/multiverse Sources [5,939 B]
+[2016-05-23 15:16:03,180][master][DEBUG ] Hit http://security.ubuntu.com trusty-security/main i386 Packages
+[2016-05-23 15:16:03,180][master][DEBUG ] Get:9 http://mirror.hetzner.de trusty-updates/main amd64 Packages [964 kB]
+[2016-05-23 15:16:03,180][master][DEBUG ] Get:10 http://de.archive.ubuntu.com trusty-updates/main amd64 Packages [768 kB]
+[2016-05-23 15:16:03,212][master][DEBUG ] Hit http://security.ubuntu.com trusty-security/restricted i386 Packages
+[2016-05-23 15:16:03,216][master][DEBUG ] Hit http://security.ubuntu.com trusty-security/universe i386 Packages
+[2016-05-23 15:16:03,217][master][DEBUG ] Get:11 http://de.archive.ubuntu.com trusty-updates/restricted amd64 Packages [15.9 kB]
+[2016-05-23 15:16:03,249][master][DEBUG ] Get:12 http://de.archive.ubuntu.com trusty-updates/universe amd64 Packages [360 kB]
+[2016-05-23 15:16:03,249][master][DEBUG ] Hit http://security.ubuntu.com trusty-security/multiverse i386 Packages
+[2016-05-23 15:16:03,257][master][DEBUG ] Get:13 http://de.archive.ubuntu.com trusty-updates/multiverse amd64 Packages [13.2 kB]
+[2016-05-23 15:16:03,272][master][DEBUG ] Get:14 http://de.archive.ubuntu.com trusty-updates/main i386 Packages [737 kB]
+[2016-05-23 15:16:03,304][master][DEBUG ] Get:15 http://de.archive.ubuntu.com trusty-updates/restricted i386 Packages [15.6 kB]
+[2016-05-23 15:16:03,320][master][DEBUG ] Hit http://mirror.hetzner.de trusty-updates/restricted amd64 Packages
+[2016-05-23 15:16:03,320][master][DEBUG ] Get:16 http://de.archive.ubuntu.com trusty-updates/universe i386 Packages [360 kB]
+[2016-05-23 15:16:03,336][master][DEBUG ] Hit http://get.megam.io trusty InRelease
+[2016-05-23 15:16:03,339][master][DEBUG ] Get:17 http://de.archive.ubuntu.com trusty-updates/multiverse i386 Packages [13.6 kB]
+[2016-05-23 15:16:03,347][master][DEBUG ] Get:18 http://mirror.hetzner.de trusty-updates/universe amd64 Packages [464 kB]
+[2016-05-23 15:16:03,363][master][DEBUG ] Hit http://de.archive.ubuntu.com trusty-backports/main Sources
+[2016-05-23 15:16:03,427][master][DEBUG ] Hit http://de.archive.ubuntu.com trusty-backports/restricted Sources
+[2016-05-23 15:16:03,442][master][DEBUG ] Hit http://mirror.hetzner.de trusty-updates/multiverse amd64 Packages
+[2016-05-23 15:16:03,442][master][DEBUG ] Hit http://de.archive.ubuntu.com trusty-backports/universe Sources
+[2016-05-23 15:16:03,443][master][DEBUG ] Get:19 http://mirror.hetzner.de trusty-updates/main i386 Packages [925 kB]
+[2016-05-23 15:16:03,458][master][DEBUG ] Hit http://de.archive.ubuntu.com trusty-backports/multiverse Sources
+[2016-05-23 15:16:03,474][master][DEBUG ] Hit http://de.archive.ubuntu.com trusty-backports/main amd64 Packages
+[2016-05-23 15:16:03,490][master][DEBUG ] Hit http://de.archive.ubuntu.com trusty-backports/restricted amd64 Packages
+[2016-05-23 15:16:03,505][master][DEBUG ] Hit http://de.archive.ubuntu.com trusty-backports/universe amd64 Packages
+[2016-05-23 15:16:03,521][master][DEBUG ] Hit http://get.megam.io trusty/testing amd64 Packages
+[2016-05-23 15:16:03,522][master][DEBUG ] Hit http://de.archive.ubuntu.com trusty-backports/multiverse amd64 Packages
+[2016-05-23 15:16:03,537][master][DEBUG ] Hit http://de.archive.ubuntu.com trusty-backports/main i386 Packages
+[2016-05-23 15:16:03,553][master][DEBUG ] Hit http://de.archive.ubuntu.com trusty-backports/restricted i386 Packages
+[2016-05-23 15:16:03,569][master][DEBUG ] Hit http://de.archive.ubuntu.com trusty-backports/universe i386 Packages
+[2016-05-23 15:16:03,584][master][DEBUG ] Hit http://de.archive.ubuntu.com trusty-backports/multiverse i386 Packages
+[2016-05-23 15:16:03,585][master][DEBUG ] Hit http://mirror.hetzner.de trusty-updates/restricted i386 Packages
+[2016-05-23 15:16:03,600][master][DEBUG ] Hit http://de.archive.ubuntu.com trusty/main Sources
+[2016-05-23 15:16:03,616][master][DEBUG ] Hit http://de.archive.ubuntu.com trusty/restricted Sources
+[2016-05-23 15:16:03,624][master][DEBUG ] Get:20 http://mirror.hetzner.de trusty-updates/universe i386 Packages [466 kB]
+[2016-05-23 15:16:03,625][master][DEBUG ] Hit http://de.archive.ubuntu.com trusty/universe Sources
+[2016-05-23 15:16:03,641][master][DEBUG ] Hit http://de.archive.ubuntu.com trusty/multiverse Sources
+[2016-05-23 15:16:03,656][master][DEBUG ] Hit http://de.archive.ubuntu.com trusty/main amd64 Packages
+[2016-05-23 15:16:03,672][master][DEBUG ] Hit http://de.archive.ubuntu.com trusty/restricted amd64 Packages
+[2016-05-23 15:16:03,688][master][DEBUG ] Hit http://de.archive.ubuntu.com trusty/universe amd64 Packages
+[2016-05-23 15:16:03,752][master][DEBUG ] Hit http://mirror.hetzner.de trusty-updates/multiverse i386 Packages
+[2016-05-23 15:16:03,753][master][DEBUG ] Hit http://mirror.hetzner.de trusty-security/main amd64 Packages
+[2016-05-23 15:16:03,757][master][DEBUG ] Hit http://de.archive.ubuntu.com trusty/multiverse amd64 Packages
+[2016-05-23 15:16:03,757][master][DEBUG ] Hit http://mirror.hetzner.de trusty-security/restricted amd64 Packages
+[2016-05-23 15:16:03,758][master][DEBUG ] Hit http://mirror.hetzner.de trusty-security/universe amd64 Packages
+[2016-05-23 15:16:03,762][master][DEBUG ] Hit http://mirror.hetzner.de trusty-security/multiverse amd64 Packages
+[2016-05-23 15:16:03,765][master][DEBUG ] Hit http://mirror.hetzner.de trusty-security/main i386 Packages
+[2016-05-23 15:16:03,769][master][DEBUG ] Hit http://mirror.hetzner.de trusty-security/restricted i386 Packages
+[2016-05-23 15:16:03,772][master][DEBUG ] Hit http://de.archive.ubuntu.com trusty/main i386 Packages
+[2016-05-23 15:16:03,772][master][DEBUG ] Hit http://mirror.hetzner.de trusty-security/universe i386 Packages
+[2016-05-23 15:16:03,774][master][DEBUG ] Hit http://mirror.hetzner.de trusty-security/multiverse i386 Packages
+[2016-05-23 15:16:03,777][master][DEBUG ] Hit http://mirror.hetzner.de trusty/main amd64 Packages
+[2016-05-23 15:16:03,781][master][DEBUG ] Hit http://mirror.hetzner.de trusty/restricted amd64 Packages
+[2016-05-23 15:16:03,784][master][DEBUG ] Hit http://mirror.hetzner.de trusty/universe amd64 Packages
+[2016-05-23 15:16:03,786][master][DEBUG ] Hit http://mirror.hetzner.de trusty/multiverse amd64 Packages
+[2016-05-23 15:16:03,786][master][DEBUG ] Hit http://de.archive.ubuntu.com trusty/restricted i386 Packages
+[2016-05-23 15:16:03,789][master][DEBUG ] Hit http://mirror.hetzner.de trusty/main i386 Packages
+[2016-05-23 15:16:03,793][master][DEBUG ] Hit http://mirror.hetzner.de trusty/restricted i386 Packages
+[2016-05-23 15:16:03,796][master][DEBUG ] Hit http://mirror.hetzner.de trusty/universe i386 Packages
+[2016-05-23 15:16:03,800][master][DEBUG ] Hit http://mirror.hetzner.de trusty/multiverse i386 Packages
+[2016-05-23 15:16:03,801][master][DEBUG ] Hit http://de.archive.ubuntu.com trusty/universe i386 Packages
+[2016-05-23 15:16:03,817][master][DEBUG ] Hit http://de.archive.ubuntu.com trusty/multiverse i386 Packages
+[2016-05-23 15:16:03,820][master][DEBUG ] Hit https://download.ceph.com trusty InRelease
+[2016-05-23 15:16:03,934][master][DEBUG ] Hit https://download.ceph.com trusty/main amd64 Packages
+[2016-05-23 15:16:04,048][master][DEBUG ] Hit https://download.ceph.com trusty/main i386 Packages
+[2016-05-23 15:16:06,318][master][DEBUG ] Fetched 5,807 kB in 3s (1,749 kB/s)
+[2016-05-23 15:16:08,537][master][DEBUG ] Reading package lists...
+[2016-05-23 15:16:08,542][master][INFO  ] Running command: sudo env DEBIAN_FRONTEND=noninteractive DEBIAN_PRIORITY=critical apt-get --assume-yes -q --no-install-recommends install -o Dpkg::Options::=--force-confnew ceph ceph-mds radosgw
+[2016-05-23 15:16:08,563][master][DEBUG ] Reading package lists...
+[2016-05-23 15:16:08,777][master][DEBUG ] Building dependency tree...
+[2016-05-23 15:16:08,778][master][DEBUG ] Reading state information...
+[2016-05-23 15:16:08,942][master][DEBUG ] The following extra packages will be installed:
+[2016-05-23 15:16:08,942][master][DEBUG ]   ceph-base ceph-common ceph-mon ceph-osd libaio1 libbabeltrace-ctf1
+[2016-05-23 15:16:08,942][master][DEBUG ]   libbabeltrace1 libboost-program-options1.54.0 libboost-regex1.54.0
+[2016-05-23 15:16:08,943][master][DEBUG ]   libcephfs1 libfcgi0ldbl libgoogle-perftools4 libleveldb1 libradosstriper1
+[2016-05-23 15:16:08,943][master][DEBUG ]   librgw2 libsnappy1 libtcmalloc-minimal4 libunwind8 python-cephfs
+[2016-05-23 15:16:08,943][master][DEBUG ]   python-flask python-itsdangerous python-jinja2 python-markupsafe
+[2016-05-23 15:16:08,943][master][DEBUG ]   python-pkg-resources python-rados python-rbd python-werkzeug
+[2016-05-23 15:16:08,943][master][DEBUG ] Suggested packages:
+[2016-05-23 15:16:08,943][master][DEBUG ]   python-flask-doc python-jinja2-doc python-distribute python-distribute-doc
+[2016-05-23 15:16:08,944][master][DEBUG ]   ipython python-genshi python-lxml python-greenlet python-redis
+[2016-05-23 15:16:08,944][master][DEBUG ]   python-pylibmc python-memcache python-werkzeug-doc
+[2016-05-23 15:16:08,944][master][DEBUG ] Recommended packages:
+[2016-05-23 15:16:08,944][master][DEBUG ]   ceph-fs-common ceph-fuse python-blinker python-openssl python-pyinotify
+[2016-05-23 15:16:08,944][master][DEBUG ] The following NEW packages will be installed:
+[2016-05-23 15:16:08,944][master][DEBUG ]   ceph ceph-base ceph-common ceph-mds ceph-mon ceph-osd libaio1
+[2016-05-23 15:16:08,944][master][DEBUG ]   libbabeltrace-ctf1 libbabeltrace1 libboost-program-options1.54.0
+[2016-05-23 15:16:08,945][master][DEBUG ]   libboost-regex1.54.0 libcephfs1 libfcgi0ldbl libgoogle-perftools4
+[2016-05-23 15:16:08,945][master][DEBUG ]   libleveldb1 libradosstriper1 librgw2 libsnappy1 libtcmalloc-minimal4
+[2016-05-23 15:16:08,945][master][DEBUG ]   libunwind8 python-cephfs python-flask python-itsdangerous python-jinja2
+[2016-05-23 15:16:08,945][master][DEBUG ]   python-markupsafe python-pkg-resources python-rados python-rbd
+[2016-05-23 15:16:08,945][master][DEBUG ]   python-werkzeug radosgw
+[2016-05-23 15:16:09,159][master][DEBUG ] 0 upgraded, 30 newly installed, 0 to remove and 38 not upgraded.
+[2016-05-23 15:16:09,160][master][DEBUG ] Need to get 0 B/102 MB of archives.
+[2016-05-23 15:16:09,160][master][DEBUG ] After this operation, 491 MB of additional disk space will be used.
+[2016-05-23 15:16:09,192][master][DEBUG ] Selecting previously unselected package libaio1:amd64.
+[2016-05-23 15:16:09,208][master][DEBUG ] (Reading database ... 48113 files and directories currently installed.)
+[2016-05-23 15:16:09,209][master][DEBUG ] Preparing to unpack .../libaio1_0.3.109-4_amd64.deb ...
+[2016-05-23 15:16:09,210][master][DEBUG ] Unpacking libaio1:amd64 (0.3.109-4) ...
+[2016-05-23 15:16:09,226][master][DEBUG ] Selecting previously unselected package libboost-program-options1.54.0:amd64.
+[2016-05-23 15:16:09,229][master][DEBUG ] Preparing to unpack .../libboost-program-options1.54.0_1.54.0-4ubuntu3.1_amd64.deb ...
+[2016-05-23 15:16:09,230][master][DEBUG ] Unpacking libboost-program-options1.54.0:amd64 (1.54.0-4ubuntu3.1) ...
+[2016-05-23 15:16:09,261][master][DEBUG ] Selecting previously unselected package libboost-regex1.54.0:amd64.
+[2016-05-23 15:16:09,262][master][DEBUG ] Preparing to unpack .../libboost-regex1.54.0_1.54.0-4ubuntu3.1_amd64.deb ...
+[2016-05-23 15:16:09,262][master][DEBUG ] Unpacking libboost-regex1.54.0:amd64 (1.54.0-4ubuntu3.1) ...
+[2016-05-23 15:16:09,326][master][DEBUG ] Selecting previously unselected package libsnappy1.
+[2016-05-23 15:16:09,326][master][DEBUG ] Preparing to unpack .../libsnappy1_1.1.0-1ubuntu1_amd64.deb ...
+[2016-05-23 15:16:09,326][master][DEBUG ] Unpacking libsnappy1 (1.1.0-1ubuntu1) ...
+[2016-05-23 15:16:09,327][master][DEBUG ] Selecting previously unselected package libleveldb1:amd64.
+[2016-05-23 15:16:09,327][master][DEBUG ] Preparing to unpack .../libleveldb1_1.15.0-2_amd64.deb ...
+[2016-05-23 15:16:09,327][master][DEBUG ] Unpacking libleveldb1:amd64 (1.15.0-2) ...
+[2016-05-23 15:16:09,343][master][DEBUG ] Selecting previously unselected package libunwind8.
+[2016-05-23 15:16:09,343][master][DEBUG ] Preparing to unpack .../libunwind8_1.1-2.2ubuntu3_amd64.deb ...
+[2016-05-23 15:16:09,343][master][DEBUG ] Unpacking libunwind8 (1.1-2.2ubuntu3) ...
+[2016-05-23 15:16:09,375][master][DEBUG ] Selecting previously unselected package libbabeltrace1:amd64.
+[2016-05-23 15:16:09,375][master][DEBUG ] Preparing to unpack .../libbabeltrace1_1.2.1-2_amd64.deb ...
+[2016-05-23 15:16:09,375][master][DEBUG ] Unpacking libbabeltrace1:amd64 (1.2.1-2) ...
+[2016-05-23 15:16:09,379][master][DEBUG ] Selecting previously unselected package libbabeltrace-ctf1:amd64.
+[2016-05-23 15:16:09,380][master][DEBUG ] Preparing to unpack .../libbabeltrace-ctf1_1.2.1-2_amd64.deb ...
+[2016-05-23 15:16:09,381][master][DEBUG ] Unpacking libbabeltrace-ctf1:amd64 (1.2.1-2) ...
+[2016-05-23 15:16:09,413][master][DEBUG ] Selecting previously unselected package libtcmalloc-minimal4.
+[2016-05-23 15:16:09,414][master][DEBUG ] Preparing to unpack .../libtcmalloc-minimal4_2.1-2ubuntu1.1_amd64.deb ...
+[2016-05-23 15:16:09,414][master][DEBUG ] Unpacking libtcmalloc-minimal4 (2.1-2ubuntu1.1) ...
+[2016-05-23 15:16:09,446][master][DEBUG ] Selecting previously unselected package libgoogle-perftools4.
+[2016-05-23 15:16:09,446][master][DEBUG ] Preparing to unpack .../libgoogle-perftools4_2.1-2ubuntu1.1_amd64.deb ...
+[2016-05-23 15:16:09,446][master][DEBUG ] Unpacking libgoogle-perftools4 (2.1-2ubuntu1.1) ...
+[2016-05-23 15:16:09,478][master][DEBUG ] Selecting previously unselected package libradosstriper1.
+[2016-05-23 15:16:09,478][master][DEBUG ] Preparing to unpack .../libradosstriper1_10.2.1-1trusty_amd64.deb ...
+[2016-05-23 15:16:09,478][master][DEBUG ] Unpacking libradosstriper1 (10.2.1-1trusty) ...
+[2016-05-23 15:16:09,743][master][DEBUG ] Selecting previously unselected package libfcgi0ldbl.
+[2016-05-23 15:16:09,743][master][DEBUG ] Preparing to unpack .../libfcgi0ldbl_2.4.0-8.1ubuntu5_amd64.deb ...
+[2016-05-23 15:16:09,743][master][DEBUG ] Unpacking libfcgi0ldbl (2.4.0-8.1ubuntu5) ...
+[2016-05-23 15:16:09,775][master][DEBUG ] Selecting previously unselected package librgw2.
+[2016-05-23 15:16:09,775][master][DEBUG ] Preparing to unpack .../librgw2_10.2.1-1trusty_amd64.deb ...
+[2016-05-23 15:16:09,776][master][DEBUG ] Unpacking librgw2 (10.2.1-1trusty) ...
+[2016-05-23 15:16:10,140][master][DEBUG ] Selecting previously unselected package python-rados.
+[2016-05-23 15:16:10,141][master][DEBUG ] Preparing to unpack .../python-rados_10.2.1-1trusty_amd64.deb ...
+[2016-05-23 15:16:10,141][master][DEBUG ] Unpacking python-rados (10.2.1-1trusty) ...
+[2016-05-23 15:16:10,205][master][DEBUG ] Selecting previously unselected package libcephfs1.
+[2016-05-23 15:16:10,205][master][DEBUG ] Preparing to unpack .../libcephfs1_10.2.1-1trusty_amd64.deb ...
+[2016-05-23 15:16:10,205][master][DEBUG ] Unpacking libcephfs1 (10.2.1-1trusty) ...
+[2016-05-23 15:16:10,369][master][DEBUG ] Selecting previously unselected package python-cephfs.
+[2016-05-23 15:16:10,370][master][DEBUG ] Preparing to unpack .../python-cephfs_10.2.1-1trusty_amd64.deb ...
+[2016-05-23 15:16:10,370][master][DEBUG ] Unpacking python-cephfs (10.2.1-1trusty) ...
+[2016-05-23 15:16:10,434][master][DEBUG ] Selecting previously unselected package python-rbd.
+[2016-05-23 15:16:10,434][master][DEBUG ] Preparing to unpack .../python-rbd_10.2.1-1trusty_amd64.deb ...
+[2016-05-23 15:16:10,434][master][DEBUG ] Unpacking python-rbd (10.2.1-1trusty) ...
+[2016-05-23 15:16:10,466][master][DEBUG ] Selecting previously unselected package ceph-common.
+[2016-05-23 15:16:10,466][master][DEBUG ] Preparing to unpack .../ceph-common_10.2.1-1trusty_amd64.deb ...
+[2016-05-23 15:16:10,467][master][DEBUG ] Unpacking ceph-common (10.2.1-1trusty) ...
+[2016-05-23 15:16:11,483][master][DEBUG ] Selecting previously unselected package python-pkg-resources.
+[2016-05-23 15:16:11,483][master][DEBUG ] Preparing to unpack .../python-pkg-resources_3.3-1ubuntu2_all.deb ...
+[2016-05-23 15:16:11,483][master][DEBUG ] Unpacking python-pkg-resources (3.3-1ubuntu2) ...
+[2016-05-23 15:16:11,484][master][DEBUG ] Selecting previously unselected package ceph-base.
+[2016-05-23 15:16:11,484][master][DEBUG ] Preparing to unpack .../ceph-base_10.2.1-1trusty_amd64.deb ...
+[2016-05-23 15:16:11,484][master][DEBUG ] Unpacking ceph-base (10.2.1-1trusty) ...
+[2016-05-23 15:16:16,912][master][DEBUG ] Selecting previously unselected package python-werkzeug.
+[2016-05-23 15:16:16,912][master][DEBUG ] Preparing to unpack .../python-werkzeug_0.9.4+dfsg-1.1ubuntu2_all.deb ...
+[2016-05-23 15:16:16,912][master][DEBUG ] Unpacking python-werkzeug (0.9.4+dfsg-1.1ubuntu2) ...
+[2016-05-23 15:16:16,912][master][DEBUG ] Selecting previously unselected package python-markupsafe.
+[2016-05-23 15:16:16,916][master][DEBUG ] Preparing to unpack .../python-markupsafe_0.18-1build2_amd64.deb ...
+[2016-05-23 15:16:16,916][master][DEBUG ] Unpacking python-markupsafe (0.18-1build2) ...
+[2016-05-23 15:16:16,932][master][DEBUG ] Selecting previously unselected package python-jinja2.
+[2016-05-23 15:16:16,939][master][DEBUG ] Preparing to unpack .../python-jinja2_2.7.2-2_all.deb ...
+[2016-05-23 15:16:16,939][master][DEBUG ] Unpacking python-jinja2 (2.7.2-2) ...
+[2016-05-23 15:16:17,003][master][DEBUG ] Selecting previously unselected package python-itsdangerous.
+[2016-05-23 15:16:17,004][master][DEBUG ] Preparing to unpack .../python-itsdangerous_0.22+dfsg1-1build1_all.deb ...
+[2016-05-23 15:16:17,004][master][DEBUG ] Unpacking python-itsdangerous (0.22+dfsg1-1build1) ...
+[2016-05-23 15:16:17,020][master][DEBUG ] Selecting previously unselected package python-flask.
+[2016-05-23 15:16:17,020][master][DEBUG ] Preparing to unpack .../python-flask_0.10.1-2build1_all.deb ...
+[2016-05-23 15:16:17,020][master][DEBUG ] Unpacking python-flask (0.10.1-2build1) ...
+[2016-05-23 15:16:17,052][master][DEBUG ] Selecting previously unselected package ceph-mon.
+[2016-05-23 15:16:17,052][master][DEBUG ] Preparing to unpack .../ceph-mon_10.2.1-1trusty_amd64.deb ...
+[2016-05-23 15:16:17,052][master][DEBUG ] Unpacking ceph-mon (10.2.1-1trusty) ...
+[2016-05-23 15:16:17,367][master][DEBUG ] Selecting previously unselected package ceph-osd.
+[2016-05-23 15:16:17,367][master][DEBUG ] Preparing to unpack .../ceph-osd_10.2.1-1trusty_amd64.deb ...
+[2016-05-23 15:16:17,367][master][DEBUG ] Unpacking ceph-osd (10.2.1-1trusty) ...
+[2016-05-23 15:16:18,233][master][DEBUG ] Selecting previously unselected package ceph.
+[2016-05-23 15:16:18,233][master][DEBUG ] Preparing to unpack .../ceph_10.2.1-1trusty_amd64.deb ...
+[2016-05-23 15:16:18,234][master][DEBUG ] Unpacking ceph (10.2.1-1trusty) ...
+[2016-05-23 15:16:18,234][master][DEBUG ] Selecting previously unselected package ceph-mds.
+[2016-05-23 15:16:18,234][master][DEBUG ] Preparing to unpack .../ceph-mds_10.2.1-1trusty_amd64.deb ...
+[2016-05-23 15:16:18,234][master][DEBUG ] Unpacking ceph-mds (10.2.1-1trusty) ...
+[2016-05-23 15:16:18,549][master][DEBUG ] Selecting previously unselected package radosgw.
+[2016-05-23 15:16:18,549][master][DEBUG ] Preparing to unpack .../radosgw_10.2.1-1trusty_amd64.deb ...
+[2016-05-23 15:16:18,549][master][DEBUG ] Unpacking radosgw (10.2.1-1trusty) ...
+[2016-05-23 15:16:18,581][master][DEBUG ] Processing triggers for man-db (2.6.7.1-1ubuntu1) ...
+[2016-05-23 15:16:18,745][master][DEBUG ] Processing triggers for ureadahead (0.100.0-16) ...
+[2016-05-23 15:16:18,745][master][DEBUG ] ureadahead will be reprofiled on next reboot
+[2016-05-23 15:16:18,777][master][DEBUG ] Setting up libaio1:amd64 (0.3.109-4) ...
+[2016-05-23 15:16:18,778][master][DEBUG ] Setting up libboost-program-options1.54.0:amd64 (1.54.0-4ubuntu3.1) ...
+[2016-05-23 15:16:18,781][master][DEBUG ] Setting up libboost-regex1.54.0:amd64 (1.54.0-4ubuntu3.1) ...
+[2016-05-23 15:16:18,789][master][DEBUG ] Setting up libsnappy1 (1.1.0-1ubuntu1) ...
+[2016-05-23 15:16:18,792][master][DEBUG ] Setting up libleveldb1:amd64 (1.15.0-2) ...
+[2016-05-23 15:16:18,796][master][DEBUG ] Setting up libunwind8 (1.1-2.2ubuntu3) ...
+[2016-05-23 15:16:18,799][master][DEBUG ] Setting up libbabeltrace1:amd64 (1.2.1-2) ...
+[2016-05-23 15:16:18,807][master][DEBUG ] Setting up libbabeltrace-ctf1:amd64 (1.2.1-2) ...
+[2016-05-23 15:16:18,808][master][DEBUG ] Setting up libtcmalloc-minimal4 (2.1-2ubuntu1.1) ...
+[2016-05-23 15:16:18,816][master][DEBUG ] Setting up libgoogle-perftools4 (2.1-2ubuntu1.1) ...
+[2016-05-23 15:16:18,816][master][DEBUG ] Setting up libradosstriper1 (10.2.1-1trusty) ...
+[2016-05-23 15:16:18,824][master][DEBUG ] Setting up libfcgi0ldbl (2.4.0-8.1ubuntu5) ...
+[2016-05-23 15:16:18,825][master][DEBUG ] Setting up librgw2 (10.2.1-1trusty) ...
+[2016-05-23 15:16:18,833][master][DEBUG ] Setting up python-rados (10.2.1-1trusty) ...
+[2016-05-23 15:16:18,833][master][DEBUG ] Setting up libcephfs1 (10.2.1-1trusty) ...
+[2016-05-23 15:16:18,837][master][DEBUG ] Setting up python-cephfs (10.2.1-1trusty) ...
+[2016-05-23 15:16:18,901][master][DEBUG ] Setting up python-rbd (10.2.1-1trusty) ...
+[2016-05-23 15:16:18,901][master][DEBUG ] Setting up ceph-common (10.2.1-1trusty) ...
+[2016-05-23 15:16:18,909][master][DEBUG ] Setting system user ceph properties....done
+[2016-05-23 15:16:18,909][master][WARNING] usermod: no changes
+[2016-05-23 15:16:19,023][master][DEBUG ] Setting up python-pkg-resources (3.3-1ubuntu2) ...
+[2016-05-23 15:16:19,087][master][DEBUG ] Setting up python-werkzeug (0.9.4+dfsg-1.1ubuntu2) ...
+[2016-05-23 15:16:19,251][master][DEBUG ] Setting up python-markupsafe (0.18-1build2) ...
+[2016-05-23 15:16:19,315][master][DEBUG ] Setting up python-jinja2 (2.7.2-2) ...
+[2016-05-23 15:16:19,480][master][DEBUG ] Setting up python-itsdangerous (0.22+dfsg1-1build1) ...
+[2016-05-23 15:16:19,512][master][DEBUG ] Setting up python-flask (0.10.1-2build1) ...
+[2016-05-23 15:16:19,626][master][DEBUG ] Processing triggers for ureadahead (0.100.0-16) ...
+[2016-05-23 15:16:19,626][master][DEBUG ] Setting up radosgw (10.2.1-1trusty) ...
+[2016-05-23 15:16:19,634][master][DEBUG ] radosgw-all start/running
+[2016-05-23 15:16:19,634][master][DEBUG ] Setting up ceph-base (10.2.1-1trusty) ...
+[2016-05-23 15:16:19,748][master][DEBUG ] ceph-all start/running
+[2016-05-23 15:16:19,862][master][DEBUG ] Setting up ceph-mon (10.2.1-1trusty) ...
+[2016-05-23 15:16:19,863][master][WARNING] start: Job is already running: ceph-mon-all
+[2016-05-23 15:16:19,927][master][DEBUG ] Setting up ceph-osd (10.2.1-1trusty) ...
+[2016-05-23 15:16:19,942][master][WARNING] start: Job is already running: ceph-osd-all
+[2016-05-23 15:16:20,107][master][DEBUG ] Setting up ceph (10.2.1-1trusty) ...
+[2016-05-23 15:16:20,107][master][DEBUG ] Setting up ceph-mds (10.2.1-1trusty) ...
+[2016-05-23 15:16:20,115][master][DEBUG ] ceph-mds-all start/running
+[2016-05-23 15:16:20,122][master][DEBUG ] Processing triggers for libc-bin (2.19-0ubuntu6.7) ...
+[2016-05-23 15:16:20,138][master][DEBUG ] Processing triggers for ureadahead (0.100.0-16) ...
+[2016-05-23 15:16:20,407][master][INFO  ] Running command: sudo ceph --version
+[2016-05-23 15:16:20,526][master][DEBUG ] ceph version 10.2.1 (3a66dd4f30852819c1bdaa8ec23c795d4ad77269)
+[2016-05-23 15:16:50,009][ceph_deploy.conf][DEBUG ] found configuration file at: /home/megdc/.cephdeploy.conf
+[2016-05-23 15:16:50,009][ceph_deploy.cli][INFO  ] Invoked (1.5.33): /usr/bin/ceph-deploy disk list node2
+[2016-05-23 15:16:50,010][ceph_deploy.cli][INFO  ] ceph-deploy options:
+[2016-05-23 15:16:50,010][ceph_deploy.cli][INFO  ]  username                      : None
+[2016-05-23 15:16:50,010][ceph_deploy.cli][INFO  ]  verbose                       : False
+[2016-05-23 15:16:50,010][ceph_deploy.cli][INFO  ]  overwrite_conf                : False
+[2016-05-23 15:16:50,010][ceph_deploy.cli][INFO  ]  subcommand                    : list
+[2016-05-23 15:16:50,010][ceph_deploy.cli][INFO  ]  quiet                         : False
+[2016-05-23 15:16:50,010][ceph_deploy.cli][INFO  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7fce4c6ca5a8>
+[2016-05-23 15:16:50,010][ceph_deploy.cli][INFO  ]  cluster                       : ceph
+[2016-05-23 15:16:50,010][ceph_deploy.cli][INFO  ]  func                          : <function disk at 0x7fce4cb2f5f0>
+[2016-05-23 15:16:50,010][ceph_deploy.cli][INFO  ]  ceph_conf                     : None
+[2016-05-23 15:16:50,011][ceph_deploy.cli][INFO  ]  default_release               : False
+[2016-05-23 15:16:50,011][ceph_deploy.cli][INFO  ]  disk                          : [('node2', None, None)]
+[2016-05-23 15:16:50,011][ceph_deploy][ERROR ] ConfigError: Cannot load config: [Errno 2] No such file or directory: 'ceph.conf'; has `ceph-deploy new` been run in this directory?
+
+[2016-05-23 15:23:24,238][ceph_deploy.conf][DEBUG ] found configuration file at: /home/megdc/.cephdeploy.conf
+[2016-05-23 15:23:24,239][ceph_deploy.cli][INFO  ] Invoked (1.5.33): /usr/bin/ceph-deploy disk list node2
+[2016-05-23 15:23:24,239][ceph_deploy.cli][INFO  ] ceph-deploy options:
+[2016-05-23 15:23:24,239][ceph_deploy.cli][INFO  ]  username                      : None
+[2016-05-23 15:23:24,239][ceph_deploy.cli][INFO  ]  verbose                       : False
+[2016-05-23 15:23:24,239][ceph_deploy.cli][INFO  ]  overwrite_conf                : False
+[2016-05-23 15:23:24,239][ceph_deploy.cli][INFO  ]  subcommand                    : list
+[2016-05-23 15:23:24,239][ceph_deploy.cli][INFO  ]  quiet                         : False
+[2016-05-23 15:23:24,239][ceph_deploy.cli][INFO  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7f17ee6325a8>
+[2016-05-23 15:23:24,239][ceph_deploy.cli][INFO  ]  cluster                       : ceph
+[2016-05-23 15:23:24,240][ceph_deploy.cli][INFO  ]  func                          : <function disk at 0x7f17eea975f0>
+[2016-05-23 15:23:24,240][ceph_deploy.cli][INFO  ]  ceph_conf                     : None
+[2016-05-23 15:23:24,240][ceph_deploy.cli][INFO  ]  default_release               : False
+[2016-05-23 15:23:24,240][ceph_deploy.cli][INFO  ]  disk                          : [('node2', None, None)]
+[2016-05-23 15:23:24,240][ceph_deploy][ERROR ] ConfigError: Cannot load config: [Errno 2] No such file or directory: 'ceph.conf'; has `ceph-deploy new` been run in this directory?
+
+[2016-05-23 15:26:49,522][ceph_deploy.conf][DEBUG ] found configuration file at: /home/megdc/.cephdeploy.conf
+[2016-05-23 15:26:49,522][ceph_deploy.cli][INFO  ] Invoked (1.5.33): /usr/bin/ceph-deploy disk list node2
+[2016-05-23 15:26:49,522][ceph_deploy.cli][INFO  ] ceph-deploy options:
+[2016-05-23 15:26:49,523][ceph_deploy.cli][INFO  ]  username                      : None
+[2016-05-23 15:26:49,523][ceph_deploy.cli][INFO  ]  verbose                       : False
+[2016-05-23 15:26:49,523][ceph_deploy.cli][INFO  ]  overwrite_conf                : False
+[2016-05-23 15:26:49,523][ceph_deploy.cli][INFO  ]  subcommand                    : list
+[2016-05-23 15:26:49,523][ceph_deploy.cli][INFO  ]  quiet                         : False
+[2016-05-23 15:26:49,523][ceph_deploy.cli][INFO  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7ff43d42e5a8>
+[2016-05-23 15:26:49,523][ceph_deploy.cli][INFO  ]  cluster                       : ceph
+[2016-05-23 15:26:49,523][ceph_deploy.cli][INFO  ]  func                          : <function disk at 0x7ff43d8935f0>
+[2016-05-23 15:26:49,523][ceph_deploy.cli][INFO  ]  ceph_conf                     : None
+[2016-05-23 15:26:49,523][ceph_deploy.cli][INFO  ]  default_release               : False
+[2016-05-23 15:26:49,524][ceph_deploy.cli][INFO  ]  disk                          : [('node2', None, None)]
+[2016-05-23 15:26:49,524][ceph_deploy][ERROR ] ConfigError: Cannot load config: [Errno 2] No such file or directory: 'ceph.conf'; has `ceph-deploy new` been run in this directory?
+
+[2016-05-23 15:28:11,158][ceph_deploy.conf][DEBUG ] found configuration file at: /home/megdc/.cephdeploy.conf
+[2016-05-23 15:28:11,158][ceph_deploy.cli][INFO  ] Invoked (1.5.33): /usr/bin/ceph-deploy disk list node2
+[2016-05-23 15:28:11,159][ceph_deploy.cli][INFO  ] ceph-deploy options:
+[2016-05-23 15:28:11,159][ceph_deploy.cli][INFO  ]  username                      : None
+[2016-05-23 15:28:11,159][ceph_deploy.cli][INFO  ]  verbose                       : False
+[2016-05-23 15:28:11,159][ceph_deploy.cli][INFO  ]  overwrite_conf                : False
+[2016-05-23 15:28:11,159][ceph_deploy.cli][INFO  ]  subcommand                    : list
+[2016-05-23 15:28:11,159][ceph_deploy.cli][INFO  ]  quiet                         : False
+[2016-05-23 15:28:11,159][ceph_deploy.cli][INFO  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7f87c41f05a8>
+[2016-05-23 15:28:11,159][ceph_deploy.cli][INFO  ]  cluster                       : ceph
+[2016-05-23 15:28:11,159][ceph_deploy.cli][INFO  ]  func                          : <function disk at 0x7f87c46555f0>
+[2016-05-23 15:28:11,159][ceph_deploy.cli][INFO  ]  ceph_conf                     : None
+[2016-05-23 15:28:11,160][ceph_deploy.cli][INFO  ]  default_release               : False
+[2016-05-23 15:28:11,160][ceph_deploy.cli][INFO  ]  disk                          : [('node2', None, None)]
+[2016-05-23 15:28:11,160][ceph_deploy][ERROR ] ConfigError: Cannot load config: [Errno 2] No such file or directory: 'ceph.conf'; has `ceph-deploy new` been run in this directory?
+
+[2016-05-23 15:31:15,299][ceph_deploy.conf][DEBUG ] found configuration file at: /home/megdc/.cephdeploy.conf
+[2016-05-23 15:31:15,299][ceph_deploy.cli][INFO  ] Invoked (1.5.33): /usr/bin/ceph-deploy disk list node2
+[2016-05-23 15:31:15,299][ceph_deploy.cli][INFO  ] ceph-deploy options:
+[2016-05-23 15:31:15,299][ceph_deploy.cli][INFO  ]  username                      : None
+[2016-05-23 15:31:15,299][ceph_deploy.cli][INFO  ]  verbose                       : False
+[2016-05-23 15:31:15,299][ceph_deploy.cli][INFO  ]  overwrite_conf                : False
+[2016-05-23 15:31:15,299][ceph_deploy.cli][INFO  ]  subcommand                    : list
+[2016-05-23 15:31:15,300][ceph_deploy.cli][INFO  ]  quiet                         : False
+[2016-05-23 15:31:15,300][ceph_deploy.cli][INFO  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7fdef4dab5a8>
+[2016-05-23 15:31:15,300][ceph_deploy.cli][INFO  ]  cluster                       : ceph
+[2016-05-23 15:31:15,300][ceph_deploy.cli][INFO  ]  func                          : <function disk at 0x7fdef52105f0>
+[2016-05-23 15:31:15,300][ceph_deploy.cli][INFO  ]  ceph_conf                     : None
+[2016-05-23 15:31:15,300][ceph_deploy.cli][INFO  ]  default_release               : False
+[2016-05-23 15:31:15,300][ceph_deploy.cli][INFO  ]  disk                          : [('node2', None, None)]
+[2016-05-23 15:31:15,300][ceph_deploy][ERROR ] ConfigError: Cannot load config: [Errno 2] No such file or directory: 'ceph.conf'; has `ceph-deploy new` been run in this directory?
+

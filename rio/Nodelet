@@ -1,0 +1,53 @@
+Environment="KUBELET_KUBECONFIG_ARGS=--kubeconfig=/etc/kubernetes/kubelet.conf --require-kubeconfig=true"
+Environment="KUBELET_FEATURE_ARGS= --feature-gates=DynamicKubeletConfig=true"
+Environment="KUBELET_SYSTEM_PODS_ARGS=--pod-manifest-path=/etc/kubernetes/manifests --allow-privileged=true"
+Environment="KUBELET_NETWORK_ARGS=--network-plugin=cni --cni-conf-dir=/etc/cni/net.d --cni-bin-dir=/opt/cni/bin"
+Environment="KUBELET_DNS_ARGS=--cluster-dns=10.96.0.10 --cluster-domain=cluster.local"
+Environment="KUBELET_EXTRA_ARGS=--v=4"
+ExecStart=
+ExecStart=/k8s/hyperkube kubelet $KUBELET_KUBECONFIG_ARGS $KUBELET_FEATURE_ARGS $KUBELET_SYSTEM_PODS_ARGS $KUBELET_NETWORK_ARGS $KUBELET_DNS_ARGS $KUBELET_EXTRA_ARGS
+
+
+
+_outputs/rio-nodelet --rioconfig=/etc/kubernetes/kubelet.conf --require-kubeconfig=true --feature-gates=DynamicKubeletConfig=true --pod-manifest-path=/etc/kubernetes/manifests --allow-privileged=true --network-plugin=cni --cni-conf-dir=/etc/cni/net.d --cni-bin-dir=/opt/cni/bin --cluster-dns=10.96.0.10 --cluster-domain=cluster.local --v=4
+
+./_outputs/rio-nodelet --aran-server=http://localhost:9636 --feature-gates=DynamicKubeletConfig=true --pod-manifest-path=/etc/kubernetes/manifests --allow-privileged=true --network-plugin=cni --cni-conf-dir=/etc/cni/net.d --cni-bin-dir=/opt/cni/bin --cluster-dns=10.96.0.10 --cluster-domain=cluster.local --v=4
+
+./_outputs/rio-nodelet --api-servers=http://localhost:9636 --v=4
+
+nano /lib/systemd/system/docker.service
+
+ExecStart=/usr/bin/dockerd -H tcp://127.0.0.1:2375 -H fd:// --exec-opt native.cgroupdriver=systemd
+
+
+./_outputs/rio-nodelet --api-servers=http://localhost:9636 --v=4
+
+  Request [ POST ]   +=======>   http://localhost:9636/api/v1/nodes
+
+
+  Request [ GET ]   +=======>   http://localhost:9636/api/v1/services?resourceVersion=0
+
+
+  Request [ GET ]   +=======>   http://localhost:9636/api/v1/pods?fieldSelector=spec.nodeName%3Dvijaywk&resourceVersion=0
+
+
+
+  Request [ GET ]   +=======>   http://localhost:9636/api/v1/nodes?fieldSelector=metadata.name%3Dvijaywk&resourceVersion=0
+
+E0829 12:51:09.793885   21153 reflector.go:190] gitlab.com/rioos/beedi/pkg/nodelet/kubelet.go:407: Failed to list *v1.Node: Object 'Kind' is missing in '{"results":[]}'
+
+
+I0829 12:51:09.858501   21153 request.go:641] Throttling request took 195.266303ms, request: PATCH:http://localhost:9636/api/v1/namespaces/default/events/vijaywk.14df401733090ee1
+
+
+  Request [ PATCH ]   +=======>   http://localhost:9636/api/v1/namespaces/default/events/vijaywk.14df401733090ee1
+
+  Request [ POST ]   +=======>   http://localhost:9636/api/v1/namespaces/default/events
+
+
+{"id":"809992532418134016","spec":{"assembly_cidr":"","external_id":"","provider_id":"","unschedulable":false,"taints":[{"key":"","value":"","effect":"","time_added":""}]},"status":{"capacity":{"cpu":"4","memory":"16331164Ki","storage":"16228764Mb"},"allocatable":{"cpu":"4","memory":"16331164Ki","storage":"16228764Mb"},"phase":"","conditions":[{"condition_type":"","status":"","last_heartbeat_time":"","last_transition_time":"","reason":"","message":""}],"addresses":[{"node_type":"","addresses":""}],"node_info":{"machine_id":"","system_uuid":"","kernel_version":"","os_image":"","architecture":""}},"created_at":"2017-09-19T12:40:25.329696+00:00","object_meta":{"name":"xyz","namespace":"","uid":"","created_at":"","cluster_name":"","labels":{"group":"development","key2":"value2"},"annotations":{"key1":"value1","key2":"value2"},"owner_references":[{"kind":"Node","api_version":"v1","name":"ddd","uid":"","block_owner_deletion":true}]},"type_meta":{"kind":"Assemblyfactory","api_version":"v1"}}
+
+curl --header "X-AUTH-RIOOS-EMAIL:info@megam" --header "Authorization:Bearer ygIEVPpVORKNqoDM78" --data '{"type_meta":{"kind":"","api_version":""},"object_meta":{"name":"rajesh","namespace":"","uid":"","creationTimestamp":null,"labels":{"beta.rioos.io/arch":"amd64","beta.rioos.io/os":"linux","rioos.io/hostname":"rajesh"},"annotations":{"volumes.kubernetes.io/controller-managed-attach-detach":"true"},"owner_references":[{"api_version":"","kind":"","name":"","uid":"","block_owner_deletion":false}],"cluster_name":"","created_at":""},"spec":{"assembly_cidr":"","external_id":"rajesh","provider_id":"","unschedulable":false,"taints":[{"key":"","value":"","effect":"","time_added":"2017-09-20T10:28:28Z"}]},"status":{"capacity":{"cpu":"4","memory":"16331164Ki","pods":"110","storage":"0"},"allocatable":{"cpu":"4","memory":"16228764Ki","pods":"110","storage":"0"},"phase":"","conditions":[{"condition_type":"OutOfDisk","status":"False","last_heartbeat_time":"2017-09-20T10:28:28Z","last_transition_time":"2017-09-20T10:28:28Z","reason":"NodeletHasSufficientDisk","message":"nodelet has sufficient disk space available"},{"condition_type":"MemoryPressure","status":"False","last_heartbeat_time":"2017-09-20T10:28:28Z","last_transition_time":"2017-09-20T10:28:28Z","reason":"NodeletHasSufficientMemory","message":"nodelet has sufficient memory available"},{"condition_type":"DiskPressure","status":"False","last_heartbeat_time":"2017-09-20T10:28:28Z","last_transition_time":"2017-09-20T10:28:28Z","reason":"NodeletHasNoDiskPressure","message":"nodelet has no disk pressure"},{"condition_type":"Ready","status":"True","last_heartbeat_time":"2017-09-20T10:28:28Z","last_transition_time":"2017-09-20T10:28:28Z","reason":"NodeletReady","message":"nodelet is posting ready status"}],"addresses":[{"node_type":"InternalIP","addresses":"192.168.2.25"},{"node_type":"Hostname","addresses":"rajesh"}],"daemonEndpoints":{"nodeletEndpoint":{"Port":10250}},"node_info":{"machine_id":"589f17c8cc084c078c5d364241433afc","system_uuid":"85EE9345-A1AF-11E3-BE7C-28E347559DE7","boot_id":"fa1f9d6d-7500-4749-8a20-4c804677fcb5","kernel_version":"4.4.0-93-generic","os_image":"Ubuntu 16.04.3 LTS","containerRuntimeVersion":"docker://Unknown","nodeletVersion":"v0.0.0-master+$Format:%h$","kubeProxyVersion":"v0.0.0-master+$Format:%h$","operating_system":"linux","architecture":"amd64"}},"id":"","created_at":""}' http://localhost:9636/api/v1/nodes
+
+
+

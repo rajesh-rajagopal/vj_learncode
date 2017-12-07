@@ -1,0 +1,87 @@
+sudo fdisk /dev/sdb
+n
+p
+1
+n
+p
+2
+sudo mkfs.xfs -f /dev/sdb1
+sudo mount -t xfs /dev/sdb1 /storage1
+sudo mkfs.xfs -f /dev/sdb2
+sudo mount -t xfs /dev/sdb2 /storage2
+ceph-deploy uninstall AKL-1110 
+ceph-deploy purgedata AKL-1110 
+ceph-deploy forgetkeys
+ceph-deploy purge  
+sudo apt-get -y autoremove
+sudo apt-get -y remove ceph-deploy ceph-common ceph-mds ceph
+sudo apt-get -y purge ceph-deploy ceph-common ceph-mds ceph
+sudo apt-get -y autoremove
+sudo rm -r /run/ceph
+sudo rm -r /var/lib/ceph
+sudo rm /var/log/upstart/ceph*
+sudo rm -rf /home/access/ceph-cluster/*
+sudo echo deb https://download.ceph.com/debian-jewel/ $(lsb_release -sc) main | tee /etc/apt/sources.list.d/ceph.list
+wget -q -O- 'https://download.ceph.com/keys/release.asc' | sudo apt-key add -
+apt-get install apt-transport-https  sudo
+apt-get update
+apt-get install ceph-deploy ceph-common ceph-mds ceph dnsmasq openssh-server ntp sshpass
+adduser access
+echo 'access ALL = (root) NOPASSWD:ALL' | sudo tee /etc/sudoers.d/access
+sudo chmod 0440 /etc/sudoers.d/access
+echo '103.231.90.154 AKL-1110' >> /etc/hosts
+mkdir /home/access/.ssh  (Mode:access)
+chmod 0700 /home/access/.ssh
+su access
+ssh-keygen -N '' -t rsa -f /home/access/.ssh/id_rsa
+cp /home/access/.ssh/id_rsa.pub /home/access/.ssh/authorized_keys
+cat > /home/access/.ssh/ssh_config <<EOF 
+  ConnectTimeout 5
+  Host AKL-1110
+  StrictHostKeyChecking no
+EOF
+chmod 0755 /home/access/.ssh/ssh_config
+cat > /home/access/.ssh/config << EOF
+Host AKL-1110
+Hostname AKL-1110
+User access
+EOF
+
+
+su access
+mkdir /home/access/ceph-cluster
+cd /home/access/ceph-cluster
+ceph-deploy new AKL-1110
+echo 'osd crush chooseleaf type = 0' >> /home/vertice/ceph-cluster/ceph.conf
+echo 'osd_pool_default_size = 2' >> /home/vertice/ceph-cluster/ceph.conf
+echo 'mon_pg_warn_max_per_osd = 0' >> /home/vertice/ceph-cluster/ceph.conf
+echo "osd max object name len = 256" >> /home/vertice/ceph-cluster/ceph.conf
+echo "osd max object namespace len = 64" >> /home/vertice/ceph-cluster/ceph.conf
+echo "rbd default features = 1">> /home/vertice/ceph-cluster/ceph.conf
+ceph-deploy install AKL-1110
+ceph-deploy mon create-initial
+
+chmod 0755 /home/access/.ssh/config
+mkdir -p /var/lib/ceph/osd/ceph-1 /var/lib/ceph/osd/ceph-0
+sudo chmod 755 /var/lib/ceph/osd/ceph-1 /var/lib/ceph/osd/ceph-0
+sudo chown -R ceph:ceph /var/lib/ceph/osd/ceph-1 /var/lib/ceph/osd/ceph-0
+sudo mkfs.xfs -f /dev/sdb1 /dev/sdb2
+sudo mount -t xfs /dev/sdb1 /var/lib/ceph/osd/ceph-0
+sudo mount -t xfs /dev/sdb2 //var/lib/ceph/osd/ceph-1
+
+ceph-deploy osd prepare AKL-1110:/storage1/osd
+ceph-deploy osd activate AKL-1110:/storage1/osd
+ceph-deploy osd prepare AKL-1110:/storage2/osd
+ceph-deploy osd activate AKL-1110:/storage2/osd
+ceph-deploy admin AKL-1110
+sudo chmod +r /etc/ceph/ceph.client.admin.keyring
+sleep 180
+ceph osd pool set rbd pg_num 120
+ceph osd pool get rbd pg_num 
+sleep 180
+ceph osd pool set rbd pgp_num 120
+normal user
+cp /home/access/ceph-cluster/*.keyring /etc/ceph/
+
+
+before going to do this mount partitions to xfs for /storage1 and /storage2

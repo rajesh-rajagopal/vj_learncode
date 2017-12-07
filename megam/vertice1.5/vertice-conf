@@ -1,0 +1,103 @@
+
+  ### Welcome to the vertice configuration file.
+  ###
+  ### [meta]
+  ###
+  ### Controls how vertice connects to scylla, nsq
+
+  [meta]
+    api = "https://api.megam.io/v2"
+    nsqd = ["localhost:4150"]
+    scylla = ["192.168.1.247"]
+    scylla_keyspace = "vertice"
+  ###
+  ### [deployd]
+  ###
+  ### Controls how the deployer endpoints are configured. These are the primary mechanism to
+  ### deploy on the cloud. The default option is to support opennebula.
+  ### defaults should work for most systems.
+  ###
+
+  [deployd]
+    one_endpoint = "http://localhost:2633/RPC2"
+    one_userid = "oneadmin"
+    one_password =  "password"
+    vcpu_percentage = "10"
+
+  ###
+  ### [http]
+  ###
+  ### Controls how the HTTP endpoints are configured. A mini webserver for pinging vertice
+  ###
+
+  [http]
+    enabled = true
+    bind_address = "localhost:7777"
+
+  ###
+  ### [docker]
+  ###
+  ### controls one or many listeners for docker
+  ###
+
+  [docker]
+    enabled = false
+    swarm = "tcp://103.56.92.52:2375"
+    gulp_port = ":6666"
+
+  [bridges]
+
+    [bridges.public]
+      name = "megdock_pub"
+      network = "103.56.93.1/24"
+      gateway = "103.56.92.1"
+
+  ###
+  ### [dns]
+  ###
+  ### Controls how the dns endpoints are configured.
+  ### The default dns supported is Route53.
+  ###
+
+  [dns]
+    enabled = true
+    access_key = "abcd"
+    secret_key = "efgh"
+
+  ###
+  ### Controls how the system metrics collection needs to be configured.
+
+  [metrics]
+    enabled = false
+    collect_interval = "10m"
+
+  ###
+  ### Controls how the events needs to be configured and handled by watchers
+
+  [events]
+    enabled = false
+
+    [events.mailgun]
+      api_key = "temp"
+      domain  = "ojamail.megambox.com"
+      nilavu = "https://console.megam.io"
+      logo = "https://s3-ap-southeast-1.amazonaws.com/megampub/images/mailers/megam_vertice.png"
+
+    [events.infobip]
+      username = "info_username"
+      password = "info_pw"
+      api_key  = "info_apiky"
+      application_id = "info_apiid"
+      message_id = "info_msgid"
+
+    [events.slack]
+      token = "temp"
+      channel = "ahoy"
+
+    [events.bill]
+      piggybanks = ["scylladb","whmcs"]
+      whmcs_key = "dummykey"
+      whmcs_username = ""
+      whmcs_password = ""
+      whmcs_domain = "http://localhost.com/billing"
+

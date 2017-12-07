@@ -1,0 +1,5 @@
+[vertice]
+    name=vertice
+     baseurl=https://get.megam.io/repo/1.5.2/centos/7.2/testing
+     enabled=1
+     gpgcheck=0

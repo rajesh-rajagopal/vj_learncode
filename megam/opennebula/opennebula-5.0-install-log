@@ -1,0 +1,500 @@
+wget -q -O- http://downloads.opennebula.org/repo/Debian/repo.key | apt-key add -
+OK
+root@opennebula-5:~# apt-get update
+Ign http://archive.ubuntu.com trusty InRelease
+Hit http://security.ubuntu.com trusty-security InRelease                       
+Hit http://archive.ubuntu.com trusty-updates InRelease                         
+Hit http://archive.ubuntu.com trusty Release.gpg                               
+Hit http://security.ubuntu.com trusty-security/main amd64 Packages             
+Hit http://archive.ubuntu.com trusty Release                                   
+Hit http://archive.ubuntu.com trusty-updates/main amd64 Packages               
+Hit http://security.ubuntu.com trusty-security/restricted amd64 Packages       
+Hit http://archive.ubuntu.com trusty-updates/restricted amd64 Packages         
+Hit http://security.ubuntu.com trusty-security/universe amd64 Packages         
+Hit http://archive.ubuntu.com trusty-updates/universe amd64 Packages           
+Hit http://security.ubuntu.com trusty-security/multiverse amd64 Packages       
+Hit http://archive.ubuntu.com trusty-updates/multiverse amd64 Packages         
+Hit http://security.ubuntu.com trusty-security/main Translation-en             
+Hit http://archive.ubuntu.com trusty-updates/main Translation-en               
+Hit http://security.ubuntu.com trusty-security/multiverse Translation-en       
+Hit http://archive.ubuntu.com trusty-updates/multiverse Translation-en         
+Hit http://security.ubuntu.com trusty-security/restricted Translation-en       
+Hit http://archive.ubuntu.com trusty-updates/restricted Translation-en         
+Hit http://security.ubuntu.com trusty-security/universe Translation-en         
+Hit http://archive.ubuntu.com trusty-updates/universe Translation-en           
+Hit http://archive.ubuntu.com trusty/main amd64 Packages                       
+Hit http://get.megam.io trusty InRelease                                       
+Hit http://archive.ubuntu.com trusty/restricted amd64 Packages                 
+Hit http://get.megam.io trusty/stable amd64 Packages                           
+Hit http://archive.ubuntu.com trusty/universe amd64 Packages                   
+Hit http://archive.ubuntu.com trusty/multiverse amd64 Packages                 
+Hit http://archive.ubuntu.com trusty/main Translation-en                       
+Ign http://downloads.opennebula.org stable InRelease                           
+Hit http://archive.ubuntu.com trusty/multiverse Translation-en                 
+Hit http://archive.ubuntu.com trusty/restricted Translation-en                 
+Ign http://get.megam.io trusty/stable Translation-en_IN                        
+Ign http://get.megam.io trusty/stable Translation-en                           
+Hit http://archive.ubuntu.com trusty/universe Translation-en                   
+Hit http://downloads.opennebula.org stable Release.gpg                         
+Ign http://archive.ubuntu.com trusty/main Translation-en_IN                    
+Ign http://archive.ubuntu.com trusty/multiverse Translation-en_IN              
+Ign http://archive.ubuntu.com trusty/restricted Translation-en_IN              
+Ign http://archive.ubuntu.com trusty/universe Translation-en_IN                
+Hit http://downloads.opennebula.org stable Release                             
+Hit http://downloads.opennebula.org stable/opennebula amd64 Packages
+Ign http://downloads.opennebula.org stable/opennebula Translation-en_IN        
+Ign http://downloads.opennebula.org stable/opennebula Translation-en
+Reading package lists... Done
+root@opennebula-5:~# cp /usr/share/one/install_gems old-gems
+root@opennebula-5:~# ls
+old-gems
+root@opennebula-5:~# apt-get update
+Hit http://security.ubuntu.com trusty-security InRelease
+Ign http://archive.ubuntu.com trusty InRelease                                 
+Hit http://get.megam.io trusty InRelease                                       
+Hit http://archive.ubuntu.com trusty-updates InRelease                         
+Hit http://archive.ubuntu.com trusty Release.gpg                               
+Hit http://get.megam.io trusty/stable amd64 Packages                           
+Hit http://security.ubuntu.com trusty-security/main amd64 Packages             
+Hit http://archive.ubuntu.com trusty Release                                   
+Hit http://security.ubuntu.com trusty-security/restricted amd64 Packages       
+Hit http://archive.ubuntu.com trusty-updates/main amd64 Packages               
+Hit http://security.ubuntu.com trusty-security/universe amd64 Packages         
+Hit http://archive.ubuntu.com trusty-updates/restricted amd64 Packages         
+Hit http://security.ubuntu.com trusty-security/multiverse amd64 Packages       
+Hit http://archive.ubuntu.com trusty-updates/universe amd64 Packages           
+Hit http://security.ubuntu.com trusty-security/main Translation-en             
+Hit http://archive.ubuntu.com trusty-updates/multiverse amd64 Packages         
+Hit http://security.ubuntu.com trusty-security/multiverse Translation-en       
+Hit http://archive.ubuntu.com trusty-updates/main Translation-en               
+Hit http://security.ubuntu.com trusty-security/restricted Translation-en       
+Hit http://archive.ubuntu.com trusty-updates/multiverse Translation-en         
+Hit http://security.ubuntu.com trusty-security/universe Translation-en         
+Hit http://archive.ubuntu.com trusty-updates/restricted Translation-en         
+Hit http://archive.ubuntu.com trusty-updates/universe Translation-en           
+Hit http://archive.ubuntu.com trusty/main amd64 Packages                       
+Hit http://archive.ubuntu.com trusty/restricted amd64 Packages                 
+Hit http://archive.ubuntu.com trusty/universe amd64 Packages                   
+Hit http://archive.ubuntu.com trusty/multiverse amd64 Packages                 
+Hit http://archive.ubuntu.com trusty/main Translation-en                       
+Ign http://downloads.opennebula.org stable InRelease                           
+Ign http://get.megam.io trusty/stable Translation-en_IN                        
+Ign http://get.megam.io trusty/stable Translation-en                           
+Hit http://archive.ubuntu.com trusty/multiverse Translation-en                 
+Hit http://archive.ubuntu.com trusty/restricted Translation-en                 
+Hit http://archive.ubuntu.com trusty/universe Translation-en                   
+Hit http://downloads.opennebula.org stable Release.gpg                         
+Ign http://archive.ubuntu.com trusty/main Translation-en_IN                    
+Ign http://archive.ubuntu.com trusty/multiverse Translation-en_IN              
+Ign http://archive.ubuntu.com trusty/restricted Translation-en_IN              
+Ign http://archive.ubuntu.com trusty/universe Translation-en_IN                
+Hit http://downloads.opennebula.org stable Release
+Hit http://downloads.opennebula.org stable/opennebula amd64 Packages
+Ign http://downloads.opennebula.org stable/opennebula Translation-en_IN        
+Ign http://downloads.opennebula.org stable/opennebula Translation-en
+Reading package lists... Done
+root@opennebula-5:~# apt-get install opennebula opennebula-sunstone opennebula-gate opennebula-flow
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+The following packages were automatically installed and are no longer required:
+  liblog4cpp5 libxmlrpc-c++8 libxmlrpc-core-c3
+Use 'apt-get autoremove' to remove them.
+The following extra packages will be installed:
+  opennebula-common opennebula-tools ruby-opennebula
+Suggested packages:
+  mysql-server
+Recommended packages:
+  lvm2
+The following NEW packages will be installed:
+  opennebula-flow opennebula-gate
+The following packages will be upgraded:
+  opennebula opennebula-common opennebula-sunstone opennebula-tools
+  ruby-opennebula
+5 upgraded, 2 newly installed, 0 to remove and 75 not upgraded.
+Need to get 13.9 MB of archives.
+After this operation, 18.2 MB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://downloads.opennebula.org/repo/5.0/Ubuntu/14.04/ stable/opennebula opennebula-sunstone all 5.0.0-1 [7,152 kB]
+Get:2 http://downloads.opennebula.org/repo/5.0/Ubuntu/14.04/ stable/opennebula ruby-opennebula all 5.0.0-1 [206 kB]
+Get:3 http://downloads.opennebula.org/repo/5.0/Ubuntu/14.04/ stable/opennebula opennebula amd64 5.0.0-1 [6,367 kB]
+Get:4 http://downloads.opennebula.org/repo/5.0/Ubuntu/14.04/ stable/opennebula opennebula-tools all 5.0.0-1 [101 kB]
+Get:5 http://downloads.opennebula.org/repo/5.0/Ubuntu/14.04/ stable/opennebula opennebula-common all 5.0.0-1 [11.5 kB]
+Get:6 http://downloads.opennebula.org/repo/5.0/Ubuntu/14.04/ stable/opennebula opennebula-flow all 5.0.0-1 [28.2 kB]
+Get:7 http://downloads.opennebula.org/repo/5.0/Ubuntu/14.04/ stable/opennebula opennebula-gate all 5.0.0-1 [10.9 kB]
+Fetched 13.9 MB in 6s (2,298 kB/s)                                             
+(Reading database ... 67522 files and directories currently installed.)
+Preparing to unpack .../opennebula-sunstone_5.0.0-1_all.deb ...
+Couldn't find econe-server process pid.
+Couldn't find sunstone-server process pid.
+/usr/lib/ruby/2.0.0/logger.rb:594:in `initialize': Permission denied - /var/log/one/novnc.log (Errno::EACCES)
+	from /usr/lib/ruby/2.0.0/logger.rb:594:in `open'
+	from /usr/lib/ruby/2.0.0/logger.rb:594:in `open_logfile'
+	from /usr/lib/ruby/2.0.0/logger.rb:551:in `initialize'
+	from /usr/lib/ruby/2.0.0/logger.rb:318:in `new'
+	from /usr/lib/ruby/2.0.0/logger.rb:318:in `initialize'
+	from /usr/bin/novnc-server:53:in `new'
+	from /usr/bin/novnc-server:53:in `<main>'
+Unpacking opennebula-sunstone (5.0.0-1) over (4.14.2-2) ...
+Preparing to unpack .../ruby-opennebula_5.0.0-1_all.deb ...
+Unpacking ruby-opennebula (5.0.0-1) over (4.14.2-2) ...
+Preparing to unpack .../opennebula_5.0.0-1_amd64.deb ...
+oned and scheduler stopped
+Unpacking opennebula (5.0.0-1) over (4.14.2-2) ...
+dpkg: warning: unable to delete old directory '/var/lib/one/remotes/datastore/lvm': Directory not empty
+dpkg: warning: unable to delete old directory '/var/lib/one/remotes/datastore/vmfs': Directory not empty
+Preparing to unpack .../opennebula-tools_5.0.0-1_all.deb ...
+Unpacking opennebula-tools (5.0.0-1) over (4.14.2-2) ...
+Preparing to unpack .../opennebula-common_5.0.0-1_all.deb ...
+Unpacking opennebula-common (5.0.0-1) over (4.14.2-2) ...
+Selecting previously unselected package opennebula-flow.
+Preparing to unpack .../opennebula-flow_5.0.0-1_all.deb ...
+Unpacking opennebula-flow (5.0.0-1) ...
+Selecting previously unselected package opennebula-gate.
+Preparing to unpack .../opennebula-gate_5.0.0-1_all.deb ...
+Unpacking opennebula-gate (5.0.0-1) ...
+Processing triggers for man-db (2.6.7.1-1ubuntu1) ...
+Processing triggers for ureadahead (0.100.0-16) ...
+Setting up opennebula-common (5.0.0-1) ...
+Installing new version of config file /etc/sudoers.d/opennebula ...
+usermod: no changes
+Setting up ruby-opennebula (5.0.0-1) ...
+Setting up opennebula-tools (5.0.0-1) ...
+Installing new version of config file /etc/one/cli/oneacl.yaml ...
+Installing new version of config file /etc/one/cli/onevnet.yaml ...
+Installing new version of config file /etc/one/cli/onedatastore.yaml ...
+Installing new version of config file /etc/one/cli/onesecgroup.yaml ...
+Installing new version of config file /etc/one/cli/oneimage.yaml ...
+Please remember to execute /usr/share/one/install_gems to install all the
+required gems.
+Setting up opennebula-sunstone (5.0.0-1) ...
+
+Configuration file '/etc/one/sunstone-server.conf'
+ ==> Modified (by you or by a script) since installation.
+ ==> Package distributor has shipped an updated version.
+   What would you like to do about it ?  Your options are:
+    Y or I  : install the package maintainer's version
+    N or O  : keep your currently-installed version
+      D     : show the differences between the versions
+      Z     : start a shell to examine the situation
+ The default action is to keep your current version.
+*** sunstone-server.conf (Y/I/N/O/D/Z) [default=N] ? d
+
+Configuration file '/etc/one/sunstone-server.conf'
+ ==> Modified (by you or by a script) since installation.
+ ==> Package distributor has shipped an updated version.
+   What would you like to do about it ?  Your options are:
+    Y or I  : install the package maintainer's version
+    N or O  : keep your currently-installed version
+      D     : show the differences between the versions
+      Z     : start a shell to examine the situation
+ The default action is to keep your current version.
+*** sunstone-server.conf (Y/I/N/O/D/Z) [default=N] ? y
+Installing new version of config file /etc/one/sunstone-server.conf ...
+Installing new version of config file /etc/one/sunstone-views.yaml ...
+Installing new version of config file /etc/one/econe.conf ...
+Installing new version of config file /etc/one/sunstone-views/cloud.yaml ...
+Installing new version of config file /etc/one/sunstone-views/groupadmin.yaml ...
+Installing new version of config file /etc/one/sunstone-views/cloud_vcenter.yaml ...
+Installing new version of config file /etc/one/sunstone-views/user.yaml ...
+Installing new version of config file /etc/one/sunstone-views/groupadmin_vcenter.yaml ...
+Installing new version of config file /etc/one/sunstone-views/admin.yaml ...
+Installing new version of config file /etc/one/sunstone-views/admin_vcenter.yaml ...
+Setting up opennebula (5.0.0-1) ...
+Installing new version of config file /var/lib/one/remotes/datastore/ceph/ceph.conf ...
+Installing new version of config file /var/lib/one/remotes/vnm/OpenNebulaNetwork.conf ...
+Installing new version of config file /etc/init.d/opennebula ...
+Installing new version of config file /etc/logrotate.d/opennebula ...
+Installing new version of config file /etc/one/sched.conf ...
+Installing new version of config file /etc/one/vmm_exec/vmm_execrc ...
+Installing new version of config file /etc/one/vmm_exec/vmm_exec_vcenter.conf ...
+Installing new version of config file /etc/one/vmm_exec/vmm_exec_kvm.conf ...
+Installing new version of config file /etc/one/auth/ldap_auth.conf ...
+Installing new version of config file /etc/one/az_driver.conf ...
+Installing new version of config file /etc/one/az_driver.default ...
+Installing new version of config file /etc/one/ec2_driver.default ...
+Installing new version of config file /etc/one/defaultrc ...
+Installing new version of config file /etc/one/ec2_driver.conf ...
+Installing new version of config file /etc/one/hm/hmrc ...
+Installing new version of config file /etc/one/oned.conf ...
+Setting up opennebula-flow (5.0.0-1) ...
+Setting up opennebula-gate (5.0.0-1) ...
+Processing triggers for ureadahead (0.100.0-16) ...
+root@opennebula-5:~# ls -la
+total 48
+drwx------  5 root root  4096 Jun 20 12:54 .
+drwxr-xr-x 22 root root  4096 Jun 20 11:03 ..
+-rw-------  1 root root  6059 Jun 13 08:23 .bash_history
+-rw-r--r--  1 root root  3106 Feb 20  2014 .bashrc
+drwx------  2 root root  4096 Mar  9 06:42 .cache
+-rw-r--r--  1 root root     0 Mar  9 06:42 .cloud-locale-test.skip
+drwxr-xr-x  4 root root  4096 Jun 20 11:26 .gem
+-rwxr-xr-x  1 root root 10749 Jun 20 12:54 old-gems
+-rw-r--r--  1 root root   140 Feb 20  2014 .profile
+drwx------  2 root root  4096 Mar 14 07:49 .ssh
+root@opennebula-5:~# cd /var/lib/one/
+root@opennebula-5:/var/lib/one# cat .one/one_auth 
+oneadmin:stycsialsIj2
+root@opennebula-5:/var/lib/one# /usr/share/one/install_gems
+No LSB modules are available.
+Distribution "debian" detected.
+About to install these dependencies:
+* gcc
+* libcurl4-openssl-dev
+* ruby-dev
+* make
+
+Press enter to continue...
+
+apt-get install gcc libcurl4-openssl-dev ruby-dev make
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+gcc is already the newest version.
+gcc set to manually installed.
+make is already the newest version.
+make set to manually installed.
+ruby-dev is already the newest version.
+The following packages were automatically installed and are no longer required:
+  liblog4cpp5 libxmlrpc-c++8 libxmlrpc-core-c3
+Use 'apt-get autoremove' to remove them.
+The following extra packages will be installed:
+  comerr-dev krb5-multidev libgcrypt11-dev libgnutls-dev libgnutlsxx27
+  libgpg-error-dev libgssrpc4 libidn11-dev libkadm5clnt-mit9 libkadm5srv-mit9
+  libkdb5-7 libkrb5-dev libldap2-dev libp11-kit-dev librtmp-dev libtasn1-6
+  libtasn1-6-dev pkg-config
+Suggested packages:
+  doc-base krb5-doc libcurl4-doc libcurl3-dbg libgcrypt11-doc gnutls26-doc
+  gnutls-bin krb5-user
+The following NEW packages will be installed:
+  comerr-dev krb5-multidev libcurl4-openssl-dev libgcrypt11-dev libgnutls-dev
+  libgnutlsxx27 libgpg-error-dev libgssrpc4 libidn11-dev libkadm5clnt-mit9
+  libkadm5srv-mit9 libkdb5-7 libkrb5-dev libldap2-dev libp11-kit-dev
+  librtmp-dev libtasn1-6-dev pkg-config
+The following packages will be upgraded:
+  libtasn1-6
+1 upgraded, 18 newly installed, 0 to remove and 74 not upgraded.
+Need to get 2,637 kB of archives.
+After this operation, 11.3 MB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libtasn1-6 amd64 3.4-3ubuntu0.4 [43.6 kB]
+Get:2 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libgssrpc4 amd64 1.12+dfsg-2ubuntu5.2 [53.1 kB]
+Get:3 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libkadm5clnt-mit9 amd64 1.12+dfsg-2ubuntu5.2 [36.2 kB]
+Get:4 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libkdb5-7 amd64 1.12+dfsg-2ubuntu5.2 [36.2 kB]
+Get:5 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libkadm5srv-mit9 amd64 1.12+dfsg-2ubuntu5.2 [50.4 kB]
+Get:6 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libgnutlsxx27 amd64 2.12.23-12ubuntu2.5 [17.3 kB]
+Get:7 http://archive.ubuntu.com/ubuntu/ trusty-updates/main comerr-dev amd64 2.1-1.42.9-3ubuntu1.3 [38.3 kB]
+Get:8 http://archive.ubuntu.com/ubuntu/ trusty-updates/main krb5-multidev amd64 1.12+dfsg-2ubuntu5.2 [111 kB]
+Get:9 http://archive.ubuntu.com/ubuntu/ trusty/main pkg-config amd64 0.26-1ubuntu4 [40.9 kB]
+Get:10 http://archive.ubuntu.com/ubuntu/ trusty/main libidn11-dev amd64 1.28-1ubuntu2 [517 kB]
+Get:11 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libkrb5-dev amd64 1.12+dfsg-2ubuntu5.2 [14.4 kB]
+Get:12 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libldap2-dev amd64 2.4.31-1+nmu2ubuntu8.2 [260 kB]
+Get:13 http://archive.ubuntu.com/ubuntu/ trusty/main libgpg-error-dev amd64 1.12-0.2ubuntu1 [20.1 kB]
+Get:14 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libgcrypt11-dev amd64 1.5.3-2ubuntu4.3 [274 kB]
+Get:15 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libtasn1-6-dev amd64 3.4-3ubuntu0.4 [385 kB]
+Get:16 http://archive.ubuntu.com/ubuntu/ trusty/main libp11-kit-dev amd64 0.20.2-2ubuntu2 [56.4 kB]
+Get:17 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libgnutls-dev amd64 2.12.23-12ubuntu2.5 [372 kB]
+Get:18 http://archive.ubuntu.com/ubuntu/ trusty/main librtmp-dev amd64 2.4+20121230.gitdf6c518-1 [67.1 kB]
+Get:19 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libcurl4-openssl-dev amd64 7.35.0-1ubuntu2.6 [245 kB]
+Fetched 2,637 kB in 0s (4,731 kB/s)        
+(Reading database ... 67547 files and directories currently installed.)
+Preparing to unpack .../libtasn1-6_3.4-3ubuntu0.4_amd64.deb ...
+Unpacking libtasn1-6:amd64 (3.4-3ubuntu0.4) over (3.4-3ubuntu0.3) ...
+Selecting previously unselected package libgssrpc4:amd64.
+Preparing to unpack .../libgssrpc4_1.12+dfsg-2ubuntu5.2_amd64.deb ...
+Unpacking libgssrpc4:amd64 (1.12+dfsg-2ubuntu5.2) ...
+Selecting previously unselected package libkadm5clnt-mit9:amd64.
+Preparing to unpack .../libkadm5clnt-mit9_1.12+dfsg-2ubuntu5.2_amd64.deb ...
+Unpacking libkadm5clnt-mit9:amd64 (1.12+dfsg-2ubuntu5.2) ...
+Selecting previously unselected package libkdb5-7:amd64.
+Preparing to unpack .../libkdb5-7_1.12+dfsg-2ubuntu5.2_amd64.deb ...
+Unpacking libkdb5-7:amd64 (1.12+dfsg-2ubuntu5.2) ...
+Selecting previously unselected package libkadm5srv-mit9:amd64.
+Preparing to unpack .../libkadm5srv-mit9_1.12+dfsg-2ubuntu5.2_amd64.deb ...
+Unpacking libkadm5srv-mit9:amd64 (1.12+dfsg-2ubuntu5.2) ...
+Selecting previously unselected package libgnutlsxx27:amd64.
+Preparing to unpack .../libgnutlsxx27_2.12.23-12ubuntu2.5_amd64.deb ...
+Unpacking libgnutlsxx27:amd64 (2.12.23-12ubuntu2.5) ...
+Selecting previously unselected package comerr-dev.
+Preparing to unpack .../comerr-dev_2.1-1.42.9-3ubuntu1.3_amd64.deb ...
+Unpacking comerr-dev (2.1-1.42.9-3ubuntu1.3) ...
+Selecting previously unselected package krb5-multidev.
+Preparing to unpack .../krb5-multidev_1.12+dfsg-2ubuntu5.2_amd64.deb ...
+Unpacking krb5-multidev (1.12+dfsg-2ubuntu5.2) ...
+Selecting previously unselected package pkg-config.
+Preparing to unpack .../pkg-config_0.26-1ubuntu4_amd64.deb ...
+Unpacking pkg-config (0.26-1ubuntu4) ...
+Selecting previously unselected package libidn11-dev.
+Preparing to unpack .../libidn11-dev_1.28-1ubuntu2_amd64.deb ...
+Unpacking libidn11-dev (1.28-1ubuntu2) ...
+Selecting previously unselected package libkrb5-dev.
+Preparing to unpack .../libkrb5-dev_1.12+dfsg-2ubuntu5.2_amd64.deb ...
+Unpacking libkrb5-dev (1.12+dfsg-2ubuntu5.2) ...
+Selecting previously unselected package libldap2-dev:amd64.
+Preparing to unpack .../libldap2-dev_2.4.31-1+nmu2ubuntu8.2_amd64.deb ...
+Unpacking libldap2-dev:amd64 (2.4.31-1+nmu2ubuntu8.2) ...
+Selecting previously unselected package libgpg-error-dev.
+Preparing to unpack .../libgpg-error-dev_1.12-0.2ubuntu1_amd64.deb ...
+Unpacking libgpg-error-dev (1.12-0.2ubuntu1) ...
+Selecting previously unselected package libgcrypt11-dev.
+Preparing to unpack .../libgcrypt11-dev_1.5.3-2ubuntu4.3_amd64.deb ...
+Unpacking libgcrypt11-dev (1.5.3-2ubuntu4.3) ...
+Selecting previously unselected package libtasn1-6-dev.
+Preparing to unpack .../libtasn1-6-dev_3.4-3ubuntu0.4_amd64.deb ...
+Unpacking libtasn1-6-dev (3.4-3ubuntu0.4) ...
+Selecting previously unselected package libp11-kit-dev.
+Preparing to unpack .../libp11-kit-dev_0.20.2-2ubuntu2_amd64.deb ...
+Unpacking libp11-kit-dev (0.20.2-2ubuntu2) ...
+Selecting previously unselected package libgnutls-dev.
+Preparing to unpack .../libgnutls-dev_2.12.23-12ubuntu2.5_amd64.deb ...
+Unpacking libgnutls-dev (2.12.23-12ubuntu2.5) ...
+Selecting previously unselected package librtmp-dev.
+Preparing to unpack .../librtmp-dev_2.4+20121230.gitdf6c518-1_amd64.deb ...
+Unpacking librtmp-dev (2.4+20121230.gitdf6c518-1) ...
+Selecting previously unselected package libcurl4-openssl-dev:amd64.
+Preparing to unpack .../libcurl4-openssl-dev_7.35.0-1ubuntu2.6_amd64.deb ...
+Unpacking libcurl4-openssl-dev:amd64 (7.35.0-1ubuntu2.6) ...
+Processing triggers for install-info (5.2.0.dfsg.1-2) ...
+Processing triggers for man-db (2.6.7.1-1ubuntu1) ...
+Setting up libtasn1-6:amd64 (3.4-3ubuntu0.4) ...
+Setting up libgssrpc4:amd64 (1.12+dfsg-2ubuntu5.2) ...
+Setting up libkadm5clnt-mit9:amd64 (1.12+dfsg-2ubuntu5.2) ...
+Setting up libkdb5-7:amd64 (1.12+dfsg-2ubuntu5.2) ...
+Setting up libkadm5srv-mit9:amd64 (1.12+dfsg-2ubuntu5.2) ...
+Setting up libgnutlsxx27:amd64 (2.12.23-12ubuntu2.5) ...
+Setting up comerr-dev (2.1-1.42.9-3ubuntu1.3) ...
+Setting up krb5-multidev (1.12+dfsg-2ubuntu5.2) ...
+Setting up pkg-config (0.26-1ubuntu4) ...
+Setting up libidn11-dev (1.28-1ubuntu2) ...
+Setting up libkrb5-dev (1.12+dfsg-2ubuntu5.2) ...
+Setting up libldap2-dev:amd64 (2.4.31-1+nmu2ubuntu8.2) ...
+Setting up libgpg-error-dev (1.12-0.2ubuntu1) ...
+Setting up libgcrypt11-dev (1.5.3-2ubuntu4.3) ...
+Setting up libtasn1-6-dev (3.4-3ubuntu0.4) ...
+Setting up libp11-kit-dev (0.20.2-2ubuntu2) ...
+Setting up libgnutls-dev (2.12.23-12ubuntu2.5) ...
+Setting up librtmp-dev (2.4+20121230.gitdf6c518-1) ...
+Setting up libcurl4-openssl-dev:amd64 (7.35.0-1ubuntu2.6) ...
+Processing triggers for libc-bin (2.19-0ubuntu6.7) ...
+About to install the gems for these components:
+* sunstone
+* quota
+* cloud
+* auth_ldap
+* vmware
+* oneflow
+* ec2_hybrid
+* oca
+* onedb
+* market
+* hybrid
+
+Press enter to continue...
+
+rake="/usr/bin/rake" gem install --no-ri --no-rdoc net-ldap --version "< 0.13"
+Fetching: net-ldap-0.12.1.gem (100%)
+Successfully installed net-ldap-0.12.1
+1 gem installed
+rake="/usr/bin/rake" gem install --no-ri --no-rdoc treetop --version ">= 1.6.3"
+Fetching: polyglot-0.3.5.gem (100%)
+Successfully installed polyglot-0.3.5
+Fetching: treetop-1.6.5.gem (100%)
+Successfully installed treetop-1.6.5
+2 gems installed
+rake="/usr/bin/rake" gem install --no-ri --no-rdoc aws-sdk --version "= 1.66"
+Fetching: aws-sdk-v1-1.66.0.gem (100%)
+Successfully installed aws-sdk-v1-1.66.0
+Fetching: aws-sdk-1.66.0.gem (100%)
+Successfully installed aws-sdk-1.66.0
+Fetching: mini_portile2-2.1.0.gem (100%)
+Successfully installed mini_portile2-2.1.0
+Fetching: pkg-config-1.1.7.gem (100%)
+Successfully installed pkg-config-1.1.7
+4 gems installed
+rake="/usr/bin/rake" gem install --no-ri --no-rdoc memcache-client zendesk_api amazon-ec2 uuidtools curb trollop parse-cron ox aws-sdk configparser azure
+Fetching: memcache-client-1.8.5.gem (100%)
+Successfully installed memcache-client-1.8.5
+Fetching: multipart-post-2.0.0.gem (100%)
+Successfully installed multipart-post-2.0.0
+Fetching: faraday-0.9.2.gem (100%)
+Successfully installed faraday-0.9.2
+Fetching: hashie-3.4.4.gem (100%)
+Successfully installed hashie-3.4.4
+Fetching: inflection-1.0.0.gem (100%)
+Successfully installed inflection-1.0.0
+Fetching: mime-types-2.99.2.gem (100%)
+Successfully installed mime-types-2.99.2
+Fetching: scrub_rb-1.0.1.gem (100%)
+Successfully installed scrub_rb-1.0.1
+Fetching: zendesk_api-1.13.4.gem (100%)
+Successfully installed zendesk_api-1.13.4
+Fetching: xml-simple-1.1.5.gem (100%)
+Successfully installed xml-simple-1.1.5
+Fetching: amazon-ec2-0.9.17.gem (100%)
+Successfully installed amazon-ec2-0.9.17
+Fetching: uuidtools-2.1.5.gem (100%)
+Successfully installed uuidtools-2.1.5
+Fetching: curb-0.9.3.gem (100%)
+Building native extensions.  This could take a while...
+Successfully installed curb-0.9.3
+Fetching: trollop-2.1.2.gem (100%)
+Successfully installed trollop-2.1.2
+Fetching: parse-cron-0.1.4.gem (100%)
+Successfully installed parse-cron-0.1.4
+Fetching: ox-2.4.1.gem (100%)
+Building native extensions.  This could take a while...
+Successfully installed ox-2.4.1
+Fetching: json_pure-1.8.3.gem (100%)
+Successfully installed json_pure-1.8.3
+Fetching: jmespath-1.2.4.gem (100%)
+Successfully installed jmespath-1.2.4
+Fetching: aws-sdk-core-2.3.14.gem (100%)
+Successfully installed aws-sdk-core-2.3.14
+Fetching: aws-sdk-resources-2.3.14.gem (100%)
+Successfully installed aws-sdk-resources-2.3.14
+Fetching: aws-sdk-2.3.14.gem (100%)
+Successfully installed aws-sdk-2.3.14
+Fetching: configparser-0.1.4.gem (100%)
+Successfully installed configparser-0.1.4
+Fetching: addressable-2.4.0.gem (100%)
+Successfully installed addressable-2.4.0
+Fetching: faraday_middleware-0.10.0.gem (100%)
+Successfully installed faraday_middleware-0.10.0
+Fetching: azure-core-0.1.2.gem (100%)
+Successfully installed azure-core-0.1.2
+Fetching: systemu-2.6.5.gem (100%)
+Successfully installed systemu-2.6.5
+Fetching: thor-0.19.1.gem (100%)
+Successfully installed thor-0.19.1
+Fetching: macaddr-1.7.1.gem (100%)
+Successfully installed macaddr-1.7.1
+Fetching: uuid-2.3.8.gem (100%)
+Successfully installed uuid-2.3.8
+Fetching: azure-0.7.5.gem (100%)
+Successfully installed azure-0.7.5
+29 gems installed
+onedb upgrade -v --sqlite /var/lib/one/one.db
+Version read:
+Shared tables 4.11.80 : OpenNebula 4.14.2 daemon bootstrap
+Local tables  4.13.85 : OpenNebula 4.14.2 daemon bootstrap
+
+Sqlite database backup stored in /var/lib/one/one.db_2016-6-20_13:5:12.bck
+Use 'onedb restore' or copy the file back to restore the DB.
+
+
+>>> Running migrators for shared tables
+  > Running migrator /usr/lib/one/ruby/onedb/shared/4.11.80_to_4.90.0.rb
+  > Done in 1.35s
+
+Database migrated from 4.11.80 to 4.90.0 (OpenNebula 4.90.0) by onedb command.
+
+>>> Running migrators for local tables
+  > Running migrator /usr/lib/one/ruby/onedb/local/4.13.85_to_4.90.0.rb
+  > Done in 5.79s
+
+Database migrated from 4.13.85 to 4.90.0 (OpenNebula 4.90.0) by onedb command.
+
+Total time: 7.30s
+
+
+

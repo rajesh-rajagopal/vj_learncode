@@ -1,0 +1,24 @@
+scp -o StrictHostKeyChecking=no ./obc megdc@192.168.0.116:/home/megdc/obc
+ssh megdc@192.168.0.116 
+sudo mv /home/megdc/obc /usr/share/megam/obc/bin
+sudo service onboard restart
+
+
+echo 'rathish  ALL = (root) NOPASSWD:ALL' >/etc/sudoers.d/rathish
+
+pvdisplay
+vgdisplay
+
+vgremove <name>
+pvremove <name>
+
+
+id ipaddress created_at status
+
+
+insert into masters(id,account_id,regions,ipaddress,username,password,created_at,inputs,outputs,status) values('cd948c82-57a2-43b9-bcbd-82b715ffbaa5','vijaykanthm28@megam.io',['chennai'],'192.168.0.127','megam','megam','2016-11-29 06:13:48.097579756 +0000 UTC',['{"key":"one","value":"true"}','{"key":"vertice","value":""}','{"key":"distro","value":"Ubuntu 14.04"}','{"key":"hostname","value":"master-1"}'],['{"key":"one_master","value":"installed"}'],'installing');
+
+
+ 192.168.0.129 | vijaykanthm28@megam.io | 0d612e64-a884-41d9-8850-5767fb89c720 | 2016-11-29 06:13:48.097579756 +0000 UTC |   null |    null |    megam |             |            |    null |  null | posterror |    megam
+ 192.168.0.128 | vijaykanthm28@megam.io | 75dfef7c-a331-4a48-9511-67b9802ccf8b | 2016-11-29 06:13:48.067228816 +0000 UTC |   null |    null |    megam |             |            |    null |  null | posterror |    megam
+

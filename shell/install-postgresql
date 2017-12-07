@@ -1,0 +1,105 @@
+Steps to install Postgresql
+
+Install postgress
+	sudo apt-get install postgresql
+
+2.Change as postgres user 
+       	sudo -s 
+su postgres
+
+3.To open postgresql 
+psql
+
+4.To list all users 
+       	postgres=# select * from user;
+ 	current_user 
+--------------
+ postgres
+
+5. To create New user with password 
+postgres=# create user rioos with password 'rioos';
+CREATE ROLE
+
+
+6. To create new database 
+postgres=# create database rioosdb;
+CREATE DATABASE
+
+7. To grant all permissions to specific user 
+postgres=# grant all privileges on database rioosdb to rioos;
+GRANT
+
+8. To exit from postgres
+postgres=#  \q
+
+9.To configure postgresql 
+nano  /etc/postgresql/9.5/main/pg_hba.conf					
+modify :-     local   all            all      peer  to local  all      all          md5
+systemctl stop postgresql
+systemctl start postgresql
+systemctl status postgresql
+
+10.To open postgresql as rioos user 
+   psql -U rioos -W rioos -d rioosdb
+           
+   set search_path TO shard_0 ,public;
+
+postgres is started
+
+By default postgresql will run on port: 5432
+
+11. To change postgresql default port 
+	nano  /etc/postgresql/9.5/main/postgresql.conf
+            Port = <your port>
+            systemctl stop postgresql
+            systemctl start postgresql
+
+
+\dt *.*
+
+                       List of relations
+       Schema       |          Name           | Type  |  Owner   
+--------------------+-------------------------+-------+----------
+ information_schema | sql_features            | table | postgres
+ information_schema | sql_implementation_info | table | postgres
+ information_schema | sql_languages           | table | postgres
+ information_schema | sql_packages            | table | postgres
+ information_schema | sql_parts               | table | postgres
+ information_schema | sql_sizing              | table | postgres
+ information_schema | sql_sizing_profiles     | table | postgres
+ pg_catalog         | pg_aggregate            | table | postgres
+ pg_catalog         | pg_am                   | table | postgres
+ pg_catalog         | pg_amop                 | table | postgres
+ pg_catalog         | pg_amproc               | table | postgres
+
+......
+
+ shard_0            | account_origins         | table | rioos
+ shard_0            | account_sessions        | table | rioos
+ shard_0            | accounts                | table | rioos
+ shard_0            | assembly                | table | rioos
+ shard_0            | assembly_factory        | table | rioos
+ shard_0            | builder_db_migrations   | table | rioos
+ shard_0            | horizontal_scaling      | table | rioos
+ shard_0            | origin_members          | table | rioos
+ shard_0            | origins                 | table | rioos
+ shard_0            | permissions             | table | rioos
+ shard_0            | roles                   | table | rioos
+
+select * from <schema_name>.<table_name>;
+set search_path TO shard_0 ,public;
+select * from accounts;
+
+
+       id         | name  |   email    | first_name | last_name |   phone    |  api_key   | password  | states | approval | suspend | registration_ip_address | updated_at |           created_at            
+--------------------+-------+------------+------------+-----------+------------+------------+-----------+--------+----------+---------+-------------------------+------------+---------------------------------
+ 789611387566432256 | megam | info@megam | vino       | v         | 9994048897 | 1234567890 | vinomegam | safa   | zfdgdg   | true    | gdfhdf                  |            | 2017-08-22 15:16:43.40072+05:30
+(1 row)
+
+
+
+\d+ accounts
+
+
+
+

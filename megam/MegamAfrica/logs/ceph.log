@@ -1,0 +1,109 @@
+[2016-05-09 16:36:15,538][ceph_deploy.conf][DEBUG ] found configuration file at: /home/megdc/.cephdeploy.conf
+[2016-05-09 16:36:15,538][ceph_deploy.cli][INFO  ] Invoked (1.5.31): /usr/bin/ceph-deploy --overwrite-conf osd prepare node2:/storage1/osd node2:/storage2/osd
+[2016-05-09 16:36:15,539][ceph_deploy.cli][INFO  ] ceph-deploy options:
+[2016-05-09 16:36:15,539][ceph_deploy.cli][INFO  ]  username                      : None
+[2016-05-09 16:36:15,539][ceph_deploy.cli][INFO  ]  disk                          : [('node2', '/storage1/osd', None), ('node2', '/storage2/osd', None)]
+[2016-05-09 16:36:15,539][ceph_deploy.cli][INFO  ]  dmcrypt                       : False
+[2016-05-09 16:36:15,539][ceph_deploy.cli][INFO  ]  verbose                       : False
+[2016-05-09 16:36:15,539][ceph_deploy.cli][INFO  ]  overwrite_conf                : True
+[2016-05-09 16:36:15,539][ceph_deploy.cli][INFO  ]  subcommand                    : prepare
+[2016-05-09 16:36:15,539][ceph_deploy.cli][INFO  ]  dmcrypt_key_dir               : /etc/ceph/dmcrypt-keys
+[2016-05-09 16:36:15,539][ceph_deploy.cli][INFO  ]  quiet                         : False
+[2016-05-09 16:36:15,540][ceph_deploy.cli][INFO  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7f0d50bd0cf8>
+[2016-05-09 16:36:15,540][ceph_deploy.cli][INFO  ]  cluster                       : ceph
+[2016-05-09 16:36:15,540][ceph_deploy.cli][INFO  ]  fs_type                       : xfs
+[2016-05-09 16:36:15,540][ceph_deploy.cli][INFO  ]  func                          : <function osd at 0x7f0d51030500>
+[2016-05-09 16:36:15,540][ceph_deploy.cli][INFO  ]  ceph_conf                     : None
+[2016-05-09 16:36:15,540][ceph_deploy.cli][INFO  ]  default_release               : False
+[2016-05-09 16:36:15,540][ceph_deploy.cli][INFO  ]  zap_disk                      : False
+[2016-05-09 16:36:15,540][ceph_deploy][ERROR ] ConfigError: Cannot load config: [Errno 2] No such file or directory: 'ceph.conf'; has `ceph-deploy new` been run in this directory?
+
+[2016-05-09 16:36:32,363][ceph_deploy.conf][DEBUG ] found configuration file at: /home/megdc/.cephdeploy.conf
+[2016-05-09 16:36:32,364][ceph_deploy.cli][INFO  ] Invoked (1.5.31): /usr/bin/ceph-deploy osd activate node2:/storage1/osd node2:/storage2/osd
+[2016-05-09 16:36:32,364][ceph_deploy.cli][INFO  ] ceph-deploy options:
+[2016-05-09 16:36:32,364][ceph_deploy.cli][INFO  ]  username                      : None
+[2016-05-09 16:36:32,364][ceph_deploy.cli][INFO  ]  verbose                       : False
+[2016-05-09 16:36:32,364][ceph_deploy.cli][INFO  ]  overwrite_conf                : False
+[2016-05-09 16:36:32,364][ceph_deploy.cli][INFO  ]  subcommand                    : activate
+[2016-05-09 16:36:32,364][ceph_deploy.cli][INFO  ]  quiet                         : False
+[2016-05-09 16:36:32,364][ceph_deploy.cli][INFO  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7f394860ecf8>
+[2016-05-09 16:36:32,365][ceph_deploy.cli][INFO  ]  cluster                       : ceph
+[2016-05-09 16:36:32,365][ceph_deploy.cli][INFO  ]  func                          : <function osd at 0x7f3948a6e500>
+[2016-05-09 16:36:32,365][ceph_deploy.cli][INFO  ]  ceph_conf                     : None
+[2016-05-09 16:36:32,365][ceph_deploy.cli][INFO  ]  default_release               : False
+[2016-05-09 16:36:32,365][ceph_deploy.cli][INFO  ]  disk                          : [('node2', '/storage1/osd', None), ('node2', '/storage2/osd', None)]
+[2016-05-09 16:36:32,365][ceph_deploy][ERROR ] ConfigError: Cannot load config: [Errno 2] No such file or directory: 'ceph.conf'; has `ceph-deploy new` been run in this directory?
+
+[2016-05-09 16:37:20,038][ceph_deploy.conf][DEBUG ] found configuration file at: /home/megdc/.cephdeploy.conf
+[2016-05-09 16:37:20,038][ceph_deploy.cli][INFO  ] Invoked (1.5.31): /usr/bin/ceph-deploy --overwrite-conf osd prepare node2:/storage1/osd node2:/storage2/osd
+[2016-05-09 16:37:20,038][ceph_deploy.cli][INFO  ] ceph-deploy options:
+[2016-05-09 16:37:20,038][ceph_deploy.cli][INFO  ]  username                      : None
+[2016-05-09 16:37:20,038][ceph_deploy.cli][INFO  ]  disk                          : [('node2', '/storage1/osd', None), ('node2', '/storage2/osd', None)]
+[2016-05-09 16:37:20,038][ceph_deploy.cli][INFO  ]  dmcrypt                       : False
+[2016-05-09 16:37:20,038][ceph_deploy.cli][INFO  ]  verbose                       : False
+[2016-05-09 16:37:20,038][ceph_deploy.cli][INFO  ]  overwrite_conf                : True
+[2016-05-09 16:37:20,039][ceph_deploy.cli][INFO  ]  subcommand                    : prepare
+[2016-05-09 16:37:20,039][ceph_deploy.cli][INFO  ]  dmcrypt_key_dir               : /etc/ceph/dmcrypt-keys
+[2016-05-09 16:37:20,039][ceph_deploy.cli][INFO  ]  quiet                         : False
+[2016-05-09 16:37:20,039][ceph_deploy.cli][INFO  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7f507ffd5cf8>
+[2016-05-09 16:37:20,039][ceph_deploy.cli][INFO  ]  cluster                       : ceph
+[2016-05-09 16:37:20,039][ceph_deploy.cli][INFO  ]  fs_type                       : xfs
+[2016-05-09 16:37:20,039][ceph_deploy.cli][INFO  ]  func                          : <function osd at 0x7f5080435500>
+[2016-05-09 16:37:20,039][ceph_deploy.cli][INFO  ]  ceph_conf                     : None
+[2016-05-09 16:37:20,039][ceph_deploy.cli][INFO  ]  default_release               : False
+[2016-05-09 16:37:20,039][ceph_deploy.cli][INFO  ]  zap_disk                      : False
+[2016-05-09 16:37:20,039][ceph_deploy][ERROR ] ConfigError: Cannot load config: [Errno 2] No such file or directory: 'ceph.conf'; has `ceph-deploy new` been run in this directory?
+
+[2016-05-09 16:37:24,482][ceph_deploy.conf][DEBUG ] found configuration file at: /home/megdc/.cephdeploy.conf
+[2016-05-09 16:37:24,482][ceph_deploy.cli][INFO  ] Invoked (1.5.31): /usr/bin/ceph-deploy osd activate node2:/storage1/osd node2:/storage2/osd
+[2016-05-09 16:37:24,483][ceph_deploy.cli][INFO  ] ceph-deploy options:
+[2016-05-09 16:37:24,483][ceph_deploy.cli][INFO  ]  username                      : None
+[2016-05-09 16:37:24,483][ceph_deploy.cli][INFO  ]  verbose                       : False
+[2016-05-09 16:37:24,483][ceph_deploy.cli][INFO  ]  overwrite_conf                : False
+[2016-05-09 16:37:24,483][ceph_deploy.cli][INFO  ]  subcommand                    : activate
+[2016-05-09 16:37:24,483][ceph_deploy.cli][INFO  ]  quiet                         : False
+[2016-05-09 16:37:24,483][ceph_deploy.cli][INFO  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7f929120dcf8>
+[2016-05-09 16:37:24,483][ceph_deploy.cli][INFO  ]  cluster                       : ceph
+[2016-05-09 16:37:24,483][ceph_deploy.cli][INFO  ]  func                          : <function osd at 0x7f929166d500>
+[2016-05-09 16:37:24,483][ceph_deploy.cli][INFO  ]  ceph_conf                     : None
+[2016-05-09 16:37:24,483][ceph_deploy.cli][INFO  ]  default_release               : False
+[2016-05-09 16:37:24,483][ceph_deploy.cli][INFO  ]  disk                          : [('node2', '/storage1/osd', None), ('node2', '/storage2/osd', None)]
+[2016-05-09 16:37:24,483][ceph_deploy][ERROR ] ConfigError: Cannot load config: [Errno 2] No such file or directory: 'ceph.conf'; has `ceph-deploy new` been run in this directory?
+
+[2016-05-09 16:49:43,453][ceph_deploy.conf][DEBUG ] found configuration file at: /home/megdc/.cephdeploy.conf
+[2016-05-09 16:49:43,454][ceph_deploy.cli][INFO  ] Invoked (1.5.31): /usr/bin/ceph-deploy osd prepare node2:/storage1/osd node2:/storage2/osd
+[2016-05-09 16:49:43,454][ceph_deploy.cli][INFO  ] ceph-deploy options:
+[2016-05-09 16:49:43,454][ceph_deploy.cli][INFO  ]  username                      : None
+[2016-05-09 16:49:43,454][ceph_deploy.cli][INFO  ]  disk                          : [('node2', '/storage1/osd', None), ('node2', '/storage2/osd', None)]
+[2016-05-09 16:49:43,454][ceph_deploy.cli][INFO  ]  dmcrypt                       : False
+[2016-05-09 16:49:43,454][ceph_deploy.cli][INFO  ]  verbose                       : False
+[2016-05-09 16:49:43,454][ceph_deploy.cli][INFO  ]  overwrite_conf                : False
+[2016-05-09 16:49:43,455][ceph_deploy.cli][INFO  ]  subcommand                    : prepare
+[2016-05-09 16:49:43,455][ceph_deploy.cli][INFO  ]  dmcrypt_key_dir               : /etc/ceph/dmcrypt-keys
+[2016-05-09 16:49:43,455][ceph_deploy.cli][INFO  ]  quiet                         : False
+[2016-05-09 16:49:43,455][ceph_deploy.cli][INFO  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7fba5fd37cf8>
+[2016-05-09 16:49:43,455][ceph_deploy.cli][INFO  ]  cluster                       : ceph
+[2016-05-09 16:49:43,455][ceph_deploy.cli][INFO  ]  fs_type                       : xfs
+[2016-05-09 16:49:43,455][ceph_deploy.cli][INFO  ]  func                          : <function osd at 0x7fba60197500>
+[2016-05-09 16:49:43,455][ceph_deploy.cli][INFO  ]  ceph_conf                     : None
+[2016-05-09 16:49:43,455][ceph_deploy.cli][INFO  ]  default_release               : False
+[2016-05-09 16:49:43,455][ceph_deploy.cli][INFO  ]  zap_disk                      : False
+[2016-05-09 16:49:43,455][ceph_deploy][ERROR ] ConfigError: Cannot load config: [Errno 2] No such file or directory: 'ceph.conf'; has `ceph-deploy new` been run in this directory?
+
+[2016-05-18 12:45:41,911][ceph_deploy.conf][DEBUG ] found configuration file at: /home/megdc/.cephdeploy.conf
+[2016-05-18 12:45:41,912][ceph_deploy.cli][INFO  ] Invoked (1.5.31): /usr/bin/ceph-deploy mon create node2
+[2016-05-18 12:45:41,912][ceph_deploy.cli][INFO  ] ceph-deploy options:
+[2016-05-18 12:45:41,912][ceph_deploy.cli][INFO  ]  username                      : None
+[2016-05-18 12:45:41,912][ceph_deploy.cli][INFO  ]  verbose                       : False
+[2016-05-18 12:45:41,912][ceph_deploy.cli][INFO  ]  overwrite_conf                : False
+[2016-05-18 12:45:41,912][ceph_deploy.cli][INFO  ]  subcommand                    : create
+[2016-05-18 12:45:41,912][ceph_deploy.cli][INFO  ]  quiet                         : False
+[2016-05-18 12:45:41,912][ceph_deploy.cli][INFO  ]  cd_conf                       : <ceph_deploy.conf.cephdeploy.Conf instance at 0x7f2afb17b3b0>
+[2016-05-18 12:45:41,912][ceph_deploy.cli][INFO  ]  cluster                       : ceph
+[2016-05-18 12:45:41,913][ceph_deploy.cli][INFO  ]  mon                           : ['node2']
+[2016-05-18 12:45:41,913][ceph_deploy.cli][INFO  ]  func                          : <function mon at 0x7f2afb5e1668>
+[2016-05-18 12:45:41,913][ceph_deploy.cli][INFO  ]  ceph_conf                     : None
+[2016-05-18 12:45:41,913][ceph_deploy.cli][INFO  ]  default_release               : False
+[2016-05-18 12:45:41,913][ceph_deploy.cli][INFO  ]  keyrings                      : None
+[2016-05-18 12:45:41,913][ceph_deploy][ERROR ] ConfigError: Cannot load config: [Errno 2] No such file or directory: 'ceph.conf'; has `ceph-deploy new` been run in this directory?
+

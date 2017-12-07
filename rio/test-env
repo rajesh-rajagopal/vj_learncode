@@ -1,0 +1,43 @@
+ Node_ID :  829691038514814976
+
+ NetworkID : 829691921180925952  
+
+ StorageConnectorID: 829692662926811136 
+
+ StoragePoolID: 829693970400419840
+
+{"id":"829693970400419840","object_meta":{"name":"","origin":"","uid":"","created_at":"","cluster_name":"","labels":{},"annotations":{}},"type_meta":{"kind":"StoragePool","api_version":"v1"},"name":"pool1","connector_id":"829692662926811136","storage_info":{"disks":[{"disk":"/dev/sdb","disk_type":"","point":"","size":"1GB"}]},"parameters":{"mount_path":"/var/lib/rioos/storage2"},"status":{"phase":"pending","message":"","reason":"","conditions":[{"message":"","reason":"","status":"","last_transition_time":"","last_probe_time":"","condition_type":""}]},"created_at":"2017-10-16T17:03:39.752687+00:00"} 
+
+
+ dataCenterID : 829694700041543680
+
+
+ assembly_factory_ID :    830073783208394752
+  plan_url: /v3/plan/tutum/hello-world
+
+
+curl -H "Authorization: Bearer kmKPcCfkpTbUATNBLv" -H "X-AUTH-RIOOS-EMAIL: info@megam"  http://localhost:9636/api/v1/assemblyfactorys
+
+
+curl --header "X-AUTH-RIOOS-EMAIL:info@megam.io" --header "Authorization:Bearer kmKPcCfkpTbUATNBLv"  --data '
+{"id":"811274763379941300","name":"ubuntu","uri":"/v1/assemblys/assembly_factorys","description":"ubuntuinstallation","tags":["ubuntu"],"replicas":1,"properties":{"domain":"megambox.com","cloudsetting":"/clouds/one","region":"829694700041543680","storage_type":"ssd"},"type_meta":{"kind":"Assemblyfactory","api_version":"v1"},"object_meta":{"name":"ubuntu-test-1","origin":"","uid":"","created_at":"","cluster_name":"","labels":{"group":"development","key2":"value2"},"annotations":{"key1":"value1","key2":"value2"},"owner_references":[{"kind":"Node","api_version":"v1","name":"ddd","uid":"","block_owner_deletion":true}]},"plan":"/v3/plan/tutum/hello-world","external_management_resource":["rio-system"],"component_collection":{"flavor":"/v3/flavor/1001","network":"/url"},"status":{"phase":"pending","message":"","reason":"","conditions":[{"message":"","reason":"","status":" ","last_transition_time":" ","last_probe_time":" ","condition_type":" "}]},"opssettings":{"nodeselector":"","priority":"","nodename":"","restartpolicy":" "}}' http://localhost:9636/api/v1/assemblyfactorys
+
+  AssemblyID :  
+
+
+curl -H "Authorization: Bearer kmKPcCfkpTbUATNBLv" -H "X-AUTH-RIOOS-EMAIL: info@megam"  --data '{"name": "fresh-mind-9865","uri":"/v1/assemblys","description":"ubuntuinstallation","tags": ["ubuntu"],"parent_id":"830073783208394752", "instance_id":"",
+"type_meta":{"kind":"AssemblyFactory","api_version":"v1"}, "object_meta":{"name":"xyz","origin":"","uid":"","created_at":"","cluster_name":"","labels":{"group":"development","key2":"value2"},"annotations":{"key1":"value1","key2":"value2"},"owner_references": [{"kind":"Node","api_version":"v1","name":"ddd", "uid":"780970728630525952","block_owner_deletion":true}]}, "volumes":[{"id":"","target":"","volume_type":""}] ,"component_collection": " ","urls": {"console":"http://192.168.2.100:5900"}, "status":{"phase":"AssemblyLaunchable","message":"","reason":"","conditions":[{"message":"","reason":"","status":" ","last_transition_time":" ","last_probe_time":" ","condition_type":" "}]},"node":"rajesh","ips":{"private_ipv4":["192.168.2.100","192.168.1.100"]}}' http://localhost:9636/api/v1/assemblys
+
+{"id":"830074497087340544","type_meta":{"kind":"Assembly","api_version":"v1"},"object_meta":{"name":"830074497087340544","origin":"","uid":"","created_at":"","cluster_name":"","labels":{},"annotations":{},"owner_references":[{"kind":"","api_version":"","name":"","uid":"","block_owner_deletion":false}]},"name":"fresh-mind-9865","uri":"/v1/assemblys","description":"ubuntuinstallation","parent_id":"830073783208394752","tags":["ubuntu"],"node":"rajesh","ips":{"private_ipv4":["192.168.2.100","192.168.1.100"]},"urls":{"console":"http://192.168.2.100:5900"},"status":{"phase":"AssemblyLaunchable","message":"","reason":"","conditions":[{"message":"","reason":"","status":" ","last_transition_time":" ","last_probe_time":" ","condition_type":" "}]},"volumes":[{"id":"","target":"","volume_type":""}],"instance_id":"","spec":{"id":"830073783208394752","name":"ubuntu","uri":"/v1/assemblys/assembly_factorys","description":"ubuntuinstallation","tags":["ubuntu"],"replicas":1,"properties":{"domain":"megambox.com","cloudsetting":"/clouds/one","region":"829694700041543680","storage_type":"ssd"},"type_meta":{"kind":"AssemblyFactory","api_version":"v1"},"object_meta":{"name":"830073783208394752","origin":"","uid":"","created_at":"","cluster_name":"","labels":{},"annotations":{},"owner_references":[{"kind":"","api_version":"","name":"","uid":"","block_owner_deletion":false}]},"plan":"/v3/plan/tutum/hello-world","plan_data":null,"external_management_resource":["rio-system"],"component_collection":{"flavor":"/v3/flavor/1001","network":"/url"},"status":{"phase":"pending","message":"","reason":"","conditions":[{"message":"","reason":"","status":" ","last_transition_time":" ","last_probe_time":" ","condition_type":" "}]},"opssettings":{"nodeselector":"","priority":"","nodename":"","restartpolicy":" "},"created_at":"2017-10-17T05:38:16.942668+00:00"},"created_at":"2017-10-17T05:39:42.069064+00:00"}
+
+
+
+
+
+
+{"{\"name\":\"rails\",\"description\":\"\",\"href\":\"http://rubyonrails.org/\",\"characteristics\":{\"os\":\"centos\",\"http.port\":\"3000\",\"version\":\"4.2\",\"image\":\"rails.png\"}}
+
+
+
+
+

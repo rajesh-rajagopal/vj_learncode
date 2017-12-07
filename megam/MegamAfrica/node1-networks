@@ -1,0 +1,93 @@
+root@node1 ~ # cat /etc/network/interfaces
+### Hetzner Online GmbH - installimage
+# Loopback device:
+auto lo
+iface lo inet loopback
+iface lo inet6 loopback
+
+# device: eth0
+auto  eth0
+iface eth0 inet static
+  address   136.243.49.217
+  netmask   255.255.255.192
+  gateway   136.243.49.193
+  # default route to access subnet
+  up route add -net 136.243.49.192 netmask 255.255.255.192 gw 136.243.49.193 eth0
+
+iface eth0 inet6 static
+  address 2a01:4f8:212:11e8::2
+  netmask 64
+  gateway fe80::1
+
+auto one
+iface one inet static
+  address 136.243.49.217
+  netmask 255.255.255.192
+  bridge_stp off 
+  bridge_ports none
+  bridge_fd 1
+  bridge_hello 2
+  bridge_maxage 12
+
+
+up ip route add 138.201.98.0/27 dev one
+up ip route add 138.201.98.1/27 dev one
+up ip route add 138.201.98.2/27 dev one
+up ip route add 138.201.98.3/27 dev one
+up ip route add 138.201.98.4/27 dev one
+up ip route add 138.201.98.5/27 dev one
+up ip route add 138.201.98.6/27 dev one
+up ip route add 138.201.98.7/27 dev one
+up ip route add 138.201.98.8/27 dev one
+up ip route add 138.201.98.9/27 dev one
+up ip route add 138.201.98.10/27 dev one
+up ip route add 138.201.98.12/27 dev one
+up ip route add 138.201.98.13/27 dev one
+up ip route add 138.201.98.14/27 dev one
+up ip route add 138.201.98.11/27 dev one
+up ip route add 138.201.98.15/27 dev one
+
+
+root@node1 ~ # ip route
+default via 136.243.49.193 dev eth0 
+136.243.49.192/26 via 136.243.49.193 dev eth0 
+136.243.49.192/26 dev eth0  proto kernel  scope link  src 136.243.49.217 
+136.243.49.192/26 dev one  proto kernel  scope link  src 136.243.49.217 
+138.201.98.0/27 dev one  scope link 
+
+
+root@node1 ~ # ifconfig
+eth0      Link encap:Ethernet  HWaddr 30:5a:3a:77:45:e1  
+          inet addr:136.243.49.217  Bcast:136.243.49.255  Mask:255.255.255.192
+          inet6 addr: fe80::325a:3aff:fe77:45e1/64 Scope:Link
+          inet6 addr: 2a01:4f8:212:11e8::2/64 Scope:Global
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:303406143 errors:0 dropped:0 overruns:6 frame:0
+          TX packets:277864643 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:313432835706 (313.4 GB)  TX bytes:266707075170 (266.7 GB)
+          Memory:fa100000-fa17ffff 
+
+lo        Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          inet6 addr: ::1/128 Scope:Host
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:48128216 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:48128216 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:184452368941 (184.4 GB)  TX bytes:184452368941 (184.4 GB)
+
+one       Link encap:Ethernet  HWaddr fe:00:8a:c9:62:03  
+          inet addr:136.243.49.217  Bcast:136.243.49.255  Mask:255.255.255.192
+          inet6 addr: fe80::9c24:89ff:fe68:f942/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:20851368 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:13017145 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:3667280787 (3.6 GB)  TX bytes:8688360761 (8.6 GB)
+
+brctl show
+bridge name	bridge id		STP enabled	interfaces
+one		8000.fe008ac96203	no		vnet0
+
+

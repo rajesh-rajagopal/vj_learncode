@@ -1,0 +1,90 @@
+https://forum.opennebula.org/t/cannot-create-snapshot-for-centos7-guest/593/7
+
+
+qemu-img convert -f raw megamio -O qcow2 new_megamio_file.qcow
+
+qemu-img info megamio
+image: megamio
+file format: raw
+virtual size: 10G (10737418240 bytes)
+disk size: 3.1G
+
+
+qemu-img info new_megamio_file
+image: new_megamio_file
+file format: qcow2
+virtual size: 10G (10737418240 bytes)
+disk size: 3.0G
+cluster_size: 65536
+Format specific information:
+    compat: 1.1
+    lazy refcounts: false
+
+
+https://github.com/yp-engineering/rbd-docker-plugin#misc
+
+RBD Snapshots: sudo rbd snap create --image foo --snap foosnap
+Resize RBD image:
+set max size: sudo rbd resize --size 2048 --image foo
+map/mount and then fix XFS: sudo xfs_growfs -d /mnt/foo
+
+
+./im/kvm.d/collectd-client_control.sh
+
+/var/lib/one/remotes/im/run_probes
+
+/var/lib/one/remotes/vmm/kvm/snapshot_create
+
+
+root@slave /usr/lib/one # grep -RnisI "snap_create" ./*
+./mads/one_vmm_exec.rb:917:                    :action     => :tm_snap_create_live,
+
+
+https://forum.opennebula.org/t/cannot-create-snapshot-for-centos7-guest/593/3
+
+
+
+virsh list
+Id    Name                           State
+----------------------------------------------------
+ 108   one-511                        running
+ 142   one-545                        running
+ 234   one-656                        running
+ 243   one-685                        running
+ 244   one-700                        running
+ 268   one-736                        running
+ 272   one-742                        running
+
+
+virsh domblklist one-685 --details
+Type       Device     Target     Source
+------------------------------------------------
+network    disk       hda        one/one-60-685-0
+file       cdrom      hdb        /var/lib/one//datastores/0/685/disk.1
+
+
+virsh snapshot-create-as one-685 snap1-one-685 "snap1 description" \
+  --diskspec hda,file=./snap-one-60-685-0 \
+  --disk-only --atomic
+
+
+error: Failed to create file 'one/one-60-685-0': No such file or directory
+
+
+
+virsh --connect $LIBVIRT_URI snapshot-create-as $DOMAIN
+
+
+virsh --connect qemu:///system snapshot-create-as one-685
+
+
+https://kashyapc.fedorapeople.org/virt/lc-2012/snapshots-handout.html
+
+https://www.redhat.com/archives/libvirt-users/2013-September/msg00146.html
+
+
+format=qcow2,cache=none: could not open disk image rbd 
+
+image is not fortmat qcow2
+
+Error deploying virtual machine: Could not create domain from

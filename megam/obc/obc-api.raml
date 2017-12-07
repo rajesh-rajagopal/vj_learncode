@@ -1,0 +1,227 @@
+#%RAML 0.8
+title: OnboardCloud
+version: 1
+baseUri: http://cloud.det.io:9005/{version}
+documentation:
+  - title: Welcome to OnboardCloud
+    content: |
+      Welcome to the OBC Documentation. The Example API allows you
+      to do make api call with obc. See also [vertengin.com](https://www.vertengin.com).
+
+      ```OnboardCloud
+      to setup your datacenter in few minutes
+      raml2html.parseWithConfig(source, config, onSuccess, onError);
+      ```
+  - title: Chapter two
+    content: More content here. Including **bold** text!
+    
+securitySchemes:
+  - oauth_1_0:
+      description: OAuth 1.0 continues to be supported for all API requests, but OAuth 2.0 is now preferred.
+      type: OAuth 1.0
+      settings:
+        requestTokenUri: https://api.dropbox.com/1/oauth/request_token
+        authorizationUri: https://www.dropbox.com/1/oauth/authorize
+        tokenCredentialsUri: https://api.dropbox.com/1/oauth/access_token
+        
+traits:
+  - paged:
+      queryParameters:
+        page_size:
+          description: The number of items per page
+          type: number
+          default: 20
+        page:
+          description: The page to return
+          type: number
+          default: 0
+
+
+/accounts/content:
+  displayName: ACCOUNTS
+
+  description: |
+    It creates a new account for user with given contents.
+
+  post:
+    description: |
+      Creates a new account. 
+    body:
+      application/json:
+        example: |
+          {
+          "first_name":"megam",
+          "last_name":"welcome",
+          "phone":"9876543210",
+          "email":"sriram@megam.io",
+          "api_key":"yse8wdmwckm38ns783nsd74jsdhmncxl2",
+          "password":"xEMdeklimdsio#83m/zd%3kjlvd",
+          "authority":"megam",
+          "password_reset_key":"qwerty",
+          "password_reset_sent_at":"12-01-2016T05:03:00.025"
+          }
+    responses:
+      200:
+        description: Account was created and user is now logged in
+        
+/login:
+    post:
+      description: Login with email and password
+      body:
+        application/json:
+          example: |
+            {
+              "email": "john@example.com",
+              "password": "super_secret"
+            }
+    responses:
+      200:
+        description: Login was correct
+        body:
+          application/json:
+            example: |
+              {
+                "email": "sriram@megam.io",
+                "password": "super_secret"
+                "api_key": "yse8wdmwckm38ns783nsd74jsdhmncxl2"
+              }
+      401:
+        description: Not authorized invalid username or password
+       
+                
+/login:
+    post:        
+      description: Login with email and password
+      headers:
+        Authorization:
+          type: string
+          description: Basic authentication header
+          example: |
+            Authorization:Basic email:john@example.com
+      body:
+        application/json:
+          example: |
+            {
+               "password": "super_secret"
+            }
+    responses:
+      200:
+        description: Login was correct
+        body:
+          application/json:
+            example: |
+              {
+                "first_name":"megam",
+                "last_name":"welcome",
+                "phone":"9876543210",
+                "email":"sriram@megam.io",
+                "api_key":"yse8wdmwckm38ns783nsd74jsdhmncxl2",
+                "password":"xEMdeklimdsio#83m/zd%3kjlvd",
+                "authority":"megam",
+                "password_reset_key":"qwerty",
+                "password_reset_sent_at":"poiuyt"
+              }
+      401:
+        description: Not authorized invalid username or password
+        body:
+          text/xml:
+            example: |
+              "Password authendication failure"        
+       
+       
+/accounts/{email}:
+    get:
+       description: |
+         signup erification for duplicate accounts. 
+       
+         It doesn't return any data only return 401 code if account exist.
+    responses:
+      401:
+        description: The given email exist and password missmatch.
+        body:
+          text/xml:
+            example: |
+              "Password authendication failure" 
+      404:
+        description: There is no such given email.
+        body:
+          text/xml:
+            example: |
+              "Account does not exist"
+            
+      500:
+        description: Internal server errors             
+        body:
+          text/xml:
+            example: |
+              "gocql: connection refused"                     
+              
+
+
+/subscriptions:
+    get:
+      description: Gets the details of user subscription plan.
+      headers:
+        Authorization:
+          type: string
+          description: Basic authentication header
+          example: |
+            Authorization:Basic api_key:yse8wdmwckm38ns783nsd74jsdhmncxl2 email:john@example.com      
+      401:
+        description: Apikey authendication failure.
+        body:
+          text/xml:
+            example: |
+              "Invalid api key" 
+      404:
+        description: There is no such given email.
+        body:
+          text/xml:
+            example: |
+              "Account does not exist"
+            
+      500:
+        description: Internal server errors             
+        body:
+          text/xml:
+            example: |
+              "gocql: connection refused"           
+                     
+  /content:
+      post:
+        description: Creates user subcription plan.
+        body:
+          application/json:
+            example: |
+              {
+        	"plan_name":"minified"
+              }
+        headers:
+          Authorization:
+            type: string
+            description: Basic authentication header
+            example: |
+              Authorization:Basic api_key:yse8wdmwckm38ns783nsd74jsdhmncxl2 email:john@example.com      
+     
+      401:
+        description: Bad request with .
+        body:
+          text/xml:
+            example: |
+              "required credential is missing" 
+      404:
+        description: There is no such given email.
+        body:
+          text/xml:
+            example: |
+              "Account does not exist"
+            
+      500:
+        description: Internal server errors             
+        body:
+          text/xml:
+            example: |
+              "gocql: connection refused"  
+
+
+

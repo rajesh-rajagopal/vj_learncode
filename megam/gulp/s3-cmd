@@ -1,0 +1,22 @@
+
+https://gist.github.com/dominicsayers/5100711
+
+sudo apt-get install python-setuptools
+wget http://downloads.sourceforge.net/project/s3tools/s3cmd/1.5.0-alpha1/s3cmd-1.5.0-alpha1.tar.gz
+
+tar xvfz s3cmd-1.5.0-alpha1.tar.gz
+cd s3cmd-1.5.0-alpha1
+python setup.py install
+s3cmd --configure
+
+http://sourceforge.net/projects/s3tools/files/s3cmd/1.5.0-beta1/s3cmd-1.5.0-beta1.tar.gz
+
+
+Leaving this for reference (s3cmd 1.6.0):
+
+sudo apt-get -y install python-setuptools
+wget http://netix.dl.sourceforge.net/project/s3tools/s3cmd/1.6.0/s3cmd-1.6.0.tar.gz
+tar xvfz s3cmd-1.6.0.tar.gz
+cd s3cmd-1.6.0
+sudo python setup.py install
+

@@ -1,0 +1,11 @@
+##Enable kvm from bios setup before install onehost
+
+grep -E 'svm|vmx' /proc/cpuinfo
+
+apt-get install megdc
+
+megdc onehostinstall 
+
+apt-get install clvm lvm2
+
+http://docs.opennebula.org/4.14/design_and_installation/quick_starts/qs_ubuntu_kvm.html#step-2-installation-in-the-nodes

@@ -1,0 +1,66 @@
+
+##############To Set up Go for Build or run Go Packages 
+
+https://golang.org/dl/
+
+wget https://storage.googleapis.com/golang/go1.5.1.linux-amd64.tar.gz
+
+mkdir ~/software
+
+tar -C ~/software/ -xzf go1.5.1.linux-amd64.tar.gz
+
+export GOPATH=~/.go
+export GOROOT=~/software/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+export GOPATH=$GOPATH:/home/alrin/code/megam/workspace/go
+
+
+############# To Build package 
+
+go to package path 
+
+rake clean
+
+rake trusty
+
+
+########### To Run go packages 
+
+
+
+
+firt make path for your work environment ( yourworkPath/go/src/github.com/megamsys/) then paste here your project ex. megamd,gulp or libgo, etc.,
+
+export GOPATH=$GOPATH:/home/alrin/code/megam/workspace/go
+
+source ~/.bashrc
+
+
+then go to your project path
+for example:
+
+cd /home/megam/code/workspace/go/src/github.com/megamsys/megamd/
+
+megamd$ go get github.com/tools/godep
+
+Install the dependencies mercurial and bzr
+
+	   sudo apt-get install mercurial meld
+
+	   sudo apt-get install bzr
+           
+           sudo apt-get -f install
+
+ make   (only at first time bcz it download dependcies every time so to avoid it  next time use make test)
+
+godep save ./...
+
+make test
+
+NOTE: if you got any error while make or make test remove ~/.go then do make
+
+
+
+
+raz#1OneEye
+ 	

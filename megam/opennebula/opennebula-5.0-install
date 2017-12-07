@@ -1,0 +1,51 @@
+
+
+gem list > previous_gems.txt
+onevnet list -x > networks.txt
+onehost list -x > hosts.txt
+onevm list -x > vms.txt
+
+cp -r /etc/one /etc/one.$(date +'%Y-%m-%d')
+
+sunstone-server stop
+econe-server stop
+sudo -H -u oneadmin bash -c "one stop"
+
+wget -q -O- http://downloads.opennebula.org/repo/Debian/repo.key | apt-key add -
+echo "deb http://downloads.opennebula.org/repo/5.2/Ubuntu/14.04 stable opennebula" > /etc/apt/sources.list.d/opennebula.list
+apt-get update
+apt-get install opennebula opennebula-sunstone opennebula-gate opennebula-flow
+
+## to change new configuration press y 
+
+/usr/share/one/install_gems
+
+y
+<-|
+<-|
+
+onedb upgrade -v --sqlite /var/lib/one/one.db
+
+
+//sunstone-server start
+//econe-server start
+//sudo -H -u oneadmin bash -c "one start"
+
+service opennebula start/stop
+service opennebula-sunstone start/stop
+
+
+########################################
+
+vnet should have VN_MAD = "dummy"
+datastore should have SAFE_DIRS = "/home/megdc/images"
+
+
+
+http://213.32.56.135:9869
+
+oneadmin:Mumdidacnat1
+
+
+
+

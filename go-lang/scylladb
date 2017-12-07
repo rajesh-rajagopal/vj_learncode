@@ -1,0 +1,39 @@
+
+
+desc databasename; //shows structure of all tables in the database
+
+desc tables;  //list tables
+
+desc table testing;  //shows structure of table
+
+create table testing(name text, common list<text>,one list<text>,primary key(name));
+
+  
+
+create table test(id int,common map<text,text>,PRIMARY KEY(id)) ;
+
+  insert into test(id,common) values(1234,{'api':'103','name':'name'});
+
+
+
+
+create keyspace example with replication = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };
+create table example.tweet(timeline text, id UUID, text text, PRIMARY KEY(id));
+create index on example.tweet(timeline);
+
+
+
+create table vertice.settings(name text,scylla text,home text,api text,nsqd text,org text,domain text,route53_access_key text,route53_secret_key text,docker_swarm text,one_endpoint text,one_userid text,one_password text,primary key(name));
+
+
+
+to update a map<text, text >
+update marketplaces set plans = {'14.04': 'Ubuntu 14.04 LTS (Trusty) is delivers the best value scale-out performance available.', '16.04': 'Ubuntu 16.04 LTS (Xenial) is delivers the best value scale-out performance available.'} where settings_name = 'vertice' and flavor = 'Ubuntu'; (edited)
+
+[3:40]  
+to update a list<test>
+update marketplaces set envs=['{"key":"port", "value":"9000"}','{"key":"oneclick", "value":"yes"}'], options = null where flavor='WordPress' and settings_name='vertice' ;
+
+
+
+

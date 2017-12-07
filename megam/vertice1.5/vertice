@@ -1,0 +1,68 @@
+go get github.com/codegangsta/negroni github.com/google/go-github/github github.com/googollee/go-socket.io github.com/gorilla/context  github.com/pivotal-golang/bytefmt github.com/plouc/go-gitlab-client github.com/rs/cors github.com/satori/go.uuid  github.com/karlentwistle/route53 github.com/megamsys/opennebula-go/api github.com/megamsys/opennebula-go/compute github.com/megamsys/opennebula-go/metrics github.com/megamsys/opennebula-go/virtualmachine gopkg.in/tylerb/graceful.v1 github.com/kward/go-vnc github.com/megamsys/opennebula-go/testing github.com/gorilla/mux golang.org/x/oauth2 github.com/fsouza/go-dockerclient github.com/Bowery/slack github.com/crackcomm/nsqueue/consumer github.com/crackcomm/nsqueue/producer github.com/mailgun/mailgun-go github.com/megamsys/gocassa github.com/megamsys/whmcs_go/whmcs 
+
+go get  golang.org/x/sys/unix github.com/Azure/go-ansiterm github.com/docker/go-connections/nat github.com/opencontainers/runc/libcontainer/system github.com/Microsoft/go-winio github.com/tools/godep github.com/pkg/errors github.com/Nvveen/Gotty github.com/opencontainers/image-spec/specs-go github.com/opencontainers/go-digest 
+ 
+libgo
+go get github.com/megamsys/libgo/action github.com/megamsys/libgo/api github.com/megamsys/libgo/cmd github.com/megamsys/libgo/events github.com/megamsys/libgo/events/alerts github.com/megamsys/libgo/exec github.com/megamsys/libgo/os github.com/megamsys/libgo/pairs github.com/megamsys/libgo/utils 
+
+go get github.com/megamsys/opennebula-go/api github.com/megamsys/opennebula-go/compute github.com/megamsys/opennebula-go/metrics github.com/megamsys/opennebula-go/virtualmachine github.com/megamsys/opennebula-go/disk github.com/megamsys/opennebula-go/snapshot github.com/megamsys/opennebula-go/template
+
+curl -d '{"id":"RIP7039260371375687900","cat_id":"AMS8175062883081452938","account_id":"vijaykanthm28@gmail.com","category":"state","action":"create"}' 'http://192.168.0.100:4151/put?topic=vms'
+
+curl -d '{"action":  "running", "category":  "done", "id":  "RIP12345", "account_id":  "ranjitha@megam.io", "cat_id":  "AMS6317905480745207189"}' 'http://188.240.231.85:4151/put?topic=vms'
+
+
+update requests set cat_id='AMS9021115914994172985' where id='RIP7039260371375687900';
+
+insert into vertice.assemblies(org_id,id,assemblies,created_at,json_claz,name) values('ORG6336350200669808432','AMS8891748652231651791',['ASM9188917125363686706'],'2016-06-13 08:19:42 +0000','Megam::Assemblies','');
+
+insert into vertice.assemblies(org_id,id,assemblies,created_at,json_claz,name) values('ORG4742986408843579321','AMS8891748652231651792',['ASM6184182194581333436'],'2016-06-13 08:19:42 +0000','Megam::Assemblies','');  
+
+insert into vertice.assemblies(org_id,id,assemblies,created_at,json_claz,name) values('ORG7157558039993929084','AMS8891748652231651793',['ASM8983613169505850200'],'2016-06-13 08:19:42 +0000','Megam::Assemblies',''); 
+
+insert into vertice.assemblies(org_id,id,assemblies,created_at,json_claz,name) values('ORG7157558039993929084','AMS8891748652231651794',['ASM4652509316971830932'],'2016-06-13 08:19:42 +0000','Megam::Assemblies','');
+
+
+insert into balances(account_id,created_at,credit,id,json_claz,updated_at) values('raaa@g.com','2016-11-09 11:49:33 +0000','1.1','BAL7736539771201115938','Megam::Balances','2016-11-09 11:49:33 +0000');
+
+insert into balances(account_id,created_at,credit,id,json_claz,updated_at) values('bbb@g.com','2016-11-10 12:49:33 +0000','-0.1','BAL7045748824129222646','Megam::Balances','2016-11-10 12:49:33 +0000');
+
+insert into balances(account_id,created_at,credit,id,json_claz,updated_at) values('kk@k.com','2016-11-09 11:49:33 +0000','-0.1','BAL7736539771201115937','Megam::Balances','2016-11-09 11:49:33 +0000');
+
+insert into balances(account_id,created_at,credit,id,json_claz,updated_at) values('vvf@gmail.com','2016-11-10 12:49:33 +0000','0.1','BAL7045748824129222645','Megam::Balances','2016-11-10 12:49:33 +0000');
+
+
+insert into requests (id,account_id, action,cat_id , category, cattype, created_at , name ) values ('RIP6680405568907406369','raaa@g.com', 'destroy', 'AMS8891748652231651791', 'state', 'torpedo', '2016-06-04 07:45:26 +0000', 'a.megambox.com');
+
+
+update assembly set status='running' ,state= 'running' where org_id = 'ORG6336350200669808432' and id = 'ASM9188917125363686706' ;
+
+update assembly set status='running' ,state= 'running' where org_id = 'ORG7157558039993929084' and created_at='2016-12-19 15:12:16.000000+0000' and  id = 'ASM4652509316971830932' ;
+
+
+   vg@ss.co | BAK6152772410627299256 | ASM4987791547395476547 | 2017-02-02 13:00:27.000000+0000 |          |   null | Megam::Backups | shy-surf-4565.atominstance.com61527 | ORG7440201358935033680 |    null | inprogress | vertice.torpedo.centos                             
+               
+
+
+curl -d '{"id":"RIP6669853291014354444","cat_id":"AMS7266733603194307895","account_id":"mvijaykanth@megam.io","category":"snapshot","action":"snapcreate"}' 'http://192.168.0.100:4151/put?topic=vms'
+
+curl -d '{"id":"RIP6669853291014354444","cat_id":"SPS8184526435547400463","account_id":"mvijaykanth@megam.io","category":"snapshot","action":"snapcreate"}' 'http://192.168.0.100:4151/put?topic=vms'
+
+
+ mvijaykanth@megam.io | SPS8184526435547400463 | ASM7269668165372309115 | 2017-02-02 14:18:46.000000+0000 |         |   null | Megam::Snapshots | withered-violet-3312.megambox.com81845 | ORG6839014412275241263 |    null |         | inprogress | vertice.torpedo.centos
+
+insert into snapshots (id , asm_id , org_id , account_id , name , status , disk_id , snap_id , tosca_type , inputs , outputs , json_claz , created_at ,updated_at) values( 'SPS8184526435547400400', 'ASM7269668165372309115' ,'ORG5581995973035462921', 'mvijaykanth@megam.io', 'withered-violet-3312.megambox.com81845', 'active', '0', '2', 'vertice.torpedo.centos',null,null,'Megam::Snapshots','2017-02-02T14:18:46.000' ,'2017-02-02T14:18:46.000');
+
+curl -d '{"id":"","accounts_id":"ACT5563357690126932758","type":"user","action":"4","inputs":[{"key":"email","value":"mvijaykanth@megam.io"},{"key":"nilavu_password","value":"dmlqYXlAMTIz"}]}' 'http://192.168.1.100:4151/put?topic=events'
+
+ account_id  id  asm_id created_at image_id  inputs  json_claz    name     org_id     outputs    status  tosca_type
+
+
+insert into backups (id , asm_id , org_id , account_id , name , status , image_id , tosca_type , inputs , outputs , json_claz , created_at) values( 'BAK8184526435547400400', 'qwertyuiop' ,'ORG6527478750926273715', 'mvijaykanth@megam.io', 'withered-violet-3312.megambox.com81845', 'active', '','vertice.backup.new',['{"key":"region","value":"Romania_low_cpu"}','{"key":"public_url","value":"http://archive.ubuntu.com/ubuntu/dists/xenial/main/installer-amd64/current/images/netboot/mini.iso"}'], null,'Megam::Backups','2017-02-02T14:18:46.000');
+
+
+curl -d '{"id":"RIP6669853291014354444","cat_id":"BAK8184526435547400400","account_id":"mvijaykanth@megam.io","category":"backup","action":"backupcreate"}' 'http://192.168.0.100:4151/put?topic=vms'
+
+
+
+

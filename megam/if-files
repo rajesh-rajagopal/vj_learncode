@@ -1,0 +1,53 @@
+
+# megamswasa
+
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+auto em0
+iface em0 inet static
+address 103.56.92.4
+netmask 255.255.252.0
+gateway 103.56.92.1
+dns-nameservers 8.8.8.8 8.8.4.4
+
+
+auto em0:1
+iface em0:1 inet static
+address 192.168.1.105
+dns-nameservers 8.8.8.8 8.8.4.4
+
+
+## megamaadhi
+
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+auto p4p1
+iface p4p1 inet static
+	address 192.168.1.102
+	netmask 255.255.255.0
+	gateway 192.168.1.1
+	# dns-* options are implemented by the resolvconf package, if installed
+	dns-nameservers 8.8.8.8 8.8.4.4
+auto one
+auto p4p2
+	iface p4p2 inet static
+	address 192.168.1.103
+	netmask 255.255.255.0
+	gateway 192.168.1.1
+	dns-nameservers 8.8.8.8 8.8.4.4
+
+
+
+

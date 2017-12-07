@@ -1,0 +1,60 @@
+
+
+Connection error: ('Unable to connect to any servers', {'': TypeError('ref() does not take keyword arguments',)})
+
+Refered 
+http://stackoverflow.com/questions/38883435/apache-cassandra-3-7-cqlsh-unable-to-connect-to-any-servers
+
+
+export CQLSH_NO_BUNDLED=true    ///export CQLSH_NO_BUNDLED=false
+
+pip install cassandra-driver 
+
+
+
+export CQLSH_NO_BUNDLED=true
+alrin@alrinwork:~$ cqlsh 192.168.0.101
+
+Python Cassandra driver not installed, or not on PYTHONPATH.
+You might try "pip install cassandra-driver".
+
+Python: /usr/bin/python
+Module load path: ['/usr/bin', '/usr/lib/python2.7', '/usr/lib/python2.7/plat-x86_64-linux-gnu', '/usr/lib/python2.7/lib-tk', '/usr/lib/python2.7/lib-old', '/usr/lib/python2.7/lib-dynload', '/usr/local/lib/python2.7/dist-packages', '/usr/lib/python2.7/dist-packages', '/usr/lib/python2.7/dist-packages/PILcompat', '/usr/lib/python2.7/dist-packages/gtk-2.0', '/usr/lib/python2.7/dist-packages/ubuntu-sso-client']
+
+Error: No module named cassandra
+pip install cassandra-driver 
+Collecting cassandra-driver
+  Downloading cassandra-driver-3.6.0.tar.gz (203kB)
+    100% |████████████████████████████████| 204kB 2.2MB/s 
+Collecting six>=1.6 (from cassandra-driver)
+  Downloading six-1.10.0-py2.py3-none-any.whl
+Collecting futures (from cassandra-driver)
+  Downloading futures-3.0.5-py2-none-any.whl
+Building wheels for collected packages: cassandra-driver
+  Running setup.py bdist_wheel for cassandra-driver ... \
+
+
+done
+  Stored in directory: /home/alrin/.cache/pip/wheels/f6/96/32/2a3eb7c473822ff399104b62eb0002c0fb21d68ac6bc2e59b0
+Successfully built cassandra-driver
+Installing collected packages: six, futures, cassandra-driver
+Successfully installed cassandra-driver futures six-1.10.0
+You are using pip version 8.1.1, however version 8.1.2 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.
+alrin@alrinwork:~$ 
+alrin@alrinwork:~$ 
+alrin@alrinwork:~$ 
+alrin@alrinwork:~$ cqlsh 192.168.0.101
+Connected to Test Cluster at 192.168.0.101:9042.
+[cqlsh 5.0.1 | Cassandra 3.0.8 | CQL spec 3.4.0 | Native protocol v4]
+Use HELP for help.
+cqlsh> use megdc
+   ... ;
+cqlsh:megdc> desc tables;
+
+customers  billing  regions  events_for_obc  accounts   clusters
+plans      masters  hosts    vnets           licensing
+
+
+
+

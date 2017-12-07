@@ -1,0 +1,158 @@
+#!/bin/bash
+
+
+https://access.redhat.com/documentation/en/red-hat-ceph-storage/version-1.2.3/red-hat-ceph-storage-123-ceph-object-gateway-for-ubuntu-x86-64/chapter-1-install-ceph-object-gateway
+
+
+
+#### Slave 
+uncomment the following lines in /etc/apt/sources.list:
+
+# deb http://archive.ubuntu.com/ubuntu trusty multiverse
+# deb-src http://archive.ubuntu.com/ubuntu trusty multiverse
+# deb http://archive.ubuntu.com/ubuntu trusty-updates multiverse
+# deb-src http://archive.ubuntu.com/ubuntu trusty-updates multiverse
+
+sudo apt-get update
+
+#Install Apache and FastCGI: on Gateway host
+
+sudo apt-get install apache2 libapache2-mod-fastcgi
+
+Edit /etc/apache2/apache2.conf
+
+sudo a2enmod rewrite
+sudo a2enmod fastcgi
+
+sudo service apache2 start
+
+sudo apt-get install radosgw
+ 
+
+#### Node1
+
+#ceph-deploy install --rgw slave  //to directly install radosgw on slave
+  
+sudo ceph-authtool --create-keyring /etc/ceph/ceph.client.radosgw.keyring
+sudo chmod +r /etc/ceph/ceph.client.radosgw.keyring
+
+sudo ceph-authtool /etc/ceph/ceph.client.radosgw.keyring -n client.radosgw.admin --gen-key
+
+sudo ceph-authtool -n client.radosgw.admin --cap osd 'allow rwx' --cap mon 'allow rwx' /etc/ceph/ceph.client.radosgw.keyring
+
+sudo ceph -k /etc/ceph/ceph.client.admin.keyring auth add client.radosgw.admin -i /etc/ceph/ceph.client.radosgw.keyring
+
+sudo scp /etc/ceph/ceph.client.radosgw.keyring  megdc@slave:/home/megdc/
+
+ssh megdc@slave 'sudo mv ceph.client.radosgw.keyring /etc/ceph/ceph.client.radosgw.keyring'
+
+
+
+max(128, Nearest power of 2 (No. of OSDs * 100 / No. of Replications / 10))
+
+ex:- max(128, Nearest power of 2 (6 * 100 / 2 / 10))
+
+ceph osd pool create .rgw 128 128
+ceph osd pool create .rgw.root 128 128
+ceph osd pool create .rgw.control 128 128
+ceph osd pool create .rgw.gc 128 128
+ceph osd pool create .rgw.buckets 128 128
+ceph osd pool create .rgw.buckets.index 128 128
+ceph osd pool create .log 128 128
+ceph osd pool create .intent-log 128 128
+ceph osd pool create .usage 128 128
+ceph osd pool create .users 128 128
+ceph osd pool create .users.email 128 128
+ceph osd pool create .users.swift 128 128
+ceph osd pool create .users.uid 128 128
+
+ceph osd pool create .rgw.meta 128 128
+
+
+
+
+Append the following configuration to /etc/ceph/ceph.conf in your admin node:
+
+[client.radosgw.admin]
+host = {hostname}
+keyring = /etc/ceph/ceph.client.radosgw.keyring
+rgw socket path =   /var/run/ceph/ceph.radosgw.admin.fastcgi.sock
+log file = /var/log/radosgw/client.radosgw.admin.log
+
+
+sudo scp /etc/ceph/ceph.conf  megdc@slave:/home/megdc/
+ssh megdc@slave 'sudo mv ceph.conf /etc/ceph/ceph.conf'
+
+ceph-deploy --overwrite-conf config pull slave
+ceph-deploy --overwrite-conf config push node1 node2 master
+
+
+sudo scp /etc/ceph/ceph.client.admin.keyring  megdc@slave:/home/megdc
+ssh megdc@slave 'sudo mv ceph.client.admin.keyring /etc/ceph/ceph.client.admin.keyring'
+
+
+GATEWAY HOST
+
+sudo nano /var/www/html/s3gw.fcgi
+
+Add the following content to the script:
+#!/bin/sh
+exec /usr/bin/radosgw -c /etc/ceph/ceph.conf -n client.radosgw.admin
+
+sudo chmod +x /var/www/html/s3gw.fcgi
+
+sudo mkdir -p /var/lib/ceph/radosgw/ceph-radosgw.admin
+
+sudo /etc/init.d/radosgw start
+
+sudo nano /etc/apache2/sites-available/rgw.conf
+
+'
+FastCgiExternalServer /var/www/html/s3gw.fcgi -socket /var/run/ceph/ceph.radosgw.admin.fastcgi.sock
+
+<VirtualHost *:80>
+ServerName localhost
+DocumentRoot /var/www/html
+
+ErrorLog /var/log/apache2/rgw_error.log
+CustomLog /var/log/apache2/rgw_access.log combined
+
+# LogLevel debug
+
+RewriteEngine On
+
+RewriteRule ^/([a-zA-Z0-9-_.]*)([/]?.*) /s3gw.fcgi?page=$1&params=$2&%{QUERY_STRING} [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
+
+<IfModule mod_fastcgi.c>
+    <Directory /var/www/html>
+    Options +ExecCGI
+    AllowOverride All
+    SetHandler fastcgi-script
+    Order allow,deny
+    Allow from all
+    AuthBasicAuthoritative Off
+    </Directory>
+</IfModule>
+
+AllowEncodedSlashes On
+ServerSignature Off
+
+</VirtualHost>
+
+'
+
+sudo a2dissite 000-default
+sudo a2ensite rgw.conf
+
+#### Revert Installation 
+
+sudo radosgw-admin list bucket --debug-rgw=20 --debug-ms=1 --log-to-stderr
+
+ceph-deploy purge slave
+ceph-deploy purgedata slave
+ceph auth del client.radosgw.admin 
+
+sudo rm /var/www/html/s3gw.fcgi
+sudo rm /etc/apache2/sites-available/rgw.conf
+
+//use when error client.radosgw.admin exists but key does not match

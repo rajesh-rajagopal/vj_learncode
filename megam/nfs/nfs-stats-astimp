@@ -1,0 +1,54 @@
+188.240.231.85 10.0.0.12
+ nfsstat 
+Client rpc stats:
+calls      retrans    authrefrsh
+3327032    11         3327035 
+
+Client nfs v3:
+null         getattr      setattr      lookup       access       readlink     
+0         0% 878375   26% 163       0% 358       0% 182961    5% 0         0% 
+read         write        create       mkdir        symlink      mknod        
+1108922  33% 738777   22% 30        0% 14        0% 0         0% 0         0% 
+remove       rmdir        rename       link         readdir      readdirplus  
+36        0% 10        0% 1         0% 0         0% 0         0% 316       0% 
+fsstat       fsinfo       pathconf     commit       
+386044   11% 2         0% 1         0% 30983     0% 
+
+Client nfs v4:
+null         read         write        commit       open         open_conf    
+0         0% 0         0% 0         0% 0         0% 0         0% 0         0% 
+open_noat    open_dgrd    close        setattr      fsinfo       renew        
+0         0% 0         0% 0         0% 0         0% 5        13% 0         0% 
+setclntid    confirm      lock         lockt        locku        access       
+1         2% 1         2% 0         0% 0         0% 0         0% 4        10% 
+getattr      lookup       lookup_root  remove       rename       link         
+4        10% 8        21% 1         2% 0         0% 0         0% 0         0% 
+symlink      create       pathconf     statfs       readlink     readdir      
+0         0% 0         0% 4        10% 0         0% 0         0% 0         0% 
+server_caps  delegreturn  getacl       setacl       fs_locations rel_lkowner  
+9        24% 0         0% 0         0% 0         0% 0         0% 0         0% 
+secinfo      exchange_id  create_ses   destroy_ses  sequence     get_lease_t  
+0         0% 0         0% 0         0% 0         0% 0         0% 0         0% 
+reclaim_comp layoutget    getdevinfo   layoutcommit layoutreturn getdevlist   
+0         0% 0         0% 0         0% 0         0% 0         0% 0         0% 
+(null)       
+0         0% 
+
+10.0.0.5:/mnt/S18TB6HDD/virtual /mnt/S18TB6HDD/virtual nfs rw,relatime,vers=3,rsize=65536,wsize=65536,namlen=255,hard,proto=tcp,timeo=600,retrans=2,sec=sys,mountaddr=10.0.0.5,mountvers=3,mountport=927,mountproto=udp,local_lock=none,addr=10.0.0.5 0 0
+tmpfs /run/user/1000 tmpfs rw,nosuid,nodev,relatime,size=3293332k,mode=700,uid=1000,gid=1000 0 0
+
+
+nfsstat -m
+/mnt/S18TB6HDD/virtual from 10.0.0.5:/mnt/S18TB6HDD/virtual
+ Flags:	rw,relatime,vers=4.0,rsize=131072,wsize=131072,namlen=255,hard,proto=tcp,port=0,timeo=600,retrans=2,sec=sys,clientaddr=10.0.0.12,local_lock=none,addr=10.0.0.5
+
+
+cat /proc/mounts 
+10.0.0.5:/mnt/S18TB6HDD/virtual /mnt/S18TB6HDD/virtual nfs4 rw,relatime,vers=4.0,rsize=131072,wsize=131072,namlen=255,hard,proto=tcp,port=0,timeo=600,retrans=2,sec=sys,clientaddr=10.0.0.12,local_lock=none,addr=10.0.0.5 0 0
+
+cat /sys/block/sda/queue/rotational 
+ 
+You should get 1 for hard disks and 0 for a SSD. 
+mount -t nfs4 10.0.0.5:/mnt/S18TB6HDD/virtual /mnt/S18TB6HDD/virtual 
+ln -s /mnt/S18TB6HDD/virtual /var/lib/one/datastores
+

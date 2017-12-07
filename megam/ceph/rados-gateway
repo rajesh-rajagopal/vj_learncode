@@ -1,0 +1,93 @@
+#!/bin/sh
+
+
+radosgw-admin user create --uid="info@megam.io" --display-name="MegamSys Admin" --email="info@megam.io" #create user 
+{
+    "user_id": "info@megam.io",
+    "display_name": "MegamSys Admin",
+    "email": "info@megam.io",
+    "suspended": 0,
+    "max_buckets": 1000,
+    "auid": 0,
+    "subusers": [],
+    "keys": [
+        {
+            "user": "info@megam.io",
+            "access_key": "V3I3ID7RC0A3H3WB3GHE",
+            "secret_key": "G2YRbwnUKVq0f4oOuaDsltiDR5Bh8AxCCMt2O4M3"
+
+....
+}
+
+radosgw-admin caps add --uid={uid} --caps={caps}  # To add administrative capabilities to a user, execute the following:
+
+# options --caps="[users|buckets|metadata|usage|zone]=[*|read|write|read, write]"
+  eg:-  radosgw-admin caps add --uid="info@megam.io" --caps="users=*"  # for user access for read, write and read,write 
+
+  eg:-  radosgw-admin caps add --uid="info@megam.io" --caps="users=*" --caps="buckets=*" --caps="metadata=*" --caps="usage=*" --caps="zone=*"  # for all user, buckets, metadata, usage and zone access for read, write and read,write 
+
+radosgw-admin user modify --uid="info@megam.io" --caps="users=read"  # To modify users details
+
+{
+    "user_id": "info@megam.io",
+    "display_name": "MegamSys Admin",
+    "email": "info@megam.io",
+    "suspended": 0,
+    "max_buckets": 1000,
+    "auid": 0,
+    "subusers": [],
+    "keys": [
+        {
+            "user": "info@megam.io",
+            "access_key": "Z6GZOQ3BTW61XRIH1QKN",
+            "secret_key": "Xp9OWYrmYQkpN9z28Wmrj3oXKRWvniJQRJ9Dpak9"
+        }
+    ],
+    "swift_keys": [],
+    "caps": [
+        {
+            "type": "users",
+            "perm": "*"
+        }
+    ],....
+}
+radosgw-admin metadata list user   #list all users 
+
+[
+    "gg@a.co",
+    "gg@h.com",
+]
+
+radosgw-admin metadata list bucket #list all buckents 
+
+[
+    "ssd",
+    "bbn",
+]
+
+radosgw-admin user info --uid="thilak@b.com"  #show user informations
+
+{    "user_id": "thilak@b.com", "display_name": "Thilak",  "email": "", "suspended": 0,"max_buckets": 1000,  "auid": 0,
+    "subusers": [],  "keys": [  {
+            "user": "thilak@b.com",
+            "access_key": "M2LHOM6X5EJO9HXF15XK",
+            "secret_key": "aJpgqTMHfOlDf1IPwcEObE60FvwR72Vc4zj2QNIt"
+
+        }
+    ]...}
+
+radosgw-admin bucket list --uid="thilak@b.com"  #list buckets for particular user
+
+[
+    "rohan",
+    "thariyal",
+    "troy"
+]
+
+
+
+radosgw-admin usage show --uid=rajesh --start-date="2016-12-28-12:05:05" --end-date="2016-12-29-10:05:05" #show usage for a period
+
+
+
+

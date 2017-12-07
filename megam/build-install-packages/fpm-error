@@ -1,0 +1,19 @@
+/home/vijay/.rvm/rubies/ruby-2.3.1/lib/ruby/2.3.0/rubygems/specification.rb:2158:in `method_missing': undefined method `this' for #<Gem::Specification:0x131d408 fpm-1.4.0> (NoMethodError)
+	from /home/vijay/.rvm/rubies/ruby-2.3.1/lib/ruby/2.3.0/rubygems/specification.rb:1057:in `find_active_stub_by_path'
+	from /home/vijay/.rvm/rubies/ruby-2.3.1/lib/ruby/2.3.0/rubygems/core_ext/kernel_require.rb:64:in `require'
+	from /home/vijay/.rvm/gems/ruby-2.3.1/gems/fpm-1.4.0/bin/fpm:5:in `<top (required)>'
+	from /home/vijay/.rvm/gems/ruby-2.3.1/bin/fpm:23:in `load'
+	from /home/vijay/.rvm/gems/ruby-2.3.1/bin/fpm:23:in `<main>'
+	from /home/vijay/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `eval'
+	from /home/vijay/.rvm/gems/ruby-2.3.1/bin/ruby_executable_hooks:15:in `<main>'
+
+
+
+
+/home/vijay/.rvm/rubies/ruby-2.3.1/lib/ruby/2.3.0/rubygems/specification.rb
+
+https://github.com/rubygems/rubygems/issues/1420
+
+added below line 
+
+def this; self; end

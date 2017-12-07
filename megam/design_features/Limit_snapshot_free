@@ -1,0 +1,52 @@
+Requirement :
+Limitation of 2 snapshot for each client
+
+Admin can offer free for 2 snapshots so when generate bill skip for those free snapshots
+
+Process:
+
+Nilavu site_settings have a flage (like free_snapshots: 2), if that flag appearse 
+we will create a Free Quota for the user as below data 
+CREATE TABLE IF NOT EXISTS quotas (id text, name text, account_id text, allowed list<text>, allocated_to text, inputs list<text>,type text,status text, json_claz text, created_at timestamp, updated_at timestamp, PRIMARY KEY ((account_id), created_at, id,type));
+
+
+{
+"account_id": "info@megam.io",
+"created_at": "2017-01-02T08:25:56.000" ,
+"id text": "QUO123456",
+"allocated_to": "ASM123",
+"allowed": [{"key":"snapshots","value":"2"}],
+"inputs": [],
+"json_claz": "",
+"name": "",
+"updated_at": "",
+"type": "snapshot",
+"status": "active",
+}
+
+When the user try to Create snapshot checks the Snapshot quota count if > 0 then 
+
+create snapshots as follows
+{
+"id": "", 
+"asm_id": "", 
+"org_id": "", 
+"account_id": "", 
+"name": "", 
+"status": "", 
+"disk_id": "", 
+"snap_id": "", 
+"tosca_type": "", 
+"inputs": [{"key":"quota_id","value":"QUO123456"}], 
+"outputs": [{"key":"","value":""}], 
+"json_claz": "", 
+"created_at": "",, 
+"updated_at": "",,
+}
+
+after snapcreated Vertice reduce count of Snapshot Quota 
+
+when bill collector donot bill for snapshots if inputs contains quota_id  
+
+
+

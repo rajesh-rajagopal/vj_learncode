@@ -1,0 +1,58 @@
+
+to solve the bellow error use 
+"ceph auth del client.radosgw.gateway"
+
+ref: http://bbs.ceph.org.cn/question/185 
+
+
+sudo ceph -k /etc/ceph/ceph.client.admin.keyring auth add client.radosgw.admin -i /etc/ceph/ceph.client.radosgw.keyring
+2016-05-11 07:44:20.944918 7f0eea3aa700  1 -- :/0 messenger.start
+2016-05-11 07:44:20.945347 7f0eea3aa700  1 -- :/2243309940 --> 136.243.49.217:6789/0 -- auth(proto 0 30 bytes epoch 0) v1 -- ?+0 0x7f0ee405d980 con 0x7f0ee405b0d0
+2016-05-11 07:44:20.945589 7f0ee842d700  1 -- 136.243.49.217:0/2243309940 learned my addr 136.243.49.217:0/2243309940
+2016-05-11 07:44:20.946203 7f0ee37fe700  1 -- 136.243.49.217:0/2243309940 <== mon.0 136.243.49.217:6789/0 1 ==== mon_map magic: 0 v1 ==== 195+0+0 (359242282 0 0) 0x7f0ed8000b00 con 0x7f0ee405b0d0
+2016-05-11 07:44:20.946298 7f0ee37fe700  1 -- 136.243.49.217:0/2243309940 <== mon.0 136.243.49.217:6789/0 2 ==== auth_reply(proto 2 0 (0) Success) v1 ==== 33+0+0 (1906662047 0 0) 0x7f0ed8001060 con 0x7f0ee405b0d0
+2016-05-11 07:44:20.946450 7f0ee37fe700  1 -- 136.243.49.217:0/2243309940 --> 136.243.49.217:6789/0 -- auth(proto 2 32 bytes epoch 0) v1 -- ?+0 0x7f0ecc001340 con 0x7f0ee405b0d0
+2016-05-11 07:44:20.947040 7f0ee37fe700  1 -- 136.243.49.217:0/2243309940 <== mon.0 136.243.49.217:6789/0 3 ==== auth_reply(proto 2 0 (0) Success) v1 ==== 206+0+0 (3094944300 0 0) 0x7f0ed8001060 con 0x7f0ee405b0d0
+2016-05-11 07:44:20.947180 7f0ee37fe700  1 -- 136.243.49.217:0/2243309940 --> 136.243.49.217:6789/0 -- auth(proto 2 165 bytes epoch 0) v1 -- ?+0 0x7f0ecc006a40 con 0x7f0ee405b0d0
+2016-05-11 07:44:20.947819 7f0ee37fe700  1 -- 136.243.49.217:0/2243309940 <== mon.0 136.243.49.217:6789/0 4 ==== auth_reply(proto 2 0 (0)  0 0) 0x7f0ed8000be0 con 0x7f0ee405b0d0
+Error EINVAL: entity client.radosgw.admin exists but key does not match
+2016-05-11 07:44:21.039351 7f0eea3aa700  1 -- 136.243.49.217:0/2243309940 mark_down 0x7f0ee405b0d0 -- 0x7f0ee4061550
+2016-05-11 07:44:21.039411 7f0eea3aa700  1 -- 136.243.49.217:0/2243309940 mark_down_all
+2016-05-11 07:44:21.039565 7f0eea3aa700  1 -- 136.243.49.217:0/2243309940 shutdown complete.
+
+
+After upgrading jewell we met issue 
+
+sudo radosgw-admin user create --uid="testuser" --display-name="First User"
+2016-05-21 12:07:30.063905 7f75adf1e900  0 RGWZoneParams::create(): error creating default zone params: (17) File exists
+2016-05-21 12:07:30.871469 7f75adf1e900  0 ERROR: rgw_put_system_obj() oid=.meta:user:testuser:_0JaxG14Mk8zCpUnWflUFl7q:3) returned ret=-22
+could not create user: unable to create user, unable to store user info2016-05-21 12:07:30.871485 7f75adf1e900  0 ERROR: put_entry: store_in_heap() key=testuser returned ret=-22
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ tail -f /var/log/radosgw/client.radosgw.admin.log
+
+
+2016-05-21 14:53:14.903222 7f364c93b700 -1 Initialization timeout, failed to initialize
+2016-05-21 15:04:59.635450 7f3be1bbb900  0 ceph version 10.2.1 (3a66dd4f30852819c1bdaa8ec23c795d4ad77269), process radosgw, pid 64100
+2016-05-21 15:04:59.636202 7f3be1bbb900  0 pidfile_write: ignore empty --pid-file
+2016-05-21 15:04:59.642710 7f3be1bbb900 -1 auth: unable to find a keyring on /etc/ceph/ceph.client.radosgw.keyring: (2) No such file or directory
+2016-05-21 15:04:59.642732 7f3be1bbb900 -1 monclient(hunting): ERROR: missing keyring, cannot use cephx for authentication
+2016-05-21 15:04:59.642734 7f3be1bbb900  0 librados: client.radosgw.admin initialization error (2) No such file or directory
+2016-05-21 15:04:59.643276 7f3be1bbb900 -1 Couldn't init storage provider (RADOS)
+
+
+
+
